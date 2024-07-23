@@ -22,12 +22,12 @@ out vec2 texCoord0;
 void main() {
     // vanilla behavior
     gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
-    vertexDistance = fog_distance(IViewRotMat * Position, FogShape);
+    vertexDistance = fog_distance(Position, FogShape);
     vertexColor = Color * texelFetch(Sampler2, UV2 / 16, 0);
     texCoord0 = UV0;
-    if (Color == vec4(78/255., 92/255., 36/255., Color.a) && Position.z == 0.03) {
+    if (Color == vec4(78/255., 92/255., 36/255., Color.a) && Position.z == 2200.03) {
         vertexColor = texelFetch(Sampler2, UV2 / 16, 0); // remove color from no shadow marker
-    } else if (Color == vec4(19/255., 23/255., 9/255., Color.a) && Position.z == 0) {
+    } else if (Color == vec4(19/255., 23/255., 9/255., Color.a) && Position.z == 2200) {
         vertexColor = vec4(0); // remove shadow
     }
 }
