@@ -1,0 +1,13 @@
+
+{
+    "parent": "minecraft:block/cube",
+    "textures": {
+      "down": "minecraft:block/lolies/loli1",
+      "east": "minecraft:block/lolies/loli2",
+      "north": "minecraft:block/lolies/loli3",
+      "particle": "minecraft:block/lolies/loli4",
+      "south": "minecraft:block/lolies/loli4",
+      "up": "minecraft:block/lolies/loli5",
+      "west": "minecraft:block/lolies/loli6"
+    }
+  }
