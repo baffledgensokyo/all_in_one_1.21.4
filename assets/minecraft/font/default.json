@@ -111,9 +111,9 @@
         },
         {
             "type":"bitmap",
-            "file":"minecraft:item/advancement_icon/delayed_death.png",
-            "ascent":11,
-            "height":18,
+            "file":"minecraft:font/icons/delayed_death.png",
+            "ascent":8,
+            "height":9,
             "chars":[
                 "\uE111"             
             ]
@@ -129,7 +129,7 @@
         },
         {
             "type":"bitmap",
-            "file":"minecraft:item/advancement_icon/lookback.png",
+            "file":"minecraft:font/icons/lookback.png",
             "ascent":8,
             "height":9,
             "chars":[
@@ -147,7 +147,7 @@
         },
         {
             "type":"bitmap",
-            "file":"minecraft:item/advancement_icon/nomagic.png",
+            "file":"minecraft:font/icons/no_magic.png",
             "ascent":8,
             "height":9,
             "chars":[
@@ -156,7 +156,7 @@
         },
         {
             "type":"bitmap",
-            "file":"minecraft:item/advancement_icon/piss.png",
+            "file":"minecraft:font/icons/piss.png",
             "ascent":8,
             "height":9,
             "chars":[
@@ -175,15 +175,15 @@
         {
             "type":"bitmap",
             "file":"minecraft:item/advancement_icon/reverse_mana.png",
-            "ascent":14,
-            "height":16,
+            "ascent":8,
+            "height":9,
             "chars":[
                 "\uE118"             
             ]
         },
         {
             "type":"bitmap",
-            "file":"minecraft:item/advancement_icon/scared.png",
+            "file":"minecraft:font/icons/scared.png",
             "ascent":8,
             "height":9,
             "chars":[
@@ -201,7 +201,7 @@
         },
         {
             "type":"bitmap",
-            "file":"minecraft:item/lightningegg.png",
+            "file":"minecraft:font/icons/lightning_bolts.png",
             "ascent":8,
             "height":9,
             "chars":[
@@ -210,7 +210,7 @@
         },
         {
             "type":"bitmap",
-            "file":"minecraft:item/advancement_icon/target.png",
+            "file":"minecraft:font/icons/target.png",
             "ascent":8,
             "height":9,
             "chars":[
