@@ -4280,5 +4280,7 @@
     "agressive_slab": "Агрессивный Полублок",
     "sharp_thing":"Острая штука",
     "tiny_skull":"Маленький череп",
-    "tiny_skeleton_relic":"Реликвия Тонкого скелета"
+    "tiny_skeleton_relic":"Реликвия Тонкого скелета",
+    "subtitles.event.mob_effect.raid_omen": "даерис пукнул",
+    "fat_skeleton_relic":"Реликвия Толстого скелета"
 }
