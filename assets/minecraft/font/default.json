@@ -174,7 +174,7 @@
         },
         {
             "type":"bitmap",
-            "file":"minecraft:item/advancement_icon/reverse_mana.png",
+            "file":"minecraft:font/icons/reverse_mana.png",
             "ascent":8,
             "height":9,
             "chars":[
