@@ -193,6 +193,17 @@
 { "predicate": { "custom_model_data": 749 }, "model": "minecraft:item/shish_wall_wand"},
 { "predicate": { "custom_model_data": 750 }, "model": "minecraft:item/overload_crux"},
 
+{ "predicate": { "custom_model_data": 751 }, "model": "minecraft:item/rune_fehu"},
+{ "predicate": { "custom_model_data": 752 }, "model": "minecraft:item/rune_uruz"},
+{ "predicate": { "custom_model_data": 753 }, "model": "minecraft:item/rune_thurisaz"},
+{ "predicate": { "custom_model_data": 754 }, "model": "minecraft:item/rune_ansuz"},
+{ "predicate": { "custom_model_data": 755 }, "model": "minecraft:item/rune_raido"},
+{ "predicate": { "custom_model_data": 756 }, "model": "minecraft:item/rune_kenaz"},
+{ "predicate": { "custom_model_data": 757 }, "model": "minecraft:item/rune_gifu"},
+{ "predicate": { "custom_model_data": 758 }, "model": "minecraft:item/rune_wunjo"},
+{ "predicate": { "custom_model_data": 759 }, "model": "minecraft:item/rune_hagalaz"},
+{ "predicate": { "custom_model_data": 760 }, "model": "minecraft:item/rune_nautiz"},
+
 { "predicate": { "custom_model_data": 1488 }, "model": "minecraft:item/zaika"}
 	]
 }
