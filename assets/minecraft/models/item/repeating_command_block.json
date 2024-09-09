@@ -114,7 +114,11 @@
 { "predicate": { "custom_model_data": 667 }, "model": "minecraft:item/x3"},
 { "predicate": { "custom_model_data": 668 }, "model": "minecraft:item/x4"},
 { "predicate": { "custom_model_data": 669 }, "model": "minecraft:item/locked"},
-{ "predicate": { "custom_model_data": 670 }, "model": "minecraft:item/windik"}
+{ "predicate": { "custom_model_data": 670 }, "model": "minecraft:item/windik"},
+{ "predicate": { "custom_model_data": 671 }, "model": "minecraft:item/trinket_0"},
+{ "predicate": { "custom_model_data": 672 }, "model": "minecraft:item/trinket_1"},
+{ "predicate": { "custom_model_data": 673 }, "model": "minecraft:item/trinket_2"},
+{ "predicate": { "custom_model_data": 674 }, "model": "minecraft:item/trinket_3"}
 
 
 	]

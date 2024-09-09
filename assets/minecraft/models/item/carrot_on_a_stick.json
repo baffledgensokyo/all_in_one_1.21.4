@@ -203,6 +203,24 @@
 { "predicate": { "custom_model_data": 758 }, "model": "minecraft:item/rune_wunjo"},
 { "predicate": { "custom_model_data": 759 }, "model": "minecraft:item/rune_hagalaz"},
 { "predicate": { "custom_model_data": 760 }, "model": "minecraft:item/rune_nautiz"},
+{ "predicate": { "custom_model_data": 761 }, "model": "minecraft:item/jungle_slab"},
+
+{ "predicate": { "custom_model_data": 762 }, "model": "minecraft:item/cunny_1"},
+{ "predicate": { "custom_model_data": 763 }, "model": "minecraft:item/cunny_2"},
+{ "predicate": { "custom_model_data": 764 }, "model": "minecraft:item/cunny_3"},
+{ "predicate": { "custom_model_data": 765 }, "model": "minecraft:item/cunny_4"},
+{ "predicate": { "custom_model_data": 766 }, "model": "minecraft:item/cunny_5"},
+{ "predicate": { "custom_model_data": 767 }, "model": "minecraft:item/cunny_6"},
+{ "predicate": { "custom_model_data": 768 }, "model": "minecraft:item/cunny_7"},
+{ "predicate": { "custom_model_data": 769 }, "model": "minecraft:item/cunny_8"},
+{ "predicate": { "custom_model_data": 770 }, "model": "minecraft:item/cunny_9"},
+{ "predicate": { "custom_model_data": 771 }, "model": "minecraft:item/cunny_10"},
+{ "predicate": { "custom_model_data": 772 }, "model": "minecraft:item/cunny_11"},
+{ "predicate": { "custom_model_data": 773 }, "model": "minecraft:item/cunny_12"},
+{ "predicate": { "custom_model_data": 774 }, "model": "minecraft:item/cunny_13"},
+{ "predicate": { "custom_model_data": 775 }, "model": "minecraft:item/cunny_14"},
+{ "predicate": { "custom_model_data": 776 }, "model": "minecraft:item/cunny_15"},
+{ "predicate": { "custom_model_data": 777 }, "model": "minecraft:item/cunny_16"},
 
 { "predicate": { "custom_model_data": 1488 }, "model": "minecraft:item/zaika"}
 	]
