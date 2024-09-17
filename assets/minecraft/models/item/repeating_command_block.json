@@ -119,7 +119,10 @@
 { "predicate": { "custom_model_data": 672 }, "model": "minecraft:item/trinket_1"},
 { "predicate": { "custom_model_data": 673 }, "model": "minecraft:item/trinket_2"},
 { "predicate": { "custom_model_data": 674 }, "model": "minecraft:item/trinket_3"},
-{ "predicate": { "custom_model_data": 675 }, "model": "minecraft:item/parasitoid"}
+{ "predicate": { "custom_model_data": 675 }, "model": "minecraft:item/parasitoid"},
+{ "predicate": { "custom_model_data": 676 }, "model": "minecraft:item/simbiont"},
+{ "predicate": { "custom_model_data": 677 }, "model": "minecraft:item/blood_anal_boom"},
+{ "predicate": { "custom_model_data": 678 }, "model": "minecraft:item/phd"}
 
 
 	]
