@@ -638,5 +638,23 @@
                 "stream": false
             }
         ]
+    },
+    "lbcsounds.pill_good": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "lbcsounds/pill_good",
+                "stream": false
+            }
+        ]
+    },
+    "lbcsounds.pill_bad": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "lbcsounds/pill_bad",
+                "stream": false
+            }
+        ]
     }
 }
