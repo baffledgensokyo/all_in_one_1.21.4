@@ -149,6 +149,7 @@
         { "predicate": { "custom_model_data": 241 }, "model": "minecraft:item/pills/pill_141"},
         { "predicate": { "custom_model_data": 242 }, "model": "minecraft:item/pills/pill_142"},
         { "predicate": { "custom_model_data": 243 }, "model": "minecraft:item/pills/pill_143"},
-        { "predicate": { "custom_model_data": 244 }, "model": "minecraft:item/pills/pill_144"}
+        { "predicate": { "custom_model_data": 244 }, "model": "minecraft:item/pills/pill_144"},
+        { "predicate": { "custom_model_data": 1488 }, "model": "minecraft:item/shit_1"}
       ]
     }
