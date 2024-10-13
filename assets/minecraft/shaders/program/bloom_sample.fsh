@@ -1,5 +1,5 @@
 #version 150
-#define GLOW_COLORS 7
+#define GLOW_COLORS 8
 
 uniform sampler2D DiffuseSampler;
 
@@ -20,7 +20,8 @@ void main(){
         ivec3(43,216,147),
         ivec3(255,14,14),
         ivec3(51,220,255),
-        ivec3(52,55,229)
+        ivec3(52,55,229),
+        ivec3(195,0,255)
     );
     
     for(int i = 0; i < GLOW_COLORS; i++) {
