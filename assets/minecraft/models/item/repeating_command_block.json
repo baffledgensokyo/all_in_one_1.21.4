@@ -123,6 +123,8 @@
 { "predicate": { "custom_model_data": 676 }, "model": "minecraft:item/simbiont"},
 { "predicate": { "custom_model_data": 677 }, "model": "minecraft:item/blood_anal_boom"},
 { "predicate": { "custom_model_data": 678 }, "model": "minecraft:item/phd"},
+{ "predicate": { "custom_model_data": 679 }, "model": "minecraft:item/trinket_5"},
+{ "predicate": { "custom_model_data": 680 }, "model": "minecraft:item/trinket_6"},
 { "predicate": { "custom_model_data": 679 }, "model": "minecraft:item/spirit_shadow"},
 { "predicate": { "custom_model_data": 680 }, "model": "minecraft:item/spirit_light"},
 { "predicate": { "custom_model_data": 681 }, "model": "minecraft:item/spirit_water"}
