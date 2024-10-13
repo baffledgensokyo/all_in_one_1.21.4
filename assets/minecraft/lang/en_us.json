@@ -4598,5 +4598,9 @@
     "just_imba_slab_lore": "Overslabs everything, if eaten",
     "just_a_white_slab_imba.lore": "Overflows everything with birch juice, when placed",
     "just_a_red_slab_imba.lore": "Commits genocide when placed",
-    "just_a_jungle_slab_imba.lore": "Creates CUNNY Jungle (RC)"
+    "just_a_jungle_slab_imba.lore": "Creates CUNNY Jungle (RC)",
+    "lbcskill.21":"Planetoid",
+    "lbcskill.21.lore.0":"All projectiles now spinning around player",
+    "lbcskill.21.lore.1":"All mobs, if they become too close,",
+    "lbcskill.21.lore.2":"starts to spin too"
 }
