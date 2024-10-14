@@ -2154,7 +2154,7 @@
     "mode_divide": "Wand Mode: Multiply",
     "mode_black_hole": "Wand Mode: Black Hole",
     "mode_sphere": "Wand Mode: Ball Lightning",
-    "mode_sniper": "Wand Mode: Long-Range Sniper",
+    "mode_sniper": "Wand Mode: Long-Range Sniper. Turn camera down + RC to auto-aim.",
     "mode_electro_ray": "Wand Mode: Electro-Fucking Ray",
     "mode_nuke": "Wand Mode: Electro-Fucking Atomic Bomb",
     "mode_chaos_area": "Wand Mode: Electro-Fucking Spark Field",
@@ -4602,5 +4602,8 @@
     "lbcskill.21":"Planetoid",
     "lbcskill.21.lore.0":"All projectiles now spinning around player",
     "lbcskill.21.lore.1":"All mobs, if they become too close,",
-    "lbcskill.21.lore.2":"starts to spin too"
+    "lbcskill.21.lore.2":"starts to spin too",
+    "lbctrinket.7":"Nether plug of Libertarianism",
+    "lbctrinket.7.lore.0":"40% chance to spawn Blaze when cast summoner items",
+    "lbctrinket.7.lore.1":"+10% for every copy"
 }
