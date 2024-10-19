@@ -31,7 +31,11 @@ void main() {
         
         fragColor = vec4(precolor.rgb,1);
       
-    } else { 
+    } else if (alpha == 129) {fragColor = vec4(precolor.rgb,0.5);
+        
+    } else
+    
+    { 
         fragColor = linear_fog(color, vertexDistance, FogStart, FogEnd, FogColor);
     }
 }
