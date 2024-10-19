@@ -125,12 +125,12 @@
 { "predicate": { "custom_model_data": 678 }, "model": "minecraft:item/phd"},
 { "predicate": { "custom_model_data": 679 }, "model": "minecraft:item/trinket_5"},
 { "predicate": { "custom_model_data": 680 }, "model": "minecraft:item/trinket_6"},
-{ "predicate": { "custom_model_data": 681 }, "model": "minecraft:item/spirit_shadow"},
-{ "predicate": { "custom_model_data": 682 }, "model": "minecraft:item/spirit_light"},
-{ "predicate": { "custom_model_data": 683 }, "model": "minecraft:item/spirit_water"},
-{ "predicate": { "custom_model_data": 684 }, "model": "minecraft:item/spirit_shadow"},
+{ "predicate": { "custom_model_data": 681 }, "model": "minecraft:item/spirit_fire"},
+{ "predicate": { "custom_model_data": 682 }, "model": "minecraft:item/spirit_water"},
+{ "predicate": { "custom_model_data": 683 }, "model": "minecraft:item/spirit_nature"},
+{ "predicate": { "custom_model_data": 684 }, "model": "minecraft:item/spirit_air"},
 { "predicate": { "custom_model_data": 685 }, "model": "minecraft:item/spirit_light"},
-{ "predicate": { "custom_model_data": 686 }, "model": "minecraft:item/spirit_water"}
+{ "predicate": { "custom_model_data": 686 }, "model": "minecraft:item/spirit_shadow"}
 
 
 	]
