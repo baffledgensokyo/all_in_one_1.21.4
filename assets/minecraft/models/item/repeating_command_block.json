@@ -130,8 +130,9 @@
 { "predicate": { "custom_model_data": 683 }, "model": "minecraft:item/spirit_nature"},
 { "predicate": { "custom_model_data": 684 }, "model": "minecraft:item/spirit_air"},
 { "predicate": { "custom_model_data": 685 }, "model": "minecraft:item/spirit_light"},
-<<<<<<< HEAD
-{ "predicate": { "custom_model_data": 686 }, "model": "minecraft:item/spirit_shadow"}
+{ "predicate": { "custom_model_data": 686 }, "model": "minecraft:item/spirit_shadow"},
+{ "predicate": { "custom_model_data": 687 }, "model": "minecraft:item/planetoid"},
+{ "predicate": { "custom_model_data": 688 }, "model": "minecraft:item/trinket_7"}
 
 
 	]
