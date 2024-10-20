@@ -4605,5 +4605,17 @@
     "lbcskill.21.lore.2":"starts to spin too",
     "lbctrinket.7":"Nether plug of Libertarianism",
     "lbctrinket.7.lore.0":"40% chance to spawn Blaze when cast summoner items",
-    "lbctrinket.7.lore.1":"+10% for every copy"
+    "lbctrinket.7.lore.1":"+10% for every copy",
+    "lbckit.18":"Dirnuin",
+    "lbckit.18.lore.1":"'Flame sword, that didn't leave scorches.'",
+    "lbckit.18.lore.2":"Hits charge firethrower",
+    "lbckit.18.lore.3":"Firethrower shoots flame stream, as long as",
+    "lbckit.18.lore.4":"charges remained. Needs at least 5 charges to start.",
+    "lbctrinket.8":"Front Hairline Stroke",
+    "lbctrinket.8.lore.1":"15% chance to shoot corrupted arrow",
+    "lbctrinket.8.lore.2":"+5% for every copy",
+    "lbclevelup.30":"Sanguis Magicae",
+    "lbclevelup.30.lore.1":"+5000 Max Mana",
+    "lbclevelup.30.lore.2":"+20 Mana Regeneration",
+    "lbclevelup.30.lore.3":"-16 Max Health"
 }
