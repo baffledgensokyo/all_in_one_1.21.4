@@ -4620,5 +4620,6 @@
     "lbclevelup.30.lore.3":"-16 Max Health",
     "lbctweak.0":"Wisdom Attraction",
     "lbctweak.0.lore":"+1 weight to drop Magic Academy",
-    "lbctweak.lore.all":"Selected for next game: "
+    "lbctweak.lore.all":"Selected for next game: ",
+    "lbctweak.lore.all.1":"Tokens left: "
 }
