@@ -2637,10 +2637,10 @@
     "drop_transformator": "Trap: Transformer",
     "drop_otchim": "Trap: Stepfather",
     "drop_helicopter": "Trap: Gypsy Attack Helicopter",
-    "karich_rifle": "SLG",
+    "karich_rifle": "SLG-88",
     "karich_rifle.lore.1": "RMB to shoot, uses up arrows.",
     "karich_rifle.lore.2": "Shift+RMB to switch shooting type:",
-    "karich_rifle.lore.3": "Default: 17 damage, headshot one-shots",
+    "karich_rifle.lore.3": "Default: 10 damage, headshot breaks helmet",
     "karich_rifle.lore.4": "Poisoned: 8 damage, inflicts poison, etc.",
     "karich_rifle.lore.5": "Explosive: 5 damage, explodes",
     "karich_rifle.lore.6": "Electric: 0 damage, completely stuns the player for 4 seconds",
@@ -2708,7 +2708,7 @@
     "lbc.adv.shooter.kazahstan": "own",
     "lbc.adv.shooter.kazahstan.lore": "Defeat the attacking gunship and take its trophy weapon, an upgraded version of the gunship!",
     "lbc.adv.shooter.slr": "Daeris on Daeris",
-    "lbc.adv.shooter.slr.lore": "Get a headshot with the 'SLG' - Daeris' sniper rifle",
+    "lbc.adv.shooter.slr.lore": "Get a headshot with the 'SLG-88' - Daeris' sniper rifle",
     "lbc.adv.sword.anal_whip": "Day of Reckoning",
     "lbc.adv.sword.anal_whip.lore": "Travel to another player using 'Legendary Ender Balls'",
     "lbc.adv.arcanums.neutral": "Mana generator",
@@ -4617,5 +4617,8 @@
     "lbclevelup.30":"Sanguis Magicae",
     "lbclevelup.30.lore.1":"+5000 Max Mana",
     "lbclevelup.30.lore.2":"+20 Mana Regeneration",
-    "lbclevelup.30.lore.3":"-16 Max Health"
+    "lbclevelup.30.lore.3":"-16 Max Health",
+    "lbctweak.0":"Wisdom Attraction",
+    "lbctweak.0.lore":"+1 weight to drop Magic Academy",
+    "lbctweak.lore.all":"Selected for next game: "
 }
