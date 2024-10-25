@@ -135,7 +135,8 @@
 { "predicate": { "custom_model_data": 688 }, "model": "minecraft:item/trinket_7"},
 { "predicate": { "custom_model_data": 689 }, "model": "minecraft:item/trinket_8"},
 { "predicate": { "custom_model_data": 690 }, "model": "minecraft:item/bloodmagick"},
-{ "predicate": { "custom_model_data": 691 }, "model": "minecraft:item/tweak"}
+{ "predicate": { "custom_model_data": 691 }, "model": "minecraft:item/tweak"},
+{ "predicate": { "custom_model_data": 692 }, "model": "minecraft:item/god_claw"}
 
 
 	]
