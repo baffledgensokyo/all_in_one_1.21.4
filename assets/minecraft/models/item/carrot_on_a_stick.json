@@ -222,6 +222,7 @@
 { "predicate": { "custom_model_data": 776 }, "model": "minecraft:item/cunny_15"},
 { "predicate": { "custom_model_data": 777 }, "model": "minecraft:item/cunny_16"},
 { "predicate": { "custom_model_data": 778 }, "model": "minecraft:item/blazefire_sword"},
+{ "predicate": { "custom_model_data": 779 }, "model": "minecraft:item/zeus"},
 
 { "predicate": { "custom_model_data": 1488 }, "model": "minecraft:item/zaika"}
 	]
