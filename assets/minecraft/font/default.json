@@ -549,6 +549,15 @@
             "chars": [
                 "\uE166"
             ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/expansion.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE167"
+            ]
         }
     ]
 }

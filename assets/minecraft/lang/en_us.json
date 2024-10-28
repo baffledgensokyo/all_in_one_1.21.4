@@ -4643,5 +4643,19 @@
     "lbcskill.23.lore.2":"Consumption devalues ​​everything it touches.",
     "lbcskill.23.lore.3":"Consumed blocks increase your attributes",
     "lbcskill.23.lore.4":"Consumed mobs (not players) becomes empty",
-    "lbcskill.23.lore.5":"Consumed items becomes liquid void"
+    "lbcskill.23.lore.5":"Consumed items becomes liquid void",
+    "lbctrinket.9":"Pubic Pooptegral",
+    "lbctrinket.9.lore.1":"30% chance to wither target on hit",
+    "lbctrinket.9.lore.2":"+10% for every copy",
+    "lbcskill.24":"Domain Expansion",
+    "lbcskill.24.lore.1":"Pressing Shift, you can activate expansion",
+    "lbcskill.24.lore.2":"Expansion expands everything around",
+    "lbcskill.24.lore.3":"Expansion can randomly create anything.",
+    "lbcskill.24.lore.4":"",
+    "lbctrinket.10":"Overfuck sperm cocktail",
+    "lbctrinket.10.lore.1":"30% chance to shoot electic field arrow",
+    "lbctrinket.10.lore.2":"+10% for every copy",
+    "lbctrinket.11":"Gay-Banana",
+    "lbctrinket.11.lore.1":"10% chance to teleport away when damaged",
+    "lbctrinket.11.lore.2":"+5% for every copy"
 }
