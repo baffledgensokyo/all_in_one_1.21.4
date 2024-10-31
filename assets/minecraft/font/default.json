@@ -531,6 +531,33 @@
             "chars": [
                 "\uE163"
             ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/mana_boost.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE165"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/god_claw.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE166"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/expansion.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE167"
+            ]
         }
     ]
 }

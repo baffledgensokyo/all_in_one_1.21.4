@@ -29,6 +29,7 @@
         {"predicate":{"custom_model_data":22},"model":"item/armors/nanobots_helmet"},
         {"predicate":{"custom_model_data":23},"model":"item/armors/erosion_helmet"},
         {"predicate":{"custom_model_data":24},"model":"item/armors/overload_helmet"},
-        {"predicate":{"custom_model_data":25},"model":"item/bucket_reversed"}
+        {"predicate":{"custom_model_data":25},"model":"item/bucket_reversed"},
+        {"predicate":{"custom_model_data":26},"model":"item/armors/clownmask"}
     ]
 }
