@@ -149,7 +149,9 @@
 		{ "predicate": { "custom_model_data": 703 }, "model": "minecraft:item/levitation"},
 		{ "predicate": { "custom_model_data": 704 }, "model": "minecraft:item/soulfull"},
 		{ "predicate": { "custom_model_data": 705 }, "model": "minecraft:item/kosoi"},
-		{ "predicate": { "custom_model_data": 706 }, "model": "minecraft:item/delit"}
+		{ "predicate": { "custom_model_data": 706 }, "model": "minecraft:item/delit"},
+		{ "predicate": { "custom_model_data": 707 }, "model": "minecraft:item/smoke_bomb"},
+		{ "predicate": { "custom_model_data": 708 }, "model": "minecraft:item/false_tumba"}
 
 	]
 }

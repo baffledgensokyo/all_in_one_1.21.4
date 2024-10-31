@@ -1,11 +1,30 @@
 {
-  "multipart": [{
+  "multipart": [
+    {
       "when": {
-        "up":"false","down":"false","north":"false","south":"false","east":"false","west":"false"
+        "up": "false",
+        "down": "false",
+        "north": "false",
+        "south": "false",
+        "east": "false",
+        "west": "false"
       },
       "apply": {
         "model": "minecraft:block/lucky_block",
-        "uvlock": true
+        "uvlock": false
+      }
+    },{
+      "when": {
+        "up": "true",
+        "down": "false",
+        "north": "false",
+        "south": "false",
+        "east": "false",
+        "west": "false"
+      },
+      "apply": {
+        "model": "minecraft:block/nothing",
+        "uvlock": false
       }
     },
     {
@@ -23,7 +42,7 @@
       "apply": {
         "model": "minecraft:block/red_mushroom_block",
         "y": 90,
-        "uvlock": true
+        "uvlock": false
       }
     },
     {
@@ -33,7 +52,7 @@
       "apply": {
         "model": "minecraft:block/red_mushroom_block",
         "y": 180,
-        "uvlock": true
+        "uvlock": false
       }
     },
     {
@@ -43,7 +62,7 @@
       "apply": {
         "model": "minecraft:block/red_mushroom_block",
         "y": 270,
-        "uvlock": true
+        "uvlock": false
       }
     },
     {
@@ -53,7 +72,7 @@
       "apply": {
         "model": "minecraft:block/red_mushroom_block",
         "x": 270,
-        "uvlock": true
+        "uvlock": false
       }
     },
     {
@@ -63,7 +82,7 @@
       "apply": {
         "model": "minecraft:block/red_mushroom_block",
         "x": 90,
-        "uvlock": true
+        "uvlock": false
       }
     },
     {
@@ -123,13 +142,32 @@
         "x": 90,
         "uvlock": false
       }
-    },{
+    },
+    {
       "when": {
-        "up":"false","down":"false","north":"false","south":"false","east":"false","west":"false"
+        "up": "false",
+        "down": "false",
+        "north": "false",
+        "south": "false",
+        "east": "false",
+        "west": "false"
       },
       "apply": {
         "model": "minecraft:block/lucky_block",
-        "uvlock": true
+        "uvlock": false
+      }
+    },{
+      "when": {
+        "up": "true",
+        "down": "false",
+        "north": "false",
+        "south": "false",
+        "east": "false",
+        "west": "false"
+      },
+      "apply": {
+        "model": "minecraft:block/nothing",
+        "uvlock": false
       }
     }
   ]
