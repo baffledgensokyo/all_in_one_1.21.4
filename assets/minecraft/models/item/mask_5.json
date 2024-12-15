@@ -1,7 +1,0 @@
-{
-    "parent": "minecraft:item/generated",
-    "textures": {
-      "layer0": "minecraft:item/troll/mask_5",
-      "layer1": "minecraft:item/troll/mask_5"
-    }
-  }
