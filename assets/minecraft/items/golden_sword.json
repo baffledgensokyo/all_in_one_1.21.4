@@ -1,0 +1,40 @@
+{
+    "model": {
+        "type": "range_dispatch",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "minecraft:item/golden_sword"
+        },
+        "entries": [
+            {
+                "threshold": 531,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/epicsword"
+                }
+            },
+            {
+                "threshold": 549,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/fragmentsword"
+                }
+            },
+            {
+                "threshold": 581,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/evolutionsword"
+                }
+            },
+            {
+                "threshold": 582,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/tiny_bone"
+                }
+            }
+        ]
+    }
+}
