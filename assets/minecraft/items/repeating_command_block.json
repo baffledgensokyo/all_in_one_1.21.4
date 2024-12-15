@@ -1,0 +1,985 @@
+{
+    "model": {
+        "type": "range_dispatch",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "minecraft:block/repeating_command_block"
+        },
+        "entries": [
+            {
+                "threshold": 535,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/manaregenerationbelt"
+                }
+            },
+            {
+                "threshold": 536,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/regenerationbelt"
+                }
+            },
+            {
+                "threshold": 537,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/saveplatform"
+                }
+            },
+            {
+                "threshold": 538,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/gaara"
+                }
+            },
+            {
+                "threshold": 543,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/imitator"
+                }
+            },
+            {
+                "threshold": 553,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/mysticalartifact"
+                }
+            },
+            {
+                "threshold": 554,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/magnet"
+                }
+            },
+            {
+                "threshold": 556,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/kishki"
+                }
+            },
+            {
+                "threshold": 562,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/quiver"
+                }
+            },
+            {
+                "threshold": 567,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/trusi"
+                }
+            },
+            {
+                "threshold": 568,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/babylongate"
+                }
+            },
+            {
+                "threshold": 569,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/kiuaskivi"
+                }
+            },
+            {
+                "threshold": 570,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/tannerkivi"
+                }
+            },
+            {
+                "threshold": 571,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/arcanumbarrier"
+                }
+            },
+            {
+                "threshold": 572,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/arcanumhealing"
+                }
+            },
+            {
+                "threshold": 573,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/arcanumblackhole"
+                }
+            },
+            {
+                "threshold": 574,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/infinity"
+                }
+            },
+            {
+                "threshold": 575,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/konserva"
+                }
+            },
+            {
+                "threshold": 576,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/liquidabyss"
+                }
+            },
+            {
+                "threshold": 577,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/barrier_and_heal"
+                }
+            },
+            {
+                "threshold": 578,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/nausea"
+                }
+            },
+            {
+                "threshold": 579,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/hunger"
+                }
+            },
+            {
+                "threshold": 580,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/invisibility"
+                }
+            },
+            {
+                "threshold": 581,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/water_breathing"
+                }
+            },
+            {
+                "threshold": 582,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/conduit_power"
+                }
+            },
+            {
+                "threshold": 583,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/evoker"
+                }
+            },
+            {
+                "threshold": 584,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/lightarrow"
+                }
+            },
+            {
+                "threshold": 585,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/kiuaskivi"
+                }
+            },
+            {
+                "threshold": 586,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/magic"
+                }
+            },
+            {
+                "threshold": 587,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/nomagic"
+                }
+            },
+            {
+                "threshold": 588,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/penis_1"
+                }
+            },
+            {
+                "threshold": 589,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/penis_2"
+                }
+            },
+            {
+                "threshold": 590,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/penis_3"
+                }
+            },
+            {
+                "threshold": 591,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/penis_4"
+                }
+            },
+            {
+                "threshold": 592,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/penis_5"
+                }
+            },
+            {
+                "threshold": 593,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/penis_6"
+                }
+            },
+            {
+                "threshold": 594,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/omega"
+                }
+            },
+            {
+                "threshold": 595,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/malevich"
+                }
+            },
+            {
+                "threshold": 596,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/transformator"
+                }
+            },
+            {
+                "threshold": 597,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/avarice_diamond"
+                }
+            },
+            {
+                "threshold": 598,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/sin_greed"
+                }
+            },
+            {
+                "threshold": 599,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/sin_lust"
+                }
+            },
+            {
+                "threshold": 600,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/sin_indolence"
+                }
+            },
+            {
+                "threshold": 601,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/sin_envy"
+                }
+            },
+            {
+                "threshold": 602,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/sin_gluttony"
+                }
+            },
+            {
+                "threshold": 603,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/sin_wrath"
+                }
+            },
+            {
+                "threshold": 604,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/sin_vanity"
+                }
+            },
+            {
+                "threshold": 605,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/otchim"
+                }
+            },
+            {
+                "threshold": 606,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/gigachad"
+                }
+            },
+            {
+                "threshold": 607,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/supply_crate"
+                }
+            },
+            {
+                "threshold": 608,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/supply_crate_opened"
+                }
+            },
+            {
+                "threshold": 609,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/round_standard"
+                }
+            },
+            {
+                "threshold": 610,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/round_incendiary"
+                }
+            },
+            {
+                "threshold": 611,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/round_electric"
+                }
+            },
+            {
+                "threshold": 612,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/round_acid"
+                }
+            },
+            {
+                "threshold": 613,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/round_void"
+                }
+            },
+            {
+                "threshold": 614,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/round_explosive"
+                }
+            },
+            {
+                "threshold": 615,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/electroblocker"
+                }
+            },
+            {
+                "threshold": 616,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/the_sun"
+                }
+            },
+            {
+                "threshold": 617,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/empty"
+                }
+            },
+            {
+                "threshold": 618,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/yellow_lightning"
+                }
+            },
+            {
+                "threshold": 619,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/piss"
+                }
+            },
+            {
+                "threshold": 620,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/laser_minigun_ray"
+                }
+            },
+            {
+                "threshold": 621,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/academy"
+                }
+            },
+            {
+                "threshold": 622,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/ice_crystal_proj"
+                }
+            },
+            {
+                "threshold": 623,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/ice_crystal_small"
+                }
+            },
+            {
+                "threshold": 624,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/runic_ice_shard"
+                }
+            },
+            {
+                "threshold": 625,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/scared"
+                }
+            },
+            {
+                "threshold": 626,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/lookback"
+                }
+            },
+            {
+                "threshold": 627,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/magic_buff"
+                }
+            },
+            {
+                "threshold": 628,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/no_magic"
+                }
+            },
+            {
+                "threshold": 629,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/piss"
+                }
+            },
+            {
+                "threshold": 630,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/target"
+                }
+            },
+            {
+                "threshold": 631,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/effect_delayed_death"
+                }
+            },
+            {
+                "threshold": 632,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/effect_reverse_mana"
+                }
+            },
+            {
+                "threshold": 633,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/shock"
+                }
+            },
+            {
+                "threshold": 634,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/big_snowball"
+                }
+            },
+            {
+                "threshold": 635,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/void_resistance"
+                }
+            },
+            {
+                "threshold": 636,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/shifting"
+                }
+            },
+            {
+                "threshold": 637,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/living_legend"
+                }
+            },
+            {
+                "threshold": 638,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/all_seeing_eye"
+                }
+            },
+            {
+                "threshold": 639,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/skill_issue"
+                }
+            },
+            {
+                "threshold": 640,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/banan"
+                }
+            },
+            {
+                "threshold": 641,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/shef"
+                }
+            },
+            {
+                "threshold": 642,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/helicopter_1"
+                }
+            },
+            {
+                "threshold": 643,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/helicopter_2"
+                }
+            },
+            {
+                "threshold": 644,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/helicopter_3"
+                }
+            },
+            {
+                "threshold": 645,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/helicopter_4"
+                }
+            },
+            {
+                "threshold": 646,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/bucks"
+                }
+            },
+            {
+                "threshold": 647,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/nexus_wire_red"
+                }
+            },
+            {
+                "threshold": 648,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/nexus_wire_green"
+                }
+            },
+            {
+                "threshold": 649,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/nexus_wire_onyx"
+                }
+            },
+            {
+                "threshold": 650,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/nexus_wire_white"
+                }
+            },
+            {
+                "threshold": 651,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/nexus_item_cage_red"
+                }
+            },
+            {
+                "threshold": 652,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/nexus_item_cage_green"
+                }
+            },
+            {
+                "threshold": 653,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/nexus_item_cage_black"
+                }
+            },
+            {
+                "threshold": 654,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/nexus_item_cage_white"
+                }
+            },
+            {
+                "threshold": 655,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/muravei"
+                }
+            },
+            {
+                "threshold": 656,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/drop_trap"
+                }
+            },
+            {
+                "threshold": 657,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/drop_not_trap"
+                }
+            },
+            {
+                "threshold": 658,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/drop_boss"
+                }
+            },
+            {
+                "threshold": 659,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/nexus_icon"
+                }
+            },
+            {
+                "threshold": 660,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/advancement_icon/nexus_ground"
+                }
+            },
+            {
+                "threshold": 661,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/ora"
+                }
+            },
+            {
+                "threshold": 662,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/card_1"
+                }
+            },
+            {
+                "threshold": 663,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/card_2"
+                }
+            },
+            {
+                "threshold": 664,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/grimoire_boss"
+                }
+            },
+            {
+                "threshold": 665,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/sand_pot"
+                }
+            },
+            {
+                "threshold": 666,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/x2"
+                }
+            },
+            {
+                "threshold": 667,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/x3"
+                }
+            },
+            {
+                "threshold": 668,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/x4"
+                }
+            },
+            {
+                "threshold": 669,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/locked"
+                }
+            },
+            {
+                "threshold": 670,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/windik"
+                }
+            },
+            {
+                "threshold": 671,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/trinket_0"
+                }
+            },
+            {
+                "threshold": 672,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/trinket_1"
+                }
+            },
+            {
+                "threshold": 673,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/trinket_2"
+                }
+            },
+            {
+                "threshold": 674,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/trinket_3"
+                }
+            },
+            {
+                "threshold": 675,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/parasitoid"
+                }
+            },
+            {
+                "threshold": 676,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/simbiont"
+                }
+            },
+            {
+                "threshold": 677,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/blood_anal_boom"
+                }
+            },
+            {
+                "threshold": 678,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/phd"
+                }
+            },
+            {
+                "threshold": 679,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/trinket_5"
+                }
+            },
+            {
+                "threshold": 680,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/trinket_6"
+                }
+            },
+            {
+                "threshold": 681,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/spirit_fire"
+                }
+            },
+            {
+                "threshold": 682,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/spirit_water"
+                }
+            },
+            {
+                "threshold": 683,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/spirit_nature"
+                }
+            },
+            {
+                "threshold": 684,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/spirit_air"
+                }
+            },
+            {
+                "threshold": 685,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/spirit_light"
+                }
+            },
+            {
+                "threshold": 686,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/spirit_shadow"
+                }
+            },
+            {
+                "threshold": 687,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/planetoid"
+                }
+            },
+            {
+                "threshold": 688,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/trinket_7"
+                }
+            },
+            {
+                "threshold": 689,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/trinket_8"
+                }
+            },
+            {
+                "threshold": 690,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/bloodmagick"
+                }
+            },
+            {
+                "threshold": 691,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/tweak"
+                }
+            },
+            {
+                "threshold": 692,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/god_claw"
+                }
+            },
+            {
+                "threshold": 693,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/trinket_9"
+                }
+            },
+            {
+                "threshold": 694,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/expansion"
+                }
+            },
+            {
+                "threshold": 695,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/trinket_10"
+                }
+            },
+            {
+                "threshold": 696,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/trinket_11"
+                }
+            }
+        ]
+    }
+}

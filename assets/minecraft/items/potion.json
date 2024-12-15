@@ -1,0 +1,32 @@
+{
+    "model": {
+        "type": "range_dispatch",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "minecraft:item/potion",
+            "tints": [
+                {
+                    "type": "minecraft:potion",
+                    "default": -13083194
+                }
+            ]
+        },
+        "entries": [
+            {
+                "threshold": 529,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/snus"
+                }
+            },
+            {
+                "threshold": 530,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/oppotion"
+                }
+            }
+        ]
+    }
+}

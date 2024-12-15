@@ -1,0 +1,75 @@
+{
+    "model": {
+        "type": "range_dispatch",
+        "property": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "minecraft:item/iron_sword"
+        },
+        "entries": [
+            {
+                "threshold": 532,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/vampiresword"
+                }
+            },
+            {
+                "threshold": 560,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/guardiansword"
+                }
+            },
+            {
+                "threshold": 561,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/gravitysword"
+                }
+            },
+            {
+                "threshold": 571,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/icesword"
+                }
+            },
+            {
+                "threshold": 572,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/crowbar"
+                }
+            },
+            {
+                "threshold": 573,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/one_punch_glove"
+                }
+            },
+            {
+                "threshold": 574,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/glass_cannon"
+                }
+            },
+            {
+                "threshold": 575,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/antimagic_stick"
+                }
+            },
+            {
+                "threshold": 576,
+                "model": {
+                    "type": "model",
+                    "model": "minecraft:item/steampunk_sword"
+                }
+            }
+        ]
+    }
+}
