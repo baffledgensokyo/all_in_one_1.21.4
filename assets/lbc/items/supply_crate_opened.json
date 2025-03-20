@@ -1,0 +1,6 @@
+{
+    "model": {
+        "type": "model",
+        "model": "lbc:supply_crate_opened"
+    }
+}

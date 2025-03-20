@@ -1,0 +1,6 @@
+{
+    "model": {
+        "type": "model",
+        "model": "lbc:one_punch_glove"
+    }
+}
