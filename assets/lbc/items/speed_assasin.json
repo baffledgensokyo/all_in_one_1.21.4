@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:speed_assasin"
+        "model": "lbc:item/speed_assasin"
     }
 }

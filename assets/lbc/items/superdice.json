@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:superdice"
+        "model": "lbc:item/superdice"
     }
 }

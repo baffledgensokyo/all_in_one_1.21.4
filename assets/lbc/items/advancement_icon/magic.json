@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:advancement_icon/magic"
+        "model": "lbc:item/advancement_icon/magic"
     }
 }

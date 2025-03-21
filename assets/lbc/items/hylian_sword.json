@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:hylian_sword"
+        "model": "lbc:item/hylian_sword"
     }
 }

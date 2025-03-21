@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:skill_issue"
+        "model": "lbc:item/skill_issue"
     }
 }

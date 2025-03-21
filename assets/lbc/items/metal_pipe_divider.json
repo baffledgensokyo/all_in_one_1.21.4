@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:metal_pipe_divider"
+        "model": "lbc:item/metal_pipe_divider"
     }
 }

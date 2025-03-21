@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:best_form/superpos"
+        "model": "lbc:item/best_form/superpos"
     }
 }

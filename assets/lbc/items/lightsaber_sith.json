@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:lightsaber_sith"
+        "model": "lbc:item/lightsaber_sith"
     }
 }

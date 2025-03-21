@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:rune_fehu"
+        "model": "lbc:item/rune_fehu"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:empty"
+        "model": "lbc:item/empty"
     }
 }

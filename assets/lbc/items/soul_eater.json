@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:soul_eater"
+        "model": "lbc:item/soul_eater"
     }
 }

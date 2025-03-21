@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:invisible_hand"
+        "model": "lbc:item/invisible_hand"
     }
 }

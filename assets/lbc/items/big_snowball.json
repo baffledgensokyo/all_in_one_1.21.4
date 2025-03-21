@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:big_snowball"
+        "model": "lbc:item/big_snowball"
     }
 }

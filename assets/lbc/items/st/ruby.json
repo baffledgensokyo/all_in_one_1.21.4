@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:st/ruby"
+        "model": "lbc:item/st/ruby"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:neutral_ball"
+        "model": "lbc:item/neutral_ball"
     }
 }

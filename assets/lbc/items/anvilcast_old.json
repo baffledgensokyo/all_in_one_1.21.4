@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:anvilcast_old"
+        "model": "lbc:item/anvilcast_old"
     }
 }

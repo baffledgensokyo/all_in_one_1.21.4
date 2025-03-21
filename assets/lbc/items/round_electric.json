@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:round_electric"
+        "model": "lbc:item/round_electric"
     }
 }

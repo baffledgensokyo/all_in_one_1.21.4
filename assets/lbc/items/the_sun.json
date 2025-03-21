@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:the_sun"
+        "model": "lbc:item/the_sun"
     }
 }

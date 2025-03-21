@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:witch_rabbit"
+        "model": "lbc:item/witch_rabbit"
     }
 }

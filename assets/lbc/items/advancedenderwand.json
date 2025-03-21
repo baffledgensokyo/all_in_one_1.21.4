@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:advancedenderwand"
+        "model": "lbc:item/advancedenderwand"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:spelllib/stone"
+        "model": "lbc:item/spelllib/stone"
     }
 }

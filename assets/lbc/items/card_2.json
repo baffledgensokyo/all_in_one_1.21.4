@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:card_2"
+        "model": "lbc:item/card_2"
     }
 }

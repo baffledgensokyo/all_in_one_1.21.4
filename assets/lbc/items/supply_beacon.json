@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:supply_beacon"
+        "model": "lbc:item/supply_beacon"
     }
 }

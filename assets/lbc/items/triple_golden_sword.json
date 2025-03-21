@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:triple_golden_sword"
+        "model": "lbc:item/triple_golden_sword"
     }
 }

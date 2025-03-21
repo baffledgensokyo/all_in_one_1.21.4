@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:whale"
+        "model": "lbc:item/whale"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:advancement_icon/target"
+        "model": "lbc:item/advancement_icon/target"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:uniwand"
+        "model": "lbc:item/uniwand"
     }
 }

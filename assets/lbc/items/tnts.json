@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:tnts"
+        "model": "lbc:item/tnts"
     }
 }

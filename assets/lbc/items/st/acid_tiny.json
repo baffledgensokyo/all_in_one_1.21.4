@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:st/acid_tiny"
+        "model": "lbc:item/st/acid_tiny"
     }
 }

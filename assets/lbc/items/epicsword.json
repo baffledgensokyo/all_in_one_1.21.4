@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:epicsword"
+        "model": "lbc:item/epicsword"
     }
 }

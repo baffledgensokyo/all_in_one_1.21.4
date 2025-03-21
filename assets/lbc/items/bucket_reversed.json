@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:bucket_reversed"
+        "model": "lbc:item/bucket_reversed"
     }
 }

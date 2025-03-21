@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:best_form/lightning_rapira"
+        "model": "lbc:item/best_form/lightning_rapira"
     }
 }

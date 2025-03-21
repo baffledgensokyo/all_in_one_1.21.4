@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:omegaflag"
+        "model": "lbc:item/omegaflag"
     }
 }

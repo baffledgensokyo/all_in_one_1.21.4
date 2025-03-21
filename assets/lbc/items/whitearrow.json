@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:whitearrow"
+        "model": "lbc:item/whitearrow"
     }
 }

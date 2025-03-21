@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:spelllib/tesla"
+        "model": "lbc:item/spelllib/tesla"
     }
 }

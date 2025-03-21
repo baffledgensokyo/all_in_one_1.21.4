@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:armors/erosion_chestplate"
+        "model": "lbc:item/armors/erosion_chestplate"
     }
 }

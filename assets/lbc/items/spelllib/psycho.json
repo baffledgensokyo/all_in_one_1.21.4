@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:spelllib/psycho"
+        "model": "lbc:item/spelllib/psycho"
     }
 }

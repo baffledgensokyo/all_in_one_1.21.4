@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:railgun_arrow"
+        "model": "lbc:item/railgun_arrow"
     }
 }

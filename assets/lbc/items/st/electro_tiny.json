@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:st/electro_tiny"
+        "model": "lbc:item/st/electro_tiny"
     }
 }

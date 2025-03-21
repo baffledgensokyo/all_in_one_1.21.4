@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:pills/pill_90"
+        "model": "lbc:item/pills/pill_90"
     }
 }

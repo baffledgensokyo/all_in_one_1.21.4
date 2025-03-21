@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:hedgehogwand"
+        "model": "lbc:item/hedgehogwand"
     }
 }

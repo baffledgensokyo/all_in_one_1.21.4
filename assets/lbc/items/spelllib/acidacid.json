@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:spelllib/acidacid"
+        "model": "lbc:item/spelllib/acidacid"
     }
 }

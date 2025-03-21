@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:armory_up"
+        "model": "lbc:item/armory_up"
     }
 }

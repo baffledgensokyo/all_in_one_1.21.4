@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:homing"
+        "model": "lbc:item/homing"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:infinite_lucky_block"
+        "model": "lbc:item/infinite_lucky_block"
     }
 }

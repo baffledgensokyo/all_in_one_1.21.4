@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:spelllib/potion"
+        "model": "lbc:item/spelllib/potion"
     }
 }

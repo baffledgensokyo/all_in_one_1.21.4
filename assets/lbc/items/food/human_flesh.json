@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:food/human_flesh"
+        "model": "lbc:item/food/human_flesh"
     }
 }

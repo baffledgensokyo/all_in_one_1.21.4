@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:lightningegg_old"
+        "model": "lbc:item/lightningegg_old"
     }
 }

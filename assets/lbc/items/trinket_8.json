@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:trinket_8"
+        "model": "lbc:item/trinket_8"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:percent"
+        "model": "lbc:item/percent"
     }
 }

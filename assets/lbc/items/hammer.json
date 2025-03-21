@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:hammer"
+        "model": "lbc:item/hammer"
     }
 }

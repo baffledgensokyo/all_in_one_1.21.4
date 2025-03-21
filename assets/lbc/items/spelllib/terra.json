@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:spelllib/terra"
+        "model": "lbc:item/spelllib/terra"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:best_form/killer_sword"
+        "model": "lbc:item/best_form/killer_sword"
     }
 }

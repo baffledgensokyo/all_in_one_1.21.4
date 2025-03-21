@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:windik"
+        "model": "lbc:item/windik"
     }
 }

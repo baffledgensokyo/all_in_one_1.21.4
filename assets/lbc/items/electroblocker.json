@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:electroblocker"
+        "model": "lbc:item/electroblocker"
     }
 }

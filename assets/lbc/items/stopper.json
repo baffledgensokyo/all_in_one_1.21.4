@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:stopper"
+        "model": "lbc:item/stopper"
     }
 }

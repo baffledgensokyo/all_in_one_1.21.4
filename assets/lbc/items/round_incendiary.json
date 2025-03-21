@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:round_incendiary"
+        "model": "lbc:item/round_incendiary"
     }
 }

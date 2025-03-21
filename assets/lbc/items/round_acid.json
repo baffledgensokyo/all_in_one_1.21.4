@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:round_acid"
+        "model": "lbc:item/round_acid"
     }
 }

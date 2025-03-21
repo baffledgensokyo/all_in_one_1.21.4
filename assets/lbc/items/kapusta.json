@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:kapusta"
+        "model": "lbc:item/kapusta"
     }
 }

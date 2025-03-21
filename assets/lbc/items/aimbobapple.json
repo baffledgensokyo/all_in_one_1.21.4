@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:aimbobapple"
+        "model": "lbc:item/aimbobapple"
     }
 }

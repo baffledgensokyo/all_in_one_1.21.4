@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:blood_anal_boom"
+        "model": "lbc:item/blood_anal_boom"
     }
 }

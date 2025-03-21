@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:starwand"
+        "model": "lbc:item/starwand"
     }
 }

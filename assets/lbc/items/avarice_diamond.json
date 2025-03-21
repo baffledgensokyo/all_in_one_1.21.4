@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:avarice_diamond"
+        "model": "lbc:item/avarice_diamond"
     }
 }

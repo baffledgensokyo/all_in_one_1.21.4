@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:terra_razorpine"
+        "model": "lbc:item/terra_razorpine"
     }
 }

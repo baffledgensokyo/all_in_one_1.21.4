@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:food/diamond_porkchop"
+        "model": "lbc:item/food/diamond_porkchop"
     }
 }

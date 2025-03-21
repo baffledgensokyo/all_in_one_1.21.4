@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:round_explosive"
+        "model": "lbc:item/round_explosive"
     }
 }

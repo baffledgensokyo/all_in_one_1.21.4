@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:round_void"
+        "model": "lbc:item/round_void"
     }
 }

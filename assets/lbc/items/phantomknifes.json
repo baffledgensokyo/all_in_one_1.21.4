@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:phantomknifes"
+        "model": "lbc:item/phantomknifes"
     }
 }

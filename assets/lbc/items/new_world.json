@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:new_world"
+        "model": "lbc:item/new_world"
     }
 }

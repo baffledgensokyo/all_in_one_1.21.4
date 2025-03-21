@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:kiuaskivi"
+        "model": "lbc:item/kiuaskivi"
     }
 }

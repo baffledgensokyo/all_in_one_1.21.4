@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:spike_impulse"
+        "model": "lbc:item/spike_impulse"
     }
 }

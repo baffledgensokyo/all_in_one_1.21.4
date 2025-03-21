@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:kill_button"
+        "model": "lbc:item/kill_button"
     }
 }

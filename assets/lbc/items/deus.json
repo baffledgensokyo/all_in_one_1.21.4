@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:deus"
+        "model": "lbc:item/deus"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:levitation"
+        "model": "lbc:item/levitation"
     }
 }

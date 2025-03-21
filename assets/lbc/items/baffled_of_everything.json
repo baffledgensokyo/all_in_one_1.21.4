@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:baffled_of_everything"
+        "model": "lbc:item/baffled_of_everything"
     }
 }

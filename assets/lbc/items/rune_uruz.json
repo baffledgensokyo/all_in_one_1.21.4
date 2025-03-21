@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:rune_uruz"
+        "model": "lbc:item/rune_uruz"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:spelllib/blaze"
+        "model": "lbc:item/spelllib/blaze"
     }
 }

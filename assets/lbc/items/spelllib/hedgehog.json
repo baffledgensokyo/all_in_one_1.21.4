@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:spelllib/hedgehog"
+        "model": "lbc:item/spelllib/hedgehog"
     }
 }

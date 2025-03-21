@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:banhammer"
+        "model": "lbc:item/banhammer"
     }
 }

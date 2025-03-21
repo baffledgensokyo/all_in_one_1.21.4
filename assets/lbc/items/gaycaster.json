@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:gaycaster"
+        "model": "lbc:item/gaycaster"
     }
 }

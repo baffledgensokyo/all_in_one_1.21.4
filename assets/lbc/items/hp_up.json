@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:hp_up"
+        "model": "lbc:item/hp_up"
     }
 }

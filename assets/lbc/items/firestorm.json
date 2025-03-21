@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:firestorm"
+        "model": "lbc:item/firestorm"
     }
 }

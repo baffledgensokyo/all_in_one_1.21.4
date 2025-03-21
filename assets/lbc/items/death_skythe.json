@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:death_skythe"
+        "model": "lbc:item/death_skythe"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:advancement_icon/scared"
+        "model": "lbc:item/advancement_icon/scared"
     }
 }

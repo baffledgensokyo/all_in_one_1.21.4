@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:god_claw"
+        "model": "lbc:item/god_claw"
     }
 }

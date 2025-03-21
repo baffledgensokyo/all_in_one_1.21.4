@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:spelllib/fire"
+        "model": "lbc:item/spelllib/fire"
     }
 }

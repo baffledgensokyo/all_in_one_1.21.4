@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:requiem_arrow"
+        "model": "lbc:item/requiem_arrow"
     }
 }

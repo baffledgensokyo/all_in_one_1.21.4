@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:magnum"
+        "model": "lbc:item/magnum"
     }
 }

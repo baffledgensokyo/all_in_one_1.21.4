@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:boltbolt_wand"
+        "model": "lbc:item/boltbolt_wand"
     }
 }

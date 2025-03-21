@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:cyber"
+        "model": "lbc:item/cyber"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:spelllib/prism"
+        "model": "lbc:item/spelllib/prism"
     }
 }

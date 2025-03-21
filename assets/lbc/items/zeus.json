@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:zeus"
+        "model": "lbc:item/zeus"
     }
 }

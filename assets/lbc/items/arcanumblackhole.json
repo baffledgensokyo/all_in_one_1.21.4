@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:arcanumblackhole"
+        "model": "lbc:item/arcanumblackhole"
     }
 }

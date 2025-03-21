@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:imitator"
+        "model": "lbc:item/imitator"
     }
 }

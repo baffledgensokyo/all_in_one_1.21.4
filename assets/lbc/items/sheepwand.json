@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:sheepwand"
+        "model": "lbc:item/sheepwand"
     }
 }

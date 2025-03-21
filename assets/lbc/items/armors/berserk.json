@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:armors/berserk"
+        "model": "lbc:item/armors/berserk"
     }
 }

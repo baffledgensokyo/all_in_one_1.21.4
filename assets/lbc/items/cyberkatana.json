@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:cyberkatana"
+        "model": "lbc:item/cyberkatana"
     }
 }

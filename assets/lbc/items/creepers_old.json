@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:creepers_old"
+        "model": "lbc:item/creepers_old"
     }
 }
