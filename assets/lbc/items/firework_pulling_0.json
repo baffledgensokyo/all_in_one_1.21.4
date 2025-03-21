@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:firework_pulling_0"
+        "model": "lbc:item/firework_pulling_0"
     }
 }

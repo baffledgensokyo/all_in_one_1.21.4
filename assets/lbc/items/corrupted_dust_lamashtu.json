@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:corrupted_dust_lamashtu"
+        "model": "lbc:item/corrupted_dust_lamashtu"
     }
 }

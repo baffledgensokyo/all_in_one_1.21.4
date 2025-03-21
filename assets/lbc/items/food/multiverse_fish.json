@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:food/multiverse_fish"
+        "model": "lbc:item/food/multiverse_fish"
     }
 }

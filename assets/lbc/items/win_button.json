@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:win_button"
+        "model": "lbc:item/win_button"
     }
 }

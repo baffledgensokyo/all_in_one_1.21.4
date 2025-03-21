@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:acidacidwand"
+        "model": "lbc:item/acidacidwand"
     }
 }

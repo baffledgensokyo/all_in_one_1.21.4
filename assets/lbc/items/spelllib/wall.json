@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:spelllib/wall"
+        "model": "lbc:item/spelllib/wall"
     }
 }

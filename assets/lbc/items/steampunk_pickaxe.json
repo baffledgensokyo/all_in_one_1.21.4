@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:steampunk_pickaxe"
+        "model": "lbc:item/steampunk_pickaxe"
     }
 }

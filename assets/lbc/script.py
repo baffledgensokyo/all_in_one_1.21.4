@@ -12,7 +12,7 @@ def rewrite_json_files(directory):
                 new_data = {
                     "model": {
                         "type": "model",
-                        "model": f"lbc:{new_model_value[:-5]}"  # Убираем .json
+                        "model": f"lbc:item/{new_model_value[:-5]}"  # Убираем .json
                     }
                 }
                 

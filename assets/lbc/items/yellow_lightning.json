@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:yellow_lightning"
+        "model": "lbc:item/yellow_lightning"
     }
 }

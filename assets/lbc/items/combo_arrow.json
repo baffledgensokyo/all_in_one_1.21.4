@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:combo_arrow"
+        "model": "lbc:item/combo_arrow"
     }
 }

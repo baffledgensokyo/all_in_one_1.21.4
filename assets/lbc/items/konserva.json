@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:konserva"
+        "model": "lbc:item/konserva"
     }
 }

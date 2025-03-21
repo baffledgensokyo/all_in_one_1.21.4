@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:summonravager"
+        "model": "lbc:item/summonravager"
     }
 }

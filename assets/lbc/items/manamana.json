@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:manamana"
+        "model": "lbc:item/manamana"
     }
 }

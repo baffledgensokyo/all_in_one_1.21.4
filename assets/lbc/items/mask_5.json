@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:mask_5"
+        "model": "lbc:item/mask_5"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:snake"
+        "model": "lbc:item/snake"
     }
 }

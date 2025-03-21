@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:railroad"
+        "model": "lbc:item/railroad"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:malevich"
+        "model": "lbc:item/malevich"
     }
 }

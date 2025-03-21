@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:spelllib/danmaku"
+        "model": "lbc:item/spelllib/danmaku"
     }
 }

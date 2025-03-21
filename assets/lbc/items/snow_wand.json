@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:snow_wand"
+        "model": "lbc:item/snow_wand"
     }
 }

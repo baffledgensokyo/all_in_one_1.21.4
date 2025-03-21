@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:dart"
+        "model": "lbc:item/dart"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:lucky_block"
+        "model": "minecraft:block/lucky_block"
     }
 }

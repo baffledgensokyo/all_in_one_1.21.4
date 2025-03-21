@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:best_form/ghost"
+        "model": "lbc:item/best_form/ghost"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:mysticalartifact"
+        "model": "lbc:item/mysticalartifact"
     }
 }

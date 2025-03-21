@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:tiny_bone"
+        "model": "lbc:item/tiny_bone"
     }
 }

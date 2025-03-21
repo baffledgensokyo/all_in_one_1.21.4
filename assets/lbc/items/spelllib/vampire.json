@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:spelllib/vampire"
+        "model": "lbc:item/spelllib/vampire"
     }
 }

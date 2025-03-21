@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:double_sword"
+        "model": "lbc:item/double_sword"
     }
 }

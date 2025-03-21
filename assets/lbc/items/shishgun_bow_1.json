@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:shishgun_bow_1"
+        "model": "lbc:item/shishgun_bow_1"
     }
 }

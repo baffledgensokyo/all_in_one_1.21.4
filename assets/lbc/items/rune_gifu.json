@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:rune_gifu"
+        "model": "lbc:item/rune_gifu"
     }
 }

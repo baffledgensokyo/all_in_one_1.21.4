@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:wallwand"
+        "model": "lbc:item/wallwand"
     }
 }

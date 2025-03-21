@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:nanobot"
+        "model": "lbc:item/nanobot"
     }
 }

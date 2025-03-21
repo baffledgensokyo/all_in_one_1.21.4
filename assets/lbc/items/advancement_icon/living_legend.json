@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:advancement_icon/living_legend"
+        "model": "lbc:item/advancement_icon/living_legend"
     }
 }

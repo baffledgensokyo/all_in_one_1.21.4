@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:teleporter"
+        "model": "lbc:item/teleporter"
     }
 }

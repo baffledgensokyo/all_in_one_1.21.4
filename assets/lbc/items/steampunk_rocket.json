@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:steampunk_rocket"
+        "model": "lbc:item/steampunk_rocket"
     }
 }

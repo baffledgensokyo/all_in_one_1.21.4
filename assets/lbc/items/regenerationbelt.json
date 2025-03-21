@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:regenerationbelt"
+        "model": "lbc:item/regenerationbelt"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:fast"
+        "model": "lbc:item/fast"
     }
 }

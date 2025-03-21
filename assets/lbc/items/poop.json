@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:poop"
+        "model": "lbc:item/poop"
     }
 }

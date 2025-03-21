@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:reactive"
+        "model": "lbc:item/reactive"
     }
 }

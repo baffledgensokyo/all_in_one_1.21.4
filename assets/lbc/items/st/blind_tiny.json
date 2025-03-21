@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:st/blind_tiny"
+        "model": "lbc:item/st/blind_tiny"
     }
 }

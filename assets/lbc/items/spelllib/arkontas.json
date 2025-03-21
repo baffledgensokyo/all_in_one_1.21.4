@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:spelllib/arkontas"
+        "model": "lbc:item/spelllib/arkontas"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:food/human_eye"
+        "model": "lbc:item/food/human_eye"
     }
 }

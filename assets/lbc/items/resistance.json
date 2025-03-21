@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:resistance"
+        "model": "lbc:item/resistance"
     }
 }

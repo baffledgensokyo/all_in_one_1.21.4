@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:lamashtu"
+        "model": "lbc:item/lamashtu"
     }
 }

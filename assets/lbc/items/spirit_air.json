@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:spirit_air"
+        "model": "lbc:item/spirit_air"
     }
 }

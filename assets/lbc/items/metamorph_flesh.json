@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:metamorph_flesh"
+        "model": "lbc:item/metamorph_flesh"
     }
 }

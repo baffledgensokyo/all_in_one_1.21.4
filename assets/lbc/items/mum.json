@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:mum"
+        "model": "lbc:item/mum"
     }
 }

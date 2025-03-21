@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:divider"
+        "model": "lbc:item/divider"
     }
 }

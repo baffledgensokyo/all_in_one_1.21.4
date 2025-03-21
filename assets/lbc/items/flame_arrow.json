@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:flame_arrow"
+        "model": "lbc:item/flame_arrow"
     }
 }

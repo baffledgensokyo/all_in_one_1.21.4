@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:ocean_arrow"
+        "model": "lbc:item/ocean_arrow"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:food/netherite_potato"
+        "model": "lbc:item/food/netherite_potato"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:evolutionsword"
+        "model": "lbc:item/evolutionsword"
     }
 }

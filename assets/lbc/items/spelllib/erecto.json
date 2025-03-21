@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:spelllib/erecto"
+        "model": "lbc:item/spelllib/erecto"
     }
 }

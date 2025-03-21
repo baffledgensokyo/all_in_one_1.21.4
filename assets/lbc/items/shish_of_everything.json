@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:shish_of_everything"
+        "model": "lbc:item/shish_of_everything"
     }
 }

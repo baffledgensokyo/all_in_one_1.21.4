@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:ruchka"
+        "model": "lbc:item/ruchka"
     }
 }

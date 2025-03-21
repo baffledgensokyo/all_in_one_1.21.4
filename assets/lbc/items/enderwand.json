@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:enderwand"
+        "model": "lbc:item/enderwand"
     }
 }

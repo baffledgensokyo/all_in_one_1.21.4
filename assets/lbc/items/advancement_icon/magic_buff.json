@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:advancement_icon/magic_buff"
+        "model": "lbc:item/advancement_icon/magic_buff"
     }
 }

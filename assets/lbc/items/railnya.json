@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:railnya"
+        "model": "lbc:item/railnya"
     }
 }

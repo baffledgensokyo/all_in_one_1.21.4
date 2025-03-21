@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:stand_arrow"
+        "model": "lbc:item/stand_arrow"
     }
 }

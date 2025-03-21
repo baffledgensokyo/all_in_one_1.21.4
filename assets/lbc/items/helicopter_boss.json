@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:helicopter_boss"
+        "model": "lbc:item/helicopter_boss"
     }
 }

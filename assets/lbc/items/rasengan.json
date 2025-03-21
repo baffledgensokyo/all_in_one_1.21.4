@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:rasengan"
+        "model": "lbc:item/rasengan"
     }
 }

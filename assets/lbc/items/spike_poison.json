@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:spike_poison"
+        "model": "lbc:item/spike_poison"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:enderdart"
+        "model": "lbc:item/enderdart"
     }
 }

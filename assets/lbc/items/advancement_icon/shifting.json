@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:advancement_icon/shifting"
+        "model": "lbc:item/advancement_icon/shifting"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:overload_crux"
+        "model": "lbc:item/overload_crux"
     }
 }

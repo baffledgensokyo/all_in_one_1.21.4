@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:wave_arrow"
+        "model": "lbc:item/wave_arrow"
     }
 }

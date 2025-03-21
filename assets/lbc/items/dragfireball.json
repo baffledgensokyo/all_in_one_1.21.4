@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:dragfireball"
+        "model": "lbc:item/dragfireball"
     }
 }

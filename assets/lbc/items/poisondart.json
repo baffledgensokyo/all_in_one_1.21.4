@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:poisondart"
+        "model": "lbc:item/poisondart"
     }
 }

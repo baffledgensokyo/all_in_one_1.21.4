@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:spike_blind"
+        "model": "lbc:item/spike_blind"
     }
 }

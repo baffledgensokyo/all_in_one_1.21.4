@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:time_fragment_2t"
+        "model": "lbc:item/time_fragment_2t"
     }
 }

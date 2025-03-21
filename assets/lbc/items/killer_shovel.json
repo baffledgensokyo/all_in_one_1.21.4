@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:killer_shovel"
+        "model": "lbc:item/killer_shovel"
     }
 }

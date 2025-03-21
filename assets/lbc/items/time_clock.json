@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:time_clock"
+        "model": "lbc:item/time_clock"
     }
 }

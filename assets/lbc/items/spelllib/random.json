@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:spelllib/random"
+        "model": "lbc:item/spelllib/random"
     }
 }

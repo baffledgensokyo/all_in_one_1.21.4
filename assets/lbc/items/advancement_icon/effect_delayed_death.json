@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:advancement_icon/effect_delayed_death"
+        "model": "lbc:item/advancement_icon/effect_delayed_death"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:muravei"
+        "model": "lbc:item/muravei"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:tiny_wands"
+        "model": "lbc:item/tiny_wands"
     }
 }

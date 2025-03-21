@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:witch_gens"
+        "model": "lbc:item/witch_gens"
     }
 }

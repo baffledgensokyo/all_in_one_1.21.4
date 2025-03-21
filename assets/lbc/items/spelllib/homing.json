@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:spelllib/homing"
+        "model": "lbc:item/spelllib/homing"
     }
 }

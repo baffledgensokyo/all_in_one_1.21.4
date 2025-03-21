@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:advancement_icon/nausea"
+        "model": "lbc:item/advancement_icon/nausea"
     }
 }

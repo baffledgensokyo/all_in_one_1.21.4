@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:islandtp"
+        "model": "lbc:item/islandtp"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:corrupted_pentagram"
+        "model": "lbc:item/corrupted_pentagram"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:st/fire_tiny"
+        "model": "lbc:item/st/fire_tiny"
     }
 }

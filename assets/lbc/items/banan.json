@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:banan"
+        "model": "lbc:item/banan"
     }
 }

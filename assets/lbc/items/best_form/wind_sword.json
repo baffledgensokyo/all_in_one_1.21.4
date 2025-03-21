@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:best_form/wind_sword"
+        "model": "lbc:item/best_form/wind_sword"
     }
 }

@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:dublicating_wand"
+        "model": "lbc:item/dublicating_wand"
     }
 }

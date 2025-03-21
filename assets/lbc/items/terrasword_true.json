@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:terrasword_true"
+        "model": "lbc:item/terrasword_true"
     }
 }

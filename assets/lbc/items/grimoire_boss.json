@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:grimoire_boss"
+        "model": "lbc:item/grimoire_boss"
     }
 }

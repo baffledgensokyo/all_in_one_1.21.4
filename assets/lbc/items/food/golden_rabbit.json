@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:food/golden_rabbit"
+        "model": "lbc:item/food/golden_rabbit"
     }
 }

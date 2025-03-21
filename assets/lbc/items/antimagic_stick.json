@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:antimagic_stick"
+        "model": "lbc:item/antimagic_stick"
     }
 }

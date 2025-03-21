@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:witherdart"
+        "model": "lbc:item/witherdart"
     }
 }

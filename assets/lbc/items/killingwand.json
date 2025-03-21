@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:killingwand"
+        "model": "lbc:item/killingwand"
     }
 }

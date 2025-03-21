@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:luck_clover_2"
+        "model": "lbc:item/luck_clover_2"
     }
 }

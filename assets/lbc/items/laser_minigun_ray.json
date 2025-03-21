@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:laser_minigun_ray"
+        "model": "lbc:item/laser_minigun_ray"
     }
 }

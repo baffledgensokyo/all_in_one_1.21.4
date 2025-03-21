@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:ice_crystal_proj"
+        "model": "lbc:item/ice_crystal_proj"
     }
 }

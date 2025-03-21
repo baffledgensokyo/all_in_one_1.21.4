@@ -1,6 +1,6 @@
 {
     "model": {
         "type": "model",
-        "model": "lbc:shish"
+        "model": "lbc:item/shish"
     }
 }
