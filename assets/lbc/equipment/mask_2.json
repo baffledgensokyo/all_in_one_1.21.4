@@ -1,0 +1,9 @@
+{
+    "layers": {
+      "humanoid": [
+        {
+          "texture": "lbc:mask_2"
+        }
+      ]
+    }
+  }

@@ -1,0 +1,14 @@
+{
+    "layers": {
+      "humanoid": [
+        {
+          "texture": "lbc:nanobots"
+        }
+      ],
+      "humanoid_leggings": [
+        {
+          "texture": "lbc:nanobots"
+        }
+      ]
+    }
+  }

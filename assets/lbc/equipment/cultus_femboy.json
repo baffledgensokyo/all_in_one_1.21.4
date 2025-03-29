@@ -1,0 +1,14 @@
+{
+    "layers": {
+      "humanoid": [
+        {
+          "texture": "lbc:cultus_femboy"
+        }
+      ],
+      "humanoid_leggings": [
+        {
+          "texture": "lbc:cultus_femboy_leggings"
+        }
+      ]
+    }
+  }
