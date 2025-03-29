@@ -1,0 +1,14 @@
+{
+    "layers": {
+      "humanoid": [
+        {
+          "texture": "lbc:steampunk"
+        }
+      ],
+      "humanoid_leggings": [
+        {
+          "texture": "lbc:steampunk_leggings"
+        }
+      ]
+    }
+  }
