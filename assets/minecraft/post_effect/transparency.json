@@ -1,0 +1,177 @@
+{
+    "targets": {
+        
+        "final":{},
+        "bloomh":{},
+        "bloomv":{},
+        "nexus_outline":{},
+        "nexus_final":{},
+        "nexus_apply":{}
+
+},
+    "passes": [
+        {
+            "program": "minecraft:post/transparency",
+            "output": "final",
+            
+            "inputs": [
+                {
+                    "sampler_name": "Main",
+                    "target": "minecraft:main"
+                },
+                {
+                    "sampler_name": "MainDepth",
+                    "target": "minecraft:main",
+                    "use_depth_buffer": true
+                },
+                {
+                    "sampler_name": "Translucent",
+                    "target": "minecraft:translucent"
+                },
+                {
+                    "sampler_name": "TranslucentDepth",
+                    "target": "minecraft:translucent",
+                    "use_depth_buffer": true
+                },
+                {
+                    "sampler_name": "ItemEntity",
+                    "target": "minecraft:item_entity"
+                },
+                {
+                    "sampler_name": "ItemEntityDepth",
+                    "target": "minecraft:item_entity",
+                    "use_depth_buffer": true
+                },
+                {
+                    "sampler_name": "Particles",
+                    "target": "minecraft:particles"
+                },
+                {
+                    "sampler_name": "ParticlesDepth",
+                    "target": "minecraft:particles",
+                    "use_depth_buffer": true
+                },
+                {
+                    "sampler_name": "Clouds",
+                    "target": "minecraft:clouds"
+                },
+                {
+                    "sampler_name": "CloudsDepth",
+                    "target": "minecraft:clouds",
+                    "use_depth_buffer": true
+                },
+                {
+                    "sampler_name": "Weather",
+                    "target": "minecraft:weather"
+                },
+                {
+                    "sampler_name": "WeatherDepth",
+                    "target": "minecraft:weather",
+                    "use_depth_buffer": true
+                }
+            ]
+        },
+        {
+            "program": "minecraft:post/bloom_sample",
+            "inputs": [{"sampler_name":"Diffuse","target":"final"}],
+            "output": "bloomh"
+        },
+        {
+            "program": "minecraft:post/bloom_horizontal",
+            "inputs": [{"sampler_name":"Diffuse","target":"bloomh"}],
+            "output": "bloomv"
+        },
+        {
+            "program": "minecraft:post/bloom_vertical",
+            "inputs":[
+                {
+                    "sampler_name": "Diffuse",
+                    "target": "final"
+                },
+                {
+                    "sampler_name": "Bloom",
+                    "target": "bloomv"
+                }
+            ],
+            "output": "nexus_final"
+        },
+        {
+            "program": "minecraft:post/nexus_outline",
+            "output":"nexus_outline",
+            "inputs":[
+                {
+                    "sampler_name": "Diffuse",
+                    "target":"nexus_final"
+                },
+                {
+                    "sampler_name":"TranslucentDepth",
+                    "target":"translucent",
+                    "use_depth_buffer":true
+                },
+                {
+                    "sampler_name":"ItemEntityDepth",
+                    "target": "item_entity",
+                    "use_depth_buffer":true
+                },
+                {
+                    "sampler_name":"ParticlesDepth",
+                    "target": "particles",
+                    "use_depth_buffer":true
+                }
+            ]
+        },
+        {
+            "program": "minecraft:post/nexus_final",          
+            "output":"nexus_apply",
+            "inputs":[
+                {
+                    "sampler_name": "Diffuse",
+                    "target": "nexus_final"
+                },
+                {
+                    "sampler_name":"TranslucentDepth",
+                    "target":"translucent",
+                    "use_depth_buffer": true
+                },
+                {
+                    "sampler_name":"ItemEntityDepth",
+                    "target": "item_entity",
+                    "use_depth_buffer": true
+                },
+                {
+                    "sampler_name":"ParticlesDepth",
+                    "target": "particles",
+                    "use_depth_buffer": true
+                },
+                {
+                    "sampler_name":"NexusOutline",
+                    "target":"nexus_outline"
+                }
+            ]
+        },
+        {
+            "program": "minecraft:post/nexus_apply",
+            "output":"minecraft:main",
+            "inputs":[
+                {
+                    "sampler_name": "Diffuse",
+                    "target": "nexus_final"
+                },
+                {
+                    "sampler_name":"Nexus",
+                    "target":"nexus_apply"
+                },
+                {
+                    "sampler_name":"Particles",
+                    "target": "particles"
+                },
+                {
+                    "sampler_name": "Bloom",
+                    "target": "bloomh"
+                }
+        
+            ]
+        }
+        
+    ]
+}
