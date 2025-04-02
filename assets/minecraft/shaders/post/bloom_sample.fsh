@@ -4,7 +4,7 @@
 uniform sampler2D DiffuseSampler;
 
 uniform vec4 ColorModulate;
-uniform vec2 InSize;
+uniform vec2 DiffuseSize;
 
 in vec2 texCoord;
 
@@ -28,7 +28,7 @@ void main(){
         ivec3(255,142,50)
     );
     
-    for(int i = 0; i  GLOW_COLORS; i++) {
+    for(int i = 0; i < GLOW_COLORS; i++) {
         if (ivec3(checkColor.xyz * 255) == glowColorList[i]) {
             outColor += checkColor;
         }

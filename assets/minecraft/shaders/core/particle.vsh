@@ -1,6 +1,6 @@
 #version 150
 
-#moj_import fog.glsl
+#moj_import <minecraft:fog.glsl>
 #define PIXEL -0.999
 #define OFFSET 10
 in vec3 Position;
@@ -26,19 +26,19 @@ vec4 PositionSwitch(){
     vec4 returnPosition = vec4(0);
     switch(gl_VertexID % 4){
                 case 0:
-                returnPosition = vec4(PIXEL,-1,-1,1);
+                returnPosition = vec4(PIXEL,-1.0,-1.0,1.0);
                 break;
 
                 case 1:
-                returnPosition = vec4(PIXEL,PIXEL,-1,1);
+                returnPosition = vec4(PIXEL,PIXEL,-1.0,1.0);
                 break;
 
                 case 2:
-                returnPosition = vec4(-1,PIXEL,-1,1);
+                returnPosition = vec4(-1.0,PIXEL,-1.0,1.0);
                 break;
 
                 case 3:
-                returnPosition = vec4(-1,-1,-1,1);
+                returnPosition = vec4(-1.0,-1.0,-1.0,1.0);
                 break;
              }
         return returnPosition;

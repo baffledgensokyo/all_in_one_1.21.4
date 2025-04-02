@@ -34,7 +34,7 @@ void main() {
         color *= lightMapColor;
     }
 
-    if (color.a  0.1) {
+    if (color.a <= 0.1) {
         discard;
     }
     fragColor = linear_fog(color, vertexDistance, FogStart, FogEnd, FogColor);

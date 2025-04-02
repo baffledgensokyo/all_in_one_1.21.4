@@ -11,8 +11,8 @@ uniform sampler2D ParticlesDepthSampler;
 uniform sampler2D TranslucentDepthSampler;
 uniform sampler2D ItemEntityDepthSampler;
 
-uniform vec2 InSize;
-vec2 oneTexel = 1.0 / InSize;
+uniform vec2 DiffuseSize;
+vec2 oneTexel = 1.0 / DiffuseSize;
 uniform vec4 ColorModulate;
 
 in vec2 texCoord;
@@ -43,7 +43,7 @@ void main(){
     vec4 right, down, diag1, diag2;
     bool edge = false;
     
-    for (int i = -WIDTH; i = WIDTH; i++){
+    for (int i = -WIDTH; i <= WIDTH; i++){
         
         right = texture(NexusOutlineSampler, texCoord + vec2(oneTexel.x * i, 0.0));
         
@@ -84,7 +84,7 @@ void main(){
 
     if (checkMixed != 0){
         
-        ivec2 grumm = ivec2(texCoord * InSize);
+        ivec2 grumm = ivec2(texCoord * DiffuseSize);
         if(grumm.y /2 % 2 == 0) 
         {
             interlace = 0.2;

@@ -1,6 +1,6 @@
 #version 150
 
-#moj_import fog.glsl
+#moj_import <minecraft:fog.glsl>
 
 uniform sampler2D Sampler0;
 
@@ -31,7 +31,7 @@ void main() {
         color = precolor;
     }
 
-    if (color.a  0.1) {
+    if (color.a < 0.1) {
         discard;
     }
     
