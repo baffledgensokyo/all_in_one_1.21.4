@@ -1,0 +1,14 @@
+{
+    "layers": {
+      "humanoid": [
+        {
+          "texture": "lbc:finger"
+        }
+      ],
+      "humanoid_leggings": [
+        {
+          "texture": "lbc:assasin"
+        }
+      ]
+    }
+  }

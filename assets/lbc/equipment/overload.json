@@ -1,0 +1,14 @@
+{
+    "layers": {
+      "humanoid": [
+        {
+          "texture": "lbc:overload"
+        }
+      ],
+      "humanoid_leggings": [
+        {
+          "texture": "lbc:overload_leggings"
+        }
+      ]
+    }
+  }
