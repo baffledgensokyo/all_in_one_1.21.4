@@ -656,5 +656,14 @@
                 "stream": false
             }
         ]
+    },
+    "lbcsounds.imprinted_enter": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "lbcsounds/imprinted_enter",
+                "stream": false
+            }
+        ]
     }
 }
