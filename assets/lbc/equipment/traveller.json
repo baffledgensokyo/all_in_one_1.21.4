@@ -1,0 +1,14 @@
+{
+    "layers": {
+      "humanoid": [
+        {
+          "texture": "lbc:traveller"
+        }
+      ],
+      "humanoid_leggings": [
+        {
+          "texture": "lbc:traveller_leggings"
+        }
+      ]
+    }
+  }

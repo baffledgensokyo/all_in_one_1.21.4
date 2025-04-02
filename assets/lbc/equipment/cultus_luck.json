@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "lbc:cultus_luck"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "lbc:cultus_luck_leggings"
+      }
+    ]
+  }
+}
