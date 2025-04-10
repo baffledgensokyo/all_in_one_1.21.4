@@ -25,8 +25,15 @@ void main() {
     int checkAlpha = int(rawColor.a * 255);
     
     if (checkAlpha == 254) {
+
         color = rawColor;
+
+    } else if (checkAlpha == 130) {
+
+        color = mix(rawColor, rawColor * vertexColor * ColorModulator, 0.5);
+    
     } else {
+        
         color = rawColor * vertexColor * ColorModulator;
 
         #ifndef NO_OVERLAY
