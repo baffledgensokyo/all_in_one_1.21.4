@@ -4680,5 +4680,6 @@
     "mode_light_blue": "Cyan Electricity",
     "mode_blue": "Blue Ocean",
     "mode_purple": "Purple Shadows",
-    "mode_queued": "All rainbows"
+    "mode_queued": "All rainbows",
+    "trap_tmt":"UNKNOWN_DROP_DESC"
 }

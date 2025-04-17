@@ -4679,5 +4679,6 @@
     "mode_light_blue": "Циановый Электрический",
     "mode_blue": "Синий Океан",
     "mode_purple": "Фиолетовая Тьма",
-    "mode_queued": "Все радуги"
+    "mode_queued": "Все радуги",
+    "trap_tmt":"UNKNOWN_DROP_DESC"
 }
