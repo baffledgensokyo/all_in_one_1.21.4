@@ -665,5 +665,14 @@
                 "stream": false
             }
         ]
+    },
+    "lbcsounds.nexus_mood": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "lbcsounds/nexus_mood",
+                "stream": false
+            }
+        ]
     }
 }
