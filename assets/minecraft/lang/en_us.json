@@ -3498,7 +3498,7 @@
     "multiply1.lore": "RC for use.",
     "nanotraps": "Nano-traps",
     "nanotraps.lore": "RC on block to place trap.",
-    "gui.locked": "Locked",
+    "gui.locked": "Locked (Click for info)",
     "gui.for_open": "For unlock you need:",
     "ghost_potion": "Splash potion of ghostness",
     "enchantment.level.11": "XI",
