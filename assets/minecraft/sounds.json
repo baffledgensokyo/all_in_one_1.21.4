@@ -98,8 +98,6 @@
             }
         ]
     },
-
-
     "lbcsounds.dick_1": {
         "category": "master",
         "sounds": [
@@ -351,7 +349,8 @@
                 "stream": false
             }
         ]
-    },"lbcsounds.laser_mg_shot": {
+    },
+    "lbcsounds.laser_mg_shot": {
         "category": "master",
         "sounds": [
             {
@@ -662,6 +661,15 @@
         "sounds": [
             {
                 "name": "lbcsounds/imprinted_enter",
+                "stream": false
+            }
+        ]
+    },
+    "lbcsounds.nexus_mood": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "lbcsounds/nexus_mood",
                 "stream": false
             }
         ]
