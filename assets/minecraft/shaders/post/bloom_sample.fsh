@@ -15,7 +15,7 @@ void main(){
     vec4 outColor = vec4(0);
     ivec3[GLOW_COLORS] glowColorList = ivec3[](
         ivec3(0,48,255),
-        ivec3(255,252,252),
+        ivec3(255,252,253),
         ivec3(238,50,115),
         ivec3(43,216,147),
         ivec3(255,14,14),
