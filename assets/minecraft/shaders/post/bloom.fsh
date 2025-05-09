@@ -29,12 +29,16 @@ vec4 blur(vec2 BlurDir, float Radius, sampler2D Sampler, vec2 Coord, float gamma
     return vec4(blurred.rgb, 1);
 }
 
+vec4 screen_blend(vec4 src, vec4 dst) {
+    return 1.0 - (1.0 - src) * (1.0 - dst);
+}
 
 void main() {
     if(BlurDir.x == 1){
         fragColor = blur(BlurDir, RADIUS, DiffuseSampler, texCoord, RADIUS * 0.1 * GAMMA);
         
     } else {
-        fragColor = texture(DiffuseSampler, texCoord) * ColorModulate + blur(BlurDir, RADIUS, BloomSampler, texCoord, RADIUS * 0.1 * GAMMA);   
+        fragColor = screen_blend(texture(DiffuseSampler, texCoord) * ColorModulate, blur(BlurDir, RADIUS, BloomSampler, texCoord, RADIUS * 0.1 * GAMMA));
+        //fragColor = texture(DiffuseSampler, texCoord) * ColorModulate + blur(BlurDir, RADIUS, BloomSampler, texCoord, RADIUS * 0.1 * GAMMA);   
     }
 }
