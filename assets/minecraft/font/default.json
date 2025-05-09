@@ -568,5 +568,44 @@
                 "\uE168"
             ]
         }
+
+
+        ,
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/touhou_power.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE169"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/bomb_item_fragment.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE170"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/life_item_fragment.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE171"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/time_orb.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE172"
+            ]
+        }
     ]
 }
