@@ -3498,7 +3498,7 @@
     "multiply1.lore": "RC for use.",
     "nanotraps": "Nano-traps",
     "nanotraps.lore": "RC on block to place trap.",
-    "gui.locked": "Locked",
+    "gui.locked": "Locked (Click for info)",
     "gui.for_open": "For unlock you need:",
     "ghost_potion": "Splash potion of ghostness",
     "enchantment.level.11": "XI",
@@ -4680,5 +4680,6 @@
     "mode_light_blue": "Cyan Electricity",
     "mode_blue": "Blue Ocean",
     "mode_purple": "Purple Shadows",
-    "mode_queued": "All rainbows"
+    "mode_queued": "All rainbows",
+    "trap_tmt":"UNKNOWN_DROP_DESC"
 }
