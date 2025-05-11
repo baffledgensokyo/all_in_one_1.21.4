@@ -673,5 +673,23 @@
                 "stream": false
             }
         ]
+    },
+    "lbcsounds.drone_signal": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "lbcsounds/drone_signal",
+                "stream": false
+            }
+        ]
+    },
+    "lbcsounds.drone_tick": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "lbcsounds/drone_tick",
+                "stream": false
+            }
+        ]
     }
 }
