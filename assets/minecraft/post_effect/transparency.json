@@ -1,19 +1,17 @@
 {
     "targets": {
-        
-        "final":{},
-        "bloomh":{},
-        "bloomv":{},
-        "nexus_outline":{},
-        "nexus_final":{},
-        "nexus_apply":{}
-
-},
+        "final": {},
+        "bloomh": {},
+        "bloomv": {},
+        "nexus_outline": {},
+        "nexus_final": {},
+        "nexus_apply": {}
+    },
     "passes": [
         {
-            "program": "minecraft:post/transparency",
+            "vertex_shader": "minecraft:post/screenquad",
+            "fragment_shader": "minecraft:post/transparency",
             "output": "final",
-            
             "inputs": [
                 {
                     "sampler_name": "Main",
@@ -72,18 +70,84 @@
             ]
         },
         {
-            "program": "minecraft:post/bloom_sample",
-            "inputs": [{"sampler_name":"Diffuse","target":"final"}],
+            "vertex_shader": "minecraft:post/blit",
+            "fragment_shader": "minecraft:post/bloom_sample",
+            "uniforms": [
+                {
+                    "name": "ColorModulate",
+                    "type": "vec4",
+                    "values": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                }
+                
+            ],
+            "inputs": [
+                {
+                    "sampler_name": "Diffuse",
+                    "target": "final"
+                }
+            ],
             "output": "bloomh"
         },
         {
-            "program": "minecraft:post/bloom_horizontal",
-            "inputs": [{"sampler_name":"Diffuse","target":"bloomh"}],
+            "vertex_shader": "minecraft:post/blit",
+            "fragment_shader": "minecraft:post/bloom",
+            "inputs": [
+                {
+                    "sampler_name": "Diffuse",
+                    "target": "bloomh"
+                }
+            ],
+            "uniforms": [
+                {
+                    "name": "ColorModulate",
+                    "type": "vec4",
+                    "values": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                },
+                {
+                    "name": "BlurDir",
+                    "type": "vec2",
+                    "values": [
+                        1.0,
+                        0.0
+                    ]
+                }
+            ],
             "output": "bloomv"
         },
         {
-            "program": "minecraft:post/bloom_vertical",
-            "inputs":[
+            "vertex_shader": "minecraft:post/blit",
+            "fragment_shader": "minecraft:post/bloom",
+            "uniforms": [
+                {
+                    "name": "ColorModulate",
+                    "type": "vec4",
+                    "values": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                },
+                {
+                    "name": "BlurDir",
+                    "type": "vec2",
+                    "values": [
+                        0.0,
+                        1.0
+                    ]
+                }
+            ],
+            "inputs": [
                 {
                     "sampler_name": "Diffuse",
                     "target": "final"
@@ -96,82 +160,108 @@
             "output": "nexus_final"
         },
         {
-            "program": "minecraft:post/nexus_outline",
-            "output":"nexus_outline",
-            "inputs":[
-                {
-                    "sampler_name": "Diffuse",
-                    "target":"nexus_final"
-                },
-                {
-                    "sampler_name":"TranslucentDepth",
-                    "target":"translucent",
-                    "use_depth_buffer":true
-                },
-                {
-                    "sampler_name":"ItemEntityDepth",
-                    "target": "item_entity",
-                    "use_depth_buffer":true
-                },
-                {
-                    "sampler_name":"ParticlesDepth",
-                    "target": "particles",
-                    "use_depth_buffer":true
-                }
-            ]
-        },
-        {
-            "program": "minecraft:post/nexus_final",          
-            "output":"nexus_apply",
-            "inputs":[
+            "vertex_shader": "minecraft:post/blit",
+            "fragment_shader": "minecraft:post/nexus_outline",
+            "uniforms": [
+                
+                
+            ],
+            "output": "nexus_outline",
+            "inputs": [
                 {
                     "sampler_name": "Diffuse",
                     "target": "nexus_final"
                 },
                 {
-                    "sampler_name":"TranslucentDepth",
-                    "target":"translucent",
+                    "sampler_name": "TranslucentDepth",
+                    "target": "translucent",
                     "use_depth_buffer": true
                 },
                 {
-                    "sampler_name":"ItemEntityDepth",
+                    "sampler_name": "ItemEntityDepth",
                     "target": "item_entity",
                     "use_depth_buffer": true
                 },
                 {
-                    "sampler_name":"ParticlesDepth",
+                    "sampler_name": "ParticlesDepth",
                     "target": "particles",
                     "use_depth_buffer": true
-                },
-                {
-                    "sampler_name":"NexusOutline",
-                    "target":"nexus_outline"
                 }
             ]
         },
         {
-            "program": "minecraft:post/nexus_apply",
-            "output":"minecraft:main",
-            "inputs":[
+            "vertex_shader": "minecraft:post/blit",
+            "fragment_shader": "minecraft:post/nexus_final",
+            "uniforms": [
+                {
+                    "name": "GameTime",
+                    "type": "float",
+                    "values": [
+                        0.3
+                    ]
+                }
+            ],
+            "output": "nexus_apply",
+            "inputs": [
                 {
                     "sampler_name": "Diffuse",
                     "target": "nexus_final"
                 },
                 {
-                    "sampler_name":"Nexus",
-                    "target":"nexus_apply"
+                    "sampler_name": "TranslucentDepth",
+                    "target": "translucent",
+                    "use_depth_buffer": true
                 },
                 {
-                    "sampler_name":"Particles",
+                    "sampler_name": "ItemEntityDepth",
+                    "target": "item_entity",
+                    "use_depth_buffer": true
+                },
+                {
+                    "sampler_name": "ParticlesDepth",
+                    "target": "particles",
+                    "use_depth_buffer": true
+                },
+                {
+                    "sampler_name": "NexusOutline",
+                    "target": "nexus_outline"
+                }
+            ]
+        },
+        {
+            "vertex_shader": "minecraft:post/blit",
+            "fragment_shader": "minecraft:post/nexus_apply",
+            "uniforms": [
+                {
+                    "name": "ColorModulate",
+                    "type": "vec4",
+                    "values": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                }
+            ],
+            "output": "minecraft:main",
+            "inputs": [
+                {
+                    "sampler_name": "Diffuse",
+                    "target": "nexus_final"
+                },
+                {
+                    "sampler_name": "Nexus",
+                    "target": "nexus_apply"
+                },
+                {
+                    "sampler_name": "Particles",
                     "target": "particles"
                 },
                 {
                     "sampler_name": "Bloom",
                     "target": "bloomh"
                 }
-        
             ]
         }
-        
     ]
 }

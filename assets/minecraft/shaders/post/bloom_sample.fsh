@@ -4,7 +4,7 @@
 uniform sampler2D DiffuseSampler;
 
 uniform vec4 ColorModulate;
-uniform vec2 DiffuseSize;
+uniform vec2 ScreenSize;
 
 in vec2 texCoord;
 
