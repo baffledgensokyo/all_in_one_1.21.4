@@ -6,7 +6,7 @@ uniform sampler2D ItemEntityDepthSampler;
 uniform sampler2D ParticlesDepthSampler;
 
 
-uniform vec2 DiffuseSize;
+uniform vec2 ScreenSize;
 uniform vec4 ColorModulate;
 
 in vec2 texCoord;
@@ -19,7 +19,7 @@ float checkItemEntity = (1 - texture(ItemEntityDepthSampler,texCoord).r);
 
 float checkMixed = (checkTranslucent + checkItemEntity + checkParticle) / 3;
 
-vec2 oneTexel = 1.0 / DiffuseSize;
+vec2 oneTexel = 1.0 / ScreenSize;
 
 vec4 color_max = vec4(0.16,0.84,0.57,1);
 vec4 color_min = vec4(1,0.14,0.44,1);

@@ -4,7 +4,8 @@
     },
     "passes": [
         {
-            "program": "minecraft:post/entity_outline",
+            "vertex_shader": "minecraft:post/sobel",
+            "fragment_shader": "minecraft:post/entity_sobel",
             "inputs": [
                 {
                     "sampler_name": "In",
@@ -15,11 +16,24 @@
         },
        
         {
-            "program": "minecraft:post/blit",
+            "vertex_shader": "minecraft:post/blit",
+            "fragment_shader": "minecraft:post/blit",
             "inputs": [
                 {
                     "sampler_name": "In",
                     "target": "swap"
+                }
+            ],
+            "uniforms":[
+                {
+                    "name": "ColorModulate",
+                    "type": "vec4",
+                    "values": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
                 }
             ],
             "output": "minecraft:entity_outline"

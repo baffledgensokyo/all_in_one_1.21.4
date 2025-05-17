@@ -10,15 +10,17 @@ uniform sampler2D NexusOutlineSampler;
 uniform sampler2D ParticlesDepthSampler;
 uniform sampler2D TranslucentDepthSampler;
 uniform sampler2D ItemEntityDepthSampler;
+uniform float GameTime;
 
-uniform vec2 DiffuseSize;
-vec2 oneTexel = 1.0 / DiffuseSize;
+float GameTimeR = fract(GameTime * 1200);
+
+uniform vec2 ScreenSize;
+vec2 oneTexel = 1.0 / ScreenSize;
 uniform vec4 ColorModulate;
 
 in vec2 texCoord;
 
 out vec4 fragColor;
-float interlace;
 vec4 outlineColor;
 
 
@@ -28,9 +30,10 @@ vec4 subtractVector(vec4 in_vec){
     return abs(center - in_vec);
 }
 
-vec4 recolor(sampler2D Sampler, vec2 Coord, vec4 ColorMin, vec4 ColorMax){
+vec4 recolor(sampler2D Sampler, vec2 Coord, vec4 ColorMin, vec4 ColorMax, bool interlace){
     vec4 getTexture = texture(Sampler, Coord);
     float lum = float((getTexture.r + getTexture.g + getTexture.b)/3);
+    if (interlace) lum -= 0.3;
     return vec4(mix(ColorMin, ColorMax, lum));
 }
 
@@ -38,6 +41,7 @@ float checkParticle = (1 - texture(ParticlesDepthSampler,texCoord).r);
 float checkTranslucent = (1 - texture(TranslucentDepthSampler,texCoord).r);
 float checkItemEntity = (1 - texture(ItemEntityDepthSampler,texCoord).r);
 float checkMixed = (checkTranslucent + checkItemEntity + checkParticle)/3;
+
 
 void main(){
     vec4 right, down, diag1, diag2;
@@ -84,20 +88,16 @@ void main(){
 
     if (checkMixed != 0){
         
-        ivec2 grumm = ivec2(texCoord * DiffuseSize);
-        if(grumm.y /2 % 2 == 0) 
-        {
-            interlace = 0.2;
-        } else {
-            interlace = 1;
-        }
-
-        fragColor = vec4(recolor(DiffuseSampler, texCoord, color_min, color_max) * vec4(vec3(interlace),1));
+        ivec2 grumm = ivec2(texCoord * ScreenSize + int(GameTimeR * ScreenSize.y * 0.02));
+        bool doInterlace = grumm.y / 4 % 2 == 0;
+        
+        fragColor = recolor(DiffuseSampler, texCoord, color_min, color_max, doInterlace);
         
     } else {
         fragColor = texture(DiffuseSampler,texCoord);
         
     }
+    
     fragColor.rgb = mix(fragColor.rgb,outlineColor.rgb,outlineColor.a);
     
 }
