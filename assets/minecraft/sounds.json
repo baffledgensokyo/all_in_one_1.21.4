@@ -691,5 +691,14 @@
                 "stream": false
             }
         ]
+    },
+    "lbcsounds.crocodildo": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "lbcsounds/crocodildo",
+                "stream": true
+            }
+        ]
     }
 }
