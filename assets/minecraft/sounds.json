@@ -700,5 +700,23 @@
                 "stream": true
             }
         ]
+    },
+    "lbcsounds.hihihiha": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "lbcsounds/hihihiha",
+                "stream": false
+            }
+        ]
+    },
+    "lbcsounds.rocketspell": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "lbcsounds/rocketspell",
+                "stream": false
+            }
+        ]
     }
 }

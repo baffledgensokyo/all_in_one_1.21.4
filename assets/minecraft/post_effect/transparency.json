@@ -72,19 +72,20 @@
         {
             "vertex_shader": "minecraft:post/blit",
             "fragment_shader": "minecraft:post/bloom_sample",
-            "uniforms": [
-                {
-                    "name": "ColorModulate",
-                    "type": "vec4",
-                    "values": [
-                        1.0,
-                        1.0,
-                        1.0,
-                        1.0
-                    ]
-                }
-                
-            ],
+            "uniforms": {
+                "BlitConfig": [
+                    {
+                        "name": "ColorModulate",
+                        "type": "vec4",
+                        "value": [
+                            1.0,
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    }
+                ]
+            },
             "inputs": [
                 {
                     "sampler_name": "Diffuse",
@@ -102,51 +103,55 @@
                     "target": "bloomh"
                 }
             ],
-            "uniforms": [
-                {
-                    "name": "ColorModulate",
-                    "type": "vec4",
-                    "values": [
-                        1.0,
-                        1.0,
-                        1.0,
-                        1.0
-                    ]
-                },
-                {
-                    "name": "BlurDir",
-                    "type": "vec2",
-                    "values": [
-                        1.0,
-                        0.0
-                    ]
-                }
-            ],
+            "uniforms": {
+                "BlitConfig": [
+                    {
+                        "name": "ColorModulate",
+                        "type": "vec4",
+                        "value": [
+                            1.0,
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    {
+                        "name": "BlurDir",
+                        "type": "vec2",
+                        "value": [
+                            1.0,
+                            0.0
+                        ]
+                    }
+                ]
+            },
             "output": "bloomv"
         },
         {
             "vertex_shader": "minecraft:post/blit",
             "fragment_shader": "minecraft:post/bloom",
-            "uniforms": [
-                {
-                    "name": "ColorModulate",
-                    "type": "vec4",
-                    "values": [
-                        1.0,
-                        1.0,
-                        1.0,
-                        1.0
-                    ]
-                },
-                {
-                    "name": "BlurDir",
-                    "type": "vec2",
-                    "values": [
-                        0.0,
-                        1.0
-                    ]
-                }
-            ],
+            "uniforms": {
+                "BlitConfig": [
+                    {
+                        "name": "ColorModulate",
+                        "type": "vec4",
+                        "value": [
+                            1.0,
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    {
+                        "name": "BlurDir",
+                        "type": "vec2",
+                        "value": [
+                            0.0,
+                            1.0
+                        ]
+                    }
+                ]
+            },
             "inputs": [
                 {
                     "sampler_name": "Diffuse",
@@ -162,10 +167,7 @@
         {
             "vertex_shader": "minecraft:post/blit",
             "fragment_shader": "minecraft:post/nexus_outline",
-            "uniforms": [
-                
-                
-            ],
+            "uniforms": {},
             "output": "nexus_outline",
             "inputs": [
                 {
@@ -192,15 +194,15 @@
         {
             "vertex_shader": "minecraft:post/blit",
             "fragment_shader": "minecraft:post/nexus_final",
-            "uniforms": [
-                {
-                    "name": "GameTime",
-                    "type": "float",
-                    "values": [
-                        1.0
-                    ]
-                }
-            ],
+            "uniforms": {
+                "BlitConfig": [
+                    {
+                        "name": "GameTime",
+                        "type": "float",
+                        "value": 1.0
+                    }
+                ]
+            },
             "output": "nexus_apply",
             "inputs": [
                 {
@@ -231,18 +233,20 @@
         {
             "vertex_shader": "minecraft:post/blit",
             "fragment_shader": "minecraft:post/nexus_apply",
-            "uniforms": [
-                {
-                    "name": "ColorModulate",
-                    "type": "vec4",
-                    "values": [
-                        1.0,
-                        1.0,
-                        1.0,
-                        1.0
-                    ]
-                }
-            ],
+            "uniforms": {
+                "BlitConfig": [
+                    {
+                        "name": "ColorModulate",
+                        "type": "vec4",
+                        "value": [
+                            1.0,
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    }
+                ]
+            },
             "output": "minecraft:main",
             "inputs": [
                 {
