@@ -1,6 +1,9 @@
 #version 150
 
 #moj_import <minecraft:fog.glsl>
+#moj_import <minecraft:dynamictransforms.glsl>
+#moj_import <minecraft:projection.glsl>
+
 #define PIXEL -0.999
 #define OFFSET 10
 in vec3 Position;
@@ -12,7 +15,7 @@ uniform sampler2D Sampler2;
 
 uniform mat4 ModelViewMat;
 uniform mat4 ProjMat;
-uniform int FogShape;
+//uniform int FogShape;
 
 out float vertexDistance;
 out vec2 texCoord0;
@@ -99,7 +102,9 @@ void main() {
         
     }
 
-    vertexDistance = fog_distance(Position, FogShape);
+    //vertexDistance = fog_distance(Position, FogShape);
+    sphericalVertexDistance = fog_spherical_distance(Position);
+    cylindricalVertexDistance = fog_cylindrical_distance(Position);
     texCoord0 = UV0;
     
 }

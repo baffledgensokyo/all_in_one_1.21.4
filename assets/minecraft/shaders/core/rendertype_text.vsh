@@ -13,7 +13,7 @@ uniform sampler2D Sampler2;
 uniform mat4 ModelViewMat;
 uniform mat4 ProjMat;
 uniform mat3 IViewRotMat;
-uniform int FogShape;
+//uniform int FogShape;
 
 out float vertexDistance;
 out vec4 vertexColor;
@@ -22,7 +22,11 @@ out vec2 texCoord0;
 void main() {
     // vanilla behavior
     gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
-    vertexDistance = fog_distance(Position, FogShape);
+    
+    //vertexDistance = fog_distance(Position, FogShape);
+    sphericalVertexDistance = fog_spherical_distance(Position);
+    cylindricalVertexDistance = fog_cylindrical_distance(Position);
+
     vertexColor = Color * texelFetch(Sampler2, UV2 / 16, 0);
     texCoord0 = UV0;
     if (Color == vec4(78/255., 92/255., 36/255., Color.a) && Position.z == 2200.03) {
