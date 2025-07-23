@@ -5,10 +5,10 @@
 
 uniform sampler2D Sampler0;
 
-//uniform vec4 ColorModulator;
-//uniform float FogStart;
-//uniform float FogEnd;
-//uniform vec4 FogColor;
+uniform vec4 ColorModulator;
+uniform float FogRenderDistanceStart;
+uniform float FogRenderDistanceEnd;
+uniform vec4 FogColor;
 
 //in float vertexDistance;
 in float sphericalVertexDistance;
@@ -39,6 +39,6 @@ void main() {
         discard;
     }
     
-    //fragColor = linear_fog(color, vertexDistance, FogStart, FogEnd, FogColor);
-    fragColor = apply_fog(color, sphericalVertexDistance, cylindricalVertexDistance, FogEnvironmentalStart, FogEnvironmentalEnd, FogRenderDistanceStart, FogRenderDistanceEnd, FogColor);
+    //fragColor = linear_fog(color, vertexDistance, FogRenderDistanceStart, FogRenderDistanceEnd, FogColor);
+    fragColor = apply_fog(color, sphericalVertexDistance, cylindricalVertexDistance, FogEnvironmentalStart, FogRenderDistanceEnd, FogRenderDistanceStart, FogRenderDistanceEnd, FogColor);
 }

@@ -5,9 +5,9 @@
 uniform sampler2D Sampler0;
 
 uniform vec4 ColorModulator;
-uniform float FogStart;
-uniform float FogEnd;
-//uniform vec4 FogColor;
+uniform float FogRenderDistanceStart;
+uniform float FogRenderDistanceEnd;
+uniform vec4 FogColor;
 
 in float vertexDistance;
 in vec4 vertexColor;
@@ -36,7 +36,7 @@ void main() {
         
     } else { 
         
-        fragColor = linear_fog(color, vertexDistance, FogStart, FogEnd, FogColor);
+        fragColor = linear_fog(color, vertexDistance, FogRenderDistanceStart, FogRenderDistanceEnd, FogColor);
         
     }
 }
