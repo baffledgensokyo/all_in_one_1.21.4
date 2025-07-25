@@ -13,11 +13,10 @@ in ivec2 UV2;
 
 uniform sampler2D Sampler2;
 
-uniform mat4 ModelViewMat;
-uniform mat4 ProjMat;
 //uniform int FogShape;
 
-out float vertexDistance;
+out float sphericalVertexDistance;
+out float cylindricalVertexDistance;
 out vec2 texCoord0;
 flat out vec4 vertexColor;
 float pos_z;

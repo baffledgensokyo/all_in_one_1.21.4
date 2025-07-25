@@ -1,22 +1,25 @@
 #version 150
+#moj_import <globals.glsl>
+
 #define WIDTH 1
 #define COMPARE vec4(0.02,0.02,0.02,0)
-
-vec4 color_min = vec4(0,0.082,0.208,1);
+vec4 color_min = vec4(0,0.082,0.308,1);
 vec4 color_max = vec4(0.169,0.847,0.576,1);
+
+layout(std140) uniform BlitConfig {
+    vec4 ColorModulate;
+};
 
 uniform sampler2D DiffuseSampler;
 uniform sampler2D NexusOutlineSampler;
 uniform sampler2D ParticlesDepthSampler;
 uniform sampler2D TranslucentDepthSampler;
 uniform sampler2D ItemEntityDepthSampler;
-uniform float GameTime;
 
-float GameTimeR = fract(GameTime * 1200);
 
-uniform vec2 ScreenSize;
+float GameTimeR = fract(GameTime * 12);
+
 vec2 oneTexel = 1.0 / ScreenSize;
-uniform vec4 ColorModulate;
 
 in vec2 texCoord;
 
@@ -88,7 +91,7 @@ void main(){
 
     if (checkMixed != 0){
         
-        ivec2 grumm = ivec2(texCoord * ScreenSize + int(GameTimeR * ScreenSize.y * 0.02));
+        ivec2 grumm = ivec2(texCoord * ScreenSize + int(GameTimeR * ScreenSize.y));
         bool doInterlace = grumm.y / 4 % 2 == 0;
         
         fragColor = recolor(DiffuseSampler, texCoord, color_min, color_max, doInterlace);

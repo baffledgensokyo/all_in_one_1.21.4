@@ -12,6 +12,7 @@
                     "target": "minecraft:entity_outline"
                 }
             ],
+            
             "output": "swap"
         },
         {

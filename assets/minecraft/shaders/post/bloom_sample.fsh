@@ -1,13 +1,13 @@
 #version 150
 #define GLOW_COLORS 12
-
+#moj_import <globals.glsl>
 uniform sampler2D DiffuseSampler;
 
-uniform vec4 ColorModulate;
-uniform vec2 ScreenSize;
+layout(std140) uniform BlitConfig {
+    vec4 ColorModulate;
+};
 
 in vec2 texCoord;
-
 out vec4 fragColor;
 
 void main(){
