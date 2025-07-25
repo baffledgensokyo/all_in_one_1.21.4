@@ -1,7 +1,7 @@
 #version 150
 #define WIDTH 2 // int
+#moj_import <globals.glsl>
 uniform sampler2D InSampler;
-uniform vec2 ScreenSize;
 
 in vec2 texCoord;
 

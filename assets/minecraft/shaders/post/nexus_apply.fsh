@@ -5,7 +5,9 @@ uniform sampler2D NexusSampler;
 uniform sampler2D ParticlesSampler;
 uniform sampler2D BloomSampler;
 
-uniform vec4 ColorModulate;
+layout(std140) uniform BlitConfig {
+    vec4 ColorModulate;
+};
 
 in vec2 texCoord;
 

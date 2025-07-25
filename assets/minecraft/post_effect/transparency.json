@@ -167,7 +167,6 @@
         {
             "vertex_shader": "minecraft:post/blit",
             "fragment_shader": "minecraft:post/nexus_outline",
-            "uniforms": {},
             "output": "nexus_outline",
             "inputs": [
                 {
@@ -194,15 +193,6 @@
         {
             "vertex_shader": "minecraft:post/blit",
             "fragment_shader": "minecraft:post/nexus_final",
-            "uniforms": {
-                "BlitConfig": [
-                    {
-                        "name": "GameTime",
-                        "type": "float",
-                        "value": 1.0
-                    }
-                ]
-            },
             "output": "nexus_apply",
             "inputs": [
                 {

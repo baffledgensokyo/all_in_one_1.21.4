@@ -1,13 +1,13 @@
 #version 150
-
+#moj_import <globals.glsl>
 uniform sampler2D DiffuseSampler;
 uniform sampler2D TranslucentDepthSampler;
 uniform sampler2D ItemEntityDepthSampler;
 uniform sampler2D ParticlesDepthSampler;
 
-
-uniform vec2 ScreenSize;
-uniform vec4 ColorModulate;
+layout (std140) uniform BlitConfig {
+    vec4 ColorModulate;
+};
 
 in vec2 texCoord;
 

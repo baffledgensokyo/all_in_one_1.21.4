@@ -1,14 +1,15 @@
 #version 150
-
+#moj_import <globals.glsl>
 #define RADIUS 10.0
 #define GAMMA 2
 
+layout(std140) uniform BlitConfig {
+    vec4 ColorModulate;
+    vec2 BlurDir;
+};
 
 uniform sampler2D DiffuseSampler;
 uniform sampler2D BloomSampler;
-uniform vec4 ColorModulate;
-uniform vec2 ScreenSize;
-uniform vec2 BlurDir;
 
 in vec2 texCoord;
 out vec4 fragColor;
