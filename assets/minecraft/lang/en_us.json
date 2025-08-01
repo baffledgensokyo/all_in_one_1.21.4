@@ -4816,5 +4816,9 @@
     "damage_from_no_air":"There is no air!",
     "lbctrinket.13":"Rocket Thing",
     "lbctrinket.13.lore.1":"5%% chance to cast rocket spell (costs 6 mana) on arrow hit",
-    "lbctrinket.13.lore.2":"+1%% за каждый дубликат"
+    "lbctrinket.13.lore.2":"+1%% for every copy",
+    "lbctrinket.14":"Twilight Sparkle",
+    "lbctrinket.14.lore.1":"10%% chance to save from falling every 1 second",
+    "lbctrinket.14.lore.2":"(Only if fall height is above 15 blocks)",
+    "lbctrinket.14.lore.3":"+1%% for every copy"
 }
