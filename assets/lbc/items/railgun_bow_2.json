@@ -2,5 +2,6 @@
     "model": {
         "type": "model",
         "model": "lbc:item/railgun_bow_2"
-    }
+    },
+  "oversized_in_gui": true
 }

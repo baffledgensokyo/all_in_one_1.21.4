@@ -2,5 +2,6 @@
     "model": {
         "type": "model",
         "model": "lbc:item/metal_pipe"
-    }
+    },
+  "oversized_in_gui": true
 }
