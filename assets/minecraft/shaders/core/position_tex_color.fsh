@@ -1,6 +1,6 @@
 #version 150
 #define SPEED 400
-#define WAVES 4
+#define WAVES 2
 // Can't moj_import in things used during startup, when resource packs don't exist.
 // This is a copy of dynamicimports.glsl
 layout(std140) uniform DynamicTransforms {
@@ -25,7 +25,7 @@ in vec2 texCoord0;
 in vec4 vertexColor;
 
 out vec4 fragColor;
-
+vec2 uv = gl_FragCoord.xy / ScreenSize;
 vec2 oneTexel = vec2(1.0) / ScreenSize;
 float rand(vec2 co) {
     return fract(sin(dot(co.xy, vec2(12.9898, 78.233))) * 43758.5453);
@@ -38,7 +38,7 @@ vec3 hsv_to_rgb(vec3 hsv) {
     return rgb;
 }
 
-vec3 currentRGB = hsv_to_rgb(vec3(fract(texCoord0.x * WAVES) + fract(GameTime * SPEED),0.6,1.0));
+vec3 currentRGB = hsv_to_rgb(vec3(fract(uv.x * WAVES) + fract(GameTime * SPEED),0.6,1.0));
 
 vec3 getPulseColor() {
     // Pulse factor: smooth transition from 0 to 1 to 0
