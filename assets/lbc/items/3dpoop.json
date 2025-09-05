@@ -2,5 +2,6 @@
     "model": {
         "type": "model",
         "model": "lbc:item/3dpoop"
-    }
+    },
+  "oversized_in_gui": true
 }
