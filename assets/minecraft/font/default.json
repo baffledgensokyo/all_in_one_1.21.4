@@ -567,10 +567,7 @@
             "chars": [
                 "\uE168"
             ]
-        }
-
-
-        ,
+        },
         {
             "type": "bitmap",
             "file": "minecraft:font/icons/touhou_power.png",
@@ -614,6 +611,29 @@
             "height": 9,
             "chars": [
                 "\uE173"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/shadow_wisp.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE174"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/shadow_wisp_charge.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE180",
+                "\uE181",
+                "\uE182",
+                "\uE183",
+                "\uE184",
+                "\uE185"
             ]
         }
     ]
