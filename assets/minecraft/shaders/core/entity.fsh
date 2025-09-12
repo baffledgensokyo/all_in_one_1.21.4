@@ -20,6 +20,7 @@ in vec2 texCoord0;
 out vec4 fragColor;
 
 void main() {
+    bool bypassFog = false;
     vec4 color;
     vec4 rawColor = texture(Sampler0, texCoord0);
     
@@ -29,6 +30,7 @@ void main() {
     if (checkAlpha == 254) {
 
         color = rawColor;
+        bypassFog = true;
 
     } else if (checkAlpha == 130) {
 
@@ -52,7 +54,6 @@ void main() {
         discard;
     }
 #endif
-
-    //fragColor = linear_fog(color, vertexDistance, FogRenderDistanceStart, FogRenderDistanceEnd, FogColor);
-    fragColor = apply_fog(color, sphericalVertexDistance, cylindricalVertexDistance, FogEnvironmentalStart, FogEnvironmentalEnd, FogRenderDistanceStart, FogRenderDistanceEnd, FogColor);
+    fragColor = bypassFog ? color : apply_fog(color, sphericalVertexDistance, cylindricalVertexDistance, FogEnvironmentalStart, FogEnvironmentalEnd, FogRenderDistanceStart, FogRenderDistanceEnd, FogColor);
+    //fragColor = apply_fog(color, sphericalVertexDistance, cylindricalVertexDistance, FogEnvironmentalStart, FogEnvironmentalEnd, FogRenderDistanceStart, FogRenderDistanceEnd, FogColor);
 }
