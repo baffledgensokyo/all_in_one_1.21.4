@@ -718,5 +718,41 @@
                 "stream": false
             }
         ]
+    },
+    "lbcsounds.bad_apple": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "lbcsounds/bad_apple",
+                "stream": true
+            }
+        ]
+    },
+    "lbcsounds.energy_1": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "lbcsounds/energy_1",
+                "stream": true
+            }
+        ]
+    },
+    "lbcsounds.energy_2": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "lbcsounds/energy_2",
+                "stream": true
+            }
+        ]
+    },
+    "lbcsounds.energy_3": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "lbcsounds/energy_3",
+                "stream": true
+            }
+        ]
     }
 }
