@@ -191,6 +191,24 @@
             "chars":[
                 "\uE173"             
             ]
+        },
+        {
+            "type":"bitmap",
+            "file":"minecraft:font/icons/shadow_wisp.png",
+            "ascent":9,
+            "height":9,
+            "chars":[
+                "\uE174"             
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/shadow_wisp_charge.png",
+            "ascent": 9,
+            "height": 9,
+            "chars": [
+                "\uE180","\uE181","\uE182","\uE183","\uE184","\uE185"
+            ]
         }
     ]
 }
