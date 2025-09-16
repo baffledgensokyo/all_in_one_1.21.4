@@ -525,11 +525,56 @@
         },
         {
             "type": "bitmap",
+            "file": "minecraft:font/icons/add_mana.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE157"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/remove_mana.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE160"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/snus.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE161"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/gravity_curse.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE162"
+            ]
+        },
+        {
+            "type": "bitmap",
             "file": "minecraft:font/icons/small_explosion.png",
             "ascent": 8,
             "height": 9,
             "chars": [
                 "\uE163"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/lightning_bolts.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE164"
             ]
         },
         {
@@ -620,6 +665,24 @@
             "height": 9,
             "chars": [
                 "\uE174"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/magic_stopper.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE175"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/mecha_stopper.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE176"
             ]
         },
         {
