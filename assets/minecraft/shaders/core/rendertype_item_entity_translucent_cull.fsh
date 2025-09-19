@@ -5,8 +5,8 @@
 
 uniform sampler2D Sampler0;
 
-in float cylindricalVertexDistance;
 in float sphericalVertexDistance;
+in float cylindricalVertexDistance;
 in vec4 vertexColor;
 in vec2 texCoord0;
 in vec2 texCoord1;
@@ -18,7 +18,6 @@ void main() {
     vec4 color = precolor * vertexColor * ColorModulator;
     int alpha = int(precolor.a * 255);
     
-
     if (color.a < 0.1) {
         discard;
     }
@@ -34,7 +33,7 @@ void main() {
     } else { 
         
         //fragColor = linear_fog(color, vertexDistance, FogRenderDistanceStart, FogRenderDistanceEnd, FogColor);
-        fragColor = apply_fog(color, sphericalVertexDistance, cylindricalVertexDistance, FogEnvironmentalStart, FogRenderDistanceEnd, FogRenderDistanceStart, FogRenderDistanceEnd, FogColor);
+        fragColor = apply_fog(color, sphericalVertexDistance, cylindricalVertexDistance, FogEnvironmentalStart, FogEnvironmentalEnd, FogRenderDistanceStart, FogRenderDistanceEnd, FogColor);
         
     }
 }
