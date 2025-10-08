@@ -754,5 +754,23 @@
                 "stream": true
             }
         ]
+    },
+    "lbcsounds.flowey_laugh": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "lbcsounds/flowey_laugh",
+                "stream": true
+            }
+        ]
+    },
+    "lbcsounds.halloween": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "lbcsounds/halloween",
+                "stream": true
+            }
+        ]
     }
 }
