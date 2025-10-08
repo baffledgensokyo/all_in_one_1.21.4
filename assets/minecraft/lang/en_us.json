@@ -4987,7 +4987,7 @@
     "halloween.lore":"You can feel Halloween vibe from this item.",
     "lbc.adv.event_root":"Events!",
     "lbc.adv.event_root.lore":"You can obtain different SPECIAL rewards during some beautiful days! Check discord for more info! (See for the link in Skywars Menu, right-bottom side)",
-    "lbc.adv.event.eat_halloween_food":"Trick or Treat!",
+    "lbc.adv.event.eat_halloween_food":"Treat!",
     "lbc.adv.event.eat_halloween_food.lore":"Eat Halloween food 100 times!",
     "halloween.food":"Halloween food.",
     "new_swrg_kit":"New DEFAULT kit unlocked!",
@@ -4996,5 +4996,12 @@
     "open_case_skill_normal":"Drops from case with Skills or Normal case",
     "open_case_cosmetics_normal":"Drops from case with Cosmetics or Normal case",
     "golden_pumpkin":"Golden pumpkin pie slice",
-    "golden_pumpkin.lore":"Treat for you"
+    "golden_pumpkin.lore":"4x Golden pumpkin pie slice",
+    "big_pumpkin_pie":"Gigantic pumpkin pie with roast beef and cheese pizza",
+    "big_pumpkin_pie.lore":"Sounds great!",
+    "gui.locked1":"Locked",
+    "lbc.adv.event.halloween":"Halloween!",
+    "lbc.adv.event.halloween.lore":"Trick or Treat?",
+    "throwable_jack_lantern":"Throwable Jack o Lantern",
+    "throwable_jack_lantern.lore":"Ghost inside it also doesn't like your enemies!"
 }
