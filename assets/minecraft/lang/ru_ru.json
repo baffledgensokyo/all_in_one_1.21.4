@@ -4988,7 +4988,7 @@
     "halloween.lore":"От этого предмета веет духом Хэллоуина",
     "lbc.adv.event_root":"Ивенты!",
     "lbc.adv.event_root.lore":"Вы можете получить уникальные награды за участие и победы в событиях на сервере! Для подробной информации, зайдите на Discord-сервер разработчиков (Находитя в правом-нижнем углоу Меню Скайварса)",
-    "lbc.adv.event.eat_halloween_food":"Сладость или Гадость!",
+    "lbc.adv.event.eat_halloween_food":"Сладость!",
     "lbc.adv.event.eat_halloween_food.lore":"Съешьте 100 кусков Хэллоуинской еды!",
     "halloween.food":"Хэллоуинская еда.",
     "new_swrg_kit":"Новый ОБЫЧНЫЙ набор открыт!",
@@ -4997,5 +4997,12 @@
     "open_case_skill_normal":"Падает из кейса с навыками или обычного",
     "open_case_cosmetics_normal":"Падает из кейса с косметикой или обычного",
     "golden_pumpkin":"Золотой ломтик тыквенного пирога",
-    "golden_pumpkin.lore":"Вам сладость, обидчикам гадость"
+    "golden_pumpkin.lore":"4x Золотой ломтик тыквенного пирога",
+    "big_pumpkin_pie":"Гигантский тыквенный пирог с мясом и сырной пиццей",
+    "big_pumpkin_pie.lore":"Звучит отлично!",
+    "gui.locked1":"Заблокировано",
+    "lbc.adv.event.halloween":"Хэллоуин",
+    "lbc.adv.event.halloween.lore":"Ну что? Сладость или гадость?",
+    "throwable_jack_lantern":"Метательный светильник джэка",
+    "throwable_jack_lantern.lore":"Внутри призрак! И он тоже не любит ваших врагов!"
 }
