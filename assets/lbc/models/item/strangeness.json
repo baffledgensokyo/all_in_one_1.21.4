@@ -1,0 +1,7 @@
+{
+    "parent": "lbc:item/managram",
+    "textures": {
+      "0": "minecraft:item/strangeness",
+      "particle": "minecraft:item/strangeness"
+    }
+  }

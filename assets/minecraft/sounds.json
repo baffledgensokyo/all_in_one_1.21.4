@@ -772,5 +772,70 @@
                 "stream": true
             }
         ]
+    },
+    "lbcsounds.hahahahaha": {
+        "category": "master",
+        "sounds": [
+            {
+                "name": "lbcsounds/hahahahaha",
+                "stream": true
+            }
+        ]
+    },
+    "lbcsounds.s1": {
+        "sounds": [
+            {
+                "name": "lbcsounds/s1",
+                "stream": true
+            }
+        ]
+    },
+    "lbcsounds.s2": {
+        "sounds": [
+            {
+                "name": "lbcsounds/s2",
+                "stream": true
+            }
+        ]
+    },
+    "lbcsounds.s3": {
+        "sounds": [
+            {
+                "name": "lbcsounds/s3",
+                "stream": true
+            }
+        ]
+    },
+    "lbcsounds.s4": {
+        "sounds": [
+            {
+                "name": "lbcsounds/s4",
+                "stream": true
+            }
+        ]
+    },
+    "lbcsounds.s5": {
+        "sounds": [
+            {
+                "name": "lbcsounds/s5",
+                "stream": true
+            }
+        ]
+    },
+    "lbcsounds.s6": {
+        "sounds": [
+            {
+                "name": "lbcsounds/s6",
+                "stream": true
+            }
+        ]
+    },
+    "lbcsounds.s7": {
+        "sounds": [
+            {
+                "name": "lbcsounds/s7",
+                "stream": true
+            }
+        ]
     }
 }
