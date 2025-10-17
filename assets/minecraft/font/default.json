@@ -698,6 +698,24 @@
                 "\uE184",
                 "\uE185"
             ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/suffix_symbols.png",
+            "ascent": 12,
+            "height": 16,
+            "chars": [
+                "\uE186",
+                "\uE187",
+                "\uE188",
+                "\uE189",
+                "\uE190",
+                "\uE191",
+                "\uE192",
+                "\uE193",
+                "\uE194",
+                "\uE195"
+            ]
         }
     ]
 }
