@@ -5173,5 +5173,15 @@
     "lbclevelup.42":"Kиshka",
     "lbclevelup.42.lore":"+4 Max Health",
     "lbclevelup.43":"Meganatural",
-    "lbclevelup.43.lore":"+1.5 Step height"
+    "lbclevelup.43.lore":"+1.5 Step height",
+    "lbckit.22":"Cheater-killing Blade",
+    "lbckit.23.lore.1":" - 7 Attack Damage",
+    "lbckit.23.lore.2":" - +50%% Movement speed",
+    "lbcskill.30":"Champion",
+    "lbcskill.30.lore.1":" - Taking damage grants +6 Attack Damage",
+    "lbcskill.30.lore.2":" - Dealing damage grants +20 Armor & +5 Armor toughness",
+    "lbcskill.30.lore.3":"This skill means counterattacks! Every buff cancels the other one!",
+    "lbctrinket.15":"Gneiss Stone",
+    "lbctrinket.15.lore.1":"10%% Chance to get Resistance V for 2 seconds after taking damage",
+    "lbctrinket.15.lore.2":"+2%% Chance for each copy"
 }
