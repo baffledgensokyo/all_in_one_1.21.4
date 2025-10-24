@@ -837,5 +837,45 @@
                 "stream": true
             }
         ]
+    },
+    "lbcsounds.skolko_nahui": {
+        "sounds": [
+            {
+                "name": "lbcsounds/skolko_nahui",
+                "stream": true
+            }
+        ]
+    },
+    "lbcsounds.uzhe_krasni": {
+        "sounds": [
+            {
+                "name": "lbcsounds/uzhe_krasni",
+                "stream": true
+            }
+        ]
+    },
+    "lbcsounds.business_suka": {
+        "sounds": [
+            {
+                "name": "lbcsounds/business_suka",
+                "stream": true
+            }
+        ]
+    },
+    "lbcsounds.amamamamam": {
+        "sounds": [
+            {
+                "name": "lbcsounds/amamamamam",
+                "stream": true
+            }
+        ]
+    },
+    "lbcsounds.pampampam": {
+        "sounds": [
+            {
+                "name": "lbcsounds/pampampam",
+                "stream": true
+            }
+        ]
     }
 }

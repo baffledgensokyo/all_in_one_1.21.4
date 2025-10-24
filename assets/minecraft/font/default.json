@@ -716,6 +716,28 @@
                 "\uE194",
                 "\uE195"
             ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/ghosting.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE196"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/mace_icons.png",
+            "ascent": 12,
+            "height": 16,
+            "chars": [
+                "\uE197",
+                "\uE198",
+                "\uE199",
+                "\uE200",
+                "\uE201"
+            ]
         }
     ]
 }
