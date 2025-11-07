@@ -1,0 +1,14 @@
+{
+    "layers": {
+      "humanoid": [
+        {
+          "texture": "lbc:zelensky"
+        }
+      ],
+      "humanoid_leggings": [
+        {
+          "texture": "lbc:zelensky"
+        }
+      ]
+    }
+  }

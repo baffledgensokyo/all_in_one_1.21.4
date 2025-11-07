@@ -738,6 +738,15 @@
                 "\uE200",
                 "\uE201"
             ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/big_bob.png",
+            "ascent": 240,
+            "height": 256,
+            "chars": [
+                "\uE202"
+            ]
         }
     ]
 }

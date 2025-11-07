@@ -2,6 +2,6 @@
   "animation": {
      "width": 256,
      "height": 384,
-     "frametime": 100
+     "frametime": 3
   }
 }
