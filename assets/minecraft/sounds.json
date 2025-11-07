@@ -877,5 +877,53 @@
                 "stream": true
             }
         ]
+    },
+    "lbcsounds.bananoponos": {
+        "sounds": [
+            {
+                "name": "lbcsounds/bananoponos",
+                "stream": false
+            }
+        ]
+    },
+    "lbcsounds.ukraine": {
+        "sounds": [
+            {
+                "name": "lbcsounds/ukraine",
+                "stream": false
+            }
+        ]
+    },
+    "lbcsounds.donbass": {
+        "sounds": [
+            {
+                "name": "lbcsounds/donbass",
+                "stream": false
+            }
+        ]
+    },
+    "lbcsounds.awaawa": {
+        "sounds": [
+            {
+                "name": "lbcsounds/awaawa",
+                "stream": false
+            }
+        ]
+    },
+    "lbcsounds.yurayura": {
+        "sounds": [
+            {
+                "name": "lbcsounds/yurayura",
+                "stream": false
+            }
+        ]
+    },
+    "lbcsounds.fuwafuwa": {
+        "sounds": [
+            {
+                "name": "lbcsounds/fuwafuwa",
+                "stream": false
+            }
+        ]
     }
 }
