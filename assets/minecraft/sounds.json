@@ -925,5 +925,13 @@
                 "stream": false
             }
         ]
+    },
+    "lbcsounds.ultrascream": {
+        "sounds": [
+            {
+                "name": "lbcsounds/ultrascream",
+                "stream": false
+            }
+        ]
     }
 }

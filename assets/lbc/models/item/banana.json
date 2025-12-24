@@ -1,4 +1,6 @@
 {
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
 		"0": "minecraft:item/banana",
@@ -122,5 +124,40 @@
 				"down": {"uv": [4, 0, 2, 2.5], "texture": "#0"}
 			}
 		}
-	]
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [-113.16, 45.32, -157.29],
+			"translation": [0, 0, 2],
+			"scale": [0.39469, 0.39469, 0.39469]
+		},
+		"thirdperson_lefthand": {
+			"translation": [0, 1.75, 0],
+			"scale": [0.45117, 0.45117, 0.45117]
+		},
+		"firstperson_righthand": {
+			"rotation": [-64.1, 37.11, 54.1],
+			"translation": [0, 5, 1],
+			"scale": [0.4668, 0.4668, 0.4668]
+		},
+		"firstperson_lefthand": {
+			"rotation": [-107.59, 57.98, 121.47],
+			"translation": [11.25, 0.5, -6.75],
+			"scale": [0.6, 0.6, 0.6]
+		},
+		"ground": {
+			"translation": [0, 2.75, 0],
+			"scale": [0.66797, 0.66797, 0.66797]
+		},
+		"gui": {
+			"rotation": [-162.03, 44.31, 173.64],
+			"translation": [0, 2.25, 0]
+		},
+		"fixed": {
+			"rotation": [0, -76.5, 0]
+		},
+		"on_shelf": {
+			"rotation": [-50.75, 0, 0]
+		}
+	}
 }

@@ -1,0 +1,7 @@
+{
+    "model": {
+        "type": "model",
+        "model": "lbc:item/palma1"
+    },
+	"oversized_in_gui": true
+}
