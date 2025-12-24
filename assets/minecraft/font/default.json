@@ -747,6 +747,33 @@
             "chars": [
                 "\uE202"
             ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/lust_death.png",
+            "ascent": 41,
+            "height": 90,
+            "chars": [
+                "\uE203"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/inv_space.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE204"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/stone_golem.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE205"
+            ]
         }
     ]
 }
