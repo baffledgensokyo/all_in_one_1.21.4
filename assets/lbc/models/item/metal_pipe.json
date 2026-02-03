@@ -1,8 +1,4 @@
 {
-	"texture_size": [
-		64,
-		64
-	],
 	"textures": {
 		"0": "minecraft:item/metal_pipe",
 		"particle": "minecraft:item/metal_pipe"

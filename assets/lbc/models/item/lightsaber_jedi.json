@@ -1,8 +1,7 @@
 {
-	"credit": "Made with Blockbench",
-	"texture_size": [64, 64],
 	"textures": {
-		"1": "item/lightsaber_jedi"
+		"1": "minecraft:item/lightsaber_jedi",
+		"particle": "minecraft:item/lightsaber_jedi"
 	},
 	"elements": [
 		{
