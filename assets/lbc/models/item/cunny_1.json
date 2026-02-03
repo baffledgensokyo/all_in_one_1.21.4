@@ -1,8 +1,8 @@
 {
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "minecraft:block/jungle_planks",
-		"1": "minecraft:block/jungle_log_top",
+		"0": "minecraft:item/jungle_planks",
+		"1": "minecraft:item/jungle_log_top",
 		"2": "minecraft:item/cunny1",
 		"particle": "minecraft:item/cunny1"
 	},

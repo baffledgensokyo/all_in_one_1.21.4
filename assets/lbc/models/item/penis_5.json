@@ -3,7 +3,8 @@
 		"1": "minecraft:item/bestform/penis5-2",
 		"2": "minecraft:item/bestform/penis5-3",
 		"3": "minecraft:item/bestform/penis5-4",
-		"4": "minecraft:item/bestform/penis5-1"
+		"4": "minecraft:item/bestform/penis5-1",
+		"particle": "minecraft:item/bestform/penis5-1"
 	},
 	"elements": [
 		{

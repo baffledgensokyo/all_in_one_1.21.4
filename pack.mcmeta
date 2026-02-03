@@ -1,6 +1,8 @@
 {
   "pack": {
-    "pack_format": 64,
+    
+        "min_format": 75,
+        "max_format": 75,
     "description": "Lucky Blocks Resources by baffledhedgehog & stendari & Daeris"
   }
 }
