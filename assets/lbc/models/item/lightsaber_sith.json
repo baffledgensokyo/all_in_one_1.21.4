@@ -1,9 +1,7 @@
 {
-	"credit": "Made with Blockbench",
-	"texture_size": [64, 64],
 	"textures": {
-		"2": "item/lightsaber_sith",
-		"particle": "item/lightsaber_sith"
+		"2": "minecraft:item/lightsaber_sith",
+		"particle": "minecraft:item/lightsaber_sith"
 	},
 	"elements": [
 		{

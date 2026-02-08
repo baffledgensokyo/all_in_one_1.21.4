@@ -2,7 +2,8 @@
 	"credit": "Made by Daeris_",
 	"texture_size": [2, 2],
 	"textures": {
-		"0": "minecraft:item/sniper"
+		"0": "minecraft:item/sniper",
+		"particle": "minecraft:item/sniper"
 	},
 	"elements": [
 		{

@@ -9,7 +9,7 @@
     },
     "passes": [
         {
-            "vertex_shader": "minecraft:post/screenquad",
+            "vertex_shader": "minecraft:core/screenquad",
             "fragment_shader": "minecraft:post/transparency",
             "output": "final",
             "inputs": [
@@ -70,7 +70,7 @@
             ]
         },
         {
-            "vertex_shader": "minecraft:post/blit",
+            "vertex_shader": "minecraft:core/screenquad",
             "fragment_shader": "minecraft:post/bloom_sample",
             "uniforms": {
                 "BlitConfig": [
@@ -95,7 +95,7 @@
             "output": "bloomh"
         },
         {
-            "vertex_shader": "minecraft:post/blit",
+            "vertex_shader": "minecraft:core/screenquad",
             "fragment_shader": "minecraft:post/bloom",
             "inputs": [
                 {
@@ -128,7 +128,7 @@
             "output": "bloomv"
         },
         {
-            "vertex_shader": "minecraft:post/blit",
+            "vertex_shader": "minecraft:core/screenquad",
             "fragment_shader": "minecraft:post/bloom",
             "uniforms": {
                 "BlitConfig": [
@@ -165,14 +165,24 @@
             "output": "nexus_final"
         },
         {
-            "vertex_shader": "minecraft:post/blit",
+            "vertex_shader": "minecraft:core/screenquad",
             "fragment_shader": "minecraft:post/nexus_outline",
             "output": "nexus_outline",
+            "uniforms": {
+                "BlitConfig": [
+                    {
+                        "name": "ColorModulate",
+                        "type": "vec4",
+                        "value": [
+                            1.0,
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    }
+                ]
+            },
             "inputs": [
-                {
-                    "sampler_name": "Diffuse",
-                    "target": "nexus_final"
-                },
                 {
                     "sampler_name": "TranslucentDepth",
                     "target": "translucent",
@@ -191,9 +201,23 @@
             ]
         },
         {
-            "vertex_shader": "minecraft:post/blit",
+            "vertex_shader": "minecraft:core/screenquad",
             "fragment_shader": "minecraft:post/nexus_final",
             "output": "nexus_apply",
+            "uniforms": {
+                "BlitConfig": [
+                    {
+                        "name": "ColorModulate",
+                        "type": "vec4",
+                        "value": [
+                            1.0,
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    }
+                ]
+            },
             "inputs": [
                 {
                     "sampler_name": "Diffuse",
@@ -221,7 +245,7 @@
             ]
         },
         {
-            "vertex_shader": "minecraft:post/blit",
+            "vertex_shader": "minecraft:core/screenquad",
             "fragment_shader": "minecraft:post/nexus_apply",
             "uniforms": {
                 "BlitConfig": [

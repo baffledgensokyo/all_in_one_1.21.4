@@ -1,8 +1,7 @@
 {
-	"credit": "Made with Blockbench",
-	"texture_size": [32, 32],
 	"textures": {
-		"1": "item/magnum/magnum"
+		"1": "minecraft:item/magnum/magnum",
+		"particle": "minecraft:item/magnum/magnum"
 	},
 	"elements": [
 		{

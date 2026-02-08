@@ -1,11 +1,10 @@
 {
-	"format_version": "1.21.6",
-	"credit": "Made with Blockbench",
 	"textures": {
 		"0": "minecraft:item/small_glass",
-		"1": "minecraft:block/cherry_planks",
+		"1": "minecraft:item/cherry_planks",
 		"2": "minecraft:item/metasola_gem_4",
-		"particle": "minecraft:item/metasola_gem_4"
+		"particle": "minecraft:item/metasola_gem_4",
+		"missing": "minecraft:item/empty"
 	},
 	"elements": [
 		{

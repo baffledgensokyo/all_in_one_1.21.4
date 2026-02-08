@@ -1,9 +1,8 @@
 {
-	"credit": "Made with Blockbench",
-	"texture_size": [64, 64],
 	"textures": {
 		"0": "minecraft:item/supply_crate_opened",
-		"particle": "minecraft:item/supply_crate_opened"
+		"particle": "minecraft:item/supply_crate_opened",
+		"missing": "minecraft:item/empty"
 	},
 	"elements": [
 		{
@@ -95,18 +94,6 @@
 				"up": {"uv": [13.5, 0, 14.75, 0.5], "texture": "#0"},
 				"down": {"uv": [13.5, 0.5, 14.75, 1], "texture": "#0"}
 			}
-		}
-	],
-	"groups": [
-		0,
-		1,
-		2,
-		{
-			"name": "holder",
-			"origin": [0.5, 0.5, 20.5],
-			"color": 0,
-			"nbt": "{}",
-			"children": [3, 4, 5, 6]
 		}
 	]
 }

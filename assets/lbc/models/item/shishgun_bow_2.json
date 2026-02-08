@@ -2,7 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"1": "item/railgun/shishgun_bow_2"
+		"1": "minecraft:item/railgun/shishgun_bow_2",
+		"particle": "minecraft:item/railgun/shishgun_bow_2"
 	},
 	"elements": [
 		{

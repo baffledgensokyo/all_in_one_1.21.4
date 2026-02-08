@@ -1,8 +1,7 @@
 {
-	"credit": "Made with Blockbench",
-	"texture_size": [64, 64],
 	"textures": {
-		"2": "item/banhammer3d"
+		"2": "minecraft:item/banhammer3d",
+		"particle": "minecraft:item/banhammer3d"
 	},
 	"elements": [
 		{

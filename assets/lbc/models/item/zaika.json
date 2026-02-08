@@ -1,10 +1,9 @@
 {
-	"credit": "Made with Blockbench",
-	"texture_size": [64, 64],
 	"textures": {
 		"0": "minecraft:item/zaika",
 		"2": "minecraft:item/zaika_frame",
-		"particle": "minecraft:item/zaika"
+		"particle": "minecraft:item/zaika",
+		"missing": "minecraft:item/empty"
 	},
 	"elements": [
 		{
