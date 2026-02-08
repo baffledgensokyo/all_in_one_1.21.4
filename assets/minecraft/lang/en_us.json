@@ -5257,5 +5257,19 @@
     "lbcskill.33.lore.4":"2: Resistance IV, taking >=2 damage breaks layer",
     "lbcskill.33.lore.5":"3: Resistance V, blocking >=8 damage breaks layer",
     "lbcskill.33.lore.6":"4: Resistance V, blocking >=10 damage breaks layer",
-    "lbcskill.33.lore.7":"5: Resistance V, takind any damage has 50%% chance to break layer"
+    "lbcskill.33.lore.7":"5: Resistance V, takind any damage has 50%% chance to break layer",
+    "lbcskill.34":"Absolute Cinema",
+    "lbcskill.34.lore.1":"At the start of every game, you become random правитель",
+    "lbcskill.34.lore.2":"Vladimir Putin: launches Oreshin in the center of the map",
+    "lbcskill.34.lore.3":"Adolf Hitler: All islands exept your turns into gas cages",
+    "lbcskill.34.lore.4":"Donald J.Trump: creates random peace rule, and those who miss it,",
+    "lbcskill.34.lore.5":"              will receive 1000 damage. But, in fact, there is 75%%",
+    "lbcskill.34.lore.6":"              chance that this rule will not work.",
+    "lbcskill.34.lore.7":"Vladimir Lenin: All mobs around you will go to your team (3 block radius)",
+    "lbcskill.34.lore.8":"Stalin: You receive AK-47, but it needs bullets. You will get some by",
+    "lbcskill.34.lore.9":"        taking damage. Bullets drop directly in ass (not an item, see actionbar).",
+    "lbcskill.34.lore.10":"Vladislav Pozdman: +4 Attack Damage, +10 Armor, players killed by melee attacks",
+    "lbcskill.34.lore.11":"                  became faggot dogs. Chance to summon Crypto-Shark Devid through meet-bot",
+    "lbcskill.34.lore.12":"Wisdom Goddess Nahida-sama: starts game again after your death, and Nahida",
+    "lbcskill.34.lore.13":"                          gets Creative (Chance to become Nahida = 0.01%%)"
 }
