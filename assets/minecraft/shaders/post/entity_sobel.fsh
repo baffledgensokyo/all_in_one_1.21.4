@@ -1,5 +1,7 @@
 #version 330
 
+#define WIDTH 2
+
 uniform sampler2D InSampler;
 
 layout(std140) uniform SamplerInfo {
@@ -21,8 +23,10 @@ void main() {
     vec2 oneTexel = 1.0 / InSize;
     float edgeStrength = 0.0;
 
-    for (int x = -1; x <= 1; x++) {
-        for (int y = -1; y <= 1; y++) {
+
+
+    for (int x = -WIDTH; x <= WIDTH; x++) {
+        for (int y = -WIDTH; y <= WIDTH; y++) {
             if (x == 0 && y == 0) {
                 continue;
             }
