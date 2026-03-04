@@ -933,5 +933,13 @@
                 "stream": false
             }
         ]
+    },
+    "lbcsounds.bafled": {
+        "sounds": [
+            {
+                "name": "lbcsounds/bafled",
+                "stream": false
+            }
+        ]
     }
 }
