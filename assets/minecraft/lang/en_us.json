@@ -5421,14 +5421,15 @@
     "ebynavy_dog":"Shiteating Dog",
     "lbctrinket.21":"Polybile",
     "lbctrinket.21.lore.1":"Every tick tries to polymorph random entity (24 block radius) (Not players).",
-    "lbctrinket.21.lore.2":"Chance to apply: 0.5%% + 0.1%% for every additional item",
+    "lbctrinket.21.lore.2":"Chance to apply: 0.2%% + 0.1%% for every additional item",
     "lbctrinket.22":"Sunprism",
     "lbctrinket.22.lore.1":"Every tick there is a chance to shoot prismatic beam to enemies.",
     "lbctrinket.22.lore.2":"24 Radius. 7 Damage. You need to be below sun.",
     "lbctrinket.22.lore.3":"Target must be lower than you. Beam can bounce.",
-    "lbctrinket.22.lore.4":"Chance to shoot: 0.5%% + 0.1%% for every additional item",
+    "lbctrinket.22.lore.4":"Chance to shoot: 0.1%% + 0.05%% for every additional item",
     "lbctrinket.23":"Thorn soul",
     "lbctrinket.23.lore.1":"Can throw away target's soul on hit (Disable AI) (Not players)",
     "lbctrinket.23.lore.2":"Chance to apply: 4%% + 1%% for every additional item",
-    "map_rotate_warn":"You feel that the map is going to rotate!"
+    "map_rotate_warn":"You feel that the map is going to rotate!",
+    "delete_tooltip":"Delete build"
 }
