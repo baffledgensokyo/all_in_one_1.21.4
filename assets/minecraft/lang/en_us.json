@@ -5429,5 +5429,6 @@
     "lbctrinket.22.lore.4":"Chance to shoot: 0.5%% + 0.1%% for every additional item",
     "lbctrinket.23":"Thorn soul",
     "lbctrinket.23.lore.1":"Can throw away target's soul on hit (Disable AI) (Not players)",
-    "lbctrinket.23.lore.2":"Chance to apply: 4%% + 1%% for every additional item"
+    "lbctrinket.23.lore.2":"Chance to apply: 4%% + 1%% for every additional item",
+    "map_rotate_warn":"You feel that the map is going to rotate!"
 }

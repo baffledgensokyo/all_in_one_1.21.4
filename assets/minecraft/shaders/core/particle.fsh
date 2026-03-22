@@ -23,7 +23,7 @@ void main() {
     checkColor = ivec3(vertexColor.rgb * 255);
 
     if(checkColor == ivec3(20,209,255) || checkColor == ivec3(255,170,0)) {
-        color = texture(Sampler0, vec2(texCoord0.x, texCoord0.y + oneTexel.y*8)) * vertexColor * ColorModulator;
+        color = texture(Sampler0, vec2(texCoord0.x, texCoord0.y + oneTexel.y*10)) * vertexColor * ColorModulator;
     } else if (checkColor == ivec3(68,64,11)) {
         color = vec4(0.282,0.323,0.098,1);
     } else {
