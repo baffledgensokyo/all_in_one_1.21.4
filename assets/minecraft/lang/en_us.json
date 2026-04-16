@@ -5422,14 +5422,20 @@
     "lbctrinket.21":"Polybile",
     "lbctrinket.21.lore.1":"Every tick tries to polymorph random entity (24 block radius) (Not players).",
     "lbctrinket.21.lore.2":"Chance to apply: 0.2%% + 0.1%% for every additional item",
-    "lbctrinket.22":"Sunprism",
+    "lbctrinket.22":"Solar Prism",
     "lbctrinket.22.lore.1":"Every tick there is a chance to shoot prismatic beam to enemies.",
     "lbctrinket.22.lore.2":"24 Radius. 7 Damage. You need to be below sun.",
     "lbctrinket.22.lore.3":"Target must be lower than you. Beam can bounce.",
-    "lbctrinket.22.lore.4":"Chance to shoot: 0.1%% + 0.05%% for every additional item",
+    "lbctrinket.22.lore.4":"Chance to shoot: 0.05%% + 0.01%% for every additional item",
     "lbctrinket.23":"Thorn soul",
     "lbctrinket.23.lore.1":"Can throw away target's soul on hit (Disable AI) (Not players)",
     "lbctrinket.23.lore.2":"Chance to apply: 4%% + 1%% for every additional item",
     "map_rotate_warn":"You feel that the map is going to rotate!",
-    "delete_tooltip":"Delete build"
+    "delete_tooltip":"Delete build",
+    "lbcskill.35":"Psychodoppelganger",
+    "lbcskill.35.lore.1":"Tears the doppelganger soul from every mob/player within a 24-block radius",
+    "lbcskill.35.lore.2":"It instantly turns into a homing projectile and gathers around you",
+    "lbcskill.35.lore.3":"Then it darts toward the nearest target within 10 blocks of you",
+    "lbcskill.35.lore.4":"(This projectile is the same one used by 'Unbekannt Und Aidryinlisch' -",
+    "lbcskill.35.lore.5":"the upgraded Psycho Wand.)"
 }
