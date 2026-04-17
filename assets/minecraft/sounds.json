@@ -941,5 +941,29 @@
                 "stream": false
             }
         ]
+    },
+    "lbcsounds.meat1": {
+        "sounds": [
+            {
+                "name": "lbcsounds/meat1",
+                "stream": false
+            }
+        ]
+    },
+    "lbcsounds.meat2": {
+        "sounds": [
+            {
+                "name": "lbcsounds/meat2",
+                "stream": false
+            }
+        ]
+    },
+    "lbcsounds.meat3": {
+        "sounds": [
+            {
+                "name": "lbcsounds/meat3",
+                "stream": false
+            }
+        ]
     }
 }

@@ -810,6 +810,33 @@
             "chars": [
                 "\uE206"
             ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/trophy.png",
+            "ascent": 12,
+            "height": 16,
+            "chars": [
+                "\uE207"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/trophy2.png",
+            "ascent": 12,
+            "height": 16,
+            "chars": [
+                "\uE208"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/trophy3.png",
+            "ascent": 12,
+            "height": 16,
+            "chars": [
+                "\uE209"
+            ]
         }
     ]
 }
