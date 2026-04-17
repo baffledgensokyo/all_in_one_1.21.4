@@ -2266,7 +2266,7 @@
     "lbc.adv.upgraded_staff.blaze": "Милашка!                     ",
     "lbc.adv.upgraded_staff.blaze.lore": "Улучшите жезл ифрита в академии. Носите духа прямо у себя, посадив его на голову!",
     "lbc.adv.upgraded_tuntija.big_stone": "Космос! Я в космосе!            ",
-    "lbc.adv.upgraded_tuntija.big_stone.lore": "Улучшите Исо Киви Похтимаан Кайтостаси в академии. Улучшение позволит создавать Землю, Солнце и даже бедроковую комету!",
+    "lbc.adv.upgraded_tuntija.big_stone.lore": "Улучшите Исо Киви Похтимаан Кайтостаси в академии. Улучшение позволит создавать Землю, бедроковую комету, или кристаллизировать всё вокруг!",
     "lbc.adv.upgraded_tuntija.bedrock": "Магия вечности                ",
     "lbc.adv.upgraded_tuntija.bedrock.lore": "Улучшите Тилаа Миеттиа Асиоита в академии. Новые режимы - Восстанавливающаяся комната, Пустое пространство, Размещение и удаление вечных кубов!",
     "lbc.adv.upgraded_staff.bass": "Следи за басами!             ",
@@ -2454,7 +2454,7 @@
     "mode_snow_meteor": "Режим жезла - Северный Полюс",
     "mode_watering": "Режим жезла - Шторм",
     "mode_earth": "Режим жезла - Земля",
-    "mode_sun": "Режим жезла - Солнце",
+    "mode_sun": "Режим жезла - Кристаллизация (Опасно!)",
     "mode_comets": "Режим жезла - Вечная Комета",
     "anal_whip": "Легендарные Эндер-шарики",
     "anal_whip.lore.1": "ПКМ для телепортации к последней цели!",
@@ -3112,8 +3112,8 @@
     "libspell_stonestone.lore": "Создаёт огромный жилистый булыжник",
     "libspell_stonestone_1": "Земля",
     "libspell_stonestone_1.lore": "Создаёт уменьшенную копию Земли",
-    "libspell_stonestone_2": "Солнце",
-    "libspell_stonestone_2.lore": "Создаёт уменьешнную копию Солнца",
+    "libspell_stonestone_2": "Кристаллизация",
+    "libspell_stonestone_2.lore": "Кристаллизует область и наносит большой урон",
     "libspell_stonestone_3": "Вечная комета",
     "libspell_stonestone_3.lore": "Создаёт куб из чистого бедрока",
     "libspell_bedrock": "Вечная камера",
@@ -5470,5 +5470,6 @@
     "lbcskill.35.lore.5":"улучшенного Психо-Жезла.)",
     "lbckit.25":"",
     "lbckit.25.lore.1":"",
-    "lbckit.25.lore.2":""
+    "lbckit.25.lore.2":"",
+    "death.attack.fallingBlock.item":"Беспощадный влад камней %2$s Вверг в камень игрока %1$s с помощью великого %3$s"
 }
