@@ -1,5 +1,6 @@
-#version 150
-#moj_import <globals.glsl>
+#version 330
+#extension GL_ARB_separate_shader_objects : require
+#include <minecraft:globals.glsl>
 
 #define RADIUS 10.0
 #define GAMMA  2.0
@@ -12,8 +13,8 @@ layout(std140) uniform BlitConfig {
 uniform sampler2D DiffuseSampler;
 uniform sampler2D BloomSampler;
 
-in vec2 texCoord;
-out vec4 fragColor;
+layout(location = 0) in vec2 texCoord;
+layout(location = 0) out vec4 fragColor;
 
 vec3 bloomToWhite(vec3 color) {
     // Rec.709 luminance

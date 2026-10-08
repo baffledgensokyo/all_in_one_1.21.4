@@ -1,72 +1,126 @@
 #version 330
+#extension GL_ARB_separate_shader_objects : require
 
-#moj_import <minecraft:fog.glsl>
-#moj_import <minecraft:dynamictransforms.glsl>
+#ifdef GLINT
+#include <minecraft:globals.glsl>
+#endif
+#include <minecraft:fog.glsl>
+#include <minecraft:dynamictransforms.glsl>
+#include <minecraft:oit.glsl>
 
 uniform sampler2D Sampler0;
 
-//uniform vec4 ColorModulator;
-//uniform float FogRenderDistanceStart;
-//uniform float FogRenderDistanceEnd;
-//uniform vec4 FogColor;
-
-in float sphericalVertexDistance;
-in float cylindricalVertexDistance;
-#ifdef PER_FACE_LIGHTING
-in vec4 vertexPerFaceColorBack;
-in vec4 vertexPerFaceColorFront;
-#else
-in vec4 vertexColor;
+#ifdef DISSOLVE
+uniform sampler2D DissolveMaskSampler;
 #endif
-in vec4 lightMapColor;
-in vec4 overlayColor;
-in vec2 texCoord0;
 
-out vec4 fragColor;
+#ifdef GLINT
+uniform sampler2D GlintSampler;
+#endif
+
+layout(location = 0) in float sphericalVertexDistance;
+layout(location = 1) in float cylindricalVertexDistance;
+#ifdef PER_FACE_LIGHTING
+layout(location = 2) in vec4 vertexPerFaceColorBack;
+layout(location = 3) in vec4 vertexPerFaceColorFront;
+#else
+layout(location = 2) in vec4 vertexColor;
+#endif
+
+#ifndef EMISSIVE
+layout(location = 4) in vec4 lightMapColor;
+#endif
+
+#ifndef NO_OVERLAY
+layout(location = 5) in vec4 overlayColor;
+#endif
+
+layout(location = 6) in vec2 texCoord0;
+#ifdef GLINT
+layout(location = 7) in vec2 texCoordGlint;
+#endif
+
+#ifndef OIT_ALPHA_ONLY
+layout(location = 0) out vec4 fragColor;
+#endif
+
+vec4 calculateFinalColor(vec4 color, bool bypassLighting, bool bypassFog) {
+    if (!bypassLighting) {
+    #ifndef NO_OVERLAY
+        color.rgb = mix(overlayColor.rgb, color.rgb, overlayColor.a);
+    #endif
+
+    #ifndef EMISSIVE
+        color *= lightMapColor;
+    #endif
+
+    }
+
+    #ifdef GLINT
+    vec4 glintColor = GlintAlpha * texture(GlintSampler, texCoordGlint);
+    // Matches BlendFuntion.GLINT
+    color.rgb += glintColor.rgb * glintColor.rgb;
+    #endif
+
+    #ifdef OIT_ACCUMULATE
+    color = sampleColorForAccumulation(color);
+    vec4 fogColor = vec4(FogColor.rgb * color.a, FogColor.a);
+    #else
+    vec4 fogColor = FogColor;
+    #endif
+
+    if (bypassFog) {
+        return color;
+    }
+    return apply_fog(color, sphericalVertexDistance, cylindricalVertexDistance, FogEnvironmentalStart, FogEnvironmentalEnd, FogRenderDistanceStart, FogRenderDistanceEnd, fogColor);
+}
 
 void main() {
-    bool bypassFog = false;
-    vec4 color;
     vec4 rawColor = texture(Sampler0, texCoord0);
-    
-    
-    int checkAlpha = int(rawColor.a * 255);
-    
-    if (checkAlpha == 254) {
+    int alphaMarker = int(round(rawColor.a * 255.0));
+    bool bypassLighting = alphaMarker == 254 || alphaMarker == 130;
+    bool bypassFog = alphaMarker == 254;
+    vec4 color = rawColor;
 
-        color = rawColor;
-        bypassFog = true;
-
-    } else if (checkAlpha == 130) {
-#ifdef PER_FACE_LIGHTING
-        vec4 lightingColor = gl_FrontFacing ? vertexPerFaceColorFront : vertexPerFaceColorBack;
-        color = mix(rawColor, rawColor * lightingColor * ColorModulator, 0.5);
-#else
-        color = mix(rawColor, rawColor * vertexColor * ColorModulator, 0.5);
-#endif
-    
-    } else {
-#ifdef PER_FACE_LIGHTING
-        vec4 lightingColor = gl_FrontFacing ? vertexPerFaceColorFront : vertexPerFaceColorBack;
-        color = rawColor * lightingColor * ColorModulator;
-#else
-        color = rawColor * vertexColor * ColorModulator;
-#endif
-
-        #ifndef NO_OVERLAY
-        color.rgb = mix(overlayColor.rgb, color.rgb, overlayColor.a);
-        #endif
-
-        #ifndef EMISSIVE
-        color *= lightMapColor;
-        #endif
-    }
-    
-#ifdef ALPHA_CUTOUT
+    #ifdef ALPHA_CUTOUT
     if (color.a < ALPHA_CUTOUT) {
         discard;
     }
-#endif
-    fragColor = bypassFog ? color : apply_fog(color, sphericalVertexDistance, cylindricalVertexDistance, FogEnvironmentalStart, FogEnvironmentalEnd, FogRenderDistanceStart, FogRenderDistanceEnd, FogColor);
-    //fragColor = apply_fog(color, sphericalVertexDistance, cylindricalVertexDistance, FogEnvironmentalStart, FogEnvironmentalEnd, FogRenderDistanceStart, FogRenderDistanceEnd, FogColor);
+    #endif
+
+    #ifdef PER_FACE_LIGHTING
+    vec4 faceVertexColor = gl_FrontFacing ? vertexPerFaceColorFront : vertexPerFaceColorBack;
+    #else
+    vec4 faceVertexColor = vertexColor;
+    #endif
+
+    #ifdef DISSOLVE
+    if (faceVertexColor.a < texture(DissolveMaskSampler, texCoord0).a) {
+        discard;
+    }
+    // The dissolve effect entirely replaces translucency
+    faceVertexColor.a = 1.0;
+    #endif
+
+    if (alphaMarker == 254) {
+        color = rawColor;
+    } else if (alphaMarker == 130) {
+        color = mix(rawColor, rawColor * faceVertexColor * ColorModulator, 0.5);
+    } else {
+        color *= faceVertexColor * ColorModulator;
+    }
+
+    #ifdef OIT_ADDITIVE
+    color.a = min(0.99, color.a);
+    #endif
+
+    #ifdef GLINT
+    color.a = max(color.a, GlintAlpha);
+    #endif
+
+    #ifdef OIT_ALPHA_ONLY
+    executeAlphaOnlyPhase(gl_FragCoord.z, color.a);
+    #else
+    fragColor = calculateFinalColor(color, bypassLighting, bypassFog);
+    #endif
 }

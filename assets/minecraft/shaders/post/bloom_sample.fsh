@@ -1,14 +1,15 @@
-#version 150
+#version 330
+#extension GL_ARB_separate_shader_objects : require
 #define GLOW_COLORS 15
-#moj_import <globals.glsl>
+#include <minecraft:globals.glsl>
 uniform sampler2D DiffuseSampler;
 
 layout(std140) uniform BlitConfig {
     vec4 ColorModulate;
 };
 
-in vec2 texCoord;
-out vec4 fragColor;
+layout(location = 0) in vec2 texCoord;
+layout(location = 0) out vec4 fragColor;
 
 void main(){
     vec4 checkColor = texture(DiffuseSampler, texCoord) * ColorModulate;

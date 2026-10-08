@@ -1,34 +1,17 @@
-#version 150
-#moj_import <globals.glsl>
-uniform sampler2D DiffuseSampler;
-uniform sampler2D TranslucentDepthSampler;
-uniform sampler2D ItemEntityDepthSampler;
-uniform sampler2D ParticlesDepthSampler;
+#version 330
+#extension GL_ARB_separate_shader_objects : require
 
-layout (std140) uniform BlitConfig {
-    vec4 ColorModulate;
-};
+uniform sampler2D MainDepthSampler;
+layout(location = 0) in vec2 texCoord;
+layout(location = 0) out vec4 fragColor;
 
-in vec2 texCoord;
-
-out vec4 fragColor;
-
-float checkParticle = (1 - texture(ParticlesDepthSampler,texCoord).r);
-float checkTranslucent = (1 - texture(TranslucentDepthSampler,texCoord).r);
-float checkItemEntity = (1 - texture(ItemEntityDepthSampler,texCoord).r);
-
-float checkMixed = (checkTranslucent + checkItemEntity + checkParticle) / 3;
-
-vec2 oneTexel = 1.0 / ScreenSize;
-
-vec4 color_max = vec4(0.16,0.84,0.57,1);
-vec4 color_min = vec4(1,0.14,0.44,1);
-
-void main(){
-
-    if(checkMixed != 0) {
-        fragColor = mix(color_min,color_max,clamp(pow(checkMixed*500,4),0,1));
+void main() {
+    // 26.3 exposes the combined scene depth, replacing the old per-layer targets.
+    float depth = texture(MainDepthSampler, texCoord).r;
+    float mask = 1.0 - depth;
+    if (mask > 0.0) {
+        fragColor = mix(vec4(1.0, 0.14, 0.44, 1.0), vec4(0.16, 0.84, 0.57, 1.0), clamp(pow(mask * 500.0, 4.0), 0.0, 1.0));
     } else {
-        fragColor = vec4(0) * ColorModulate;  
+        fragColor = vec4(0.0);
     }
 }

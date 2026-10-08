@@ -1,0 +1,191 @@
+{
+  "targets": {
+    "final": {},
+    "bloomh": {},
+    "bloomv": {},
+    "nexus_final": {},
+    "nexus_outline": {},
+    "nexus_apply": {}
+  },
+  "passes": [
+    {
+      "vertex_shader": "minecraft:core/screenquad",
+      "fragment_shader": "minecraft:post/blit",
+      "inputs": [
+        {
+          "sampler_name": "In",
+          "target": "minecraft:main"
+        }
+      ],
+      "output": "final",
+      "uniforms": {
+        "BlitConfig": [
+          {
+            "name": "ColorModulate",
+            "type": "vec4",
+            "value": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "vertex_shader": "minecraft:core/screenquad",
+      "fragment_shader": "minecraft:post/bloom_sample",
+      "inputs": [
+        {
+          "sampler_name": "Diffuse",
+          "target": "final"
+        }
+      ],
+      "output": "bloomh",
+      "uniforms": {
+        "BlitConfig": [
+          {
+            "name": "ColorModulate",
+            "type": "vec4",
+            "value": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "vertex_shader": "minecraft:core/screenquad",
+      "fragment_shader": "minecraft:post/bloom",
+      "inputs": [
+        {
+          "sampler_name": "Diffuse",
+          "target": "bloomh"
+        },
+        {
+          "sampler_name": "Bloom",
+          "target": "bloomh"
+        }
+      ],
+      "output": "bloomv",
+      "uniforms": {
+        "BlitConfig": [
+          {
+            "name": "ColorModulate",
+            "type": "vec4",
+            "value": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "name": "BlurDir",
+            "type": "vec2",
+            "value": [
+              1.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "vertex_shader": "minecraft:core/screenquad",
+      "fragment_shader": "minecraft:post/bloom",
+      "inputs": [
+        {
+          "sampler_name": "Diffuse",
+          "target": "final"
+        },
+        {
+          "sampler_name": "Bloom",
+          "target": "bloomv"
+        }
+      ],
+      "output": "nexus_final",
+      "uniforms": {
+        "BlitConfig": [
+          {
+            "name": "ColorModulate",
+            "type": "vec4",
+            "value": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "name": "BlurDir",
+            "type": "vec2",
+            "value": [
+              0.0,
+              1.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "vertex_shader": "minecraft:core/screenquad",
+      "fragment_shader": "minecraft:post/nexus_outline",
+      "inputs": [
+        {
+          "sampler_name": "MainDepth",
+          "target": "minecraft:main",
+          "use_depth_buffer": true
+        }
+      ],
+      "output": "nexus_outline"
+    },
+    {
+      "vertex_shader": "minecraft:core/screenquad",
+      "fragment_shader": "minecraft:post/nexus_final",
+      "inputs": [
+        {
+          "sampler_name": "Diffuse",
+          "target": "nexus_final"
+        },
+        {
+          "sampler_name": "NexusOutline",
+          "target": "nexus_outline"
+        },
+        {
+          "sampler_name": "MainDepth",
+          "target": "minecraft:main",
+          "use_depth_buffer": true
+        }
+      ],
+      "output": "nexus_apply"
+    },
+    {
+      "vertex_shader": "minecraft:core/screenquad",
+      "fragment_shader": "minecraft:post/nexus_apply",
+      "inputs": [
+        {
+          "sampler_name": "Diffuse",
+          "target": "nexus_final"
+        },
+        {
+          "sampler_name": "Nexus",
+          "target": "nexus_apply"
+        },
+        {
+          "sampler_name": "Control",
+          "target": "final"
+        },
+        {
+          "sampler_name": "Bloom",
+          "target": "bloomh"
+        }
+      ],
+      "output": "minecraft:main"
+    }
+  ]
+}

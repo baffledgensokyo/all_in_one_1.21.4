@@ -1,6 +1,6 @@
 {
 	"credit": "Made with Blockbench",
-	"parent": "minecraft:item/laser_minigun/1","textures": {
+	"parent": "lbc:item/laser_minigun/1","textures": {
 		"2": "item/lasermg",
 		"particle": "item/lasermg"
 	},
