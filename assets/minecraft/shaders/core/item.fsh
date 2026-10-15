@@ -1,12 +1,11 @@
 #version 330
 #extension GL_ARB_separate_shader_objects : require
 
-#ifdef GLINT
 #include <minecraft:globals.glsl>
-#endif
 #include <minecraft:fog.glsl>
 #include <minecraft:dynamictransforms.glsl>
 #include <minecraft:oit.glsl>
+#include <lbc:zone_window.glsl>
 
 uniform sampler2D Sampler0;
 
@@ -27,6 +26,8 @@ layout(location = 5) in vec2 texCoord0;
 #ifdef GLINT
 layout(location = 6) in vec2 texCoordGlint;
 #endif
+layout(location = 9) flat in int zoneMaterial;
+layout(location = 10) in vec3 zoneRelativePosition;
 
 #ifndef OIT_ALPHA_ONLY
 layout(location = 0) out vec4 fragColor;
@@ -63,16 +64,25 @@ vec4 calculateFinalColor(vec4 color, bool bypassLighting, bool bypassFog) {
 void main() {
     vec4 rawColor = texture(Sampler0, texCoord0);
     int alphaMarker = int(round(rawColor.a * 255.0));
-    bool bypassLighting = alphaMarker == 254 || alphaMarker == 130;
+    bool isZoneBorder = zoneMaterial != 0;
+    bool bypassLighting = isZoneBorder || alphaMarker == 254 || alphaMarker == 130;
     bool bypassFog = bypassLighting;
-    vec4 color = rawColor;
+    // Only the requested 1x1, 10%-opaque red fallback is drawn here.
+    // All energy detail belongs to the post effect.
+    vec4 color = isZoneBorder ? vec4(1.0, 0.0, 0.0, 26.0 / 255.0) : rawColor;
+    if (isZoneBorder) {
+        color.a *= lbc_zone_window(zoneRelativePosition);
+        if (color.a <= 0.0) discard;
+    }
     #ifdef ALPHA_CUTOUT
-    if (color.a < ALPHA_CUTOUT) {
+    if (color.a < (isZoneBorder ? 0.005 : ALPHA_CUTOUT)) {
         discard;
     }
     #endif
 
-    if (alphaMarker == 254) {
+    if (isZoneBorder) {
+        color.a *= ColorModulator.a;
+    } else if (alphaMarker == 254) {
         color = vec4(rawColor.rgb, 1.0);
     } else if (alphaMarker == 130) {
         color = vec4(rawColor.rgb, 0.5);

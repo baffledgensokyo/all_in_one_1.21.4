@@ -10,7 +10,9 @@ uniform sampler2D Sampler0;
 layout(location = 0) in float sphericalVertexDistance;
 layout(location = 1) in float cylindricalVertexDistance;
 layout(location = 2) in vec2 texCoord0;
-layout(location = 3) flat in vec4 vertexColor;
+layout(location = 3) in vec4 vertexColor;
+layout(location = 4) flat in int customParticle;
+layout(location = 5) in vec2 particleCoord;
 
 #ifndef OIT_ALPHA_ONLY
 layout(location = 0) out vec4 fragColor;
@@ -31,12 +33,14 @@ vec4 calculateFinalColor(vec4 color, bool bypassFog) {
 
 void main() {
     vec4 color = texture(Sampler0, texCoord0) * vertexColor * ColorModulator;
-    ivec3 marker = ivec3(round(vertexColor.rgb * 255.0));
-    bool laser = marker == ivec3(20, 209, 255) || marker == ivec3(255, 170, 0);
-    bool nexus = marker == ivec3(68, 64, 11);
+    bool laser = customParticle == 1 || customParticle == 2;
+    bool nexus = customParticle == 3;
     if (laser) {
-        vec2 oneTexel = 1.0 / vec2(textureSize(Sampler0, 0));
-        color = texture(Sampler0, texCoord0 + vec2(0.0, oneTexel.y * 10.0)) * vertexColor * ColorModulator;
+        // The original 8x8, 52-pixel dot, independent of sprite packing or age.
+        // Never shift UV into a neighbouring (possibly transparent) sprite.
+        vec2 pixel = floor(clamp(particleCoord, 0.0, 0.99999) * 8.0) - 3.5;
+        if (dot(pixel, pixel) > 16.0) discard;
+        color = vertexColor * ColorModulator;
     } else if (nexus) {
         color = vec4(vec3(72.0, 82.0, 25.0) / 255.0, 1.0);
     }

@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "lbc:item/zone_border",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 16645887
+      }
+    ]
+  }
+}

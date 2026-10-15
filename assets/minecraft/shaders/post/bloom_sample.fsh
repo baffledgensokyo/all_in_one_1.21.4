@@ -33,9 +33,16 @@ void main(){
     );
     
     for(int i = 0; i < GLOW_COLORS; i++) {
+        // Red energy is continuous. Exact RGB equality made its glow toggle
+        // when movement/filtering changed a channel by a single byte.
+        if (i == 4) continue;
         if (ivec3(checkColor.xyz * 255) == glowColorList[i]) {
             outColor += checkColor;
         }
     }
+    vec3 redCore = vec3(255.0, 14.0, 14.0) / 255.0;
+    float redDistance = length((checkColor.rgb - redCore) * vec3(1.0, 2.0, 2.0));
+    float redGlow = 1.0 - smoothstep(0.005, 0.09, redDistance);
+    outColor = max(outColor, checkColor * redGlow);
     fragColor = outColor;
 }
