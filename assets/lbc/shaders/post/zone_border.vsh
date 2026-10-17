@@ -8,6 +8,7 @@ layout(location = 1) flat out mat4 zoneInverseViewProjection;
 layout(location = 5) flat out mat3 zoneInverseBasis;
 layout(location = 8) flat out vec3 zoneCenter;
 layout(location = 9) flat out int zoneEnabled;
+layout(location = 10) flat out float zoneOutsideDistance;
 
 bool zoneHeader(int row) {
     return all(equal(ivec3(round(texelFetch(ZoneDataSampler, ivec2(56, row), 0).rgb * 255.0)),
@@ -29,6 +30,7 @@ void main() {
     gl_Position = vec4(uv * 2.0 - 1.0, 0.0, 1.0);
     texCoord = uv;
     zoneEnabled = 0;
+    zoneOutsideDistance = -100000.0;
     zoneCenter = vec3(0.0);
     zoneInverseBasis = mat3(1.0);
     zoneInverseViewProjection = mat4(1.0);
@@ -54,5 +56,12 @@ void main() {
     zoneCenter = references[0];
     zoneInverseBasis = inverse(basis);
     zoneInverseViewProjection = invVP;
+    vec3 cameraLocal = zoneInverseBasis * -zoneCenter;
+    float cameraRadius = length(cameraLocal.xz);
+    if (cameraRadius > 1e-6) {
+        vec3 radialGradient = transpose(zoneInverseBasis) *
+            vec3(cameraLocal.x / cameraRadius, 0.0, cameraLocal.z / cameraRadius);
+        zoneOutsideDistance = (cameraRadius - 1.0) / max(length(radialGradient), 1e-8);
+    }
     zoneEnabled = 1;
 }

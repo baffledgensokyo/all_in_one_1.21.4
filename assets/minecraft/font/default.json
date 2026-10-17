@@ -837,6 +837,330 @@
             "chars": [
                 "\uE209"
             ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/heart.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE210"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/max_absorption.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE211"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/gravity.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE212"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/armor.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE213"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/armor_toughness.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE214"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/luck.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE215"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:item/iron_sword.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE216"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/attack_knockback.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE217"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/attack_speed.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE218"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:item/diamond_pickaxe.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE219"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/submerged_mining_speed.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE220"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/movement_efficiency.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE221"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/movement_speed.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE222"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/air_drag.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE223"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/below_name_distance.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE224"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/block_interaction_range.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE225"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/bounciness.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE226"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/burning_time.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE227"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/camera_distance.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE228"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/entity_interaction_range.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE229"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/explosion_knockback_resistance.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE230"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/fall_damage_multiplier.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE231"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/friction_modifier.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE232"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/jump_strength.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE233"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/knockback_resistance.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE234"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/mining_efficiency.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE235"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/name_tag_distance.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE236"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/oxygen_bonus.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE237"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/safe_fall_distance.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE238"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/scale.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE239"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/sneaking_speed.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE240"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/step_height.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE241"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/sweeping_damage_ratio.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE242"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/water_walking_efficiency.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE243"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/waypoint_receive_range.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE244"
+            ]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/icons/waypoint_transmit_range.png",
+            "ascent": 8,
+            "height": 9,
+            "chars": [
+                "\uE245"
+            ]
         }
     ]
 }

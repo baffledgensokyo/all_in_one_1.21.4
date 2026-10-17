@@ -1,0 +1,24 @@
+#version 330
+#extension GL_ARB_separate_shader_objects : require
+
+#include <minecraft:globals.glsl>
+#include <lbc:zone_damage.glsl>
+
+uniform sampler2D SceneSampler;
+layout(location = 0) in vec2 texCoord;
+layout(location = 9) flat in int zoneEnabled;
+layout(location = 10) flat in float zoneOutsideDistance;
+layout(location = 0) out vec4 fragColor;
+
+void main() {
+    vec4 scene = texture(SceneSampler, texCoord);
+    fragColor = scene;
+    // Existing nexus particles send a control marker through these four
+    // corner pixels; the later end_of_frame chain must receive it unchanged.
+    ivec2 pixel = ivec2(texCoord * ScreenSize);
+    if (all(lessThan(pixel, ivec2(4))) &&
+        all(lessThanEqual(abs(ivec3(round(scene.rgb * 255.0)) - ivec3(72, 82, 25)), ivec3(1)))) return;
+    if (zoneEnabled != 0) {
+        fragColor.rgb = lbc_zone_damage(scene.rgb, texCoord, zoneOutsideDistance);
+    }
+}

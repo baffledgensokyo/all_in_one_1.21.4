@@ -4,18 +4,21 @@
 #include <minecraft:dynamictransforms.glsl>
 #include <minecraft:globals.glsl>
 #include <lbc:zone_data.glsl>
+#include <lbc:black_hole_data.glsl>
 
 uniform sampler2D Sampler0;
 layout(location = 0) in vec4 vertexColor;
 layout(location = 1) in vec2 texCoord0;
 layout(location = 2) flat in int zoneDataIndex;
 layout(location = 3) in float zoneDataValue;
+layout(location = 4) flat in int blackHoleKind;
 layout(location = 0) out vec4 fragColor;
 
 void main() {
     if (zoneDataIndex >= 0) {
         if (zoneDataIndex == 56) {
-            fragColor = vec4(vec3(90, 66, 83) / 255.0, 0.0);
+            vec3 header = blackHoleKind >= 0 ? vec3(66, 72, 100 + blackHoleKind) : vec3(90, 66, 83);
+            fragColor = vec4(header / 255.0, 0.0);
         } else {
             uint bits = floatBitsToUint(zoneDataValue);
             uint shift = (zoneDataIndex % 2 == 0) ? 0u : 16u;
@@ -27,8 +30,7 @@ void main() {
         return;
     }
     // Protect invisible data against other glowing entities in this tiny strip.
-    if (gl_FragCoord.x < float(LBC_ZONE_DATA_PIXELS) &&
-        (gl_FragCoord.y < 1.0 || gl_FragCoord.y > ScreenSize.y - 1.0)) {
+    if (lbc_bh_reserved_pixel(gl_FragCoord.xy, ScreenSize)) {
         discard;
     }
     vec4 color = texture(Sampler0, texCoord0);

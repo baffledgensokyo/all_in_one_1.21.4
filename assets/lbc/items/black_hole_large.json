@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "lbc:item/black_hole_large",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 16580095
+      }
+    ]
+  }
+}

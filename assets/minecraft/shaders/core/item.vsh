@@ -8,6 +8,7 @@
 #include <minecraft:sample_lightmap.glsl>
 #include <lbc:zone_data.glsl>
 #include <lbc:zone_window.glsl>
+#include <lbc:black_hole_data.glsl>
 
 layout(location = 0) in vec3 Position;
 layout(location = 1) in vec4 Color;
@@ -63,6 +64,12 @@ void main() {
     // Reserved constant tint in lbc:zone_border. Read raw Color, before light.
     zoneMaterial = all(equal(ivec3(round(Color.rgb * 255.0)), LBC_ZONE_TINT)) ? 1 : 0;
     zoneRelativePosition = Position;
+    ivec3 itemTint = ivec3(round(Color.rgb * 255.0));
+    if (all(equal(itemTint, LBC_BH_SMALL_TINT)) || all(equal(itemTint, LBC_BH_DISK_TINT))) {
+        // Black holes have no rasterized surface: all geometry is an invisible
+        // outline data carrier. In particular, it must never enter OIT depth.
+        gl_Position = vec4(2.0, 2.0, 2.0, 1.0);
+    }
     if (zoneMaterial != 0) {
         if (lbc_zone_tag(UV0, textureSize(Sampler0, 0)) != LBC_ZONE_WALL_TAG) {
             // Data quads are rendered only into the invisible outline channel.

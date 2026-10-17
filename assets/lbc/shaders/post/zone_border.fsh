@@ -167,9 +167,26 @@ void main() {
     float halfDistance = sqrt(remainder / quadratic);
     vec2 hits = vec2(middle - halfDistance, middle + halfDistance);
 
-    bool nearVisible = zoneVisibleHit(hits.x, origin, direction, sceneDistance, depthUncertainty);
+    // Identify the fallback wall in the scene depth by both its cylinder
+    // position and its surface normal. Different passes can round its depth
+    // differently, particularly on high/low sections viewed at steep angles.
+    // Reconcile ONLY that same surface; terrain keeps the ordinary depth test.
+    vec3 localSurface = zoneInverseBasis * (surfacePosition - zoneCenter);
+    float surfaceRadius = length(localSurface.xz);
+    vec3 surfaceGradient = transpose(zoneInverseBasis) *
+                          vec3(localSurface.x, 0.0, localSurface.z);
+    float radialSeparation = abs(surfaceRadius - 1.0) * surfaceRadius /
+                             max(length(surfaceGradient), 1e-8);
+    bool ownWallDepth = finiteDepth && surfaceRadius > 0.5 && terrainContact < 0.001 &&
+                        localSurface.y >= 0.0 && localSurface.y <= 1.0 &&
+                        radialSeparation <= 0.02;
+    bool ownNear = hits.x >= 0.0 && abs(sceneDistance - hits.x) <= abs(sceneDistance - hits.y);
+    float nearSceneDistance = ownWallDepth && ownNear ? max(sceneDistance, hits.x) : sceneDistance;
+    float farSceneDistance = ownWallDepth && !ownNear ? max(sceneDistance, hits.y) : sceneDistance;
+
+    bool nearVisible = zoneVisibleHit(hits.x, origin, direction, nearSceneDistance, depthUncertainty);
     bool farVisible = hits.y - hits.x > 0.00001 &&
-                      zoneVisibleHit(hits.y, origin, direction, sceneDistance, depthUncertainty);
+                      zoneVisibleHit(hits.y, origin, direction, farSceneDistance, depthUncertainty);
     int surfaces = (nearVisible ? 1 : 0) + (farVisible ? 1 : 0);
     if (surfaces == 0) return;
 

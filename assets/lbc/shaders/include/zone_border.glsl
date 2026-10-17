@@ -13,12 +13,12 @@ float lbc_zone_hash(vec3 cell) {
     return float(bits & 16777215u) / 16777216.0;
 }
 
-// Value and exact spatial gradient of cubic-interpolated lattice noise.
+// Value and exact gradient of quintic noise (continuous slope and curvature).
 vec4 lbc_zone_noise(vec3 p) {
     vec3 cell = floor(p);
     vec3 fraction = fract(p);
-    vec3 w = fraction * fraction * (3.0 - 2.0 * fraction);
-    vec3 dw = 6.0 * fraction * (1.0 - fraction);
+    vec3 w = fraction * fraction * fraction * (10.0 + fraction * (-15.0 + 6.0 * fraction));
+    vec3 dw = 30.0 * fraction * fraction * (1.0 - fraction) * (1.0 - fraction);
     float a = lbc_zone_hash(cell);
     float b = lbc_zone_hash(cell + vec3(1, 0, 0));
     float c = lbc_zone_hash(cell + vec3(0, 1, 0));
@@ -89,19 +89,21 @@ vec4 lbc_zone_color(vec3 relativePosition, vec3 pixelDX, vec3 pixelDY) {
                         0.5 * pow(0.5 + offset, 2.0));
     float plasma = 0.0;
     float flow = 0.0;
-    vec3 gradient = vec3(0.0);
+    float filterWidth = 0.0;
     for (int index = 0; index < 3; index++) {
         LbcZoneField field = lbc_zone_field(relativePosition, centre + float(index - 1));
         plasma += (field.plasma - 0.5) * weights[index];
         flow += field.flow * weights[index];
-        gradient += field.gradient * weights[index];
+        // Do not cancel opposing band gradients when estimating the filter.
+        // That under-filtered tiny bright cores, especially at steep angles.
+        filterWidth += weights[index] * (abs(dot(field.gradient, pixelDX)) +
+                                         abs(dot(field.gradient, pixelDY)));
     }
     // Retain contrast while filtering instead of washing the material out.
     float contrast = inversesqrt(dot(weights, weights));
     plasma = 0.5 + plasma * contrast;
     flow *= contrast;
-    gradient *= contrast;
-    float aa = max(abs(dot(gradient, pixelDX)) + abs(dot(gradient, pixelDY)), 0.012);
+    float aa = max(filterWidth * contrast, 0.012);
     float filament = 1.0 - smoothstep(0.04 - aa, 0.22 + aa, abs(flow));
     filament *= 1.0 - smoothstep(0.5, 2.5, aa);
 
@@ -116,5 +118,6 @@ vec4 lbc_zone_color(vec3 relativePosition, vec3 pixelDX, vec3 pixelDY) {
     opacity = mix(opacity, 1.0, core);
     return vec4(color, opacity);
 }
+
 
 #endif
