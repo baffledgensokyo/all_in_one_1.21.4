@@ -1,8 +1,7 @@
 {
     "targets": {
         "swap": {},
-        "zone_scene": {},
-        "black_hole_scene": {}
+        "zone_scene": {}
     },
     "passes": [
         {
@@ -26,36 +25,19 @@
             "output": "zone_scene"
         },
         {
-            "vertex_shader": "lbc:post/black_hole",
-            "fragment_shader": "lbc:post/black_hole",
-            "inputs": [
-                {
-                    "sampler_name": "HoleData",
-                    "target": "minecraft:entity_outline"
-                },
-                {
-                    "sampler_name": "Scene",
-                    "target": "zone_scene",
-                    "bilinear": true
-                },
-                {
-                    "sampler_name": "SceneDepth",
-                    "target": "minecraft:main",
-                    "use_depth_buffer": true
-                }
-            ],
-            "output": "black_hole_scene"
-        },
-        {
             "vertex_shader": "lbc:post/zone_border",
             "fragment_shader": "lbc:post/zone_damage",
             "inputs": [
                 {
                     "sampler_name": "Scene",
-                    "target": "black_hole_scene"
+                    "target": "zone_scene"
                 },
                 {
                     "sampler_name": "ZoneData",
+                    "target": "minecraft:entity_outline"
+                },
+                {
+                    "sampler_name": "HoleData",
                     "target": "minecraft:entity_outline"
                 }
             ],

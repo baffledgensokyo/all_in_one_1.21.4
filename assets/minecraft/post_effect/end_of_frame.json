@@ -5,7 +5,11 @@
     "bloomv": {},
     "nexus_final": {},
     "nexus_outline": {},
-    "nexus_apply": {}
+    "nexus_apply": {},
+    "black_hole_scene": {},
+    "black_hole_trace": {},
+    "black_hole_coarse": {},
+    "black_hole_geometry": {}
   },
   "passes": [
     {
@@ -185,6 +189,200 @@
           "target": "bloomh"
         }
       ],
+      "output": "black_hole_scene"
+    },
+    {
+      "vertex_shader": "lbc:post/black_hole_near",
+      "fragment_shader": "lbc:post/black_hole_geometry",
+      "inputs": [
+        {
+          "sampler_name": "HoleData",
+          "target": "final"
+        },
+        {
+          "sampler_name": "Scene",
+          "target": "black_hole_scene"
+        },
+        {
+          "sampler_name": "SceneDepth",
+          "target": "minecraft:main",
+          "use_depth_buffer": true
+        }
+      ],
+      "output": "black_hole_geometry"
+    },
+    {
+      "vertex_shader": "lbc:post/black_hole_coarse_fast",
+      "fragment_shader": "lbc:post/black_hole_near_fast",
+      "inputs": [
+        {
+          "sampler_name": "HoleData",
+          "target": "final"
+        },
+        {
+          "sampler_name": "Scene",
+          "target": "black_hole_scene",
+          "bilinear": true
+        },
+        {
+          "sampler_name": "SceneDepth",
+          "target": "minecraft:main",
+          "use_depth_buffer": true
+        },
+        {
+          "sampler_name": "Coarse",
+          "target": "black_hole_scene"
+        },
+        {
+          "sampler_name": "Geometry",
+          "target": "black_hole_geometry"
+        }
+      ],
+      "output": "black_hole_coarse",
+      "uniforms": {
+        "BlackHoleConfig": [
+          {
+            "name": "ResolutionScale",
+            "type": "float",
+            "value": 4.0
+          }
+        ]
+      }
+    },
+    {
+      "vertex_shader": "lbc:post/black_hole_coarse_many",
+      "fragment_shader": "lbc:post/black_hole_near",
+      "inputs": [
+        {
+          "sampler_name": "HoleData",
+          "target": "final"
+        },
+        {
+          "sampler_name": "Scene",
+          "target": "black_hole_scene",
+          "bilinear": true
+        },
+        {
+          "sampler_name": "SceneDepth",
+          "target": "minecraft:main",
+          "use_depth_buffer": true
+        },
+        {
+          "sampler_name": "Coarse",
+          "target": "black_hole_scene"
+        },
+        {
+          "sampler_name": "Geometry",
+          "target": "black_hole_geometry"
+        }
+      ],
+      "output": "black_hole_coarse",
+      "uniforms": {
+        "BlackHoleConfig": [
+          {
+            "name": "ResolutionScale",
+            "type": "float",
+            "value": 4.0
+          }
+        ]
+      }
+    },
+    {
+      "vertex_shader": "lbc:post/black_hole_far_fast",
+      "fragment_shader": "lbc:post/black_hole_fast",
+      "inputs": [
+        {
+          "sampler_name": "HoleData",
+          "target": "final"
+        },
+        {
+          "sampler_name": "Scene",
+          "target": "black_hole_scene",
+          "bilinear": true
+        },
+        {
+          "sampler_name": "SceneDepth",
+          "target": "minecraft:main",
+          "use_depth_buffer": true
+        }
+      ],
+      "output": "black_hole_trace",
+      "uniforms": {
+        "BlackHoleConfig": [
+          {
+            "name": "ResolutionScale",
+            "type": "float",
+            "value": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "vertex_shader": "lbc:post/black_hole_far_many",
+      "fragment_shader": "lbc:post/black_hole",
+      "inputs": [
+        {
+          "sampler_name": "HoleData",
+          "target": "final"
+        },
+        {
+          "sampler_name": "Scene",
+          "target": "black_hole_scene",
+          "bilinear": true
+        },
+        {
+          "sampler_name": "SceneDepth",
+          "target": "minecraft:main",
+          "use_depth_buffer": true
+        }
+      ],
+      "output": "black_hole_trace",
+      "uniforms": {
+        "BlackHoleConfig": [
+          {
+            "name": "ResolutionScale",
+            "type": "float",
+            "value": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "vertex_shader": "lbc:post/black_hole_late",
+      "fragment_shader": "lbc:post/black_hole_late_resolve",
+      "inputs": [
+        {
+          "sampler_name": "HoleData",
+          "target": "final"
+        },
+        {
+          "sampler_name": "Scene",
+          "target": "black_hole_scene",
+          "bilinear": true
+        },
+        {
+          "sampler_name": "Trace",
+          "target": "black_hole_trace"
+        },
+        {
+          "sampler_name": "SceneDepth",
+          "target": "minecraft:main",
+          "use_depth_buffer": true
+        },
+        {
+          "sampler_name": "Coarse",
+          "target": "black_hole_coarse"
+        }
+      ],
+      "uniforms": {
+        "BlackHoleConfig": [
+          {
+            "name": "ResolutionScale",
+            "type": "float",
+            "value": 1.0
+          }
+        ]
+      },
       "output": "minecraft:main"
     }
   ]
