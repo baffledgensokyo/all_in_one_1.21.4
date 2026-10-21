@@ -3,6 +3,7 @@
 #endif
 
 #include <lbc:black_hole_data.glsl>
+#include <lbc:black_hole_sampling.glsl>
 
 uniform sampler2D HoleDataSampler;
 layout(location = 0) out vec2 texCoord;
@@ -14,7 +15,7 @@ layout(location = 29) flat out uint holeMask;
 layout(location = 30) flat out vec4 holePeripheral;
 
 ivec3 holeBytes(ivec2 pixel) {
-#ifdef LBC_BH_PACKED_ALPHA
+#if defined(LBC_BH_PACKED_ALPHA) && !defined(LBC_EFFECT_HISTORY)
     int x = pixel.x * 3;
     return ivec3(round(vec3(texelFetch(HoleDataSampler, ivec2(x, pixel.y), 0).a,
                            texelFetch(HoleDataSampler, ivec2(x + 1, pixel.y), 0).a,
@@ -51,7 +52,7 @@ void main() {
     for (int i = 0; i < LBC_BH_TRACE_COUNT; i++) holeObjects[i] = vec4(0.0);
     for (int i = 0; i < (LBC_BH_TRACE_COUNT + 3) / 4; i++) holeStyles[i] = uvec4(0u);
     ivec2 size = textureSize(HoleDataSampler, 0);
-#ifdef LBC_BH_PACKED_ALPHA
+#if defined(LBC_BH_PACKED_ALPHA) && !defined(LBC_EFFECT_HISTORY)
     if (size.x < LBC_BH_PIXELS * 3 || size.y < 2 * (LBC_BH_FIRST_ROW + LBC_BH_COUNT)) return;
 #else
     if (size.x < LBC_BH_PIXELS || size.y < 2 * (LBC_BH_FIRST_ROW + LBC_BH_COUNT)) return;
@@ -75,6 +76,15 @@ void main() {
             float radius = length(x);
             if (!valid || radius < 0.0001 || radius > 1000000.0 ||
                 length(y) < 0.0001 || length(z) < 0.0001 || abs(determinant(invVP)) < 1e-16) continue;
+#ifdef LBC_EFFECT_HISTORY
+            // Grow/collapse the actual lens, shadow and disk together. Never
+            // crossfade two differently refracted copies of the world.
+            uvec4 fadeBytes=uvec4(round(texelFetch(HoleDataSampler,ivec2(58,row),0)*255.0));
+            float appearance=uintBitsToFloat(fadeBytes.x|(fadeBytes.y<<8u)|(fadeBytes.z<<16u)|(fadeBytes.w<<24u));
+            if(isnan(appearance)||isinf(appearance)||appearance<0.0||appearance>1.2)continue;
+            radius*=appearance;
+            if(radius<0.0001)continue;
+#endif
             // Transport slots stay server-assigned; compact only the decoded
             // shader list. Ray steps must not scan fifteen empty slots for one
             // hole. Preserve slot order so accumulation remains unchanged.
@@ -103,10 +113,12 @@ void main() {
 #ifdef LBC_BH_FAR_ONLY
     if (holePeripheral.w > 0.0) gl_Position = vec4(4.0,4.0,0.0,1.0);
     holePeripheral = vec4(0.0);
+    vec2 farScale = ceil(vec2(size) / lbc_bh_far_stride()) / vec2(size);
+    gl_Position.xy = (gl_Position.xy + 1.0) * farScale - 1.0;
 #endif
 #ifdef LBC_BH_COARSE_PASS
-    // Cover the final partial tile too when the window is not divisible by 4.
-    float stride = mix(1.0,8.0,clamp(holePeripheral.w,0.0,1.0));
+    // Use the same grid spacing as trace and resolve, including partial tiles.
+    float stride = lbc_bh_stride(holePeripheral);
     vec2 coarseScale = ceil(vec2(size) / stride) / vec2(size);
     gl_Position.xy = (gl_Position.xy + 1.0) * coarseScale - 1.0;
     if (holePeripheral.w <= 0.0) gl_Position = vec4(4.0, 4.0, 0.0, 1.0);

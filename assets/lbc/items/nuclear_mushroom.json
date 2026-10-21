@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "lbc:item/nuclear_mushroom",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 16514815
+      }
+    ]
+  }
+}

@@ -151,11 +151,16 @@ void main() {
             fragColor.rgb = coarse.rgb;
             return;
         }
+#ifdef LBC_BH_FAR_MAP_RESOLVE
+        // Reconstruct the far 2x2 lens map in source coordinates as well.
+        lbc_bh_reconstruct_grid(SceneSampler,SceneDepthSampler,TraceSampler,
+            gl_FragCoord.xy,vec2(sceneSize),holeInverseVP,lbc_bh_far_stride(),coarse);
+        fragColor.rgb = coarse.rgb;
+#else
         vec4 traced = texelFetch(TraceSampler, pixel, 0);
-        // Exactly one traced pixel replaces one scene pixel. Original depth
-        // must not paste unwarped buildings back over the event horizon.
         if (traced.a > 0.1) fragColor.rgb = bhContinueNeighbour(pixel, sceneSize, traced);
         if (peripheral > 0.0) fragColor.rgb = mix(fragColor.rgb, coarse.rgb, peripheral);
+#endif
         return;
     }
     // The nexus control pixels belong to a different effect.

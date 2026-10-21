@@ -5,6 +5,7 @@
 #include <minecraft:globals.glsl>
 #include <lbc:zone_data.glsl>
 #include <lbc:black_hole_data.glsl>
+#include <lbc:nuclear_data.glsl>
 
 uniform sampler2D Sampler0;
 layout(location = 0) in vec4 vertexColor;
@@ -18,6 +19,7 @@ void main() {
     if (zoneDataIndex >= 0) {
         if (zoneDataIndex == 56) {
             vec3 header = blackHoleKind >= 0 ? vec3(66, 72, 100 + blackHoleKind) : vec3(90, 66, 83);
+            if (blackHoleKind == 2) header = vec3(78, 85, 75);
             fragColor = vec4(header / 255.0, 0.0);
         } else {
             uint bits = floatBitsToUint(zoneDataValue);
@@ -30,7 +32,8 @@ void main() {
         return;
     }
     // Protect invisible data against other glowing entities in this tiny strip.
-    if (lbc_bh_reserved_pixel(gl_FragCoord.xy, ScreenSize)) {
+    if (lbc_bh_reserved_pixel(gl_FragCoord.xy, ScreenSize) ||
+        lbc_nuclear_reserved_pixel(gl_FragCoord.xy, ScreenSize)) {
         discard;
     }
     vec4 color = texture(Sampler0, texCoord0);

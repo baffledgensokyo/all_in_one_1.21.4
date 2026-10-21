@@ -6,6 +6,7 @@
 #include <minecraft:globals.glsl>
 #include <lbc:zone_data.glsl>
 #include <lbc:black_hole_data.glsl>
+#include <lbc:nuclear_data.glsl>
 
 layout(location = 0) in vec3 Position;
 layout(location = 1) in vec4 Color;
@@ -26,13 +27,15 @@ void main() {
     zoneDataValue = 0.0;
     blackHoleKind = -1;
     int blackHoleSlot = lbc_bh_slot(Color.rgb);
-    if (blackHoleSlot >= 0 || all(equal(ivec3(round(Color.rgb * 255.0)), LBC_ZONE_GLOW))) {
+    int nuclearSlot = lbc_nuclear_slot(Color.rgb);
+    if (blackHoleSlot >= 0 || nuclearSlot >= 0 || all(equal(ivec3(round(Color.rgb * 255.0)), LBC_ZONE_GLOW))) {
         int tag = lbc_zone_tag(UV0, textureSize(Sampler0, 0));
         if (tag < LBC_ZONE_DATA_PIXELS) {
             zoneDataIndex = tag;
             if (blackHoleSlot >= 0) {
                 blackHoleKind = fract(UV0.y * float(textureSize(Sampler0, 0).y)) > 0.5 ? 1 : 0;
             }
+            if (nuclearSlot >= 0) blackHoleKind = 2;
             int field = tag / 2;
             if (field < 12) {
                 // CPU-transformed reference points already include scale,
@@ -49,6 +52,7 @@ void main() {
             vec2 edge = vec2((corner == 0 || corner == 3) ? 0.0 : 1.0,
                              corner < 2 ? 0.0 : 1.0);
             float row = blackHoleSlot >= 0 ? float(LBC_BH_FIRST_ROW + blackHoleSlot) : 0.0;
+            if (nuclearSlot >= 0) row = float(LBC_NUCLEAR_FIRST_ROW + nuclearSlot);
             vec2 pixel = vec2(float(tag), row) + edge;
             gl_Position = vec4(pixel / ScreenSize * 2.0 - 1.0, 0.0, 1.0);
         } else {

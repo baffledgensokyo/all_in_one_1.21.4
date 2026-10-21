@@ -2,15 +2,5 @@ assets/minecraft/textures/item/дареис.png
 all_in_one_1.21.8.zip
 all_in_one_1.21.11.zip
 all_in_one_resourcepack.zip
-tools/validate_zone_border.py
-tools/generate_zone_border.py
-tools/preview_zone_border.py
-tools/validate_particles.py
-tools/__pycache__/validate_zone_border.cpython-313.pyc
-blockbench/zone_border.bbmodel
-blockbench/zone_border.txt
-blockbench/zone_border_preview.png
-blockbench/zone_border_shader_preview.png
-blockbench/zone_border_terrain_preview.png
 blockbench/
 tools/

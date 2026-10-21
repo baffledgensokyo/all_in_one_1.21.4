@@ -4,7 +4,11 @@
 // Continuously increase the lens-map spacing near a horizon. Colour is
 // fetched from the original full-resolution frame after UV reconstruction.
 float lbc_bh_stride(vec4 peripheral) {
-    return mix(1.0, 8.0, clamp(peripheral.w,0.0,1.0));
+    return mix(2.0, 4.0, clamp(peripheral.w,0.0,1.0));
+}
+
+float lbc_bh_far_stride() {
+    return 2.0;
 }
 
 vec2 lbc_bh_decode_uv(vec4 value) {
@@ -40,12 +44,10 @@ vec4 lbc_bh_coarse_color(sampler2D scene, sampler2D depth, mat4 inverseVP, vec4 
     return vec4(lbc_bh_sharp_color(scene,depth,lbc_bh_decode_uv(value),inverseVP), 1.0);
 }
 
-float lbc_bh_reconstruct(sampler2D scene, sampler2D depth, sampler2D coarse,
-                         vec2 position, vec2 size, mat4 inverseVP, vec4 peripheral,
+float lbc_bh_reconstruct_grid(sampler2D scene, sampler2D depth, sampler2D coarse,
+                         vec2 position, vec2 size, mat4 inverseVP, float stride,
                          out vec4 reconstructed) {
     reconstructed = vec4(0.0);
-    if (peripheral.w <= 0.0) return 0.0;
-    float stride = lbc_bh_stride(peripheral);
     vec2 grid = position / stride - 0.5;
     ivec2 base = ivec2(floor(grid));
     ivec2 last = ivec2(ceil(size / stride)) - 1;
@@ -93,6 +95,15 @@ float lbc_bh_reconstruct(sampler2D scene, sampler2D depth, sampler2D coarse,
         ? vec4(textureLod(scene,position / size,0.0).rgb,0.0)
         : lbc_bh_coarse_color(scene,depth,inverseVP,selected);
     return 1.0;
+}
+
+float lbc_bh_reconstruct(sampler2D scene, sampler2D depth, sampler2D coarse,
+                         vec2 position, vec2 size, mat4 inverseVP, vec4 peripheral,
+                         out vec4 reconstructed) {
+    reconstructed = vec4(0.0);
+    if (peripheral.w <= 0.0) return 0.0;
+    return lbc_bh_reconstruct_grid(scene,depth,coarse,position,size,inverseVP,
+                                  lbc_bh_stride(peripheral),reconstructed);
 }
 
 #endif
