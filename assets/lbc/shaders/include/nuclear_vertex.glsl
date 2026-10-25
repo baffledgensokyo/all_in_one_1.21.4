@@ -1,6 +1,6 @@
 #include <lbc:nuclear_data.glsl>
 
-#if defined(LBC_NUCLEAR_HEAT) || defined(LBC_NUCLEAR_MANY)
+#if defined(LBC_NUCLEAR_HEAT_MANY) || defined(LBC_NUCLEAR_MANY)
 #define LBC_NUCLEAR_TRACE_COUNT 16
 #else
 #define LBC_NUCLEAR_TRACE_COUNT 4
@@ -39,8 +39,8 @@ layout(location = 22) flat out int nuclearCount;
 #include <minecraft:globals.glsl>
 #include <lbc:nuclear_volume.glsl>
 uniform sampler2D SceneDepthSampler;
-layout(location = 1) flat out vec4 nuclearHeatCenters[LBC_NUCLEAR_COUNT];
-layout(location = 17) flat out vec4 nuclearHeatVisibilities[4];
+layout(location = 1) flat out vec4 nuclearHeatCenters[LBC_NUCLEAR_TRACE_COUNT];
+layout(location = 17) flat out vec4 nuclearHeatVisibilities[LBC_NUCLEAR_TRACE_COUNT/4];
 float heatVisibility(vec3 p,float radius) {
     vec4 clip=nuclearVP*vec4(p,1.0);
     if(clip.w<=0.0)return 0.0;
@@ -92,8 +92,8 @@ void main() {
 #endif
     nuclearCount = 0;
 #ifdef LBC_NUCLEAR_HEAT
-    for(int i=0;i<LBC_NUCLEAR_COUNT;i++)nuclearHeatCenters[i]=vec4(0.0);
-    for(int i=0;i<4;i++)nuclearHeatVisibilities[i]=vec4(0.0);
+    for(int i=0;i<LBC_NUCLEAR_TRACE_COUNT;i++)nuclearHeatCenters[i]=vec4(0.0);
+    for(int i=0;i<LBC_NUCLEAR_TRACE_COUNT/4;i++)nuclearHeatVisibilities[i]=vec4(0.0);
 #endif
     nuclearInverseVP = mat4(1.0);
     nuclearVP = mat4(1.0);
@@ -147,13 +147,13 @@ void main() {
       }
     }
     if (nuclearCount > 0) nuclearVP = inverse(nuclearInverseVP);
-#ifdef LBC_NUCLEAR_MANY
+#if defined(LBC_NUCLEAR_MANY) || defined(LBC_NUCLEAR_HEAT_MANY)
     if(nuclearCount<=4)gl_Position=vec4(4.0,4.0,0.0,1.0);
-#elif !defined(LBC_NUCLEAR_HEAT)
+#else
     if(nuclearCount>4)gl_Position=vec4(4.0,4.0,0.0,1.0);
 #endif
 #ifdef LBC_NUCLEAR_HEAT
-    for(int i=0;i<nuclearCount;i++) {
+    for(int i=0;i<min(nuclearCount,LBC_NUCLEAR_TRACE_COUNT);i++) {
         float radius=nuclearObjects[i].w*NUCLEAR_WORLD_SCALE;
         float age=nuclearAges[i];
         vec3 dim=nuclearDimensions(age);

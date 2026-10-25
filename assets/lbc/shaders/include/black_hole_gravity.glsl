@@ -60,6 +60,7 @@ float bhEntry(vec3 origin, vec3 direction) {
 vec3 bhField(vec3 position, vec3 velocity, out float stepSize, out bool captured,
              out bool nearHorizon) {
     vec3 acceleration = vec3(0.0);
+    float strongestField2 = 0.0;
     stepSize = 1e30;
     captured = false;
     nearHorizon = false;
@@ -74,17 +75,24 @@ vec3 bhField(vec3 position, vec3 velocity, out float stepSize, out bool captured
         captured = captured || r < 1.0;
         if (r >= BH_REACH || r < 0.5) continue;
         // Spatial null-ray equation in Schwarzschild units (event horizon=1).
-        // Central force preserves angular momentum for an isolated hole. For
-        // several holes this is a visual weak-field superposition, not an
-        // exact dynamical multi-body solution of Einstein's field equations.
+        // Central force preserves angular momentum for an isolated hole.
         vec3 momentum = cross(p, velocity);
         float angularMomentum2 = dot(momentum, momentum);
         float taper = 1.0 - smoothstep(10.0, BH_REACH, r);
-        acceleration -= 1.5 * angularMomentum2 * p * taper /
-                        (radius * max(r2 * r2 * r, 0.001));
+        vec3 field = -1.5 * angularMomentum2 * p * taper /
+                     (radius * max(r2 * r2 * r, 0.001));
+        acceleration += field;
+        strongestField2 = max(strongestField2, dot(field, field));
         stepSize = min(stepSize, radius * r * mix(0.045, 0.16, smoothstep(1.5, 5.0, r)) /
                                 max(length(velocity), 0.25));
     }
+    // Art-directed overlap: retain the combined direction, but never bend
+    // light more strongly than the strongest individual field at this point.
+    // Coincident holes then keep one hole's shadow instead of adding mass.
+    // The magnitude cap is continuous and independent of transport slot order.
+    float combinedField2 = dot(acceleration, acceleration);
+    if (combinedField2 > strongestField2)
+        acceleration *= sqrt(strongestField2 / combinedField2);
     return acceleration;
 }
 

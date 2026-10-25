@@ -29,11 +29,12 @@ ivec3 rawBytes(int x,int row) {
                            texelFetch(CurrentSampler,ivec2(x*3+2,row),0).a)*255.0));
 }
 bool header(ivec3 b,int row) {
-    return row<18 ? b.r==66&&b.g==72&&(b.b==100||b.b==101) : all(equal(b,ivec3(78,85,75)));
+    return row<LBC_NUCLEAR_FIRST_ROW ? b.r==66&&b.g==72&&(b.b==100||b.b==101) :
+        lbc_nuclear_header(b,row>=LBC_NUCLEAR_FADE_FIRST_ROW);
 }
 int currentRow(int row) {
     ivec2 size=textureSize(CurrentSampler,0);
-    if(size.x<171||size.y<LBC_EFFECT_ROWS)return -1;
+    if(size.x<171||size.y<2*(row+1))return -1;
     for(int copy=0;copy<2;copy++) {
         int y=copy==0?row:size.y-1-row;
         if(!header(rawBytes(56,y),row))continue;
@@ -45,7 +46,7 @@ int currentRow(int row) {
     return -1;
 }
 int cameraRow() {
-    for(int row=2;row<LBC_NUCLEAR_FIRST_ROW+LBC_NUCLEAR_COUNT;row++) {
+    for(int row=2;row<LBC_NUCLEAR_FADE_FIRST_ROW+LBC_NUCLEAR_COUNT;row++) {
         int y=currentRow(row);
         if(y>=0)return y;
     }
@@ -78,6 +79,13 @@ float holeArrival(float phase) {
     float t=phase-1.0;
     return 1.0+(BH_SPAWN_BACK+1.0)*t*t*t+BH_SPAWN_BACK*t*t;
 }
+float nuclearOpacity(float progress,float visibility) {
+    // Quantize identically for UNORM header alpha and the float cache. A
+    // half-byte tie must not yield different opacity in the two draw paths.
+    float opacity=smoothstep(0.0,1.0,progress)*visibility;
+    opacity=floor(clamp(opacity,0.0,1.0)*65536.0+0.5)/65536.0;
+    return floor(opacity*255.0+0.5)/255.0;
+}
 void main() {
     ivec2 pixel=ivec2(gl_FragCoord.xy);
     int x=pixel.x,row=min(pixel.y,EFFECT_SIZE.y-1-pixel.y);
@@ -106,7 +114,13 @@ void main() {
         }
         return;
     }
+    bool nuclear=row>=LBC_NUCLEAR_FIRST_ROW;
     int live=currentRow(row);
+    bool fading=false;
+    if(nuclear&&live<0) {
+        live=currentRow(row+LBC_NUCLEAR_COUNT);
+        fading=live>=0;
+    }
     bool wasAlive=history&&header(ivec3(round(texelFetch(HistorySampler,ivec2(56,row),0).rgb*255.0)),row);
     float progress=wasAlive?oldFloat(ivec2(57,row)):0.0;
     if(isnan(progress)||isinf(progress))progress=0.0;
@@ -115,20 +129,27 @@ void main() {
     if(live>=0&&wasAlive) {
         vec3 oldCenter=point(0,row,false)+delta;
         float radius=length(point(1,live,true)-point(0,live,true));
-        bool replaced=any(notEqual(rawBytes(56,live),ivec3(round(texelFetch(HistorySampler,ivec2(56,row),0).rgb*255.0))))||
+        bool replaced=(!nuclear&&any(notEqual(rawBytes(56,live),ivec3(round(texelFetch(HistorySampler,ivec2(56,row),0).rgb*255.0)))))||
                       distance(oldCenter,point(0,live,true))>max(radius*4.0,8.0);
         if(replaced){progress=0.0;wasAlive=false;}
     }
-    bool nuclear=row>=18;
-    if(live>=0)progress=nuclear?1.0:min(progress+(wasAlive?dt/BH_FADE_SECONDS:0.0),1.0);
+    if(nuclear) {
+        // A real, stationary fade display supplies ALL points and inverse VP
+        // every frame. Never render a nuclear tail from a dead carrier's VP.
+        if(live<0)progress=0.0;
+        else if(!fading)progress=1.0;
+        else if(!wasAlive||oldFloat(ivec2(59,row))<1.5)progress=1.0;
+        else progress=max(progress-dt/NUCLEAR_FADE_OUT,0.0);
+    }
+    else if(live>=0)progress=min(progress+(wasAlive?dt/BH_FADE_SECONDS:0.0),1.0);
     else {
         // A removal during arrival still gets its complete exit duration,
         // beginning at the actual displayed radius (including overshoot).
         if(wasAlive&&oldFloat(ivec2(59,row))>0.5){progress=1.0;previousProgress=1.0;}
-        progress=max(progress-dt/(nuclear?NUCLEAR_FADE_OUT:BH_FADE_SECONDS),0.0);
+        progress=max(progress-dt/BH_FADE_SECONDS,0.0);
     }
     if(x==57) {fragColor=packBits(floatBitsToUint(progress));return;}
-    if(x==59) {fragColor=packBits(floatBitsToUint(live>=0?1.0:0.0));return;}
+    if(x==59) {fragColor=packBits(floatBitsToUint(live>=0?(fading?2.0:1.0):0.0));return;}
     if(nuclear&&x>=60&&x<=75&&(live>=0||wasAlive&&progress>0.0)) {
         // Prepare exact float object data once per frame for the 5..16 path.
         // The fragment stage fetches only its current object; no huge arrays
@@ -148,13 +169,13 @@ void main() {
         } else if(x==73)value=clamp(length(axisY)-1.0,0.0,120.0);
         else if(x==74) {
             float visibility=clamp(2.0-length(axisZ)/max(radius,0.0001),0.0,1.0);
-            value=round(smoothstep(0.0,1.0,progress)*visibility*255.0)/255.0;
+            value=nuclearOpacity(progress,visibility);
         } else value=float(row-LBC_NUCLEAR_FIRST_ROW)*13.71;
         fragColor=packBits(floatBitsToUint(value));return;
     }
     if(x>58||(live<0&&(!wasAlive||progress<=0.0)))return;
     if(x==56||x==58) {
-        // Optional server-controlled fade while the display is still alive:
+        // Optional server-controlled visibility while the carrier is alive:
         // Z/X=1 means fully visible (existing commands), Z/X=2 means hidden.
         // Keeping the live carrier until zero also supplies fresh camera data.
         int source=live>=0?live:row;
@@ -169,15 +190,17 @@ void main() {
                 oldFloat(ivec2(58,row))*fade/max(smoothstep(0.0,1.0,previousProgress),1e-6);
             fragColor=packBits(floatBitsToUint(nuclear?fade*visibility:max(size,0.0)));
         } else {
-            vec3 bytes=live>=0?vec3(rawBytes(x,live))/255.0:texelFetch(HistorySampler,ivec2(x,row),0).rgb;
-            fragColor=vec4(bytes,fade*visibility);
+            // Normalize both nuclear inputs to the existing NUK output ABI.
+            // The volume, resolve and heat shaders keep exactly their design.
+            vec3 bytes=nuclear?vec3(78,85,75)/255.0:
+                (live>=0?vec3(rawBytes(x,live))/255.0:texelFetch(HistorySampler,ivec2(x,row),0).rgb);
+            fragColor=vec4(bytes,nuclear?nuclearOpacity(progress,visibility):fade*visibility);
         }
     } else if(live>=0)fragColor=vec4(vec3(rawBytes(x,live))/255.0,1.0);
     else if(x<24) {
         int index=x/6,axis=(x/2)%3;
         vec3 p=point(index,row,false)+delta;
-        // Retain the last mushroom stage during its four-second tail;
-        // GameTime still animates flow, but age 70 cannot cut the tail short.
+        // Only black holes use a brief tail without a live carrier.
         fragColor=encodedField(p[axis],x);
     } else {
         int camera=cameraRow();

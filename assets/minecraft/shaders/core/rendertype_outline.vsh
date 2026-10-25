@@ -35,7 +35,7 @@ void main() {
             if (blackHoleSlot >= 0) {
                 blackHoleKind = fract(UV0.y * float(textureSize(Sampler0, 0).y)) > 0.5 ? 1 : 0;
             }
-            if (nuclearSlot >= 0) blackHoleKind = 2;
+            if (nuclearSlot >= 0) blackHoleKind = lbc_nuclear_fade_carrier(Color.rgb) ? 3 : 2;
             int field = tag / 2;
             if (field < 12) {
                 // CPU-transformed reference points already include scale,
@@ -52,7 +52,7 @@ void main() {
             vec2 edge = vec2((corner == 0 || corner == 3) ? 0.0 : 1.0,
                              corner < 2 ? 0.0 : 1.0);
             float row = blackHoleSlot >= 0 ? float(LBC_BH_FIRST_ROW + blackHoleSlot) : 0.0;
-            if (nuclearSlot >= 0) row = float(LBC_NUCLEAR_FIRST_ROW + nuclearSlot);
+            if (nuclearSlot >= 0) row = float((blackHoleKind == 3 ? LBC_NUCLEAR_FADE_FIRST_ROW : LBC_NUCLEAR_FIRST_ROW) + nuclearSlot);
             vec2 pixel = vec2(float(tag), row) + edge;
             gl_Position = vec4(pixel / ScreenSize * 2.0 - 1.0, 0.0, 1.0);
         } else {

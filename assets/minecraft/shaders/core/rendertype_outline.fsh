@@ -20,6 +20,7 @@ void main() {
         if (zoneDataIndex == 56) {
             vec3 header = blackHoleKind >= 0 ? vec3(66, 72, 100 + blackHoleKind) : vec3(90, 66, 83);
             if (blackHoleKind == 2) header = vec3(78, 85, 75);
+            if (blackHoleKind == 3) header = vec3(78, 85, 76);
             fragColor = vec4(header / 255.0, 0.0);
         } else {
             uint bits = floatBitsToUint(zoneDataValue);

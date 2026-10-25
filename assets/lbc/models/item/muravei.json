@@ -231,10 +231,18 @@
 			}
 		}
 	],
-	"display": {
-		"head": {
-			"translation": [0, -14.75, 2],
-			"scale": [2, 2, 2]
-		}
-	}
+  "display": {
+    "head": {
+      "translation": [
+        0,
+        -7.4625,
+        1.5
+      ],
+      "scale": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    }
+  }
 }

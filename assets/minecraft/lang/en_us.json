@@ -6526,5 +6526,11 @@
   "death.fell.finish": "%1$s fell too far and was finished by %2$s",
   "death.fell.finish.item": "%1$s fell too far and was finished by %2$s using %3$s",
   "death.fell.killer": "%1$s was doomed to fall",
-  "skywars2.game.admin_only": "Only players with the admin tag can control the match while an admin is online."
+  "skywars2.game.admin_only": "Only players with the admin tag can control the match while an admin is online.",
+  "skywars2.gui.source.page1000.s12-5.part0": "TNT damage - protection 5",
+  "skywars2.crafting.tiny_reforge": "Random Reforge",
+  "skywars2.crafting.tiny_reforge.lore": "The result is rolled on taking. 30% chance to consume the wand.",
+  "skywars2.crafting.reroll_machine.lore": "The result is rolled on taking. Costs 5000 mana per transformed item.",
+  "mode_alternating": "Alternating",
+  "welcome_to_single_use_academy": "Welcome to Underground Academy! Here you can upgrade one of your wands, but only a single one! Right-Click with wand in your hand!"
 }

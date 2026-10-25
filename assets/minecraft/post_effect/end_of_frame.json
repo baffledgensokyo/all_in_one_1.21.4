@@ -383,6 +383,27 @@
         }
       ],
       "output": "minecraft:main"
+    },
+    {
+      "vertex_shader": "lbc:post/nuclear_heat_many",
+      "fragment_shader": "lbc:post/nuclear_heat_many",
+      "inputs": [
+        {
+          "sampler_name": "NuclearData",
+          "target": "effect_state"
+        },
+        {
+          "sampler_name": "Scene",
+          "target": "black_hole_trace",
+          "bilinear": true
+        },
+        {
+          "sampler_name": "SceneDepth",
+          "target": "minecraft:main",
+          "use_depth_buffer": true
+        }
+      ],
+      "output": "minecraft:main"
     }
   ]
 }
