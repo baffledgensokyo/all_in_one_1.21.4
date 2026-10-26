@@ -1,6 +1,14 @@
 {
     "targets": {
         "swap": {},
+        "blur_h": {
+            "width": 640,
+            "height": 360
+        },
+        "blur_v": {
+            "width": 640,
+            "height": 360
+        },
         "next_state": {
             "width": 3,
             "height": 1
@@ -10,6 +18,10 @@
             "height": 1,
             "persistent": true,
             "clear_color": 0
+        },
+        "scene_small": {
+            "width": 640,
+            "height": 360
         }
     },
     "passes": [
@@ -51,6 +63,76 @@
         },
         {
             "vertex_shader": "minecraft:core/screenquad",
+            "fragment_shader": "lbc:post/scope_downsample",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "minecraft:main",
+                    "bilinear": true
+                }
+            ],
+            "output": "scene_small"
+        },
+        {
+            "vertex_shader": "minecraft:core/screenquad",
+            "fragment_shader": "lbc:post/scope_blur",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "scene_small",
+                    "bilinear": true
+                }
+            ],
+            "output": "blur_h",
+            "uniforms": {
+                "BlurConfig": [
+                    {
+                        "name": "BlurDir",
+                        "type": "vec2",
+                        "value": [
+                            1.0,
+                            0.0
+                        ]
+                    },
+                    {
+                        "name": "Radius",
+                        "type": "float",
+                        "value": 1.0
+                    }
+                ]
+            }
+        },
+        {
+            "vertex_shader": "minecraft:core/screenquad",
+            "fragment_shader": "lbc:post/scope_blur",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "blur_h",
+                    "bilinear": true
+                }
+            ],
+            "output": "blur_v",
+            "uniforms": {
+                "BlurConfig": [
+                    {
+                        "name": "BlurDir",
+                        "type": "vec2",
+                        "value": [
+                            0.0,
+                            1.0
+                        ]
+                    },
+                    {
+                        "name": "Radius",
+                        "type": "float",
+                        "value": 1.0
+                    }
+                ]
+            }
+        },
+        {
+            "vertex_shader": "minecraft:core/screenquad",
             "fragment_shader": "lbc:post/zoom",
             "inputs": [
                 {
@@ -60,16 +142,16 @@
                 {
                     "sampler_name": "Animation",
                     "target": "animation"
+                },
+                {
+                    "sampler_name": "Blur",
+                    "target": "blur_v",
+                    "bilinear": true
                 }
             ],
             "output": "swap",
             "uniforms": {
                 "ZoomConfig": [
-                    {
-                        "name": "ZoomFactor",
-                        "type": "float",
-                        "value": 4.0
-                    },
                     {
                         "name": "Direction",
                         "type": "float",
@@ -79,6 +161,16 @@
                         "name": "Duration",
                         "type": "float",
                         "value": 0.25
+                    },
+                    {
+                        "name": "Style",
+                        "type": "float",
+                        "value": 0.0
+                    },
+                    {
+                        "name": "VerticalFov",
+                        "type": "float",
+                        "value": 70.0
                     }
                 ]
             }
