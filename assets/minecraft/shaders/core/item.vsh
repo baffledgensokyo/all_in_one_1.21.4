@@ -39,6 +39,9 @@ layout(location = 6) out vec2 texCoordGlint;
 #endif
 layout(location = 9) flat out int zoneMaterial;
 layout(location = 10) out vec3 zoneRelativePosition;
+layout(location = 11) out float meditationWarningFade;
+layout(location = 12) out float meditationWarningProgress;
+layout(location = 13) out vec2 meditationWarningQuadCoord;
 
 void main() {
     gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
@@ -48,12 +51,20 @@ void main() {
     cylindricalVertexDistance = fog_cylindrical_distance(Position);
     #endif
     vertexColor = minecraft_mix_light(Light0_Direction, Light1_Direction, Normal, Color);
+    meditationWarningProgress = Color.g; // independent red-beam countdown
+    meditationWarningFade = Color.r; // raw grayscale tint, BEFORE directional light
     #ifndef OIT_ALPHA_ONLY
     lightMapColor = sample_lightmap(Sampler2, UV2);
     overlayColor = texelFetch(Sampler1, UV1, 0);
     #endif
 
     texCoord0 = UV0;
+    // Native item quads retain four sequential vertex indices, even with sorted OIT indices.
+    // This local coordinate is independent of atlas placement and sprite resolution.
+    int warningCorner = gl_VertexIndex & 3;
+    meditationWarningQuadCoord = vec2(
+        (warningCorner == 2 || warningCorner == 3) ? 1.0 : 0.0,
+        (warningCorner == 1 || warningCorner == 2) ? 1.0 : 0.0);
     #ifdef GLINT
     #ifdef GLINT_SPECIAL
     texCoordGlint = (TextureMat * vec4(UV3, 0.0, 1.0)).xy;

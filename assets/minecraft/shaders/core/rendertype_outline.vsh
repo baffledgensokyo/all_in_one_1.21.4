@@ -7,6 +7,7 @@
 #include <lbc:zone_data.glsl>
 #include <lbc:black_hole_data.glsl>
 #include <lbc:nuclear_data.glsl>
+#include <lbc:signed_glow_data.glsl>
 
 layout(location = 0) in vec3 Position;
 layout(location = 1) in vec4 Color;
@@ -28,7 +29,8 @@ void main() {
     blackHoleKind = -1;
     int blackHoleSlot = lbc_bh_slot(Color.rgb);
     int nuclearSlot = lbc_nuclear_slot(Color.rgb);
-    if (blackHoleSlot >= 0 || nuclearSlot >= 0 || all(equal(ivec3(round(Color.rgb * 255.0)), LBC_ZONE_GLOW))) {
+    int signedGlowSlot=lbc_signed_glow_slot(Color.rgb);
+    if (signedGlowSlot >= 0 || blackHoleSlot >= 0 || nuclearSlot >= 0 || all(equal(ivec3(round(Color.rgb * 255.0)), LBC_ZONE_GLOW))) {
         int tag = lbc_zone_tag(UV0, textureSize(Sampler0, 0));
         if (tag < LBC_ZONE_DATA_PIXELS) {
             zoneDataIndex = tag;
@@ -36,6 +38,7 @@ void main() {
                 blackHoleKind = fract(UV0.y * float(textureSize(Sampler0, 0).y)) > 0.5 ? 1 : 0;
             }
             if (nuclearSlot >= 0) blackHoleKind = lbc_nuclear_fade_carrier(Color.rgb) ? 3 : 2;
+            if(signedGlowSlot>=0) blackHoleKind=4;
             int field = tag / 2;
             if (field < 12) {
                 // CPU-transformed reference points already include scale,
@@ -53,6 +56,7 @@ void main() {
                              corner < 2 ? 0.0 : 1.0);
             float row = blackHoleSlot >= 0 ? float(LBC_BH_FIRST_ROW + blackHoleSlot) : 0.0;
             if (nuclearSlot >= 0) row = float((blackHoleKind == 3 ? LBC_NUCLEAR_FADE_FIRST_ROW : LBC_NUCLEAR_FIRST_ROW) + nuclearSlot);
+            if(signedGlowSlot>=0) row=float(LBC_SIGNED_GLOW_FIRST_ROW+signedGlowSlot);
             vec2 pixel = vec2(float(tag), row) + edge;
             gl_Position = vec4(pixel / ScreenSize * 2.0 - 1.0, 0.0, 1.0);
         } else {

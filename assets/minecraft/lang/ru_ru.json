@@ -6587,5 +6587,10 @@
   "libspell_gaycaster_purple": "Фиолетовая радуга",
   "libspell_gaycaster_purple.lore": "Пустотный теневой луч тьмы",
   "libspell_snow": "Зимнее заклинание",
-  "libspell_snow.lore": "Создаёт снежное облако над вами"
+  "libspell_snow.lore": "Создаёт снежное облако над вами",
+  "skywars2.banhammer.kick": "Вас забанили за куколдство!",
+  "lbc.adv.legends.chef_label": "КУХНЯ 52                      ",
+  "lbc.adv.legends.chef_label.lore": "Налепите метку фарти гоно фарта на Шефа.",
+  "libspell_snow_academy": "Направленный Снегопад",
+  "libspell_snow_academy.lore": "Создаёт снегопад там, куда вы смотрите"
 }

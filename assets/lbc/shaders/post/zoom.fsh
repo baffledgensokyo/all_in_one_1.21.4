@@ -53,13 +53,11 @@ void main() {
     scopePaint(color,pale,scopeStroke(edge+4.0*s,1.3*s)*0.65,amount);
     scopePaint(color,accent,scopeStroke(edge-5.0*s,2.0*s),amount);
 
-    vec2 pixel=floor(gl_FragCoord.xy);
-    vec2 lineStart=floor(OutSize*0.5)-1.0;
-    bool vertical=pixel.x>=lineStart.x&&pixel.x<lineStart.x+2.0;
-    bool horizontal=pixel.y>=lineStart.y&&pixel.y<lineStart.y+2.0;
+    // Symmetric coverage also centers a two-pixel line on odd-sized viewports.
+    vec2 line=1.0-smoothstep(vec2(0.5),vec2(1.5),abs(p));
     if(!magnum) {
         // SLG: long etched cross, crimson acquisition brackets and steel corner caps.
-        float cross=float(vertical||horizontal)*inner;
+        float cross=max(line.x,line.y)*inner;
         scopePaint(color,vec3(0.025),cross,amount*0.85);
         float brackets=scopeStroke(scopeBox(p,vec2(16.0*s)),2.0*s);
         brackets*=float(min(abs(p.x),abs(p.y))>7.0*s);
@@ -77,8 +75,8 @@ void main() {
         }
     } else {
         // Magnum: interrupted cyan cross and angular lock-on diamond.
-        float arms=float((vertical&&abs(p.y)>10.0*s&&abs(p.y)<30.0*s)||
-                         (horizontal&&abs(p.x)>10.0*s&&abs(p.x)<36.0*s));
+        float arms=max(line.x*float(abs(p.y)>10.0*s&&abs(p.y)<30.0*s),
+                       line.y*float(abs(p.x)>10.0*s&&abs(p.x)<36.0*s));
         scopePaint(color,metal,scopeStroke(length(p)-4.0*s,3.0*s),amount);
         scopePaint(color,pale,scopeStroke(length(p)-3.0*s,1.0*s),amount);
         scopePaint(color,accent,arms,amount);

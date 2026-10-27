@@ -6587,5 +6587,10 @@
   "libspell_gaycaster_purple": "Purplebow",
   "libspell_gaycaster_purple.lore": "Void ray",
   "libspell_snow": "Winter cloud",
-  "libspell_snow.lore": "Creates a freezing cloud above you"
+  "libspell_snow.lore": "Creates a freezing cloud above you",
+  "skywars2.banhammer.kick": "You were banned for being a cuckold!",
+  "lbc.adv.legends.chef_label": "KITCHEN 52                ",
+  "lbc.adv.legends.chef_label.lore": "Slap the Chef with 'Fatie gonna Fart' banana mark.",
+  "libspell_snow_academy": "Snowcloud",
+  "libspell_snow_academy.lore": "Creates freezing cloud where you are looking at."
 }

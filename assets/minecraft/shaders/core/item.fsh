@@ -6,6 +6,7 @@
 #include <minecraft:dynamictransforms.glsl>
 #include <minecraft:oit.glsl>
 #include <lbc:zone_window.glsl>
+#include <lbc:meditation_warning.glsl>
 
 uniform sampler2D Sampler0;
 
@@ -28,6 +29,9 @@ layout(location = 6) in vec2 texCoordGlint;
 #endif
 layout(location = 9) flat in int zoneMaterial;
 layout(location = 10) in vec3 zoneRelativePosition;
+layout(location = 11) in float meditationWarningFade;
+layout(location = 12) in float meditationWarningProgress;
+layout(location = 13) in vec2 meditationWarningQuadCoord;
 
 #ifndef OIT_ALPHA_ONLY
 layout(location = 0) out vec4 fragColor;
@@ -64,23 +68,34 @@ vec4 calculateFinalColor(vec4 color, bool bypassLighting, bool bypassFog) {
 void main() {
     vec4 rawColor = texture(Sampler0, texCoord0);
     int alphaMarker = int(round(rawColor.a * 255.0));
+    float meditationBase = lbc_meditation_warning_base_alpha(rawColor);
+    bool isMeditationWarning = meditationBase >= 0.0;
     bool isZoneBorder = zoneMaterial != 0;
-    bool bypassLighting = isZoneBorder || alphaMarker == 254 || alphaMarker == 130;
+    bool bypassLighting = isMeditationWarning || isZoneBorder || alphaMarker == 254 || alphaMarker == 130;
     bool bypassFog = bypassLighting;
     // Only the requested 1x1, 10%-opaque red fallback is drawn here.
     // All energy detail belongs to the post effect.
-    vec4 color = isZoneBorder ? vec4(1.0, 0.0, 0.0, 26.0 / 255.0) : rawColor;
+    vec4 color = isMeditationWarning
+        ? vec4(lbc_meditation_warning_color(rawColor, meditationWarningProgress), meditationBase * clamp(meditationWarningFade, 0.0, 1.0) * ColorModulator.a)
+        : (isZoneBorder ? vec4(1.0, 0.0, 0.0, 26.0 / 255.0) : rawColor);
+    if (lbc_meditation_warning_is_ring(rawColor)) {
+        // Double-sided model: draw only the facing quad, also on no-cull layers.
+        if (!gl_FrontFacing) discard;
+        color.a *= lbc_meditation_warning_ring_coverage(meditationWarningQuadCoord);
+    }
     if (isZoneBorder) {
         color.a *= lbc_zone_window(zoneRelativePosition);
         if (color.a <= 0.0) discard;
     }
     #ifdef ALPHA_CUTOUT
-    if (color.a < (isZoneBorder ? 0.005 : ALPHA_CUTOUT)) {
+    if (color.a < (isMeditationWarning ? 0.00001 : (isZoneBorder ? 0.005 : ALPHA_CUTOUT))) {
         discard;
     }
     #endif
 
-    if (isZoneBorder) {
+    if (isMeditationWarning) {
+        if (color.a <= 0.00001) discard;
+    } else if (isZoneBorder) {
         color.a *= ColorModulator.a;
     } else if (alphaMarker == 254) {
         color = vec4(rawColor.rgb, 1.0);

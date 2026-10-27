@@ -31,7 +31,7 @@ void main(){
         ivec3(180,53,255),
         ivec3(122,42,232)
     );
-    
+
     for(int i = 0; i < GLOW_COLORS; i++) {
         // Red energy is continuous. Exact RGB equality made its glow toggle
         // when movement/filtering changed a channel by a single byte.
