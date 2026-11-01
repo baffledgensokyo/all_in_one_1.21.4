@@ -15,6 +15,7 @@ layout(location = 21) flat out vec4 nuclearAges;
 layout(location = 23) flat out vec4 nuclearSeeds;
 layout(location = 24) flat out mat4 nuclearVP;
 layout(location = 28) flat out vec4 nuclearFades;
+layout(location = 29) flat out vec4 nuclearDissolves;
 
 #else
 #ifdef LBC_NUCLEAR_MANY
@@ -28,6 +29,7 @@ float nuclearAges[LBC_NUCLEAR_TRACE_COUNT];
 float nuclearSeeds[LBC_NUCLEAR_TRACE_COUNT];
 mat4 nuclearVP;
 float nuclearFades[LBC_NUCLEAR_TRACE_COUNT];
+float nuclearDissolves[LBC_NUCLEAR_TRACE_COUNT];
 
 #endif
 #ifdef LBC_NUCLEAR_MANY
@@ -98,7 +100,7 @@ void main() {
     nuclearInverseVP = mat4(1.0);
     nuclearVP = mat4(1.0);
     for (int i = 0; i < LBC_NUCLEAR_TRACE_COUNT; i++) {
-        nuclearAges[i]=0.0;nuclearSeeds[i]=0.0;nuclearFades[i]=1.0;
+        nuclearAges[i]=0.0;nuclearSeeds[i]=0.0;nuclearFades[i]=1.0;nuclearDissolves[i]=0.0;
         nuclearObjects[i] = vec4(0.0);
         nuclearRotations[i] = mat3(1.0);
     }
@@ -136,6 +138,9 @@ void main() {
         nuclearSeeds[nuclearCount] = float(slot) * 13.71;
 #ifdef LBC_EFFECT_HISTORY
         nuclearFades[nuclearCount] = fade;
+        uvec4 dissolveBytes=uvec4(round(texelFetch(NuclearDataSampler,ivec2(76,row),0)*255.0));
+        nuclearDissolves[nuclearCount]=clamp(uintBitsToFloat(dissolveBytes.x|(dissolveBytes.y<<8u)|
+            (dissolveBytes.z<<16u)|(dissolveBytes.w<<24u)),0.0,1.0);
 #endif
         }
 #ifdef LBC_NUCLEAR_MANY

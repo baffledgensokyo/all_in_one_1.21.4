@@ -6592,5 +6592,6 @@
   "lbc.adv.legends.chef_label": "KITCHEN 52                ",
   "lbc.adv.legends.chef_label.lore": "Slap the Chef with 'Fatie gonna Fart' banana mark.",
   "libspell_snow_academy": "Snowcloud",
-  "libspell_snow_academy.lore": "Creates freezing cloud where you are looking at."
+  "libspell_snow_academy.lore": "Creates freezing cloud where you are looking at.",
+  "lbc.swapper.charge_failed": "Swap cancelled! You must stay on the same place while using it!"
 }

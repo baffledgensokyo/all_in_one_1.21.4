@@ -15,15 +15,24 @@ void scopePaint(inout vec3 color, vec3 ink, float coverage, float opacity) {
     color=mix(color,ink,clamp(coverage*opacity,0.0,1.0));
 }
 float scopeDigit(vec2 p,int digit,float scale) {
-    // 3x5 bitmaps, left to right and top to bottom.
-    const uint glyphs[10]=uint[](31599u,11415u,29671u,29647u,23497u,31183u,31215u,29257u,31727u,31695u);
-    ivec2 c=ivec2(floor(p/scale));
-    if(c.x<0||c.x>=3||c.y<0||c.y>=5)return 0.0;
-    return float((glyphs[digit]>>uint((4-c.y)*3+2-c.x))&1u);
+    // Rounded vector seven-segment digits: smooth coverage at any framebuffer size.
+    const uint glyphs[10]=uint[](63u,6u,91u,79u,102u,109u,125u,7u,127u,111u);
+    const vec2 start[7]=vec2[](vec2(0,6),vec2(4,6),vec2(4,3),vec2(0,0),
+                               vec2(0,0),vec2(0,3),vec2(0,3));
+    const vec2 end[7]=vec2[](vec2(4,6),vec2(4,3),vec2(4,0),vec2(4,0),
+                             vec2(0,3),vec2(0,6),vec2(4,3));
+    float ink=0.0;
+    for(int i=0;i<7;i++)if((glyphs[digit]&(1u<<uint(i)))!=0u)
+        ink=max(ink,scopeLine(p,start[i]*scale,end[i]*scale,max(1.6,0.8*scale)));
+    return ink;
 }
 float scopeNumber(vec2 p,int value,float scale) {
-    float ink=scopeDigit(p,value/10,scale);
-    ink=max(ink,scopeDigit(p-vec2(4.0*scale,0.0),value%10,scale));
-    float degree=scopeStroke(length(p-vec2(9.0,4.0)*scale)-scale,scale*0.7);
+    float advance=value>=10?6.0:0.0;
+    float ink=value>=10?scopeDigit(p,value/10,scale):0.0;
+    ink=max(ink,scopeDigit(p-vec2(advance*scale,0.0),value%10,scale));
+    float degree=scopeStroke(length(p-vec2(advance+6.8,5.2)*scale)-0.8*scale,max(1.3,scale*0.65));
     return max(ink,degree);
+}
+void scopeLabel(inout vec3 color,vec2 p,int value,float scale,vec3 ink,float opacity) {
+    scopePaint(color,ink,scopeNumber(p,value,scale),opacity);
 }

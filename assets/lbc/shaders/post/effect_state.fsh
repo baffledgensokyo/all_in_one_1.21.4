@@ -10,7 +10,7 @@ layout(location = 0) out vec4 fragColor;
 // Tiny persistent object records, never previous world RGB. Durations are
 // seconds and are independent of FPS, particle age and display scale.
 const float BH_FADE_SECONDS=0.20;
-const float NUCLEAR_FADE_OUT=4.0;
+const float NUCLEAR_FADE_OUT=12.0;
 const float BH_SPAWN_BACK=1.70158; // About 10% overshoot, then settle.
 const ivec2 EFFECT_SIZE=ivec2(171,LBC_EFFECT_ROWS);
 
@@ -121,6 +121,16 @@ void main() {
         live=currentRow(row+LBC_NUCLEAR_COUNT);
         fading=live>=0;
     }
+    float nuclearVisibility=1.0,nuclearDuration=NUCLEAR_FADE_OUT;
+    if(nuclear&&live>=0) {
+        vec3 origin=point(0,live,true);
+        float ratio=length(point(3,live,true)-origin)/max(length(point(1,live,true)-origin),0.0001);
+        // Fade-only duration channel: Z/R = 2 + seconds. Legacy Z/R=1..2
+        // still controls visibility; changing duration never stretches smoke.
+        bool customDuration=fading&&ratio>=2.5;
+        nuclearVisibility=customDuration?1.0:clamp(2.0-ratio,0.0,1.0);
+        if(customDuration)nuclearDuration=clamp(ratio-2.0,0.5,120.0);
+    }
     bool wasAlive=history&&header(ivec3(round(texelFetch(HistorySampler,ivec2(56,row),0).rgb*255.0)),row);
     float progress=wasAlive?oldFloat(ivec2(57,row)):0.0;
     if(isnan(progress)||isinf(progress))progress=0.0;
@@ -139,7 +149,7 @@ void main() {
         if(live<0)progress=0.0;
         else if(!fading)progress=1.0;
         else if(!wasAlive||oldFloat(ivec2(59,row))<1.5)progress=1.0;
-        else progress=max(progress-dt/NUCLEAR_FADE_OUT,0.0);
+        else progress=max(progress-dt/nuclearDuration,0.0);
     }
     else if(live>=0)progress=min(progress+(wasAlive?dt/BH_FADE_SECONDS:0.0),1.0);
     else {
@@ -148,9 +158,12 @@ void main() {
         if(wasAlive&&oldFloat(ivec2(59,row))>0.5){progress=1.0;previousProgress=1.0;}
         progress=max(progress-dt/BH_FADE_SECONDS,0.0);
     }
+    float dissolve=fading?1.0-progress:0.0;
+    // Keep the cap fully opaque while the clearing front climbs the stem.
+    float opacityProgress=fading?min(progress/(1.0-LBC_NUCLEAR_DISSOLVE_SPLIT),1.0):progress;
     if(x==57) {fragColor=packBits(floatBitsToUint(progress));return;}
     if(x==59) {fragColor=packBits(floatBitsToUint(live>=0?(fading?2.0:1.0):0.0));return;}
-    if(nuclear&&x>=60&&x<=75&&(live>=0||wasAlive&&progress>0.0)) {
+    if(nuclear&&x>=60&&x<=76&&live>=0) {
         // Prepare exact float object data once per frame for the 5..16 path.
         // The fragment stage fetches only its current object; no huge arrays
         // of matrices need to cross the vertex/fragment interface.
@@ -168,9 +181,9 @@ void main() {
             value=rotation[(x-64)/3][(x-64)%3];
         } else if(x==73)value=clamp(length(axisY)-1.0,0.0,120.0);
         else if(x==74) {
-            float visibility=clamp(2.0-length(axisZ)/max(radius,0.0001),0.0,1.0);
-            value=nuclearOpacity(progress,visibility);
-        } else value=float(row-LBC_NUCLEAR_FIRST_ROW)*13.71;
+            value=nuclearOpacity(opacityProgress,nuclearVisibility);
+        } else if(x==75)value=float(row-LBC_NUCLEAR_FIRST_ROW)*13.71;
+        else value=dissolve;
         fragColor=packBits(floatBitsToUint(value));return;
     }
     if(x>58||(live<0&&(!wasAlive||progress<=0.0)))return;
@@ -181,20 +194,20 @@ void main() {
         int source=live>=0?live:row;
         vec3 origin=point(0,source,live>=0);
         float ratio=length(point(3,source,live>=0)-origin)/max(length(point(1,source,live>=0)-origin),0.0001);
-        float visibility=clamp(2.0-ratio,0.0,1.0);
+        float visibility=nuclear?nuclearVisibility:clamp(2.0-ratio,0.0,1.0);
         float fade=smoothstep(0.0,1.0,progress);
         if(x==58) {
             // Store radius in a float: RGBA8 alpha cannot carry overshoot >1.
             // If removed during the bounce, contract from the actual last size.
             float size=live>=0?holeArrival(progress)*visibility:
                 oldFloat(ivec2(58,row))*fade/max(smoothstep(0.0,1.0,previousProgress),1e-6);
-            fragColor=packBits(floatBitsToUint(nuclear?fade*visibility:max(size,0.0)));
+            fragColor=packBits(floatBitsToUint(nuclear?nuclearOpacity(opacityProgress,visibility):max(size,0.0)));
         } else {
             // Normalize both nuclear inputs to the existing NUK output ABI.
             // The volume, resolve and heat shaders keep exactly their design.
             vec3 bytes=nuclear?vec3(78,85,75)/255.0:
                 (live>=0?vec3(rawBytes(x,live))/255.0:texelFetch(HistorySampler,ivec2(x,row),0).rgb);
-            fragColor=vec4(bytes,nuclear?nuclearOpacity(progress,visibility):fade*visibility);
+            fragColor=vec4(bytes,nuclear?nuclearOpacity(opacityProgress,visibility):fade*visibility);
         }
     } else if(live>=0)fragColor=vec4(vec3(rawBytes(x,live))/255.0,1.0);
     else if(x<24) {

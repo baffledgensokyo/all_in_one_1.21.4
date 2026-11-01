@@ -10,6 +10,8 @@ const int LBC_NUCLEAR_FADE_FIRST_ROW = LBC_NUCLEAR_FIRST_ROW + LBC_NUCLEAR_COUNT
 const int LBC_NUCLEAR_DATA_ROWS = 2 * (LBC_NUCLEAR_FADE_FIRST_ROW + LBC_NUCLEAR_COUNT);
 const int LBC_EFFECT_ROWS = 2 * (LBC_NUCLEAR_FIRST_ROW + LBC_NUCLEAR_COUNT);
 const ivec3 LBC_NUCLEAR_TINT = ivec3(251, 254, 255);
+// First clear the stem; reserve most of the exit for the suspended cap.
+const float LBC_NUCLEAR_DISSOLVE_SPLIT = 0.35;
 
 int lbc_nuclear_slot(vec3 color) {
     ivec3 bytes = ivec3(round(color * 255.0));

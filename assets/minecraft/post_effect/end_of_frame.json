@@ -89,11 +89,15 @@
     },
     {
       "vertex_shader": "minecraft:core/screenquad",
-      "fragment_shader": "minecraft:post/bloom_sample",
+      "fragment_shader": "lbc:post/polymorph_bloom_sample",
       "inputs": [
         {
           "sampler_name": "Diffuse",
           "target": "final"
+        },
+        {
+          "sampler_name": "PolymorphOutline",
+          "target": "minecraft:entity_outline"
         }
       ],
       "output": "bloomh",

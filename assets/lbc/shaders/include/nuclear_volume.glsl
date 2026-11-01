@@ -45,6 +45,21 @@ vec3 nuclearDimensions(float age) {
     return mix(vec3(0.22,0.25,0.20),vec3(52.0,60.0,32.0)/36.0,growth);
 }
 
+// World-anchored, turbulent clearing front. The stem disappears first while
+// the suspended cap retains its density; then the front eats into the cap.
+float nuclearDissolve(vec3 p,vec3 dim,float phase,float time,float seed) {
+    if(phase<=0.0)return 1.0;
+    if(phase>=1.0)return 0.0;
+    float capBottom=dim.y-dim.z*0.80;
+    float cloudPhase=smoothstep(LBC_NUCLEAR_DISSOLVE_SPLIT,1.0,phase);
+    float front=phase<LBC_NUCLEAR_DISSOLVE_SPLIT?
+        mix(-1.2,capBottom,smoothstep(0.0,LBC_NUCLEAR_DISSOLVE_SPLIT,phase)):
+        mix(capBottom,dim.y+dim.z+0.35,cloudPhase);
+    float billows=(nuclearNoise(p*3.2-vec3(0.0,time*0.25,0.0)+seed)-0.5)*0.5;
+    float width=mix(0.14,0.38,cloudPhase);
+    return smoothstep(front-width,front+width,p.y+billows);
+}
+
 float nuclearSmoothUnion(float a, float b, float radius) {
     float h = clamp(0.5 + 0.5 * (b-a) / radius, 0.0, 1.0);
     return mix(b,a,h) - radius * h * (1.0-h);

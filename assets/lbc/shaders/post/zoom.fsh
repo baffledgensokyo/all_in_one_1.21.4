@@ -37,7 +37,7 @@ void main() {
     vec2 p=gl_FragCoord.xy-OutSize*0.5;
     bool magnum=Style>0.5;
     float halfSize=mix(max(OutSize.x,OutSize.y)+unit,
-                       unit*(magnum?0.455:0.365),amount);
+                       unit*(magnum?0.455*0.95:0.365),amount);
     float edge=magnum?(abs(p.x)+abs(p.y)-halfSize)*0.70710678:
                        scopeBox(p,vec2(halfSize));
     float outside=smoothstep(-3.0*s,3.0*s,edge);
@@ -82,49 +82,40 @@ void main() {
         scopePaint(color,accent,arms,amount);
         float lock=scopeStroke((abs(p.x)+abs(p.y)-19.0*s)*0.70710678,1.5*s);
         scopePaint(color,accent,lock,amount*0.9);
+        float fontSize=max(2.0,3.0*s);
+        // Three simple reference marks above aim. Shot four follows three kicks.
         for(int i=0;i<3;i++) {
-            int degrees=(i+1)*5;
+            int degrees=(i+1)*3;
             float y=OutSize.y*0.5*tan(radians(float(degrees)))/
                     tan(radians(clamp(VerticalFov,1.0,175.0))*0.5);
             vec3 mark=i==0?vec3(186,115,245)/255.0:
                       i==1?vec3(94,193,199)/255.0:vec3(192,197,205)/255.0;
-            // True angular coordinates. If outside the aperture, show a separate
-            // edge warning with an upward arrow, never a false on-screen tick.
-            bool offscreen=y>halfSize-80.0*s;
+            float available=halfSize-y-6.0*s;
             vec2 q=p-vec2(0.0,y);
-            if(offscreen) {
-                q=p-vec2(halfSize*0.55,-halfSize*0.18-float(i)*23.0*s);
-                float arrow=max(scopeLine(q,vec2(-5,-1)*s,vec2(0,4)*s,1.5*s),
-                                scopeLine(q,vec2(0,4)*s,vec2(5,-1)*s,1.5*s));
+            if(available<2.0*s) {
+                // Separate warning only when the actual angle is outside the lens.
+                q=p-vec2(halfSize*0.30,-halfSize*0.06-float(i)*11.0*fontSize);
+                float arrow=max(scopeLine(q,vec2(-5,-1)*s,vec2(0,4)*s,max(1.5,1.5*s)),
+                                scopeLine(q,vec2(0,4)*s,vec2(5,-1)*s,max(1.5,1.5*s)));
                 scopePaint(color,mark,arrow,amount);
-                float plate=1.0-smoothstep(-0.5,0.5,
-                    scopeBox(q-vec2(19.5,0)*s,vec2(11,6)*s));
-                scopePaint(color,metal,plate,amount*0.9);
-                float label=scopeNumber(q-vec2(11.0,-4.0)*s,degrees,1.5*s);
-                scopePaint(color,mark,label,amount);
-                if(i==1) {
-                    scopePaint(color,vec3(248,221,114)/255.0,
-                        scopeLine(q,vec2(11,-8)*s,vec2(15,-8)*s,2.0*s),amount);
-                    scopePaint(color,vec3(91,188,244)/255.0,
-                        scopeLine(q,vec2(17,-8)*s,vec2(21,-8)*s,2.0*s),amount);
-                    scopePaint(color,vec3(106,178,91)/255.0,
-                        scopeLine(q,vec2(23,-8)*s,vec2(27,-8)*s,2.0*s),amount);
-                }
+                scopeLabel(color,q-vec2(max(11.0*s,5.0*fontSize),-3.0*fontSize),
+                           degrees,fontSize,mark,amount);
                 continue;
             }
-            float tick=scopeLine(q,vec2(-22.0*s,0),vec2(22.0*s,0),2.0);
-            float outline=scopeLine(q,vec2(-23.0*s,0),vec2(23.0*s,0),4.0);
+            // Slightly shorten the topmost tick if it is close to the diamond tip.
+            float halfWidth=min(22.0*s,available);
+            float tick=scopeLine(q,vec2(-halfWidth,0),vec2(halfWidth,0),2.0);
+            float outline=scopeLine(q,vec2(-halfWidth-s,0),vec2(halfWidth+s,0),4.0);
             scopePaint(color,metal,outline,amount);
             if(i==1) {
                 mark=q.x< -7.0*s?vec3(248,221,114)/255.0:
                      q.x<7.0*s?vec3(91,188,244)/255.0:vec3(106,178,91)/255.0;
             }
             scopePaint(color,mark,tick,amount);
-            float plate=1.0-smoothstep(-0.5,0.5,
-                scopeBox(q-vec2(37.5,0)*s,vec2(11,6)*s));
-            scopePaint(color,metal,plate,amount*0.9);
-            float label=scopeNumber(q-vec2(29.0,-4.0)*s,degrees,1.5*s);
-            scopePaint(color,i==1?accent:mark,label,amount);
+            vec2 labelOrigin=vec2(29.0*s,-3.0*fontSize);
+            if(y+29.0*s+12.0*fontSize>halfSize-6.0*s)
+                labelOrigin=vec2(-3.8*fontSize,-10.0*fontSize);
+            scopeLabel(color,q-labelOrigin,degrees,fontSize,i==1?accent:mark,amount);
         }
         // Short illuminated divisions on the lower diagonal edges.
         for(int i=1;i<=4;i++) {

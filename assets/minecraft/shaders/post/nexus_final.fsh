@@ -3,6 +3,8 @@
 #include <minecraft:globals.glsl>
 
 #define WIDTH 1
+// Half the previous scanline darkening; keep their width and animation.
+const float SCANLINE_DARKENING = 0.15;
 uniform sampler2D DiffuseSampler;
 uniform sampler2D NexusOutlineSampler;
 uniform sampler2D MainDepthSampler;
@@ -29,7 +31,7 @@ void main() {
         float phase = fract(GameTime * 12.0);
         int scanline = int(texCoord.y * ScreenSize.y + phase * ScreenSize.y);
         if ((scanline / 4) % 2 == 0) {
-            luminance -= 0.3;
+            luminance -= SCANLINE_DARKENING;
         }
         color = mix(vec4(0.0, 0.082, 0.308, 1.0), vec4(0.169, 0.847, 0.576, 1.0), luminance);
     }

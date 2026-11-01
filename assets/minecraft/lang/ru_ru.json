@@ -6592,5 +6592,6 @@
   "lbc.adv.legends.chef_label": "КУХНЯ 52                      ",
   "lbc.adv.legends.chef_label.lore": "Налепите метку фарти гоно фарта на Шефа.",
   "libspell_snow_academy": "Направленный Снегопад",
-  "libspell_snow_academy.lore": "Создаёт снегопад там, куда вы смотрите"
+  "libspell_snow_academy.lore": "Создаёт снегопад там, куда вы смотрите",
+  "lbc.swapper.charge_failed": "Подмена не удалась! Вы НЕ ДОЛЖНЫ двигаться, пока подмена заряжается!"
 }

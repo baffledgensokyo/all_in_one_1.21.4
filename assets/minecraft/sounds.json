@@ -965,5 +965,21 @@
                 "stream": false
             }
         ]
+    },
+    "lbcsounds.swap_charge": {
+        "sounds": [
+            {
+                "name": "lbcsounds/swap_charge",
+                "stream": false
+            }
+        ]
+    },
+    "lbcsounds.swap_go": {
+        "sounds": [
+            {
+                "name": "lbcsounds/swap_go",
+                "stream": false
+            }
+        ]
     }
 }

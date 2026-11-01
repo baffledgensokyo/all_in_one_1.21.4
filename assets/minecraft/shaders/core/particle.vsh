@@ -6,7 +6,6 @@
 #include <minecraft:projection.glsl>
 
 #include <minecraft:sample_lightmap.glsl>
-#include <minecraft:globals.glsl>
 layout(location = 0) in vec3 Position;
 layout(location = 1) in vec2 UV0;
 layout(location = 2) in vec4 Color;
@@ -20,36 +19,6 @@ layout(location = 2) out vec2 texCoord0;
 layout(location = 3) out vec4 vertexColor;
 layout(location = 4) flat out int customParticle;
 layout(location = 5) out vec2 particleCoord;
-
-vec4 PositionSwitch(){
-
-    // Four pixels survive resizing and OIT compositing; end_of_frame reads their centre.
-    vec2 pixel = vec2(-1.0) + 8.0 / max(ScreenSize, vec2(1.0));
-#ifdef RENDERPEARL_DEPTH_IS_ZERO_TO_ONE
-    const float markerDepth = 0.0;
-#else
-    const float markerDepth = -1.0;
-#endif
-    vec4 returnPosition = vec4(0);
-    switch(gl_VertexIndex % 4){
-                case 0:
-                returnPosition = vec4(pixel.x,-1.0,markerDepth,1.0);
-                break;
-
-                case 1:
-                returnPosition = vec4(pixel,markerDepth,1.0);
-                break;
-
-                case 2:
-                returnPosition = vec4(-1.0,pixel.y,markerDepth,1.0);
-                break;
-
-                case 3:
-                returnPosition = vec4(-1.0,-1.0,markerDepth,1.0);
-                break;
-             }
-        return returnPosition;
-}
 
 void main() {
 
@@ -82,11 +51,6 @@ void main() {
         pos_z = 0;
         break;    
         
-        case 3:
-        vertexColor = vec4(vec3(68,64,11)/255,1.0);
-        customParticle = 3;
-        pos_z = 0;
-        break;    
         }
     }
     
@@ -95,10 +59,6 @@ void main() {
         case 1:
         case 2:
         gl_Position = vec4(pre_Position.xy, pos_z, pre_Position.w);
-        break;
-
-        case 3:
-        gl_Position = PositionSwitch();
         break;
 
         default:

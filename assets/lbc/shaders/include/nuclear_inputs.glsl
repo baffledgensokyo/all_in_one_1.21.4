@@ -13,6 +13,7 @@ layout(location = 21) flat in vec4 nuclearAges;
 layout(location = 23) flat in vec4 nuclearSeeds;
 layout(location = 24) flat in mat4 nuclearVP;
 layout(location = 28) flat in vec4 nuclearFades;
+layout(location = 29) flat in vec4 nuclearDissolves;
 #endif
 layout(location = 22) flat in int nuclearCount;
 
@@ -22,6 +23,7 @@ struct NuclearObject {
     float age;
     float fade;
     float seed;
+    float dissolve;
 };
 #ifdef LBC_NUCLEAR_MANY
 float nuclearObjectFloat(int field,int row) {
@@ -39,9 +41,10 @@ NuclearObject nuclearGetObject(int i) {
     object.age=nuclearObjectFloat(73,row);
     object.fade=nuclearObjectFloat(74,row);
     object.seed=nuclearObjectFloat(75,row);
+    object.dissolve=nuclearObjectFloat(76,row);
     return object;
 #else
-    return NuclearObject(nuclearObjects[i],nuclearRotations[i],nuclearAges[i],nuclearFades[i],nuclearSeeds[i]);
+    return NuclearObject(nuclearObjects[i],nuclearRotations[i],nuclearAges[i],nuclearFades[i],nuclearSeeds[i],nuclearDissolves[i]);
 #endif
 }
 

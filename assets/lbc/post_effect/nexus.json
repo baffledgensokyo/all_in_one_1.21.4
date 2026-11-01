@@ -1,0 +1,101 @@
+{
+  "targets": {
+    "scene": {},
+    "glow": {},
+    "outline": {},
+    "nexus": {}
+  },
+  "passes": [
+    {
+      "vertex_shader": "minecraft:core/screenquad",
+      "fragment_shader": "minecraft:post/blit",
+      "inputs": [
+        {
+          "sampler_name": "In",
+          "target": "minecraft:main"
+        }
+      ],
+      "output": "scene",
+      "uniforms": {
+        "BlitConfig": [
+          {
+            "name": "ColorModulate",
+            "type": "vec4",
+            "value": [1.0, 1.0, 1.0, 1.0]
+          }
+        ]
+      }
+    },
+    {
+      "vertex_shader": "minecraft:core/screenquad",
+      "fragment_shader": "minecraft:post/bloom_sample",
+      "inputs": [
+        {
+          "sampler_name": "Diffuse",
+          "target": "scene"
+        }
+      ],
+      "output": "glow",
+      "uniforms": {
+        "BlitConfig": [
+          {
+            "name": "ColorModulate",
+            "type": "vec4",
+            "value": [1.0, 1.0, 1.0, 1.0]
+          }
+        ]
+      }
+    },
+    {
+      "vertex_shader": "minecraft:core/screenquad",
+      "fragment_shader": "minecraft:post/nexus_outline",
+      "inputs": [
+        {
+          "sampler_name": "MainDepth",
+          "target": "minecraft:main",
+          "use_depth_buffer": true
+        }
+      ],
+      "output": "outline"
+    },
+    {
+      "vertex_shader": "minecraft:core/screenquad",
+      "fragment_shader": "minecraft:post/nexus_final",
+      "inputs": [
+        {
+          "sampler_name": "Diffuse",
+          "target": "scene"
+        },
+        {
+          "sampler_name": "NexusOutline",
+          "target": "outline"
+        },
+        {
+          "sampler_name": "MainDepth",
+          "target": "minecraft:main",
+          "use_depth_buffer": true
+        }
+      ],
+      "output": "nexus"
+    },
+    {
+      "vertex_shader": "minecraft:core/screenquad",
+      "fragment_shader": "minecraft:post/nexus_apply",
+      "inputs": [
+        {
+          "sampler_name": "Diffuse",
+          "target": "scene"
+        },
+        {
+          "sampler_name": "Nexus",
+          "target": "nexus"
+        },
+        {
+          "sampler_name": "Bloom",
+          "target": "glow"
+        }
+      ],
+      "output": "minecraft:main"
+    }
+  ]
+}

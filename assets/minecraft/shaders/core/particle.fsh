@@ -34,15 +34,12 @@ vec4 calculateFinalColor(vec4 color, bool bypassFog) {
 void main() {
     vec4 color = texture(Sampler0, texCoord0) * vertexColor * ColorModulator;
     bool laser = customParticle == 1 || customParticle == 2;
-    bool nexus = customParticle == 3;
     if (laser) {
         // The original 8x8, 52-pixel dot, independent of sprite packing or age.
         // Never shift UV into a neighbouring (possibly transparent) sprite.
         vec2 pixel = floor(clamp(particleCoord, 0.0, 0.99999) * 8.0) - 3.5;
         if (dot(pixel, pixel) > 16.0) discard;
         color = vertexColor * ColorModulator;
-    } else if (nexus) {
-        color = vec4(vec3(72.0, 82.0, 25.0) / 255.0, 1.0);
     }
     if (color.a < 0.1) {
         discard;
@@ -50,6 +47,6 @@ void main() {
     #ifdef OIT_ALPHA_ONLY
     executeAlphaOnlyPhase(gl_FragCoord.z, color.a);
     #else
-    fragColor = calculateFinalColor(color, laser || nexus);
+    fragColor = calculateFinalColor(color, laser);
     #endif
 }
