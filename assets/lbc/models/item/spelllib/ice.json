@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "lbc:item/spelllib/ice"
+    "layer0": "minecraft:item/spelllib/ice"
   }
 }

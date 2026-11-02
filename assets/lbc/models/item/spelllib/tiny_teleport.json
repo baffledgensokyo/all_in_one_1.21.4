@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "lbc:item/spelllib/tiny_teleport"
+    "layer0": "minecraft:item/spelllib/tiny_teleport"
   }
 }
