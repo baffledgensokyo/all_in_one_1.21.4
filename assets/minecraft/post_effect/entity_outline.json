@@ -3,7 +3,10 @@
     "swap": {},
     "zone_scene": {},
     "signed_glow_scene": {},
-    "spread_scene": {}
+    "spread_scene": {},
+    "polymorph_bloom_h": {},
+    "polymorph_bloom_v": {},
+    "polymorph_bloom_scene": {}
   },
   "passes": [
     {
@@ -107,6 +110,116 @@
         {
           "sampler_name": "In",
           "target": "spread_scene"
+        }
+      ],
+      "output": "minecraft:main",
+      "uniforms": {
+        "BlitConfig": [
+          {
+            "name": "ColorModulate",
+            "type": "vec4",
+            "value": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "vertex_shader": "minecraft:core/screenquad",
+      "fragment_shader": "lbc:post/polymorph_outline_bloom_sample",
+      "inputs": [
+        {
+          "sampler_name": "PolymorphOutline",
+          "target": "minecraft:entity_outline"
+        }
+      ],
+      "output": "polymorph_bloom_h"
+    },
+    {
+      "vertex_shader": "minecraft:core/screenquad",
+      "fragment_shader": "minecraft:post/bloom",
+      "inputs": [
+        {
+          "sampler_name": "Diffuse",
+          "target": "polymorph_bloom_h"
+        },
+        {
+          "sampler_name": "Bloom",
+          "target": "polymorph_bloom_h"
+        }
+      ],
+      "output": "polymorph_bloom_v",
+      "uniforms": {
+        "BlitConfig": [
+          {
+            "name": "ColorModulate",
+            "type": "vec4",
+            "value": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "name": "BlurDir",
+            "type": "vec2",
+            "value": [
+              1.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "vertex_shader": "minecraft:core/screenquad",
+      "fragment_shader": "lbc:post/polymorph_outline_bloom",
+      "inputs": [
+        {
+          "sampler_name": "Diffuse",
+          "target": "minecraft:main"
+        },
+        {
+          "sampler_name": "Bloom",
+          "target": "polymorph_bloom_v"
+        }
+      ],
+      "output": "polymorph_bloom_scene",
+      "uniforms": {
+        "BlitConfig": [
+          {
+            "name": "ColorModulate",
+            "type": "vec4",
+            "value": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          {
+            "name": "BlurDir",
+            "type": "vec2",
+            "value": [
+              0.0,
+              1.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "vertex_shader": "minecraft:core/screenquad",
+      "fragment_shader": "minecraft:post/blit",
+      "inputs": [
+        {
+          "sampler_name": "In",
+          "target": "polymorph_bloom_scene"
         }
       ],
       "output": "minecraft:main",

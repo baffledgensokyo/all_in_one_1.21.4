@@ -26,7 +26,8 @@ void main() {
     }
 
     vec4 color = texture(DiffuseSampler, texCoord);
-    if (texture(MainDepthSampler, texCoord).r < 1.0) {
+    // Reverse-Z: cleared sky is 0, including the far plane.
+    if (texture(MainDepthSampler, texCoord).r > 0.0) {
         float luminance = (color.r + color.g + color.b) / 3.0;
         float phase = fract(GameTime * 12.0);
         int scanline = int(texCoord.y * ScreenSize.y + phase * ScreenSize.y);

@@ -42,13 +42,15 @@ void main() {
         case 1:
         vertexColor = vec4(vec3(20,209,255)/255,1.0);
         customParticle = 1;
-        pos_z = 0;
+        // 26.3 uses reverse-Z (GREATER_OR_EQUAL): clip depth 1 is nearest.
+        pos_z = pre_Position.w;
         break;
 
         case 2:
         vertexColor = vec4(vec3(255,170,0)/255,1.0);
         customParticle = 2;
-        pos_z = 0;
+        // 26.3 uses reverse-Z (GREATER_OR_EQUAL): clip depth 1 is nearest.
+        pos_z = pre_Position.w;
         break;    
         
         }
