@@ -43,6 +43,9 @@ layout(location = 11) out float meditationWarningFade;
 layout(location = 12) out float meditationWarningProgress;
 layout(location = 13) out vec2 meditationWarningQuadCoord;
 
+layout(location = 14) flat out uvec2 tmtTintSeed;
+layout(location = 15) out vec4 tmtVertexLight;
+
 void main() {
     gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
 
@@ -58,6 +61,10 @@ void main() {
     overlayColor = texelFetch(Sampler1, UV1, 0);
     #endif
 
+    // Persistent component tint, decoded BEFORE lighting; never a time/camera seed.
+    uvec3 tmtTint = uvec3(round(Color.rgb * 255.0));
+    tmtTintSeed = uvec2(tmtTint.r, (tmtTint.g << 8u) | tmtTint.b);
+    tmtVertexLight = minecraft_mix_light(Light0_Direction, Light1_Direction, Normal, vec4(1.0));
     texCoord0 = UV0;
     // Native item quads retain four sequential vertex indices, even with sorted OIT indices.
     // This local coordinate is independent of atlas placement and sprite resolution.

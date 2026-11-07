@@ -6599,5 +6599,6 @@
   "lore.lbcskill.15.3": "",
   "item.skywars2.oguzok_sword":"Baguette",
   "block.skywars2.consumed_block": "Empty matter",
-  "item.skywars2.consumed_block": "Empty matter"
+  "item.skywars2.consumed_block": "Empty matter",
+  "skywars2.game.map_mode_mismatch": "This map does not match game mode %s."
 }
