@@ -1,0 +1,120 @@
+{
+  "targets": {
+    "next_state": {
+      "width": 8,
+      "height": 1
+    },
+    "state": {
+      "width": 8,
+      "height": 1,
+      "persistent": true,
+      "clear_color": 0
+    },
+    "next_scene": {},
+    "scene_history": {
+      "persistent": true,
+      "clear_color": 0
+    }
+  },
+  "passes": [
+    {
+      "vertex_shader": "minecraft:core/screenquad",
+      "fragment_shader": "lbc:post/badapple/state",
+      "inputs": [
+        {
+          "sampler_name": "Scene",
+          "target": "minecraft:main"
+        },
+        {
+          "sampler_name": "History",
+          "target": "state"
+        }
+      ],
+      "output": "next_state"
+    },
+    {
+      "vertex_shader": "minecraft:core/screenquad",
+      "fragment_shader": "minecraft:post/blit",
+      "uniforms": {
+        "BlitConfig": [
+          {
+            "name": "ColorModulate",
+            "type": "vec4",
+            "value": [
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "sampler_name": "In",
+          "target": "next_state"
+        }
+      ],
+      "output": "state"
+    },
+    {
+      "vertex_shader": "minecraft:core/screenquad",
+      "fragment_shader": "lbc:post/badapple/blend",
+      "inputs": [
+        {
+          "sampler_name": "Scene",
+          "target": "minecraft:main"
+        },
+        {
+          "sampler_name": "History",
+          "target": "scene_history"
+        },
+        {
+          "sampler_name": "State",
+          "target": "state"
+        }
+      ],
+      "output": "next_scene"
+    },
+    {
+      "vertex_shader": "minecraft:core/screenquad",
+      "fragment_shader": "minecraft:post/blit",
+      "uniforms": {
+        "BlitConfig": [
+          {
+            "name": "ColorModulate",
+            "type": "vec4",
+            "value": [
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "sampler_name": "In",
+          "target": "next_scene"
+        }
+      ],
+      "output": "scene_history"
+    },
+    {
+      "vertex_shader": "minecraft:core/screenquad",
+      "fragment_shader": "lbc:post/badapple/invert",
+      "inputs": [
+        {
+          "sampler_name": "Scene",
+          "target": "next_scene"
+        },
+        {
+          "sampler_name": "State",
+          "target": "state"
+        }
+      ],
+      "output": "minecraft:main"
+    }
+  ]
+}

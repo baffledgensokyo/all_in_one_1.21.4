@@ -5234,7 +5234,7 @@
   "lbctrinket.16": "Hedgehog gauntlet",
   "lbctrinket.16.lore.1": "Taking damage creates hedgehog spike",
   "lbctrinket.16.lore.2": "Chance 10%% + 2%% for every copy of item",
-  "lbctrinket.16.lore.3": "Spike lying on the ground and deals 3 damage for those who stand on it",
+  "lbctrinket.16.lore.3": "Spike lying on the ground and deals 4 damage for those who stand on it",
   "lbctrinket.17": "Ice pearl",
   "lbctrinket.17.lore.1": "Inflicts cold on hit",
   "lbctrinket.17.lore.2": "Chance 10%% + 2%% vor every copy",
@@ -6597,5 +6597,7 @@
   "lore.lbcskill.15.1": "  Killing a player adds their positive base-attribute bonuses",
   "lore.lbcskill.15.2": "  above normal, penalties do not transfer",
   "lore.lbcskill.15.3": "",
-  "item.skywars2.oguzok_sword":"Baguette"
+  "item.skywars2.oguzok_sword":"Baguette",
+  "block.skywars2.consumed_block": "Empty matter",
+  "item.skywars2.consumed_block": "Empty matter"
 }
