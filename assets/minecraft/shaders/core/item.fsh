@@ -7,6 +7,7 @@
 #include <minecraft:oit.glsl>
 #include <lbc:zone_window.glsl>
 #include <lbc:meditation_warning.glsl>
+#include <lbc:tmt_atlas.glsl>
 
 uniform sampler2D Sampler0;
 
@@ -32,6 +33,9 @@ layout(location = 10) in vec3 zoneRelativePosition;
 layout(location = 11) in float meditationWarningFade;
 layout(location = 12) in float meditationWarningProgress;
 layout(location = 13) in vec2 meditationWarningQuadCoord;
+
+layout(location = 14) flat in uvec2 tmtTintSeed;
+layout(location = 15) in vec4 tmtVertexLight;
 
 #ifndef OIT_ALPHA_ONLY
 layout(location = 0) out vec4 fragColor;
@@ -67,8 +71,11 @@ vec4 calculateFinalColor(vec4 color, bool bypassLighting, bool bypassFog) {
 
 void main() {
     vec4 rawColor = texture(Sampler0, texCoord0);
-    int alphaMarker = int(round(rawColor.a * 255.0));
-    float meditationBase = lbc_meditation_warning_base_alpha(rawColor);
+    // Dedicated sprite AND reserved component tint: no broad texture/color classifier.
+    bool isTmt = lbc_tmt_carrier(rawColor, tmtTintSeed.x);
+    if (isTmt) rawColor = lbc_tmt_collage(Sampler0, meditationWarningQuadCoord, tmtTintSeed.y);
+    int alphaMarker = isTmt ? 255 : int(round(rawColor.a * 255.0));
+    float meditationBase = isTmt ? -1.0 : lbc_meditation_warning_base_alpha(rawColor);
     bool isMeditationWarning = meditationBase >= 0.0;
     bool isZoneBorder = zoneMaterial != 0;
     bool bypassLighting = isMeditationWarning || isZoneBorder || alphaMarker == 254 || alphaMarker == 130;
@@ -78,7 +85,7 @@ void main() {
     vec4 color = isMeditationWarning
         ? vec4(lbc_meditation_warning_color(rawColor, meditationWarningProgress), meditationBase * clamp(meditationWarningFade, 0.0, 1.0) * ColorModulator.a)
         : (isZoneBorder ? vec4(1.0, 0.0, 0.0, 26.0 / 255.0) : rawColor);
-    if (lbc_meditation_warning_is_ring(rawColor)) {
+    if (!isTmt && lbc_meditation_warning_is_ring(rawColor)) {
         // Double-sided model: draw only the facing quad, also on no-cull layers.
         if (!gl_FrontFacing) discard;
         color.a *= lbc_meditation_warning_ring_coverage(meditationWarningQuadCoord);
@@ -101,6 +108,8 @@ void main() {
         color = vec4(rawColor.rgb, 1.0);
     } else if (alphaMarker == 130) {
         color = vec4(rawColor.rgb, 0.5);
+    } else if (isTmt) {
+        color *= tmtVertexLight * ColorModulator;
     } else {
         color *= vertexColor * ColorModulator;
     }

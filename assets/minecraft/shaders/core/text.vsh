@@ -51,10 +51,9 @@ void main() {
     texCoord0 = UV0;
 
     ivec3 checkColor = ivec3(round(Color.rgb * 255.0));
-    // Recognize all icon marker variants by the shadow they actually produce.
-    // Mana's (78,92,36) -> (19,23,9) is one of these pairs. Ordinary text
-    // colors (and their shadows) do not use these reserved marker buckets.
-    if (isIconShadowColor(checkColor / 4) || isColorNear(checkColor, ivec3(170, 2, 2), 1)) {
+    // The server assigns the same exact marker to every actionbar icon.
+    // Do not infer foreground markers from a range of dark text colors.
+    if (isColorNear(checkColor, ivec3(78, 92, 36), 1) || isColorNear(checkColor, ivec3(170, 2, 2), 1)) {
 #if !defined(IS_GUI) && !defined(IS_SEE_THROUGH)
         vertexColor = sample_lightmap(Sampler2, UV2);
 #else

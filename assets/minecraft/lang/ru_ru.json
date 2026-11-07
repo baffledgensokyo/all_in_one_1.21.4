@@ -6599,5 +6599,6 @@
   "lore.lbcskill.15.3": "  (База здоровья зависит от настроек матча)",
   "item.skywars2.oguzok_sword":"Багет",
   "block.skywars2.consumed_block": "Опустошённая материя",
-  "item.skywars2.consumed_block": "Опустошённая материя"
+  "item.skywars2.consumed_block": "Опустошённая материя",
+  "skywars2.game.map_mode_mismatch": "Карта не подходит для режима %s."
 }

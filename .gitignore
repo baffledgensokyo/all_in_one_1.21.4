@@ -4,3 +4,5 @@ all_in_one_1.21.11.zip
 all_in_one_resourcepack.zip
 blockbench/
 tools/
+logs/
+compare_lang.py
