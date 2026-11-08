@@ -90,7 +90,7 @@ void main() {
         // outline data carrier. In particular, it must never enter OIT depth.
         gl_Position = vec4(2.0, 2.0, 2.0, 1.0);
     }
-    if (zoneMaterial != 0) {
+    if (zoneMaterial == 1) {
         if (lbc_zone_tag(UV0, textureSize(Sampler0, 0)) != LBC_ZONE_WALL_TAG) {
             // Data quads are rendered only into the invisible outline channel.
             gl_Position = vec4(2.0, 2.0, 2.0, 1.0);
@@ -103,4 +103,15 @@ void main() {
             gl_Position = ProjMat * ModelViewMat * vec4(bandPosition, 1.0);
         }
     }
+    // Private radar quad: reserved tint AND exact four-corner sprite signature.
+    // This uses the existing integer channel and adds no varying locations.
+    ivec2 radarSize = textureSize(Sampler0, 0);
+    ivec4 radarTag = ivec4(round(texelFetch(Sampler0, clamp(ivec2(UV0 * vec2(radarSize)), ivec2(0), radarSize - 1), 0) * 255.0));
+    bool radarSprite = all(equal(radarTag, ivec4(17,19,23,253)));
+    if (radarSprite && (all(equal(itemTint, ivec3(27,229,199))) || all(equal(itemTint, ivec3(27,229,200))))) {
+        zoneMaterial = itemTint.b == 199 ? 2 : 3;
+        // Minecraft26.3 reverse-Z: nearest clip depth, preserving perspective size.
+        gl_Position.z = gl_Position.w;
+    }
+
 }

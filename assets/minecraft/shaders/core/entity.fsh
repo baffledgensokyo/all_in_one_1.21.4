@@ -75,8 +75,11 @@ vec4 calculateFinalColor(vec4 color, bool bypassLighting, bool bypassFog) {
     return apply_fog(color, sphericalVertexDistance, cylindricalVertexDistance, FogEnvironmentalStart, FogEnvironmentalEnd, FogRenderDistanceStart, FogRenderDistanceEnd, fogColor);
 }
 
+#include <lbc:tmt_equipment.glsl>
+layout(location = 8) flat in uvec2 tmtEquipmentSeed;
 void main() {
     vec4 rawColor = texture(Sampler0, texCoord0);
+    if (tmtEquipmentSeed.x != 0u) rawColor = lbc_tmt_collage(Sampler0, texCoord0, tmtEquipmentSeed.y);
     int alphaMarker = int(round(rawColor.a * 255.0));
     bool bypassLighting = alphaMarker == 254 || alphaMarker == 130;
     bool bypassFog = alphaMarker == 254;

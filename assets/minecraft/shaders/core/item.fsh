@@ -70,6 +70,18 @@ vec4 calculateFinalColor(vec4 color, bool bypassLighting, bool bypassFog) {
 #endif
 
 void main() {
+    if (zoneMaterial == 2 || zoneMaterial == 3) {
+        // Same 8x8 / 52-pixel circle and palette as the original radar particle.
+        vec2 pixel = floor(clamp(meditationWarningQuadCoord, 0.0, 0.99999) * 8.0) - 3.5;
+        if (dot(pixel,pixel) > 16.0) discard;
+        vec4 radar = vec4((zoneMaterial == 2 ? vec3(20,209,255) : vec3(255,170,0)) / 255.0, ColorModulator.a);
+        #ifdef OIT_ALPHA_ONLY
+        executeAlphaOnlyPhase(gl_FragCoord.z,radar.a);
+        #else
+        fragColor = calculateFinalColor(radar,true,true);
+        #endif
+        return;
+    }
     vec4 rawColor = texture(Sampler0, texCoord0);
     // Dedicated sprite AND reserved component tint: no broad texture/color classifier.
     bool isTmt = lbc_tmt_carrier(rawColor, tmtTintSeed.x);

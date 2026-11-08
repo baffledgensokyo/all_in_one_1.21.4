@@ -63,16 +63,17 @@ bool isColorNear(ivec3 color, ivec3 target, int tolerance) {
 
 void main() {
     if(centeredCrosshairScale.x>0.0) {
-        // HUD integer rounding can move the vanilla sprite away from the
-        // framebuffer center. Reconstruct only that recognized crosshair at
-        // the same geometric center as the scopes, with physical-pixel coverage.
-        vec2 d=abs(gl_FragCoord.xy-ScreenSize*0.5);
-        vec2 stroke=clamp(centeredCrosshairScale*0.5+0.5-d,0.0,1.0);
-        vec2 reach=clamp(centeredCrosshairScale*4.5+0.5-d,0.0,1.0);
-        float coverage=stroke.x*reach.y+stroke.y*reach.x-stroke.x*stroke.y;
-        if(coverage<=0.0)discard;
-        // CROSSHAIR uses INVERT blending: RGB, not just alpha, must carry coverage.
-        fragColor=vec4(vec3(coverage),coverage)*vertexColor*ColorModulator;
+        // Keep native stroke width and snap its edges to physical pixels.
+        // Exact geometric centering would soften odd-width strokes on even
+        // framebuffers (and vice versa); the nearest sharp center is <=0.5px away.
+        vec2 pixelScale=max(round(centeredCrosshairScale),vec2(1.0));
+        vec2 center=floor((ScreenSize-pixelScale)*0.5)+pixelScale*0.5;
+        vec2 d=abs(gl_FragCoord.xy-center);
+        bvec2 stroke=lessThan(d,pixelScale*0.5);
+        bvec2 reach=lessThan(d,pixelScale*4.5);
+        if(!((stroke.x&&reach.y)||(stroke.y&&reach.x)))discard;
+        // INVERT blending needs fully white RGB as well as opaque alpha.
+        fragColor=vertexColor*ColorModulator;
         return;
     }
     vec4 color = texture(Sampler0, texCoord0) * vertexColor;
