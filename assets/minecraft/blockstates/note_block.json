@@ -1,6 +1,6 @@
 {
     "variants": {
-        "instrument=harp,note=0,powered=true": [
+        "instrument=banjo,note=1,powered=false": [
             {
                 "model": "lbc:block/consumed_block",
                 "x": 0,
@@ -9,16 +9,16 @@
                 "weight": 1
             }
         ],
-        "instrument=harp,note=1,powered=false": [
+        "instrument=banjo,note=1,powered=true": [
             {
-                "model": "minecraft:block/neko_lucky_block",
+                "model": "lbc:block/consumed_block",
                 "x": 0,
                 "y": 0,
                 "uvlock": false,
                 "weight": 1
             }
         ],
-        "instrument=harp,note=1,powered=true": [
+        "instrument=banjo,note=2,powered=false": [
             {
                 "model": "minecraft:block/lucky_block",
                 "x": 0,
@@ -27,7 +27,52 @@
                 "weight": 1
             }
         ],
-        "instrument=harp,note=2,powered=false": [
+        "instrument=banjo,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=banjo,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=banjo,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=banjo,note=4,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=banjo,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=banjo,note=5,powered=false": [
             {
                 "model": "skywars2:block/greedstone_cursed_block",
                 "x": 0,
@@ -36,9 +81,2349 @@
                 "weight": 1
             }
         ],
-        "instrument=harp,note=2,powered=true": [
+        "instrument=banjo,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=basedrum,note=1,powered=false": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=basedrum,note=1,powered=true": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=basedrum,note=2,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=basedrum,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=basedrum,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=basedrum,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=basedrum,note=4,powered=false": [
             {
                 "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=basedrum,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=basedrum,note=5,powered=false": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=basedrum,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bass,note=1,powered=false": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bass,note=1,powered=true": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bass,note=2,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bass,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bass,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bass,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bass,note=4,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bass,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bass,note=5,powered=false": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bass,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bell,note=1,powered=false": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bell,note=1,powered=true": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bell,note=2,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bell,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bell,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bell,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bell,note=4,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bell,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bell,note=5,powered=false": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bell,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bit,note=1,powered=false": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bit,note=1,powered=true": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bit,note=2,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bit,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bit,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bit,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bit,note=4,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bit,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bit,note=5,powered=false": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=bit,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=chime,note=1,powered=false": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=chime,note=1,powered=true": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=chime,note=2,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=chime,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=chime,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=chime,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=chime,note=4,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=chime,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=chime,note=5,powered=false": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=chime,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=cow_bell,note=1,powered=false": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=cow_bell,note=1,powered=true": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=cow_bell,note=2,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=cow_bell,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=cow_bell,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=cow_bell,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=cow_bell,note=4,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=cow_bell,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=cow_bell,note=5,powered=false": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=cow_bell,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=creeper,note=1,powered=false": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=creeper,note=1,powered=true": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=creeper,note=2,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=creeper,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=creeper,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=creeper,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=creeper,note=4,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=creeper,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=creeper,note=5,powered=false": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=creeper,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=custom_head,note=1,powered=false": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=custom_head,note=1,powered=true": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=custom_head,note=2,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=custom_head,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=custom_head,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=custom_head,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=custom_head,note=4,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=custom_head,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=custom_head,note=5,powered=false": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=custom_head,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=didgeridoo,note=1,powered=false": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=didgeridoo,note=1,powered=true": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=didgeridoo,note=2,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=didgeridoo,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=didgeridoo,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=didgeridoo,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=didgeridoo,note=4,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=didgeridoo,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=didgeridoo,note=5,powered=false": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=didgeridoo,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=dragon,note=1,powered=false": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=dragon,note=1,powered=true": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=dragon,note=2,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=dragon,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=dragon,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=dragon,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=dragon,note=4,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=dragon,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=dragon,note=5,powered=false": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=dragon,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=flute,note=1,powered=false": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=flute,note=1,powered=true": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=flute,note=2,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=flute,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=flute,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=flute,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=flute,note=4,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=flute,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=flute,note=5,powered=false": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=flute,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=guitar,note=1,powered=false": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=guitar,note=1,powered=true": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=guitar,note=2,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=guitar,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=guitar,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=guitar,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=guitar,note=4,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=guitar,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=guitar,note=5,powered=false": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=guitar,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=harp,note=1,powered=false": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=harp,note=1,powered=true": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=harp,note=2,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=harp,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=harp,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=harp,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=harp,note=4,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=harp,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=harp,note=5,powered=false": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=harp,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=hat,note=1,powered=false": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=hat,note=1,powered=true": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=hat,note=2,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=hat,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=hat,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=hat,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=hat,note=4,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=hat,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=hat,note=5,powered=false": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=hat,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=iron_xylophone,note=1,powered=false": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=iron_xylophone,note=1,powered=true": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=iron_xylophone,note=2,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=iron_xylophone,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=iron_xylophone,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=iron_xylophone,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=iron_xylophone,note=4,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=iron_xylophone,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=iron_xylophone,note=5,powered=false": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=iron_xylophone,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=piglin,note=1,powered=false": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=piglin,note=1,powered=true": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=piglin,note=2,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=piglin,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=piglin,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=piglin,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=piglin,note=4,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=piglin,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=piglin,note=5,powered=false": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=piglin,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=pling,note=1,powered=false": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=pling,note=1,powered=true": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=pling,note=2,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=pling,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=pling,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=pling,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=pling,note=4,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=pling,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=pling,note=5,powered=false": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=pling,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=skeleton,note=1,powered=false": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=skeleton,note=1,powered=true": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=skeleton,note=2,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=skeleton,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=skeleton,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=skeleton,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=skeleton,note=4,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=skeleton,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=skeleton,note=5,powered=false": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=skeleton,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=snare,note=1,powered=false": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=snare,note=1,powered=true": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=snare,note=2,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=snare,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=snare,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=snare,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=snare,note=4,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=snare,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=snare,note=5,powered=false": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=snare,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet,note=1,powered=false": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet,note=1,powered=true": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet,note=2,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet,note=4,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet,note=5,powered=false": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_exposed,note=1,powered=false": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_exposed,note=1,powered=true": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_exposed,note=2,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_exposed,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_exposed,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_exposed,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_exposed,note=4,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_exposed,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_exposed,note=5,powered=false": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_exposed,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_oxidized,note=1,powered=false": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_oxidized,note=1,powered=true": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_oxidized,note=2,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_oxidized,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_oxidized,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_oxidized,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_oxidized,note=4,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_oxidized,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_oxidized,note=5,powered=false": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_oxidized,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_weathered,note=1,powered=false": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_weathered,note=1,powered=true": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_weathered,note=2,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_weathered,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_weathered,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_weathered,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_weathered,note=4,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_weathered,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_weathered,note=5,powered=false": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=trumpet_weathered,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=wither_skeleton,note=1,powered=false": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=wither_skeleton,note=1,powered=true": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=wither_skeleton,note=2,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=wither_skeleton,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=wither_skeleton,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=wither_skeleton,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=wither_skeleton,note=4,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=wither_skeleton,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=wither_skeleton,note=5,powered=false": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=wither_skeleton,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=xylophone,note=1,powered=false": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=xylophone,note=1,powered=true": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=xylophone,note=2,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=xylophone,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=xylophone,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=xylophone,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=xylophone,note=4,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=xylophone,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=xylophone,note=5,powered=false": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=xylophone,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=zombie,note=1,powered=false": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=zombie,note=1,powered=true": [
+            {
+                "model": "lbc:block/consumed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=zombie,note=2,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=zombie,note=2,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=zombie,note=3,powered=false": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=zombie,note=3,powered=true": [
+            {
+                "model": "minecraft:block/neko_lucky_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=zombie,note=4,powered=false": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=zombie,note=4,powered=true": [
+            {
+                "model": "minecraft:block/lucky_block_loli",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=zombie,note=5,powered=false": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
+                "x": 0,
+                "y": 0,
+                "uvlock": false,
+                "weight": 1
+            }
+        ],
+        "instrument=zombie,note=5,powered=true": [
+            {
+                "model": "skywars2:block/greedstone_cursed_block",
                 "x": 0,
                 "y": 0,
                 "uvlock": false,
