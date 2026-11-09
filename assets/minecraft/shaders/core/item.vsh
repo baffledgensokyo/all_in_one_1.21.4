@@ -6,10 +6,12 @@
 #include <minecraft:dynamictransforms.glsl>
 #include <minecraft:projection.glsl>
 #include <minecraft:sample_lightmap.glsl>
+#include <lbc:atlas_glitch.glsl>
 #include <lbc:zone_data.glsl>
 #include <lbc:zone_window.glsl>
 #include <lbc:black_hole_data.glsl>
 #include <lbc:nuclear_data.glsl>
+#include <lbc:tmt_atlas.glsl>
 
 layout(location = 0) in vec3 Position;
 layout(location = 1) in vec4 Color;
@@ -45,6 +47,7 @@ layout(location = 13) out vec2 meditationWarningQuadCoord;
 
 layout(location = 14) flat out uvec2 tmtTintSeed;
 layout(location = 15) out vec4 tmtVertexLight;
+layout(location = 7) flat out uvec4 tmtSourceCells;
 
 void main() {
     gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
@@ -58,12 +61,22 @@ void main() {
     meditationWarningFade = Color.r; // raw grayscale tint, BEFORE directional light
     #ifndef OIT_ALPHA_ONLY
     lightMapColor = sample_lightmap(Sampler2, UV2);
+    // Reuse the otherwise constant alpha; no extra varying locations.
+    lightMapColor.a = lbc_atlas_glitch_code(Sampler2);
     overlayColor = texelFetch(Sampler1, UV1, 0);
     #endif
 
     // Persistent component tint, decoded BEFORE lighting; never a time/camera seed.
     uvec3 tmtTint = uvec3(round(Color.rgb * 255.0));
     tmtTintSeed = uvec2(tmtTint.r, (tmtTint.g << 8u) | tmtTint.b);
+    tmtSourceCells = uvec4(LBC_TMT_EMPTY);
+    if (tmtTint.r == 250u) {
+        ivec2 tmtAtlasSize = textureSize(Sampler0, 0);
+        ivec2 tmtMarkerTexel = clamp(ivec2(UV0 * vec2(tmtAtlasSize)), ivec2(0), tmtAtlasSize - 1);
+        if (lbc_tmt_carrier(texelFetch(Sampler0, tmtMarkerTexel, 0), tmtTint.r)) {
+            tmtSourceCells = lbc_tmt_sources(Sampler0, tmtTintSeed.y);
+        }
+    }
     tmtVertexLight = minecraft_mix_light(Light0_Direction, Light1_Direction, Normal, vec4(1.0));
     texCoord0 = UV0;
     // Native item quads retain four sequential vertex indices, even with sorted OIT indices.

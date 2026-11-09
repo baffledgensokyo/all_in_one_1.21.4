@@ -1,5 +1,5 @@
-// TMT v1: sole source is the currently bound ITEM atlas (Sampler0).
-// Integer hash is stable across render context; atlas repacking may change crops.
+// TMT: sample the bound atlas on a 16px grid, without overlapping shape layers.
+// These are atlas cells, not sprite bounds (core shaders have no sprite table).
 #ifndef LBC_TMT_ATLAS_GLSL
 #define LBC_TMT_ATLAS_GLSL
 bool lbc_tmt_carrier(vec4 sampleColor, uint tintPrefix) {
@@ -35,54 +35,83 @@ int lbc_tmt_resolution(uint seed) {
     if (ticket < 12159u) return 128;
     return 256;
 }
-vec4 lbc_tmt_collage(sampler2D atlas, vec2 quad, uint seed) {
-    // Output quantization varies per item; patch geometry stays in 32 logical units.
-    // Center samples keep rotations/reflections symmetric at every resolution.
+const uint LBC_TMT_EMPTY = 0xffffffffu;
+
+// Run only in the vertex stage. One transparent pixel must never reroll a cell.
+bool lbc_tmt_cell_visible(sampler2D atlas, ivec2 origin) {
+    ivec2 extent = min(ivec2(16), textureSize(atlas, 0) - origin);
+    for (int y = 0; y < extent.y; ++y) {
+        for (int x = 0; x < extent.x; ++x) {
+            if (texelFetch(atlas, origin + ivec2(x, y), 0).a > 0.0) return true;
+        }
+    }
+    return false;
+}
+
+uvec4 lbc_tmt_sources(sampler2D atlas, uint seed) {
+    ivec2 grid = max(textureSize(atlas, 0) / 16, ivec2(1));
+    uvec4 sources = uvec4(LBC_TMT_EMPTY);
+    uint state = lbc_tmt_hash(seed ^ 0x5bf03635u);
+    for (int slot = 0; slot < 4; ++slot) {
+        // Bounded retries avoid scanning an entire empty/mostly unused atlas.
+        // If retries run out, reuse an already verified cell, or stay transparent.
+        if (slot > 0) sources[slot] = sources[slot - 1];
+        for (int attempt = 0; attempt < 16; ++attempt) {
+            ivec2 origin = ivec2(lbc_tmt_random2(state) * vec2(grid)) * 16;
+            if (!lbc_tmt_cell_visible(atlas, origin)) continue;
+            sources[slot] = uint(origin.x) | (uint(origin.y) << 16u);
+            break;
+        }
+    }
+    // A later slot may have found art after the first exhausted its retries.
+    for (int slot = 2; slot >= 0; --slot) {
+        if (sources[slot] == LBC_TMT_EMPTY) sources[slot] = sources[slot + 1];
+    }
+    return sources;
+}
+
+vec4 lbc_tmt_collage(sampler2D atlas, vec2 quad, uint seed, uvec4 sources) {
     float resolution = float(lbc_tmt_resolution(seed));
-    float density = resolution / 32.0;
     vec2 cell = clamp(floor(quad * resolution), vec2(0.0), vec2(resolution - 1.0));
-    vec2 pixel = (cell + 0.5) / density;
-    uint state = lbc_tmt_hash(seed + 1u);
-    vec3 base = lbc_tmt_random3(state);
-    vec2 centered = abs(pixel - vec2(16.0));
-    float mask = max(centered.x, centered.y) < 13.0 ? 1.0 : 0.0;
-    if (centered.x + centered.y > 22.0) mask = 0.0;
-    vec4 result = vec4(0.18 + base * 0.45, mask);
-    ivec2 size = textureSize(atlas, 0);
-    // Two underlying atlas crops reduce padding-only output. A visible fallback
-    // remains only where both source texels are transparent. Total bound: 2+6=8.
-    for (int backing = 0; backing < 2; ++backing) {
-        ivec2 crop = ivec2(lbc_tmt_random2(state) * vec2(max(size - ivec2(int(resolution)), ivec2(1))));
-        ivec2 texel = clamp(crop + ivec2(cell), ivec2(0), size - ivec2(1));
-        vec4 source = texelFetch(atlas, texel, 0);
-        if (source.a >= 0.1 && mask > 0.0) result.rgb = source.rgb;
+    ivec2 pixel = ivec2(cell);
+    uint layoutTicket = lbc_tmt_hash(seed ^ 0x3c6ef372u);
+    // Half of the layout tickets shift the whole tiling. Wrapping keeps coverage
+    // square; source cells and cut/swap pieces remain grid-aligned.
+    if ((layoutTicket & 1u) != 0u) {
+        ivec2 offset = ivec2(1u + ((layoutTicket >> 1u) % 15u), 1u + ((layoutTicket >> 5u) % 15u));
+        pixel = (pixel + offset) % int(resolution);
     }
-    for (int layer = 0; layer < 6; ++layer) {
-        vec2 origin = floor(lbc_tmt_random2(state) * 24.0) - 4.0;
-        float width = 8.0 + floor(lbc_tmt_random(state) * 17.0);
-        vec2 p = pixel - origin;
-        int rotation = int(lbc_tmt_random(state) * 4.0);
-        bool flip = lbc_tmt_random(state) < 0.5;
-        float scale = exp2(floor(lbc_tmt_random(state) * 3.0) - 1.0);
-        int shape = int(lbc_tmt_random(state) * 3.0);
-        vec3 tint = 0.55 + 0.9 * lbc_tmt_random3(state);
-        int extent = max(int(ceil(width * scale * density)), 1);
-        ivec2 crop = ivec2(lbc_tmt_random2(state) * vec2(max(size - ivec2(extent), ivec2(1))));
-        bool inside = all(greaterThanEqual(p, vec2(0.0))) && all(lessThan(p, vec2(width)));
-        if (shape == 1) inside = inside && abs(p.x - width * 0.5) + abs(p.y - width * 0.5) < width * 0.65;
-        if (shape == 2) inside = inside && int(p.x + p.y) % 5 != 0;
-        if (!inside) continue;
-        if (flip) p.x = width - p.x;
-        if (rotation == 1) p = vec2(p.y, width - p.x);
-        if (rotation == 2) p = vec2(width) - p;
-        if (rotation == 3) p = vec2(width - p.y, p.x);
-        ivec2 texel = clamp(crop + ivec2(floor(p * scale * density)), ivec2(0), size - ivec2(1));
-        vec4 source = texelFetch(atlas, texel, 0);
-        // Sprite padding is skipped. Source alpha markers never enter effect dispatch.
-        if (source.a < 0.1) continue;
-        result.rgb = clamp(source.rgb * tint, 0.0, 1.0);
-        result.a = 1.0;
+    ivec2 tile = pixel / 16;
+    int tileIndex = tile.x + tile.y * (int(resolution) / 16);
+    uint state = lbc_tmt_hash(seed ^ (uint(tileIndex + 1) * 0x9e3779b9u));
+    int slot = int(state & 3u);
+    ivec2 local = pixel % 16;
+    int rotation = int(lbc_tmt_random(state) * 4.0);
+    bool flip = lbc_tmt_random(state) < 0.5;
+    bool cut = lbc_tmt_random(state) < 0.5;
+    bool swap = lbc_tmt_random(state) < 0.5;
+    uint permutation = lbc_tmt_hash(state ^ 0xa511e9b3u);
+    vec3 tint = 0.55 + 0.9 * lbc_tmt_random3(state);
+    if (flip) local.x = 15 - local.x;
+    if (rotation == 1) local = ivec2(local.y, 15 - local.x);
+    if (rotation == 2) local = ivec2(15) - local;
+    if (rotation == 3) local = ivec2(15 - local.y, local.x);
+    if (cut) {
+        int part = local.x / 8 + (local.y / 8) * 2;
+        // An odd multiplier gives a bijection of the four 8x8 quadrants.
+        int sourcePart = (part * (int(permutation & 1u) * 2 + 1) +
+                          1 + int((permutation >> 1u) % 3u)) % 4;
+        local = local % 8 + ivec2(sourcePart % 2, sourcePart / 2) * 8;
+        if (swap) slot = (slot + part) % 4;
     }
-    return result;
+    uint sourceAddress = sources[slot];
+    if (sourceAddress == LBC_TMT_EMPTY) return vec4(0.0);
+    ivec2 origin = ivec2(sourceAddress & 0xffffu, sourceAddress >> 16u);
+    ivec2 extent = min(ivec2(16), textureSize(atlas, 0) - origin);
+    local = min(local, extent - 1);
+    vec4 source = texelFetch(atlas, origin + local, 0);
+    // Keep holes and fractional alpha, including the pack's effect-marker values.
+    // Callers bypass alpha-marker dispatch for TMT rather than altering alpha.
+    return vec4(clamp(source.rgb * tint, 0.0, 1.0), source.a);
 }
 #endif

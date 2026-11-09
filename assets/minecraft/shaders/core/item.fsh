@@ -8,6 +8,8 @@
 #include <lbc:zone_window.glsl>
 #include <lbc:meditation_warning.glsl>
 #include <lbc:tmt_atlas.glsl>
+#define LBC_ATLAS_GLITCH_FRAGMENT
+#include <lbc:atlas_glitch.glsl>
 
 uniform sampler2D Sampler0;
 
@@ -36,6 +38,7 @@ layout(location = 13) in vec2 meditationWarningQuadCoord;
 
 layout(location = 14) flat in uvec2 tmtTintSeed;
 layout(location = 15) in vec4 tmtVertexLight;
+layout(location = 7) flat in uvec4 tmtSourceCells;
 
 #ifndef OIT_ALPHA_ONLY
 layout(location = 0) out vec4 fragColor;
@@ -45,7 +48,7 @@ layout(location = 0) out vec4 fragColor;
 vec4 calculateFinalColor(vec4 color, bool bypassLighting, bool bypassFog) {
     if (!bypassLighting) {
         color.rgb = mix(overlayColor.rgb, color.rgb, overlayColor.a);
-        color *= lightMapColor;
+        color *= vec4(lightMapColor.rgb, 1.0);
 
     }
 
@@ -85,11 +88,19 @@ void main() {
     vec4 rawColor = texture(Sampler0, texCoord0);
     // Dedicated sprite AND reserved component tint: no broad texture/color classifier.
     bool isTmt = lbc_tmt_carrier(rawColor, tmtTintSeed.x);
-    if (isTmt) rawColor = lbc_tmt_collage(Sampler0, meditationWarningQuadCoord, tmtTintSeed.y);
+    if (isTmt) rawColor = lbc_tmt_collage(Sampler0, meditationWarningQuadCoord, tmtTintSeed.y, tmtSourceCells);
     int alphaMarker = isTmt ? 255 : int(round(rawColor.a * 255.0));
     float meditationBase = isTmt ? -1.0 : lbc_meditation_warning_base_alpha(rawColor);
     bool isMeditationWarning = meditationBase >= 0.0;
     bool isZoneBorder = zoneMaterial != 0;
+    #ifndef OIT_ALPHA_ONLY
+    // Decode service sprites before shifting. Their markers drive the zone,
+    // meditation, radar and procedural-item effects and must stay intact.
+    if (lightMapColor.a > 0.0 && !isTmt && !isMeditationWarning && !isZoneBorder &&
+        alphaMarker != 254 && alphaMarker != 130) {
+        rawColor.rgb = lbc_atlas_glitch_rgb(Sampler0, texCoord0, lightMapColor.a);
+    }
+    #endif
     bool bypassLighting = isMeditationWarning || isZoneBorder || alphaMarker == 254 || alphaMarker == 130;
     bool bypassFog = bypassLighting;
     // Only the requested 1x1, 10%-opaque red fallback is drawn here.
@@ -107,7 +118,7 @@ void main() {
         if (color.a <= 0.0) discard;
     }
     #ifdef ALPHA_CUTOUT
-    if (color.a < (isMeditationWarning ? 0.00001 : (isZoneBorder ? 0.005 : ALPHA_CUTOUT))) {
+    if (color.a < ((isMeditationWarning || isTmt) ? 0.00001 : (isZoneBorder ? 0.005 : ALPHA_CUTOUT))) {
         discard;
     }
     #endif
@@ -127,7 +138,7 @@ void main() {
     }
 
     #ifdef GLINT
-    color.a = max(color.a, GlintAlpha);
+    if (!isTmt) color.a = max(color.a, GlintAlpha);
     #endif
 
     #ifdef OIT_ALPHA_ONLY

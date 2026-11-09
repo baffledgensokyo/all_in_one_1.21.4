@@ -6,3 +6,4 @@ blockbench/
 tools/
 logs/
 compare_lang.py
+server_support/

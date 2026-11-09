@@ -77,16 +77,18 @@ vec4 calculateFinalColor(vec4 color, bool bypassLighting, bool bypassFog) {
 
 #include <lbc:tmt_equipment.glsl>
 layout(location = 8) flat in uvec2 tmtEquipmentSeed;
+layout(location = 9) flat in uvec4 tmtSourceCells;
 void main() {
     vec4 rawColor = texture(Sampler0, texCoord0);
-    if (tmtEquipmentSeed.x != 0u) rawColor = lbc_tmt_collage(Sampler0, texCoord0, tmtEquipmentSeed.y);
-    int alphaMarker = int(round(rawColor.a * 255.0));
+    bool isTmt = tmtEquipmentSeed.x != 0u;
+    if (isTmt) rawColor = lbc_tmt_collage(Sampler0, texCoord0, tmtEquipmentSeed.y, tmtSourceCells);
+    int alphaMarker = isTmt ? 255 : int(round(rawColor.a * 255.0));
     bool bypassLighting = alphaMarker == 254 || alphaMarker == 130;
     bool bypassFog = alphaMarker == 254;
     vec4 color = rawColor;
 
     #ifdef ALPHA_CUTOUT
-    if (color.a < ALPHA_CUTOUT) {
+    if (color.a < (isTmt ? 0.00001 : ALPHA_CUTOUT)) {
         discard;
     }
     #endif
@@ -118,7 +120,7 @@ void main() {
     #endif
 
     #ifdef GLINT
-    color.a = max(color.a, GlintAlpha);
+    if (!isTmt) color.a = max(color.a, GlintAlpha);
     #endif
 
     #ifdef OIT_ALPHA_ONLY

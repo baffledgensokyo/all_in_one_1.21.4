@@ -8,6 +8,7 @@
 #include <minecraft:dynamictransforms.glsl>
 #include <minecraft:projection.glsl>
 #include <minecraft:sample_lightmap.glsl>
+#include <lbc:tmt_equipment.glsl>
 
 layout(location = 0) in vec3 Position;
 layout(location = 1) in vec4 Color;
@@ -49,10 +50,13 @@ layout(location = 7) out vec2 texCoordGlint;
 
 uniform sampler2D Sampler0;
 layout(location = 8) flat out uvec2 tmtEquipmentSeed;
+layout(location = 9) flat out uvec4 tmtSourceCells;
 void main() {
     uvec3 rawTint = uvec3(round(Color.rgb * 255.0));
     bool carrier = rawTint.r == 250u && all(equal(ivec4(round(texelFetch(Sampler0, ivec2(0), 0) * 255.0)), ivec4(31,197,83,255)));
     tmtEquipmentSeed = uvec2(carrier ? 1u : 0u, (rawTint.g << 8u) | rawTint.b);
+    tmtSourceCells = uvec4(LBC_TMT_EMPTY);
+    if (carrier) tmtSourceCells = lbc_tmt_sources(Sampler0, tmtEquipmentSeed.y);
     vec4 equipmentColor = carrier ? vec4(1.0,1.0,1.0,Color.a) : Color;
     gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
 
