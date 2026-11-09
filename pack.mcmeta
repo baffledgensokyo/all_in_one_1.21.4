@@ -9,5 +9,11 @@
       1
     ],
     "description": "Lucky Blocks Resources by baffledhedgehog & stendari & Daeris"
+  },
+  "sodium": {
+    "ignored_shaders": [
+      "terrain.vsh",
+      "terrain.fsh"
+    ]
   }
 }

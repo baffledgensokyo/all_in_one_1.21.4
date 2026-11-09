@@ -37,11 +37,12 @@ vec4 calculateFinalColor(vec4 color) {
 layout(location = 5) flat in float atlasGlitchCode;
 
 void main() {
-    vec4 color = (UseRgss == 1 ? sampleRGSS(Sampler0, texCoord0, 1.0f / TextureSize) : sampleNearest(Sampler0, texCoord0, 1.0f / TextureSize)) * vertexColor;
+    vec4 rawColor = UseRgss == 1 ? sampleRGSS(Sampler0, texCoord0, 1.0f / TextureSize) : sampleNearest(Sampler0, texCoord0, 1.0f / TextureSize);
+    vec4 color = rawColor * vertexColor;
     // Keep native coverage, including the separate OIT alpha/depth phase.
     // Only the atlas color lookup moves; geometry and transparency stay valid.
     #ifndef OIT_ALPHA_ONLY
-    if (atlasGlitchCode > 0.0) color.rgb = lbc_atlas_glitch_rgb(Sampler0, texCoord0, atlasGlitchCode) * vertexColor.rgb;
+    if (atlasGlitchCode > 0.0) color.rgb = lbc_atlas_glitch_rgb(Sampler0, texCoord0, atlasGlitchCode, rawColor.rgb) * vertexColor.rgb;
     #endif
     #ifndef OIT_ALPHA_ONLY
     color = mix(FogColor * vec4(1, 1, 1, color.a), color, chunkVisibility);

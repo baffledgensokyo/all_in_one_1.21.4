@@ -39,6 +39,7 @@ layout(location = 13) in vec2 meditationWarningQuadCoord;
 layout(location = 14) flat in uvec2 tmtTintSeed;
 layout(location = 15) in vec4 tmtVertexLight;
 layout(location = 7) flat in uvec4 tmtSourceCells;
+layout(location = 8) flat in float atlasGlitchCode;
 
 #ifndef OIT_ALPHA_ONLY
 layout(location = 0) out vec4 fragColor;
@@ -96,9 +97,9 @@ void main() {
     #ifndef OIT_ALPHA_ONLY
     // Decode service sprites before shifting. Their markers drive the zone,
     // meditation, radar and procedural-item effects and must stay intact.
-    if (lightMapColor.a > 0.0 && !isTmt && !isMeditationWarning && !isZoneBorder &&
+    if (atlasGlitchCode > 0.0 && !isTmt && !isMeditationWarning && !isZoneBorder &&
         alphaMarker != 254 && alphaMarker != 130) {
-        rawColor.rgb = lbc_atlas_glitch_rgb(Sampler0, texCoord0, lightMapColor.a);
+        rawColor.rgb = lbc_atlas_glitch_rgb(Sampler0, texCoord0, atlasGlitchCode, rawColor.rgb);
     }
     #endif
     bool bypassLighting = isMeditationWarning || isZoneBorder || alphaMarker == 254 || alphaMarker == 130;

@@ -32,9 +32,10 @@ vec4 calculateFinalColor(vec4 color) {
 layout(location = 4) flat in float atlasGlitchCode;
 
 void main() {
-    vec4 color = texture(Sampler0, texCoord0) * vertexColor * ColorModulator;
+    vec4 rawColor = texture(Sampler0, texCoord0);
+    vec4 color = rawColor * vertexColor * ColorModulator;
     #ifndef OIT_ALPHA_ONLY
-    if (atlasGlitchCode > 0.0) color.rgb = lbc_atlas_glitch_rgb(Sampler0, texCoord0, atlasGlitchCode) * vertexColor.rgb * ColorModulator.rgb;
+    if (atlasGlitchCode > 0.0) color.rgb = lbc_atlas_glitch_rgb(Sampler0, texCoord0, atlasGlitchCode, rawColor.rgb) * vertexColor.rgb * ColorModulator.rgb;
     #endif
     #ifdef ALPHA_CUTOUT
     if (color.a < ALPHA_CUTOUT) {

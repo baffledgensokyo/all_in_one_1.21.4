@@ -48,6 +48,7 @@ layout(location = 13) out vec2 meditationWarningQuadCoord;
 layout(location = 14) flat out uvec2 tmtTintSeed;
 layout(location = 15) out vec4 tmtVertexLight;
 layout(location = 7) flat out uvec4 tmtSourceCells;
+layout(location = 8) flat out float atlasGlitchCode;
 
 void main() {
     gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
@@ -61,9 +62,12 @@ void main() {
     meditationWarningFade = Color.r; // raw grayscale tint, BEFORE directional light
     #ifndef OIT_ALPHA_ONLY
     lightMapColor = sample_lightmap(Sampler2, UV2);
-    // Reuse the otherwise constant alpha; no extra varying locations.
-    lightMapColor.a = lbc_atlas_glitch_code(Sampler2);
+    // Large integer camera seeds must be flat: perspective interpolation can
+    // otherwise round different pixels of the same item to different seeds.
+    atlasGlitchCode = lbc_atlas_glitch_code(Sampler2);
     overlayColor = texelFetch(Sampler1, UV1, 0);
+    #else
+    atlasGlitchCode = 0.0;
     #endif
 
     // Persistent component tint, decoded BEFORE lighting; never a time/camera seed.

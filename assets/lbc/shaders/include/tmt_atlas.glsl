@@ -20,20 +20,10 @@ vec2 lbc_tmt_random2(inout uint state) {
     float y = lbc_tmt_random(state);
     return vec2(x, y);
 }
-vec3 lbc_tmt_random3(inout uint state) {
-    float x = lbc_tmt_random(state);
-    float y = lbc_tmt_random(state);
-    float z = lbc_tmt_random(state);
-    return vec3(x, y, z);
-}
-// Preserve the observed legacy PNG size weights, with one stable choice per seed.
+// Five equally likely sizes, with one stable choice per seed.
 int lbc_tmt_resolution(uint seed) {
-    uint ticket = lbc_tmt_hash(seed ^ 0x93a761bdu) % 12758u;
-    if (ticket < 7248u) return 16;
-    if (ticket < 9508u) return 32;
-    if (ticket < 11379u) return 64;
-    if (ticket < 12159u) return 128;
-    return 256;
+    uint ticket = lbc_tmt_hash(seed ^ 0x93a761bdu) % 5u;
+    return 16 << int(ticket);
 }
 const uint LBC_TMT_EMPTY = 0xffffffffu;
 
@@ -74,36 +64,18 @@ vec4 lbc_tmt_collage(sampler2D atlas, vec2 quad, uint seed, uvec4 sources) {
     float resolution = float(lbc_tmt_resolution(seed));
     vec2 cell = clamp(floor(quad * resolution), vec2(0.0), vec2(resolution - 1.0));
     ivec2 pixel = ivec2(cell);
-    uint layoutTicket = lbc_tmt_hash(seed ^ 0x3c6ef372u);
-    // Half of the layout tickets shift the whole tiling. Wrapping keeps coverage
-    // square; source cells and cut/swap pieces remain grid-aligned.
-    if ((layoutTicket & 1u) != 0u) {
-        ivec2 offset = ivec2(1u + ((layoutTicket >> 1u) % 15u), 1u + ((layoutTicket >> 5u) % 15u));
-        pixel = (pixel + offset) % int(resolution);
-    }
     ivec2 tile = pixel / 16;
     int tileIndex = tile.x + tile.y * (int(resolution) / 16);
     uint state = lbc_tmt_hash(seed ^ (uint(tileIndex + 1) * 0x9e3779b9u));
     int slot = int(state & 3u);
     ivec2 local = pixel % 16;
+    // Transform the complete cell; keep its native colors and alpha untouched.
     int rotation = int(lbc_tmt_random(state) * 4.0);
     bool flip = lbc_tmt_random(state) < 0.5;
-    bool cut = lbc_tmt_random(state) < 0.5;
-    bool swap = lbc_tmt_random(state) < 0.5;
-    uint permutation = lbc_tmt_hash(state ^ 0xa511e9b3u);
-    vec3 tint = 0.55 + 0.9 * lbc_tmt_random3(state);
     if (flip) local.x = 15 - local.x;
     if (rotation == 1) local = ivec2(local.y, 15 - local.x);
     if (rotation == 2) local = ivec2(15) - local;
     if (rotation == 3) local = ivec2(15 - local.y, local.x);
-    if (cut) {
-        int part = local.x / 8 + (local.y / 8) * 2;
-        // An odd multiplier gives a bijection of the four 8x8 quadrants.
-        int sourcePart = (part * (int(permutation & 1u) * 2 + 1) +
-                          1 + int((permutation >> 1u) % 3u)) % 4;
-        local = local % 8 + ivec2(sourcePart % 2, sourcePart / 2) * 8;
-        if (swap) slot = (slot + part) % 4;
-    }
     uint sourceAddress = sources[slot];
     if (sourceAddress == LBC_TMT_EMPTY) return vec4(0.0);
     ivec2 origin = ivec2(sourceAddress & 0xffffu, sourceAddress >> 16u);
@@ -112,6 +84,6 @@ vec4 lbc_tmt_collage(sampler2D atlas, vec2 quad, uint seed, uvec4 sources) {
     vec4 source = texelFetch(atlas, origin + local, 0);
     // Keep holes and fractional alpha, including the pack's effect-marker values.
     // Callers bypass alpha-marker dispatch for TMT rather than altering alpha.
-    return vec4(clamp(source.rgb * tint, 0.0, 1.0), source.a);
+    return source;
 }
 #endif
