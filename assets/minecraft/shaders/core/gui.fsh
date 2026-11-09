@@ -33,19 +33,29 @@ void main() {
         float centre = floor(sidebarGuiSize.y * 0.5);
         float bodyRows = round((height - 1.0) / 9.0);
         float titleRows = round((centre - 1.0 - upper.y) / 6.0);
-        bool body = bodyRows >= 0.0 && bodyRows <= 15.0 &&
-                    abs(height - (9.0 * bodyRows + 1.0)) < 0.05 &&
+        bool bodyShape = bodyRows >= 0.0 && bodyRows <= 15.0 &&
+                         abs(height - (9.0 * bodyRows + 1.0)) < 0.05;
+        bool titleShape = abs(height - 9.0) < 0.05;
+        bool body = bodyShape &&
                     abs(upper.y - (centre + 3.0 * bodyRows)) < 0.05;
         bool title = titleRows >= 0.0 && titleRows <= 15.0 &&
-                     abs(height - 9.0) < 0.05 &&
+                     titleShape &&
                      abs(upper.y - (centre - 6.0 * titleRows - 1.0)) < 0.05;
         bool rightEdge = abs(upper.x - (sidebarGuiSize.x - 1.0)) < 0.05;
         bool sidebarWidth = lower.x >= sidebarGuiSize.x * 0.5 && upper.x - lower.x >= 3.0;
         bool aligned = abs(edgeU.y) < 0.05 && abs(edgeV.x) < 0.05;
         bool black = all(lessThan(abs(vertexColor.rgb), vec3(0.001)));
-        // Opacity is deliberately unrestricted: accessibility settings can
-        // override both the usual 0.3 body alpha and the 0.4 title alpha.
-        if (black && aligned && rightEdge && sidebarWidth && (body || title)) discard;
+        // Keep arbitrary accessibility opacity at the vanilla HUD position.
+        bool vanillaSidebar = rightEdge && sidebarWidth && (body || title);
+        // A moved sidebar no longer matches the screen anchors. Recognize its
+        // shape and standard alpha instead (vertex alpha is quantized to 8 bits).
+        // Match body/title alpha separately to avoid removing unrelated panels.
+        float alphaByte = round(vertexColor.a * 255.0);
+        bool bodyAlpha = alphaByte == 76.0 || alphaByte == 77.0;
+        bool titleAlpha = alphaByte == 102.0;
+        bool movedSidebar = upper.x - lower.x >= 3.0 &&
+                            ((bodyShape && bodyAlpha) || (titleShape && titleAlpha));
+        if (black && aligned && (vanillaSidebar || movedSidebar)) discard;
     }
     vec4 color = vertexColor;
     if (color.a == 0.0) {
