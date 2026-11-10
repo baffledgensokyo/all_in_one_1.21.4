@@ -1,5 +1,5 @@
 #version 330
-// Adapted from CaffeineMC Sodium 0.9.2+mc26.3 (https://github.com/CaffeineMC/sodium).
+// Adapted from CaffeineMC Sodium 0.9.3-beta.4+mc26.3 (https://github.com/CaffeineMC/sodium).
 // PolyForm Shield 1.0.0: assets/sodium/licenses/LICENSE.md.
 // Changes: decode the atlas signal and keep lightmap alpha out of coverage.
 #extension GL_ARB_separate_shader_objects : require
@@ -11,7 +11,8 @@
 
 layout(location = 0) out vec4 v_Color;
 layout(location = 1) out vec2 v_TexCoord;
-layout(location = 4) flat out float atlasGlitchCode;
+// Sodium Extra reserves locations 4 and 5 for its fog varyings.
+layout(location = 10) flat out float atlasGlitchCode;
 
 #ifdef USE_FOG
 layout(location = 2) out vec2 v_FragDistance;
@@ -50,7 +51,8 @@ void main() {
 
     // Transform the chunk-local vertex position into world model space
     vec3 translation = u_RegionOffset + _get_draw_translation(_draw_id);
-    vec3 position = _vert_position + translation;
+    // Sodium 0.9.3 supplies fractional camera movement separately from the region offset.
+    vec3 position = (_vert_position + translation) - u_CameraOffset;
 
 #ifdef USE_FOG
     v_FragDistance = getFragDistance(position);

@@ -14,7 +14,8 @@ layout(location = 0) in vec4 v_Color; // The interpolated vertex color
 layout(location = 1) in vec2 v_TexCoord; // The interpolated block texture coordinates
 layout(location = 2) in vec2 v_FragDistance; // The fragment's distance from the camera (cylindrical and spherical)
 layout(location = 3) in float fadeFactor;
-layout(location = 4) flat in float atlasGlitchCode;
+// Keep the location in sync with the vertex shader and clear of Sodium Extra.
+layout(location = 10) flat in float atlasGlitchCode;
 
 uniform sampler2D u_BlockTex; // The block texture
 
