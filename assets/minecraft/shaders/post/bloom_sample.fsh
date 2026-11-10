@@ -44,5 +44,12 @@ void main(){
     float redDistance = length((checkColor.rgb - redCore) * vec3(1.0, 2.0, 2.0));
     float redGlow = 1.0 - smoothstep(0.005, 0.09, redDistance);
     outColor = max(outColor, checkColor * redGlow);
+    // Rune textures use continuous warm ink, not the old exact RGB palette.
+    // Retain existing extraction and include saturated red/orange/yellow energy.
+    float warmPeak = max(checkColor.r, checkColor.g);
+    float warmHue = 1.0 - smoothstep(0.35, 0.65, checkColor.b / max(warmPeak, 0.0001));
+    float warmRed = smoothstep(0.85, 1.05, checkColor.r / max(checkColor.g, 0.0001));
+    float warmBrightness = smoothstep(0.45, 0.7, warmPeak);
+    outColor = max(outColor, checkColor * warmHue * warmRed * warmBrightness);
     fragColor = outColor;
 }
