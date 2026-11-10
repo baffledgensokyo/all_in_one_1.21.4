@@ -8,6 +8,7 @@
 #include <lbc:nuclear_data.glsl>
 #include <lbc:signed_glow_data.glsl>
 #include <lbc:weapon_spread_data.glsl>
+#include <lbc:exoperso_bloom.glsl>
 
 uniform sampler2D Sampler0;
 layout(location = 0) in vec4 vertexColor;
@@ -45,5 +46,11 @@ void main() {
     }
     vec4 color = texture(Sampler0, texCoord0);
     if (color.a == 0.0) discard;
+    if (lbc_exoperso_outline_color(vertexColor.rgb)) {
+        // Only our native rune displays own this reserved outline color.
+        if (int(round(color.a * 255.0)) != 254) discard;
+        fragColor = lbc_exoperso_pack(color.rgb, gl_FragCoord.z);
+        return;
+    }
     fragColor = vec4(ColorModulator.rgb * vertexColor.rgb, ColorModulator.a);
 }

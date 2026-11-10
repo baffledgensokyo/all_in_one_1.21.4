@@ -1,6 +1,5 @@
 {
   "targets": {
-    "final": {},
     "bloomh": {},
     "bloomv": {},
     "black_hole_scene": {},
@@ -21,36 +20,11 @@
   "passes": [
     {
       "vertex_shader": "minecraft:core/screenquad",
-      "fragment_shader": "minecraft:post/blit",
-      "inputs": [
-        {
-          "sampler_name": "In",
-          "target": "minecraft:main"
-        }
-      ],
-      "output": "final",
-      "uniforms": {
-        "BlitConfig": [
-          {
-            "name": "ColorModulate",
-            "type": "vec4",
-            "value": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ]
-          }
-        ]
-      }
-    },
-    {
-      "vertex_shader": "minecraft:core/screenquad",
       "fragment_shader": "lbc:post/effect_state",
       "inputs": [
         {
           "sampler_name": "Current",
-          "target": "final"
+          "target": "minecraft:main"
         },
         {
           "sampler_name": "History",
@@ -90,7 +64,7 @@
       "inputs": [
         {
           "sampler_name": "Diffuse",
-          "target": "final"
+          "target": "minecraft:main"
         }
       ],
       "output": "bloomh",
@@ -115,11 +89,13 @@
       "inputs": [
         {
           "sampler_name": "Diffuse",
-          "target": "bloomh"
+          "target": "bloomh",
+          "bilinear": true
         },
         {
           "sampler_name": "Bloom",
-          "target": "bloomh"
+          "target": "bloomh",
+          "bilinear": true
         }
       ],
       "output": "bloomv",
@@ -152,11 +128,12 @@
       "inputs": [
         {
           "sampler_name": "Diffuse",
-          "target": "final"
+          "target": "minecraft:main"
         },
         {
           "sampler_name": "Bloom",
-          "target": "bloomv"
+          "target": "bloomv",
+          "bilinear": true
         }
       ],
       "output": "black_hole_scene",

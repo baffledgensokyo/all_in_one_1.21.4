@@ -13,6 +13,12 @@ layout(location = 0) out vec4 fragColor;
 
 void main(){
     vec4 checkColor = texture(DiffuseSampler, texCoord) * ColorModulate;
+    // All palette colors peak above 0.84; the tolerant red core needs r > 0.91.
+    // Dim scene pixels cannot contribute, so skip classification entirely.
+    if (max(checkColor.r, max(checkColor.g, checkColor.b)) < 0.84) {
+        fragColor = vec4(0.0);
+        return;
+    }
     vec4 outColor = vec4(0);
     ivec3[GLOW_COLORS] glowColorList = ivec3[](
         ivec3(0,48,255),
@@ -44,12 +50,5 @@ void main(){
     float redDistance = length((checkColor.rgb - redCore) * vec3(1.0, 2.0, 2.0));
     float redGlow = 1.0 - smoothstep(0.005, 0.09, redDistance);
     outColor = max(outColor, checkColor * redGlow);
-    // Rune textures use continuous warm ink, not the old exact RGB palette.
-    // Retain existing extraction and include saturated red/orange/yellow energy.
-    float warmPeak = max(checkColor.r, checkColor.g);
-    float warmHue = 1.0 - smoothstep(0.35, 0.65, checkColor.b / max(warmPeak, 0.0001));
-    float warmRed = smoothstep(0.85, 1.05, checkColor.r / max(checkColor.g, 0.0001));
-    float warmBrightness = smoothstep(0.45, 0.7, warmPeak);
-    outColor = max(outColor, checkColor * warmHue * warmRed * warmBrightness);
     fragColor = outColor;
 }

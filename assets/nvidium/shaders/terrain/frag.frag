@@ -23,6 +23,7 @@ layout(binding = 1) uniform sampler2D tex_light;
 #import <nvidium:occlusion/scene.glsl>
 #import <nvidium:terrain/vertex_format/vertex_format.glsl>
 #import <minecraft:include/oit.glsl>
+#import <lbc:include/atlas_glitch_directory.glsl>
 #define LBC_ATLAS_GLITCH_FRAGMENT
 #import <lbc:include/atlas_glitch.glsl>
 
