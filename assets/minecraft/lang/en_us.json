@@ -4820,7 +4820,7 @@
   "lbctrinket.13.lore.2": "+1%% for every copy",
   "lbctrinket.14": "Twilight Sparkle",
   "lbctrinket.14.lore.1": "5%% chance to save from falling every 1 second",
-  "lbctrinket.14.lore.2": "(Only if falling distance is more than 21 blocks)",
+  "lbctrinket.14.lore.2": "(Only if falling speed is fast enough)",
   "lbctrinket.14.lore.3": "+2%% for every copy",
   "twilight_sparkle": "Twilight Sparkle",
   "lbcskill.28": "True Phoenix",
@@ -6600,5 +6600,13 @@
   "item.skywars2.oguzok_sword":"Baguette",
   "block.skywars2.consumed_block": "Empty matter",
   "item.skywars2.consumed_block": "Empty matter",
-  "skywars2.game.map_mode_mismatch": "This map does not match game mode %s."
+  "skywars2.game.map_mode_mismatch": "This map does not match game mode %s.",
+  "swrg.menu":"Skywars menu",
+  "menu.personal_settings":"Personal Settings",
+  "menu.personal_settings.fov":"FOV effects multiplier: ",
+  "menu.personal_settings.modechange":"Change item mode on Shift+Scroll: ",
+  "on":"ON",
+  "off":"OFF",
+  "death.attack.skywars2.kamikaze_drone": "%1$s was fucked by %2$s's Kamikaze Drone",
+  "death.attack.skywars2.kamikaze_drone.unowned": "%1$s was fucked by a Kamikaze Drone"
 }

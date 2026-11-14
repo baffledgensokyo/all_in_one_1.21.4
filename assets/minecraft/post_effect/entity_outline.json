@@ -6,7 +6,8 @@
     "spread_scene": {},
     "polymorph_bloom_h": {},
     "polymorph_bloom_v": {},
-    "zone_damage_scene": {}
+    "zone_damage_scene": {},
+    "smoke_scene": {}
   },
   "passes": [
     {
@@ -64,6 +65,26 @@
       "output": "signed_glow_scene"
     },
     {
+      "vertex_shader": "lbc:post/smoke_volume",
+      "fragment_shader": "lbc:post/smoke_volume",
+      "inputs": [
+        {
+          "sampler_name": "SmokeData",
+          "target": "minecraft:entity_outline"
+        },
+        {
+          "sampler_name": "Scene",
+          "target": "signed_glow_scene"
+        },
+        {
+          "sampler_name": "SceneDepth",
+          "target": "minecraft:main",
+          "use_depth_buffer": true
+        }
+      ],
+      "output": "smoke_scene"
+    },
+    {
       "vertex_shader": "lbc:post/weapon_spread",
       "fragment_shader": "lbc:post/weapon_spread",
       "inputs": [
@@ -73,7 +94,7 @@
         },
         {
           "sampler_name": "Scene",
-          "target": "signed_glow_scene"
+          "target": "smoke_scene"
         }
       ],
       "output": "spread_scene"

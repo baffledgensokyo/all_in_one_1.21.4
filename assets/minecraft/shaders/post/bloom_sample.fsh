@@ -38,11 +38,13 @@ void main(){
         ivec3(122,42,232)
     );
 
+    // Half-float OIT intermediates can put an exact palette channel just below
+    // its byte value. Recover the nearest byte instead of truncating it.
     for(int i = 0; i < GLOW_COLORS; i++) {
         // Red energy is continuous. Exact RGB equality made its glow toggle
         // when movement/filtering changed a channel by a single byte.
         if (i == 4) continue;
-        if (ivec3(checkColor.xyz * 255) == glowColorList[i]) {
+        if (ivec3(round(checkColor.xyz * 255.0)) == glowColorList[i]) {
             outColor += checkColor;
         }
     }

@@ -7,8 +7,11 @@ layout(location=0) out vec4 fragColor;
 void main() {
     ivec2 pixel=ivec2(gl_FragCoord.xy);
     vec4 scene=texelFetch(SceneSampler,pixel,0);
-    vec2 delta=gl_FragCoord.xy-vec2(textureSize(SceneSampler,0))*0.5;
     float thickness=spreadStyle.x,lengthPx=spreadStyle.y;
+    // Match the pixel-snapped center of the vanilla crosshair in position_tex_color.
+    vec2 size=vec2(textureSize(SceneSampler,0));
+    vec2 center=floor((size-vec2(thickness))*0.5)+vec2(thickness)*0.5;
+    vec2 delta=gl_FragCoord.xy-center;
     bool horizontal=delta.y>=-thickness*0.5 && delta.y<thickness*0.5 &&
         ((delta.x<0.0 && -delta.x<=spreadBounds.x && -delta.x>=max(0.0,spreadBounds.x-lengthPx)) ||
          (delta.x>=0.0 && delta.x<=spreadBounds.y && delta.x>=max(0.0,spreadBounds.y-lengthPx)));

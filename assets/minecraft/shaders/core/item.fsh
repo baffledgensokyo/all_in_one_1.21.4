@@ -46,7 +46,7 @@ layout(location = 0) out vec4 fragColor;
 #endif
 
 #ifndef OIT_ALPHA_ONLY
-vec4 calculateFinalColor(vec4 color, bool bypassLighting, bool bypassFog) {
+vec4 calculateFinalColor(vec4 color, bool bypassLighting, bool bypassFog, bool preserveEmission) {
     if (!bypassLighting) {
         color.rgb = mix(overlayColor.rgb, color.rgb, overlayColor.a);
         color *= vec4(lightMapColor.rgb, 1.0);
@@ -56,7 +56,9 @@ vec4 calculateFinalColor(vec4 color, bool bypassLighting, bool bypassFog) {
     #ifdef GLINT
     vec4 glintColor = GlintAlpha * texture(GlintSampler, texCoordGlint);// Glint color modulator?
     // Matches BlendFuntion.GLINT
-    color.rgb += glintColor.rgb * glintColor.rgb;
+    // Alpha254 is a deliberate emissive material, including saber blades.
+    // Foil still shades the hilt; its animated color must not erase the glow key.
+    if (!preserveEmission) color.rgb += glintColor.rgb * glintColor.rgb;
     #endif
 
     #ifdef OIT_ACCUMULATE
@@ -82,7 +84,7 @@ void main() {
         #ifdef OIT_ALPHA_ONLY
         executeAlphaOnlyPhase(gl_FragCoord.z,radar.a);
         #else
-        fragColor = calculateFinalColor(radar,true,true);
+        fragColor = calculateFinalColor(radar,true,true,false);
         #endif
         return;
     }
@@ -145,6 +147,6 @@ void main() {
     #ifdef OIT_ALPHA_ONLY
     executeAlphaOnlyPhase(gl_FragCoord.z, color.a);
     #else
-    fragColor = calculateFinalColor(color, bypassLighting, bypassFog);
+    fragColor = calculateFinalColor(color, bypassLighting, bypassFog, alphaMarker == 254);
     #endif
 }
