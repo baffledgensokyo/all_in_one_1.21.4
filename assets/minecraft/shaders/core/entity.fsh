@@ -78,12 +78,18 @@ vec4 calculateFinalColor(vec4 color, bool bypassLighting, bool bypassFog) {
 #include <lbc:tmt_equipment.glsl>
 layout(location = 8) flat in uvec2 tmtEquipmentSeed;
 layout(location = 9) flat in uvec4 tmtSourceCells;
+#define LBC_TIKTOK_FRAGMENT
+#include <lbc:tiktok_pixels.glsl>
+layout(location = 10) flat in uvec4 tiktokPixels;
+layout(location = 11) in float tiktokU;
 void main() {
     vec4 rawColor = texture(Sampler0, texCoord0);
+    bool isPhone = tiktokPixels.w != 0u;
+    if (isPhone) rawColor = vec4(lbc_tiktok_colour(tiktokPixels.xyz, tiktokU), 1.0);
     bool isTmt = tmtEquipmentSeed.x != 0u;
     if (isTmt) rawColor = lbc_tmt_collage(Sampler0, texCoord0, tmtEquipmentSeed.y, tmtSourceCells);
-    int alphaMarker = isTmt ? 255 : int(round(rawColor.a * 255.0));
-    bool bypassLighting = alphaMarker == 254 || alphaMarker == 130;
+    int alphaMarker = (isTmt || isPhone) ? 255 : int(round(rawColor.a * 255.0));
+    bool bypassLighting = isPhone || alphaMarker == 254 || alphaMarker == 130;
     bool bypassFog = alphaMarker == 254;
     vec4 color = rawColor;
 
@@ -107,7 +113,9 @@ void main() {
     faceVertexColor.a = 1.0;
     #endif
 
-    if (alphaMarker == 254) {
+    if (isPhone) {
+        color = rawColor * vec4(1.0, 1.0, 1.0, ColorModulator.a);
+    } else if (alphaMarker == 254) {
         color = rawColor;
     } else if (alphaMarker == 130) {
         color = mix(rawColor, rawColor * faceVertexColor * ColorModulator, 0.5);

@@ -51,7 +51,16 @@ layout(location = 7) out vec2 texCoordGlint;
 uniform sampler2D Sampler0;
 layout(location = 8) flat out uvec2 tmtEquipmentSeed;
 layout(location = 9) flat out uvec4 tmtSourceCells;
+#include <lbc:tiktok_pixels.glsl>
+layout(location = 10) flat out uvec4 tiktokPixels;
+layout(location = 11) out float tiktokU;
 void main() {
+    uvec3 phoneTint = uvec3(round(Color.rgb * 255.0));
+    vec2 phoneUV;
+    bool phoneCarrier = all(lessThanEqual(phoneTint, uvec3(247u))) && lbc_tiktok_tile(Sampler0, UV0, phoneUV);
+    tiktokPixels = uvec4(phoneTint, phoneCarrier ? 1u : 0u);
+    tiktokU = phoneCarrier ? phoneUV.x : 0.0;
+
     uvec3 rawTint = uvec3(round(Color.rgb * 255.0));
     bool carrier = rawTint.r == 250u && all(equal(ivec4(round(texelFetch(Sampler0, ivec2(0), 0) * 255.0)), ivec4(31,197,83,255)));
     tmtEquipmentSeed = uvec2(carrier ? 1u : 0u, (rawTint.g << 8u) | rawTint.b);

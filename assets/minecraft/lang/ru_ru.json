@@ -6608,5 +6608,22 @@
   "on":"ВКЛ",
   "off":"ВЫКЛ",
   "death.attack.skywars2.kamikaze_drone": "Игрок %1$s поймал дрон ртом от игрока %2$s",
-  "death.attack.skywars2.kamikaze_drone.unowned": "Игрок %1$s поймал жопой камикадзе-дрон"
+  "death.attack.skywars2.kamikaze_drone.unowned": "Игрок %1$s поймал жопой камикадзе-дрон",
+  "tiktok.loading": "Видео всё ещё загружается.",
+  "tiktok.import": "Импорт TikTok cookies",
+  "tiktok.cookies": "JSON cookies TikTok",
+  "tiktok.import_hint": "Вставь JSON, экспортированный для tiktok.com до %s символов",
+  "tiktok.imported": "Cookies сохранены. Готовится очередь.",
+  "tiktok.cookies_invalid": "Не удалось прочитать куки, Нужен JSON",
+  "tiktok.save_failed": "Не удалось сохранить куки",
+  "tiktok.unavailable": "Подготовка видео сейчас недоступна",
+  "tiktok.status": "Готово %s/%s видео; аккаунт: %s. %s",
+  "tiktok.browser_missing": "Не найден браузер.",
+  "tiktok.feed_unavailable": "Не удалось получить рекомендации.",
+  "tiktok.cache_full": "Достигнут лимит кэша.",
+  "tiktok.prepare_failed": "Не удалось подготовить видео.",
+  "tiktok.preparing": "Очередь ВАРИТСЯ.",
+  "tiktok.ready": "Очередь готова.",
+  "tiktok.configured": "Куки сохранены",
+  "tiktok.not_configured": "Куки не импортированы"
 }
