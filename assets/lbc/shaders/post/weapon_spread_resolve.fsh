@@ -5,13 +5,15 @@ uniform sampler2D SceneSampler;
 layout(location=0) flat in vec4 reticleBounds;
 layout(location=1) flat in vec2 reticleStyle;
 layout(location=2) flat in vec2 reticleCenter;
+layout(location=3) flat in vec4 nativeRect;
 layout(location=0) out vec4 fragColor;
 void main() {
     ivec2 pixel=ivec2(gl_FragCoord.xy),size=textureSize(SceneSampler,0);
     vec4 scene=texelFetch(SceneSampler,pixel,0);
-    bool nativeStroke=int(round(scene.a*255.0))==251;
+    bool nativeTag=int(round(scene.a*255.0))==251 && all(lessThan(abs(gl_FragCoord.xy-vec2(size)*.5),vec2(128)));
+    bool nativeStroke=nativeTag && all(greaterThanEqual(gl_FragCoord.xy,nativeRect.xy)) && all(lessThan(gl_FragCoord.xy,nativeRect.zw));
     fragColor=scene;
-    if(nativeStroke || lbc_reticle_offset(pixel,size)>=0)fragColor.a=1.0;
+    if(nativeTag || lbc_reticle_offset(pixel,size)>=0)fragColor.a=1.0;
     if(reticleStyle.x<=0)return;
     vec2 delta=gl_FragCoord.xy-reticleCenter;
     vec4 bounds=max(reticleBounds,vec4(1.0));

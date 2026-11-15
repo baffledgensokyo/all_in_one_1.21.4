@@ -56,6 +56,17 @@ void main() {
         }
     }
     
+    if(checkColor.r==83 && checkColor.g==77 && checkColor.b>=1 && checkColor.b<=127) {
+        customParticle=3;
+        // Native QuadParticleRenderState corners are(+,-),(+,+),(-,+),(-,-).
+        // Expand in camera space, retaining native positions, drift and depth.
+        vec2 side=vec2(corner<2 ? 1.0 : -1.0,corner==1||corner==2 ? 1.0 : -1.0);
+        particleCoord=side*.5+.5;
+        vec4 view=ModelViewMat*vec4(Position,1.0);
+        view.xy+=side*(.12+2.3*float(checkColor.b)/127.0);
+        pre_Position=ProjMat*view;
+        vertexColor=vec4(vec3(.48),1.0);
+    }
     switch(customParticle){
 
         case 1:

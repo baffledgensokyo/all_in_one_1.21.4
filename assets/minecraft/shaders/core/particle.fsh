@@ -41,6 +41,14 @@ void main() {
         if (dot(pixel, pixel) > 16.0) discard;
         color = vertexColor * ColorModulator;
     }
+    if(customParticle==3) {
+        // A soft2D billow, not a fullscreen fog volume or a solid square.
+        vec2 p=particleCoord*2.0-1.0;
+        float edge=.79+.075*sin(p.x*9.0+p.y*5.0)+.045*sin(p.y*13.0-p.x*6.0);
+        float coverage=1.0-smoothstep(edge-.34,edge,length(p));
+        float shade=.45+.055*sin(p.x*7.0-p.y*8.0);
+        color=vec4(vec3(shade),coverage*.9)*ColorModulator;
+    }
     if (color.a < 0.1) {
         discard;
     }

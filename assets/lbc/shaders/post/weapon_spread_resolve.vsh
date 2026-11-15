@@ -5,6 +5,7 @@ uniform sampler2D SceneSampler;
 layout(location=0) flat out vec4 reticleBounds;
 layout(location=1) flat out vec2 reticleStyle;
 layout(location=2) flat out vec2 reticleCenter;
+layout(location=3) flat out vec4 nativeRect;
 int byteAt(int n,int row,ivec2 size) {
     return int(round(texelFetch(SceneSampler,ivec2(size.x-20-n,row),0).a*255.0));
 }
@@ -19,7 +20,7 @@ bool nativePixel(ivec2 p,ivec2 size) {
 void main() {
     vec2 uv=vec2((gl_VertexIndex<<1)&2,gl_VertexIndex&2);
     gl_Position=vec4(uv*2.0-1.0,0,1);
-    reticleBounds=vec4(0);reticleStyle=vec2(0);
+    reticleBounds=vec4(0);reticleStyle=vec2(0);nativeRect=vec4(0);
     ivec2 size=textureSize(SceneSampler,0);
     reticleCenter=vec2(size)*.5;
     if(size.x<48 || size.y<2)return;
@@ -40,11 +41,12 @@ void main() {
         if(nativePixel(middle+ivec2(x,y),size))found=middle+ivec2(x,y);
     if(found.x<0)return;
     ivec2 lo=found,hi=found;
-    for(int i=-128;i<=128;i++) {
-        ivec2 x=ivec2(middle.x+i,found.y),y=ivec2(found.x,middle.y+i);
+    for(int i=-128;i<=128;i++)for(int d=-1;d<=1;d++) {
+        ivec2 x=ivec2(middle.x+i,middle.y+d),y=ivec2(middle.x+d,middle.y+i);
         if(nativePixel(x,size)){lo.x=min(lo.x,x.x);hi.x=max(hi.x,x.x);}
         if(nativePixel(y,size)){lo.y=min(lo.y,y.y);hi.y=max(hi.y,y.y);}
     }
+    nativeRect=vec4(lo,hi+1);
     reticleCenter=(vec2(lo+hi)+1.0)*.5;
     reticleBounds=vec4(fields[0],fields[1],fields[2],fields[3]);
     reticleStyle=vec2(fields[4],fields[5]);

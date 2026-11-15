@@ -5,13 +5,13 @@ bool lbc_tiktok_tile(sampler2D atlas, vec2 uv, out vec2 local) {
     ivec2 p = clamp(ivec2(floor(uv * vec2(size))), ivec2(0), size - 1);
     ivec4 tag = ivec4(round(texelFetch(atlas, p, 0) * 255.0));
     local = vec2(0);
-    if (tag.r != 43 || tag.a != 211 || tag.g < 32 || tag.g > 95 || tag.b < 128 || tag.b > 191) return false;
+    if (tag.r != 43 || (tag.a != 211 && tag.a != 255) || tag.g < 32 || tag.g > 95 || tag.b < 128 || tag.b > 191) return false;
     ivec2 origin = p - ivec2(tag.g - 32, tag.b - 128);
     if (any(lessThan(origin, ivec2(0))) || any(greaterThanEqual(origin + 63, size))) return false;
-    if (any(notEqual(ivec4(round(texelFetch(atlas, origin, 0) * 255.0)), ivec4(43,32,128,211))) ||
-        any(notEqual(ivec4(round(texelFetch(atlas, origin + ivec2(63,0), 0) * 255.0)), ivec4(43,95,128,211))) ||
-        any(notEqual(ivec4(round(texelFetch(atlas, origin + ivec2(0,63), 0) * 255.0)), ivec4(43,32,191,211))) ||
-        any(notEqual(ivec4(round(texelFetch(atlas, origin + ivec2(63,63), 0) * 255.0)), ivec4(43,95,191,211)))) return false;
+    if (any(notEqual(ivec4(round(texelFetch(atlas, origin, 0) * 255.0)), ivec4(43,32,128,tag.a))) ||
+        any(notEqual(ivec4(round(texelFetch(atlas, origin + ivec2(63,0), 0) * 255.0)), ivec4(43,95,128,tag.a))) ||
+        any(notEqual(ivec4(round(texelFetch(atlas, origin + ivec2(0,63), 0) * 255.0)), ivec4(43,32,191,tag.a))) ||
+        any(notEqual(ivec4(round(texelFetch(atlas, origin + ivec2(63,63), 0) * 255.0)), ivec4(43,95,191,tag.a)))) return false;
     local = (uv * vec2(size) - vec2(origin)) / 64.0;
     return true;
 }
@@ -274,8 +274,18 @@ uvec3(0u,0u,0u),
 uvec3(0u,0u,0u),
 uvec3(0u,0u,0u));
 vec3 lbc_tiktok_colour(uvec3 pixels, float localX) {
-    int component = int(clamp(floor(localX * 3.0), 0.0, 2.0));
-    return vec3(LBC_TIKTOK_PALETTE[int(pixels[component] & 255u)]) / 255.0;
+    // Integrate the physical pixel footprint instead of point-sampling three
+    // sharp subpixels. Keep all native palette colors; no reduced palette.
+    float x=clamp(localX*3.0,0.0,3.0);
+    float width=max(fwidth(localX*3.0),.0001);
+    float lo=x-width*.5,hi=x+width*.5,total=0.0;
+    vec3 rgb=vec3(0);
+    for(int i=0;i<3;i++) {
+        float weight=max(0.0,min(hi,float(i+1))-max(lo,float(i)));
+        rgb+=vec3(LBC_TIKTOK_PALETTE[int(pixels[i]&255u)])*weight;
+        total+=weight;
+    }
+    return rgb/(255.0*max(total,.00001));
 }
 #endif
 #endif
