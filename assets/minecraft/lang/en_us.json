@@ -6625,5 +6625,15 @@
   "tiktok.preparing": "Preparing the queue.",
   "tiktok.ready": "Ready.",
   "tiktok.configured": "cookies saved",
-  "tiktok.not_configured": "cookies not imported"
+  "tiktok.not_configured": "cookies not imported",
+  "tiktok.cookie_file": "Path to the cookie JSON file on the server",
+  "tiktok.import_file": "Import a file (up to 4 MiB)",
+  "tiktok.import_file_hint": "Enter the path to a UTF-8 cookie JSON file on the server computer (up to %s MiB).",
+  "tiktok.file_invalid": "Could not import the file",
+  "music_staff": "Staff 52",
+  "music_staff.lore.wild": "Shoots arrow 52, Basically, this is magical bow.",
+  "music_staff.lore.double": "52% chance to shoot double arrow",
+  "upgrade_condition_music_staff": "Listen the music 52 for 52 seconds - so you can feel this wand even better than Adolf ϟϟ",
+  "upgrade_succesful_music_staff": "ϟϟ Now the 52 arrow damage is 16! ϟϟ Moreover, each ϟ 52 ϟ shot now has a 52% chance to fire two ϟϟ 52 arrows at once! ϟϟ",
+  "skywars2.settings.label.synchroRanked": "Shared loot order (next match)"
 }
