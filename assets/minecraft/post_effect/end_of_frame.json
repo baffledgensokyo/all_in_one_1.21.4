@@ -15,9 +15,65 @@
       "height": 68,
       "persistent": true,
       "clear_color": 0
+    },
+    "time_frame": {
+      "width": 3840,
+      "height": 2160,
+      "persistent": true,
+      "clear_color": 0
+    },
+    "time_gate": {
+      "width": 1,
+      "height": 1
+    },
+    "time_previous": {
+      "width": 1,
+      "height": 1,
+      "persistent": true,
+      "clear_color": 0
     }
   },
   "passes": [
+    {
+      "vertex_shader": "minecraft:core/screenquad",
+      "fragment_shader": "lbc:post/time_gate",
+      "inputs": [
+        {
+          "sampler_name": "Scene",
+          "target": "minecraft:main"
+        },
+        {
+          "sampler_name": "History",
+          "target": "time_previous"
+        }
+      ],
+      "output": "time_gate"
+    },
+    {
+      "vertex_shader": "minecraft:core/screenquad",
+      "fragment_shader": "minecraft:post/blit",
+      "inputs": [
+        {
+          "sampler_name": "In",
+          "target": "time_gate"
+        }
+      ],
+      "output": "time_previous",
+      "uniforms": {
+        "BlitConfig": [
+          {
+            "name": "ColorModulate",
+            "type": "vec4",
+            "value": [
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        ]
+      }
+    },
     {
       "vertex_shader": "minecraft:core/screenquad",
       "fragment_shader": "lbc:post/effect_state",
@@ -320,6 +376,36 @@
           "sampler_name": "SceneDepth",
           "target": "minecraft:main",
           "use_depth_buffer": true
+        }
+      ],
+      "output": "minecraft:main"
+    },
+    {
+      "vertex_shader": "lbc:post/time_capture",
+      "fragment_shader": "lbc:post/time_capture",
+      "inputs": [
+        {
+          "sampler_name": "Gate",
+          "target": "time_gate"
+        },
+        {
+          "sampler_name": "Scene",
+          "target": "minecraft:main"
+        }
+      ],
+      "output": "time_frame"
+    },
+    {
+      "vertex_shader": "lbc:post/time_present",
+      "fragment_shader": "lbc:post/time_present",
+      "inputs": [
+        {
+          "sampler_name": "Gate",
+          "target": "time_gate"
+        },
+        {
+          "sampler_name": "Frame",
+          "target": "time_frame"
         }
       ],
       "output": "minecraft:main"
