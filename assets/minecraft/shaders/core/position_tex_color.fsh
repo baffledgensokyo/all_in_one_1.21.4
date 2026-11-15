@@ -73,7 +73,7 @@ void main() {
         bvec2 reach=lessThan(d,pixelScale*4.5);
         if(!((stroke.x&&reach.y)||(stroke.y&&reach.x)))discard;
         // INVERT blending needs fully white RGB as well as opaque alpha.
-        fragColor=vertexColor*ColorModulator;
+        fragColor=vec4((vertexColor*ColorModulator).rgb,251.0/255.0);
         return;
     }
     vec4 color = texture(Sampler0, texCoord0) * vertexColor;

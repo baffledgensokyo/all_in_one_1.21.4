@@ -36,7 +36,7 @@ layout(location = 11) in float meditationWarningFade;
 layout(location = 12) in float meditationWarningProgress;
 layout(location = 13) in vec2 meditationWarningQuadCoord;
 
-layout(location = 14) flat in uvec2 tmtTintSeed;
+layout(location = 14) flat in uvec3 tmtTintSeed;
 layout(location = 15) in vec4 tmtVertexLight;
 layout(location = 7) flat in uvec4 tmtSourceCells;
 layout(location = 8) flat in float atlasGlitchCode;
@@ -75,7 +75,19 @@ vec4 calculateFinalColor(vec4 color, bool bypassLighting, bool bypassFog, bool p
 }
 #endif
 
+#define LBC_TIKTOK_FRAGMENT
+#include <lbc:phone_hd_pixels.glsl>
 void main() {
+    if (tmtTintSeed.z != 0u) {
+        vec3 rgb = lbc_tiktok_colour(uvec3(tmtTintSeed.x, tmtTintSeed.y >> 8u, tmtTintSeed.y & 255u), meditationWarningFade);
+        vec4 phone = vec4(rgb, ColorModulator.a);
+        #ifdef OIT_ALPHA_ONLY
+        executeAlphaOnlyPhase(gl_FragCoord.z, phone.a);
+        #else
+        fragColor = calculateFinalColor(phone, true, true, true);
+        #endif
+        return;
+    }
     if (zoneMaterial == 2 || zoneMaterial == 3) {
         // Same 8x8 / 52-pixel circle and palette as the original radar particle.
         vec2 pixel = floor(clamp(meditationWarningQuadCoord, 0.0, 0.99999) * 8.0) - 3.5;

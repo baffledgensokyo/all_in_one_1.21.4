@@ -58,7 +58,7 @@ void main() {
     for(int a=0;a<3;a++)up[a]=readField(20+a,row,valid);
     if(!valid || any(lessThan(projection,vec2(0.00001))) || any(greaterThan(projection,vec2(10000))))return;
     float degrees=length(p[1]-p[0]),modeLength=length(p[2]-p[0]);
-    if(isnan(degrees) || isinf(degrees) || degrees<=0.0 || degrees>=89.9 || modeLength<0.5 || modeLength>2.5)return;
+    if(isnan(degrees) || isinf(degrees) || degrees<0.0 || degrees>=89.9 || modeLength<0.5 || modeLength>2.5)return;
     if(abs(length(forward)-1.0)>0.02 || abs(length(right)-1.0)>0.02 || abs(length(up)-1.0)>0.02)return;
     forward=normalize(forward);right=normalize(right);up=normalize(up);
     if(abs(dot(forward,right))>0.02 || abs(dot(forward,up))>0.02 || abs(dot(right,up))>0.02)return;
