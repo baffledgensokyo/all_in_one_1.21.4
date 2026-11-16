@@ -6635,5 +6635,6 @@
   "music_staff.lore.double": "52% chance to shoot double arrow",
   "upgrade_condition_music_staff": "Listen the music 52 for 52 seconds - so you can feel this wand even better than Adolf ϟϟ",
   "upgrade_succesful_music_staff": "ϟϟ Now the 52 arrow damage is 16! ϟϟ Moreover, each ϟ 52 ϟ shot now has a 52% chance to fire two ϟϟ 52 arrows at once! ϟϟ",
-  "skywars2.settings.label.synchroRanked": "Shared loot order (next match)"
+  "skywars2.settings.label.synchroRanked": "Shared loot order (next match)",
+  "close": "Close"
 }

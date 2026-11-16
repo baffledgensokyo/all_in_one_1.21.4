@@ -63,17 +63,11 @@ bool isColorNear(ivec3 color, ivec3 target, int tolerance) {
 
 void main() {
     if(centeredCrosshairScale.x>0.0) {
-        // Keep native stroke width and snap its edges to physical pixels.
-        // Exact geometric centering would soften odd-width strokes on even
-        // framebuffers (and vice versa); the nearest sharp center is <=0.5px away.
-        vec2 pixelScale=max(round(centeredCrosshairScale),vec2(1.0));
-        vec2 center=floor((ScreenSize-pixelScale)*0.5)+pixelScale*0.5;
-        vec2 d=abs(gl_FragCoord.xy-center);
-        bvec2 stroke=lessThan(d,pixelScale*0.5);
-        bvec2 reach=lessThan(d,pixelScale*4.5);
-        if(!((stroke.x&&reach.y)||(stroke.y&&reach.x)))discard;
-        // INVERT blending needs fully white RGB as well as opaque alpha.
-        fragColor=vec4((vertexColor*ColorModulator).rgb,251.0/255.0);
+        // Preserve the native GUI sprite and projection. GUI rendering may use
+        // an intermediate viewport; Globals.ScreenSize is not its clip rectangle.
+        vec4 nativeCrosshair=texture(Sampler0,texCoord0)*vertexColor*ColorModulator;
+        if(nativeCrosshair.a<=0.0)discard;
+        fragColor=vec4(nativeCrosshair.rgb,251.0/255.0);
         return;
     }
     vec4 color = texture(Sampler0, texCoord0) * vertexColor;

@@ -1,19 +1,30 @@
 #ifndef LBC_PHONE_HD_PIXELS
 #define LBC_PHONE_HD_PIXELS
+// Model UVs in26.3 include the exact right/bottom atlas boundary.
+// Check the four adjacent texels before validating the whole private sprite.
+// A standalone texture clamps that boundary and hides this atlas-only failure.
 bool lbc_tiktok_tile(sampler2D atlas, vec2 uv, out vec2 local) {
     ivec2 size = textureSize(atlas, 0);
-    ivec2 p = clamp(ivec2(floor(uv * vec2(size))), ivec2(0), size - 1);
-    ivec4 tag = ivec4(round(texelFetch(atlas, p, 0) * 255.0));
+    vec2 pixel = uv * vec2(size);
+    ivec2 edge = ivec2(floor(pixel));
     local = vec2(0);
-    if (tag.r != 43 || (tag.a != 211 && tag.a != 255) || tag.g < 32 || tag.g > 95 || tag.b < 128 || tag.b > 191) return false;
-    ivec2 origin = p - ivec2(tag.g - 32, tag.b - 128);
-    if (any(lessThan(origin, ivec2(0))) || any(greaterThanEqual(origin + 63, size))) return false;
-    if (any(notEqual(ivec4(round(texelFetch(atlas, origin, 0) * 255.0)), ivec4(43,32,128,tag.a))) ||
-        any(notEqual(ivec4(round(texelFetch(atlas, origin + ivec2(63,0), 0) * 255.0)), ivec4(43,95,128,tag.a))) ||
-        any(notEqual(ivec4(round(texelFetch(atlas, origin + ivec2(0,63), 0) * 255.0)), ivec4(43,32,191,tag.a))) ||
-        any(notEqual(ivec4(round(texelFetch(atlas, origin + ivec2(63,63), 0) * 255.0)), ivec4(43,95,191,tag.a)))) return false;
-    local = (uv * vec2(size) - vec2(origin)) / 64.0;
-    return true;
+    for (int candidate=0;candidate<4;candidate++) {
+        ivec2 p=edge-ivec2(candidate&1,candidate>>1);
+        if(any(lessThan(p,ivec2(0)))||any(greaterThanEqual(p,size)))continue;
+        ivec4 tag=ivec4(round(texelFetch(atlas,p,0)*255.0));
+        if(tag.r!=43 || (tag.a!=211 && tag.a!=255) || tag.g<32 || tag.g>95 || tag.b<128 || tag.b>191)continue;
+        ivec2 origin=p-ivec2(tag.g-32,tag.b-128);
+        if(any(lessThan(origin,ivec2(0)))||any(greaterThanEqual(origin+63,size)))continue;
+        vec2 point=(pixel-vec2(origin))/64.0;
+        if(any(lessThan(point,vec2(-.00001)))||any(greaterThan(point,vec2(1.00001))))continue;
+        if(any(notEqual(ivec4(round(texelFetch(atlas,origin,0)*255.0)),ivec4(43,32,128,tag.a))) ||
+           any(notEqual(ivec4(round(texelFetch(atlas,origin+ivec2(63,0),0)*255.0)),ivec4(43,95,128,tag.a))) ||
+           any(notEqual(ivec4(round(texelFetch(atlas,origin+ivec2(0,63),0)*255.0)),ivec4(43,32,191,tag.a))) ||
+           any(notEqual(ivec4(round(texelFetch(atlas,origin+ivec2(63,63),0)*255.0)),ivec4(43,95,191,tag.a))))continue;
+        local=clamp(point,vec2(0),vec2(1));
+        return true;
+    }
+    return false;
 }
 #ifdef LBC_TIKTOK_FRAGMENT
 const uvec3 LBC_TIKTOK_PALETTE[256] = uvec3[256](
