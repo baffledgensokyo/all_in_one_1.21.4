@@ -7,6 +7,7 @@
 #include <minecraft:fog.glsl>
 #include <minecraft:dynamictransforms.glsl>
 #include <minecraft:oit.glsl>
+#include <lbc:bloom_rules.glsl>
 
 uniform sampler2D Sampler0;
 
@@ -135,5 +136,10 @@ void main() {
     executeAlphaOnlyPhase(gl_FragCoord.z, color.a);
     #else
     fragColor = calculateFinalColor(color, bypassLighting, bypassFog);
+    #ifndef OIT
+    // Fullbright textures explicitly opt in with alpha254; ordinary skins do not.
+    fragColor = lbc_bloom_unmarked(fragColor);
+    if (alphaMarker == 254 && lbc_bloom_rule(rawColor.rgb) >= 0) fragColor.a = 254.0 / 255.0;
+    #endif
     #endif
 }

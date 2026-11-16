@@ -1,6 +1,16 @@
 {
   "targets": {
-    "skill_issue_scene": {}
+    "skill_issue_scene": {},
+    "skill_issue_history": {
+      "persistent": true,
+      "clear_color": 0
+    },
+    "skill_issue_clock": {
+      "width": 1,
+      "height": 1,
+      "persistent": true,
+      "clear_color": 0
+    }
   },
   "passes": [
     {
@@ -10,9 +20,43 @@
         {
           "sampler_name": "In",
           "target": "minecraft:main"
+        },
+        {
+          "sampler_name": "History",
+          "target": "skill_issue_history",
+          "bilinear": true
+        },
+        {
+          "sampler_name": "Clock",
+          "target": "skill_issue_clock"
         }
       ],
       "output": "skill_issue_scene"
+    },
+    {
+      "vertex_shader": "minecraft:core/screenquad",
+      "fragment_shader": "minecraft:post/blit",
+      "inputs": [
+        {
+          "sampler_name": "In",
+          "target": "skill_issue_scene"
+        }
+      ],
+      "output": "skill_issue_history",
+      "uniforms": {
+        "BlitConfig": [
+          {
+            "name": "ColorModulate",
+            "type": "vec4",
+            "value": [
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        ]
+      }
     },
     {
       "vertex_shader": "minecraft:core/screenquad",
@@ -38,6 +82,12 @@
           }
         ]
       }
+    },
+    {
+      "vertex_shader": "minecraft:core/screenquad",
+      "fragment_shader": "lbc:post/skill_issue_clock",
+      "inputs": [],
+      "output": "skill_issue_clock"
     }
   ]
 }

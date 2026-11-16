@@ -4,75 +4,71 @@
 #include <minecraft:globals.glsl>
 
 uniform sampler2D InSampler;
+uniform sampler2D HistorySampler;
+uniform sampler2D ClockSampler;
 layout(location = 0) out vec4 fragColor;
 
-const float CELL_DENSITY = 0.50;
-// Denser grids of smaller squares leave about 30% of the screen unobstructed.
-const float MAX_TILE_FRACTION = 0.80;
-const float SWITCH_SECONDS = 0.8;
+// Exponential persistence: larger values leave longer trails, independent of FPS.
+const float TRAIL_SECONDS = 0.65;
+const float HUE_RADIANS_PER_SECOND = 1.6;
 
-float cellNoise(ivec2 cell, uint seed) {
-    uint bits = uint(cell.x) * 1597334677u ^ uint(cell.y) * 3812015801u ^ seed * 2798796415u;
-    bits ^= bits >> 16u;
-    bits *= 2246822519u;
-    bits ^= bits >> 13u;
-    return float(bits & 16777215u) / 16777216.0;
-}
-
-vec3 cubeColor(ivec2 cell, uint seed) {
-    // Four equally likely slots: black, black, white, independent random RGB.
-    int slot = int(cellNoise(cell, seed + 1u) * 4.0);
-    if (slot < 2) return vec3(0.0);
-    if (slot == 2) return vec3(1.0);
-    return vec3(cellNoise(cell, seed + 2u),
-                cellNoise(cell, seed + 3u),
-                cellNoise(cell, seed + 4u));
-}
-
-vec3 cubeGrid(vec3 scene, vec2 point, float pixelWidth, float seconds,
-              float cellSize, vec2 offset, uint layerSeed) {
-    vec2 grid = point / cellSize + offset;
-    ivec2 cell = ivec2(floor(grid));
-    vec2 local = (fract(grid) - 0.5) * cellSize;
-
-    // Every cell switches on its own clock, including cells in currently empty areas.
-    float period = mix(2.8, 5.5, cellNoise(cell, layerSeed));
-    float clock = seconds + cellNoise(cell, layerSeed + 1u) * period;
-    uint cycle = uint(int(floor(clock / period)));
-    float transition = smoothstep(0.0, SWITCH_SECONDS, mod(clock, period));
-    uint previousSeed = layerSeed + (cycle - 1u) * 1013u + 100u;
-    uint nextSeed = layerSeed + cycle * 1013u + 100u;
-    float previous = 1.0 - step(CELL_DENSITY, cellNoise(cell, previousSeed));
-    float next = 1.0 - step(CELL_DENSITY, cellNoise(cell, nextSeed));
-    float extent = mix(previous, next, transition);
-
-    // Grow/shrink the square instead of fading it: its interior stays opaque.
-    float halfSize = cellSize * MAX_TILE_FRACTION * 0.5 * extent;
-    float edge = max(abs(local.x), abs(local.y));
-    float face = clamp((halfSize - edge) / pixelWidth + 0.5, 0.0, 1.0);
-    face *= step(0.0001, extent);
-    if (face <= 0.0) return scene;
-
-    vec3 previousColor = cubeColor(cell, previousSeed);
-    vec3 nextColor = cubeColor(cell, nextSeed);
-    // Appearing/disappearing cubes retain their color; surviving cubes change smoothly.
-    float colorTransition = previous * next * transition + (1.0 - previous);
-    vec3 color = mix(previousColor, nextColor, colorTransition);
-    return mix(scene, color, face);
+vec3 acidHue(vec3 color, float angle) {
+    // Rotate around the gray axis without adding brightness on each feedback loop.
+    vec3 axis = vec3(0.57735026919);
+    vec3 rotated = color * cos(angle) + cross(axis, color) * sin(angle)
+                 + axis * dot(axis, color) * (1.0 - cos(angle));
+    rotated = max(rotated, vec3(0.0));
+    float peak = max(color.r, max(color.g, color.b));
+    return rotated * (peak / max(max(rotated.r, max(rotated.g, rotated.b)), 0.0001));
 }
 
 void main() {
-    ivec2 pixel = ivec2(gl_FragCoord.xy);
-    vec4 scene = texelFetch(InSampler, pixel, 0);
+    vec2 size = vec2(textureSize(InSampler, 0));
+    vec2 uv = gl_FragCoord.xy / size;
+    vec4 scene = texelFetch(InSampler, ivec2(gl_FragCoord.xy), 0);
+    float gray = dot(scene.rgb, vec3(0.2126, 0.7152, 0.0722));
+    vec3 fresh = clamp(mix(vec3(gray), scene.rgb, 1.3), 0.0, 1.0);
+
+    // The separate clock keeps scene alpha intact and rejects stale history
+    // after the effect has been disabled. Unsigned subtraction handles day wrap.
+    uvec4 clock = uvec4(round(texelFetch(ClockSampler, ivec2(0), 0) * 255.0));
+    uint previous = clock.r | (clock.g << 8u) | (clock.b << 16u);
+    uint now = uint(GameTime * 16777216.0) & 16777215u;
+    float delta = float((now - previous) & 16777215u) * (1200.0 / 16777216.0);
+    if (clock.a == 0u || delta > 0.35) {
+        fragColor = vec4(fresh, scene.a);
+        return;
+    }
+
     float seconds = GameTime * 1200.0;
-    float pixelWidth = 720.0 / float(textureSize(InSampler, 0).y);
-    vec2 point = gl_FragCoord.xy * pixelWidth;
+    vec2 centered = uv - 0.5;
+    // Feed the old screen back into itself: slow expansion and liquid drift
+    // stretch real previous frames into the trails of an unredrawn desktop.
+    vec2 velocity = centered * 0.018;
+    velocity += vec2(sin(uv.y * 9.0 + seconds * 0.7),
+                     cos(uv.x * 8.0 - seconds * 0.6)) * 0.007;
+    velocity.x *= size.y / size.x;
+    vec2 historyUV = uv - velocity * delta;
+    vec2 halfPixel = 0.5 / size;
+    vec3 history = texture(HistorySampler, clamp(historyUV, halfPixel, 1.0 - halfPixel)).rgb;
+    history = acidHue(history, delta * HUE_RADIANS_PER_SECOND);
 
-    // Fixed, offset grids at three scales; the scene itself is sampled unchanged.
-    vec3 color = cubeGrid(scene.rgb, point, pixelWidth, seconds, 22.0, vec2(0.0), 17u);
-    color = cubeGrid(color, point, pixelWidth, seconds, 35.0, vec2(0.37, 0.61), 131u);
-    color = cubeGrid(color, point, pixelWidth, seconds, 51.0, vec2(-0.28, 0.19), 307u);
-
-    // Preserve alpha data used by other post effects.
+    float persistence = exp(-delta / TRAIL_SECONDS);
+    vec3 color = mix(fresh, history, persistence);
+    // Unbiased rounding prevents RGBA8 feedback from retaining dim ghosts
+    // forever at high FPS. Noise is below one color step.
+    uint seed = now ^ (uint(gl_FragCoord.x) * 1597334677u)
+                    ^ (uint(gl_FragCoord.y) * 3812015801u);
+    uvec3 bits = uvec3(seed) ^ uvec3(2246822519u, 3266489917u, 668265263u);
+    bits ^= bits >> 16u;
+    bits *= 2246822519u;
+    bits ^= bits >> 13u;
+    if (delta > 0.0) {
+        color += (vec3(bits & 65535u) / 65536.0 - 0.5) / 255.0;
+    }
+    // Do not smear edge texels into a permanent border outside the saved image.
+    if (any(lessThan(historyUV, halfPixel)) || any(greaterThan(historyUV, 1.0 - halfPixel))) {
+        color = fresh;
+    }
     fragColor = vec4(color, scene.a);
 }

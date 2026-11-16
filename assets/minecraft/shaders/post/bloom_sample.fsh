@@ -1,56 +1,19 @@
 #version 330
 #extension GL_ARB_separate_shader_objects : require
-#define GLOW_COLORS 15
-#include <minecraft:globals.glsl>
+#include <lbc:bloom_rules.glsl>
 uniform sampler2D DiffuseSampler;
-
-layout(std140) uniform BlitConfig {
-    vec4 ColorModulate;
-};
-
+layout(std140) uniform BlitConfig { vec4 ColorModulate; };
 layout(location = 0) in vec2 texCoord;
 layout(location = 0) out vec4 fragColor;
-
-void main(){
-    vec4 checkColor = texture(DiffuseSampler, texCoord) * ColorModulate;
-    // All palette colors peak above 0.84; the tolerant red core needs r > 0.91.
-    // Dim scene pixels cannot contribute, so skip classification entirely.
-    if (max(checkColor.r, max(checkColor.g, checkColor.b)) < 0.84) {
-        fragColor = vec4(0.0);
-        return;
-    }
-    vec4 outColor = vec4(0);
-    ivec3[GLOW_COLORS] glowColorList = ivec3[](
-        ivec3(0,48,255),
-        ivec3(255,252,253),
-        ivec3(238,50,115),
-        ivec3(43,216,147),
-        ivec3(255,14,14),
-        ivec3(51,220,255),
-        ivec3(52,55,229),
-        ivec3(195,0,255),
-        ivec3(147,0,237),
-        ivec3(116,0,228),
-        ivec3(105,218,82),
-        ivec3(255,142,50),
-        ivec3(235,79,255),
-        ivec3(180,53,255),
-        ivec3(122,42,232)
-    );
-
-    // Half-float OIT intermediates can put an exact palette channel just below
-    // its byte value. Recover the nearest byte instead of truncating it.
-    for(int i = 0; i < GLOW_COLORS; i++) {
-        // Red energy is continuous. Exact RGB equality made its glow toggle
-        // when movement/filtering changed a channel by a single byte.
-        if (i == 4) continue;
-        if (ivec3(round(checkColor.xyz * 255.0)) == glowColorList[i]) {
-            outColor += checkColor;
-        }
-    }
-    vec3 redCore = vec3(255.0, 14.0, 14.0) / 255.0;
-    float redDistance = length((checkColor.rgb - redCore) * vec3(1.0, 2.0, 2.0));
-    float redGlow = 1.0 - smoothstep(0.005, 0.09, redDistance);
-    outColor = max(outColor, checkColor * redGlow);
-    fragColor = outColor;
+void main() {
+    vec4 scene = texture(DiffuseSampler, texCoord);
+    fragColor = vec4(0.0);
+    if (lbc_bloom_transport(ivec2(gl_FragCoord.xy), textureSize(DiffuseSampler, 0))) return;
+    // Reject ordinary RGB before the table lookup. Never loosen this to RGB-only.
+    if (!lbc_bloom_marked(scene)) return;
+    int index = lbc_bloom_rule(scene.rgb);
+    if (index < 0) return;
+    LbcBloomRule rule = LBC_BLOOM_RULES[index];
+    // RGBA8 intermediate: retain headroom for strengths up to4, restore after blur.
+    fragColor = vec4(vec3(rule.halo) / 255.0 * clamp(rule.strength, 0.0, 4.0) / 4.0, 1.0);
 }

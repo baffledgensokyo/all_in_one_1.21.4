@@ -7,6 +7,7 @@
 #include <minecraft:globals.glsl>
 #include <minecraft:texture_sampling.glsl>
 #include <minecraft:oit.glsl>
+#include <lbc:bloom_rules.glsl>
 #include <minecraft:terrainglobals.glsl>
 #ifndef MULTIDRAW_TERRAIN
     #include <minecraft:chunksection.glsl>
@@ -57,5 +58,9 @@ void main() {
     executeAlphaOnlyPhase(gl_FragCoord.z, color.a);
     #else
     fragColor = calculateFinalColor(color);
+    #ifndef OIT
+    // The material tag is owned by item/entity emission, never terrain/particles.
+    fragColor = lbc_bloom_unmarked(fragColor);
+    #endif
     #endif
 }

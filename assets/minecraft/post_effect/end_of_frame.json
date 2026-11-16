@@ -178,7 +178,7 @@
     },
     {
       "vertex_shader": "minecraft:core/screenquad",
-      "fragment_shader": "minecraft:post/bloom",
+      "fragment_shader": "lbc:post/material_bloom",
       "inputs": [
         {
           "sampler_name": "Diffuse",
@@ -217,7 +217,7 @@
     },
     {
       "vertex_shader": "minecraft:core/screenquad",
-      "fragment_shader": "minecraft:post/bloom",
+      "fragment_shader": "lbc:post/material_bloom",
       "inputs": [
         {
           "sampler_name": "Diffuse",

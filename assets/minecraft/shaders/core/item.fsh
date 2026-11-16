@@ -5,6 +5,7 @@
 #include <minecraft:fog.glsl>
 #include <minecraft:dynamictransforms.glsl>
 #include <minecraft:oit.glsl>
+#include <lbc:bloom_rules.glsl>
 #include <lbc:zone_window.glsl>
 #include <lbc:meditation_warning.glsl>
 #include <lbc:tmt_atlas.glsl>
@@ -160,5 +161,10 @@ void main() {
     executeAlphaOnlyPhase(gl_FragCoord.z, color.a);
     #else
     fragColor = calculateFinalColor(color, bypassLighting, bypassFog, alphaMarker == 254);
+    #ifndef OIT
+    // Item cutout writes this explicit material tag; PNG alpha255 never opts in.
+    fragColor = lbc_bloom_unmarked(fragColor);
+    if (alphaMarker == 254 && lbc_bloom_rule(rawColor.rgb) >= 0) fragColor.a = 254.0 / 255.0;
+    #endif
     #endif
 }

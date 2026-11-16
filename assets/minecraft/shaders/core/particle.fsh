@@ -4,6 +4,7 @@
 #include <minecraft:fog.glsl>
 #include <minecraft:dynamictransforms.glsl>
 #include <minecraft:oit.glsl>
+#include <lbc:bloom_rules.glsl>
 
 uniform sampler2D Sampler0;
 
@@ -56,5 +57,9 @@ void main() {
     executeAlphaOnlyPhase(gl_FragCoord.z, color.a);
     #else
     fragColor = calculateFinalColor(color, laser);
+    #ifndef OIT
+    // The material tag is owned by item/entity emission, never terrain/particles.
+    fragColor = lbc_bloom_unmarked(fragColor);
+    #endif
     #endif
 }
