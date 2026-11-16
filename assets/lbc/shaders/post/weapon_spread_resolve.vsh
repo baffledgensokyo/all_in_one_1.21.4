@@ -34,20 +34,8 @@ void main() {
         if(isnan(fields[i]) || isinf(fields[i]) || fields[i]<0)return;
     }
     if(fields[4]<=0 || fields[4]>64 || fields[5]>256)return;
-    // Inspect the actual GUI stroke, including its pixel-snapped center/GUI scale.
-    // With F1, a scope or a menu there is no native stroke: retain that behavior.
-    ivec2 middle=size/2,found=ivec2(-1);
-    for(int y=-1;y<=1;y++)for(int x=-1;x<=1;x++)
-        if(nativePixel(middle+ivec2(x,y),size))found=middle+ivec2(x,y);
-    if(found.x<0)return;
-    ivec2 lo=found,hi=found;
-    for(int i=-128;i<=128;i++)for(int d=-1;d<=1;d++) {
-        ivec2 x=ivec2(middle.x+i,middle.y+d),y=ivec2(middle.x+d,middle.y+i);
-        if(nativePixel(x,size)){lo.x=min(lo.x,x.x);hi.x=max(hi.x,x.x);}
-        if(nativePixel(y,size)){lo.y=min(lo.y,y.y);hi.y=max(hi.y,y.y);}
-    }
-    nativeRect=vec4(lo,hi+1);
-    reticleCenter=(vec2(lo+hi)+1.0)*.5;
+    // GameRenderer applies post effects BEFORE GuiRenderer.render. Decode the
+    // current weapon header without looking for a future GUI crosshair pixel.
     reticleBounds=vec4(fields[0],fields[1],fields[2],fields[3]);
     reticleStyle=vec2(fields[4],fields[5]);
 }

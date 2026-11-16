@@ -67,7 +67,7 @@ void main() {
         // an intermediate viewport; Globals.ScreenSize is not its clip rectangle.
         vec4 nativeCrosshair=texture(Sampler0,texCoord0)*vertexColor*ColorModulator;
         if(nativeCrosshair.a<=0.0)discard;
-        fragColor=vec4(nativeCrosshair.rgb,251.0/255.0);
+        fragColor=nativeCrosshair;
         return;
     }
     vec4 color = texture(Sampler0, texCoord0) * vertexColor;

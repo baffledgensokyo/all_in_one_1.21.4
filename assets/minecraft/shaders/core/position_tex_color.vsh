@@ -59,7 +59,15 @@ void main() {
         vec2 origin=Position.xy-quadUV*15.0;
         if(all(lessThan(abs(origin-expectedOrigin),vec2(0.01)))) {
             ivec2 spriteOrigin=ivec2(round(UV0*vec2(textureSize(Sampler0,0))-quadUV*15.0));
-            if(vanillaCrosshair(spriteOrigin))centeredCrosshairScale=ScreenSize/viewport;
+            if(vanillaCrosshair(spriteOrigin)) {
+                centeredCrosshairScale=ScreenSize/viewport;
+                // Canonical physical-pixel footprint: the world XOR pass uses the
+                // same geometry without needing a GUI draw that happens later.
+                float scale=max(1.0,floor(min(ScreenSize.x/640.0,ScreenSize.y/360.0)));
+                vec2 origin=floor(ScreenSize*.5-vec2(7.5*scale));
+                vec2 pixel=origin+vec2(quadUV.x,1.0-quadUV.y)*15.0*scale;
+                gl_Position.xy=(pixel/ScreenSize*2.0-1.0)*gl_Position.w;
+            }
         }
     }
 }
