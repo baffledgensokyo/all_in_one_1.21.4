@@ -43,7 +43,10 @@ void main() {
         // Server-provided text can make the sidebar cross the screen midpoint.
         // Its right edge and vertical layout stay anchored; its left edge does not.
         bool sidebarWidth = upper.x - lower.x >= 3.0;
-        bool aligned = abs(edgeU.y) < 0.05 && abs(edgeV.x) < 0.05;
+        // StagedVertexBuffer baseVertex can rotate the quad corner phase.
+        // Both edge bases describe the same axis-aligned rectangle.
+        bool aligned = (abs(edgeU.y) < 0.05 && abs(edgeV.x) < 0.05) ||
+                       (abs(edgeU.x) < 0.05 && abs(edgeV.y) < 0.05);
         bool black = all(lessThan(abs(vertexColor.rgb), vec3(0.001)));
         // Opacity is deliberately unrestricted: accessibility settings can
         // override both the usual 0.3 body alpha and the 0.4 title alpha.

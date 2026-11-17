@@ -2,6 +2,7 @@
 #extension GL_ARB_separate_shader_objects : require
 
 #include <minecraft:fog.glsl>
+#include <minecraft:globals.glsl>
 #include <minecraft:dynamictransforms.glsl>
 #include <minecraft:oit.glsl>
 #include <lbc:bloom_rules.glsl>
@@ -14,6 +15,7 @@ layout(location = 2) in vec2 texCoord0;
 layout(location = 3) in vec4 vertexColor;
 layout(location = 4) flat in int customParticle;
 layout(location = 5) in vec2 particleCoord;
+layout(location = 6) in vec3 smokeWorldRay;
 
 #ifndef OIT_ALPHA_ONLY
 layout(location = 0) out vec4 fragColor;
@@ -49,6 +51,20 @@ void main() {
         float coverage=1.0-smoothstep(edge-.34,edge,length(p));
         float shade=.45+.055*sin(p.x*7.0-p.y*8.0);
         color=vec4(vec3(shade),coverage*.9)*ColorModulator;
+    }
+    if(customParticle==4) {
+        vec2 p=particleCoord*2.0-1.0;
+        float edge=.84+.05*sin(p.x*9.0+p.y*5.0)+.03*sin(p.y*13.0-p.x*6.0);
+        float coverage=1.0-smoothstep(edge-.08,edge,length(p));
+        // Equal, opaque interiors do not reveal seams where billboards overlap.
+        // Only the outer rim and the final native tick fade into the next puff.
+        // Shared world-oriented shading: every puff on this view ray has the
+        // same colour, so depth order cannot draw a patchwork of visible seams.
+        vec3 camera=vec3(CameraBlockPos)-CameraOffset;
+        vec3 q=normalize(smokeWorldRay)*18.0+camera*.12+GameTime*24000.0*vec3(.009,.004,-.006);
+        float billow=sin(dot(q,vec3(1.17,.93,1.42))+.4*sin(dot(q,vec3(-1.3,2.2,.7))));
+        float shade=.46+.035*billow;
+        color=vec4(vec3(shade),coverage*vertexColor.a)*ColorModulator;
     }
     if (color.a < 0.1) {
         discard;

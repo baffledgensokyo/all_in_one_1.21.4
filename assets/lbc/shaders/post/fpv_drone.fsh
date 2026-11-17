@@ -1,5 +1,6 @@
 #version 330
 #extension GL_ARB_separate_shader_objects : require
+#include <minecraft:globals.glsl>
 
 // Cosmetic edge instrumentation only; flight/camera/input are native server state.
 uniform sampler2D InSampler;
@@ -24,13 +25,45 @@ float fpvGrid(vec2 point, vec2 origin, vec2 size, float cell) {
     return occupied * square;
 }
 
+float fpvNoise(ivec2 pixel, uint frame) {
+    uint bits = uint(pixel.x) * 1973u ^ uint(pixel.y) * 9277u ^ frame * 26699u;
+    bits = (bits ^ (bits >> 13u)) * 1274126177u;
+    return float((bits ^ (bits >> 16u)) & 1023u) / 1023.0;
+}
+
+vec4 fpvVhs(vec4 original, ivec2 pixel, ivec2 dimensions) {
+    // Keep the existing camera/black-hole/nuclear transport strips byte-exact.
+    if (pixel.x < 171 && min(pixel.y, dimensions.y - 1 - pixel.y) < 50) return original;
+    float seconds = GameTime * 1200.0;
+    uint frame = uint(floor(seconds * 30.0));
+    float y = (float(pixel.y) + 0.5) / float(dimensions.y);
+    float sweep = abs(fract(y - seconds * 0.075) - 0.5);
+    float tracking = 1.0 - smoothstep(0.004, 0.018, sweep);
+    float lineNoise = fpvNoise(ivec2(pixel.y / 2, 0), frame) - 0.5;
+    int shift = int(round(tracking * (lineNoise * 5.0 + 2.0)));
+    ivec2 signalPixel = clamp(pixel + ivec2(shift, 0), ivec2(0), dimensions - 1);
+    vec3 signal = shift == 0 ? original.rgb : texelFetch(InSampler, signalPixel, 0).rgb;
+    // Chroma misalignment belongs only to the narrow rolling tracking band.
+    if (tracking > 0.1) {
+        signal.r = texelFetch(InSampler, clamp(signalPixel + ivec2(1, 0), ivec2(0), dimensions - 1), 0).r;
+        signal.b = texelFetch(InSampler, clamp(signalPixel - ivec2(1, 0), ivec2(0), dimensions - 1), 0).b;
+    }
+    float grain = (fpvNoise(pixel, frame) - 0.5) * 0.036;
+    float scan = ((pixel.y & 1) == 0) ? 1.0 : 0.982;
+    signal = signal * scan + grain + lineNoise * tracking * 0.035;
+    return vec4(clamp(signal, 0.0, 1.0), original.a);
+}
+
 void main() {
     ivec2 pixel = ivec2(gl_FragCoord.xy);
     vec2 size = vec2(textureSize(InSampler, 0));
     vec4 scene = texelFetch(InSampler, pixel, 0);
     fragColor = scene;
+    if (pixel.x < 171 && min(pixel.y, int(size.y) - 1 - pixel.y) < 50) return;
+    scene = fpvVhs(scene, pixel, ivec2(size));
+    fragColor = scene;
     float sideX = min(gl_FragCoord.x, size.x - gl_FragCoord.x);
-    // Keep the full central 60% unmodified at every height and aspect ratio.
+    // Existing edge instruments stay outside the central60%; VHS affects the camera signal.
     if (sideX >= size.x * 0.20) return;
     float scale = max(min(size.x, size.y) / 720.0, 0.5);
     // All geometry is measured in height-scaled pixels, clipped to the side band.

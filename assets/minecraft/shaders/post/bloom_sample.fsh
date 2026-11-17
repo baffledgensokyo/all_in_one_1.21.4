@@ -15,5 +15,7 @@ void main() {
     if (index < 0) return;
     LbcBloomRule rule = LBC_BLOOM_RULES[index];
     // RGBA8 intermediate: retain headroom for strengths up to4, restore after blur.
-    fragColor = vec4(vec3(rule.halo) / 255.0 * clamp(rule.strength, 0.0, 4.0) / 4.0, 1.0);
+    float weight = clamp(rule.strength, 0.0, 4.0) / 4.0;
+    // RGB carries light; alpha carries a black halo. Unmarked pixels stay zero.
+    fragColor = vec4(vec3(rule.halo) / 255.0 * weight, lbc_bloom_dark(rule) ? weight : 0.0);
 }

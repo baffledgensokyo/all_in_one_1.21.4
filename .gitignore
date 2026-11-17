@@ -8,3 +8,4 @@ logs/
 compare_lang.py
 server_support/
 scripts/
+__pycache__/

@@ -30,7 +30,9 @@ const LbcBloomRule LBC_BLOOM_RULES[] = LbcBloomRule[](
     LbcBloomRule(ivec3(235,79,255), ivec3(235,79,255), 1.0, LBC_CORE_KEEP),
     LbcBloomRule(ivec3(180,53,255), ivec3(180,53,255), 1.0, LBC_CORE_KEEP),
     LbcBloomRule(ivec3(122,42,232), ivec3(122,42,232), 1.0, LBC_CORE_KEEP),
-    LbcBloomRule(ivec3(255,3,3), ivec3(255,3,3), 1.0, LBC_CORE_WHITE)
+    LbcBloomRule(ivec3(255,3,3), ivec3(255,3,3), 1.0, LBC_CORE_WHITE),
+    LbcBloomRule(ivec3(255,0,64), ivec3(255,14,14), 1.5, LBC_CORE_WHITE),
+    LbcBloomRule(ivec3(29,28,32), ivec3(0,0,0), 2.0, LBC_CORE_WHITE)
 );
 // END ARTIST RULES
 
@@ -50,6 +52,11 @@ int lbc_bloom_rule(vec3 rgb) {
         if (all(equal(source, LBC_BLOOM_RULES[i].source))) return i;
     }
     return -1;
+}
+// A zero-RGB halo is subtractive. The existing editor's black swatch selects it.
+// Its weight travels in the separate bloom target's otherwise unused alpha.
+bool lbc_bloom_dark(LbcBloomRule rule) {
+    return all(equal(rule.halo, ivec3(0)));
 }
 vec4 lbc_bloom_unmarked(vec4 value) {
     // One alpha byte, not a color key: RGB and geometric coverage stay intact.

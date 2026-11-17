@@ -6636,5 +6636,17 @@
   "upgrade_condition_music_staff": "Listen the music 52 for 52 seconds - so you can feel this wand even better than Adolf ϟϟ",
   "upgrade_succesful_music_staff": "ϟϟ Now the 52 arrow damage is 16! ϟϟ Moreover, each ϟ 52 ϟ shot now has a 52% chance to fire two ϟϟ 52 arrows at once! ϟϟ",
   "skywars2.settings.label.synchroRanked": "Shared loot order (next match)",
-  "close": "Close"
+  "close": "Close",
+  "genie.lamp": "Genie lamp",
+  "genie.prompt": "Enter your wish for an item",
+  "genie.warning": "If the genie finds your wish disrespectful, he will crap in your pockets",
+  "genie.submit": "Make a wish",
+  "genie.thinking": "The genie is thinking",
+  "genie.rejected": "The genie crapped in your pockets and flew away",
+  "genie.answer": "<Genie> %s",
+  "genie.dont_drop": "<Genie> Hey, stop tickling my balls! Put me back!",
+  "genie.unavailable": "The server has not configured the genie connection.",
+  "genie.failed": "The genie lost his train of thought. Your lamp is safe, try again.",
+  "genie.need_slot": "Free one slot to separate a lamp from its stack.",
+  "genie.invalid_wish": "Write a wish between 1 and 2000 characters."
 }
