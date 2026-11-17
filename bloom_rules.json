@@ -250,5 +250,19 @@
     ],
     "strength": 2.0,
     "core": "white"
+  },
+  {
+    "source": [
+      64,
+      143,
+      255
+    ],
+    "halo": [
+      35,
+      140,
+      255
+    ],
+    "strength": 1.4,
+    "core": "white"
   }
 ]

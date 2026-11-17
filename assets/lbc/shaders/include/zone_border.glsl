@@ -110,11 +110,11 @@ vec4 lbc_zone_color(vec3 relativePosition, vec3 pixelDX, vec3 pixelDY) {
     // No dependence on the display's lower edge or vertical scale.
     float cloud = smoothstep(0.22, 0.82, plasma);
     float intensity = clamp(cloud * 0.85 + filament * 0.75, 0.0, 1.0);
-    vec3 color = mix(vec3(0.32, 0.003, 0.018), vec3(1.0, 0.025, 0.065), intensity);
-    color = mix(color, vec3(1.0, 0.30, 0.25), filament * 0.5);
+    vec3 color = mix(vec3(0.015, 0.09, 0.24), vec3(0.18, 0.55, 1.0), intensity);
+    color = mix(color, vec3(0.58, 0.88, 1.0), filament * 0.5);
     float opacity = 0.14 + cloud * 0.48 + filament * 0.30;
     float core = smoothstep(0.94, 0.995, filament);
-    color = mix(color, vec3(1.0, 14.0 / 255.0, 14.0 / 255.0), core);
+    color = mix(color, vec3(0.72, 0.92, 1.0), core);
     opacity = mix(opacity, 1.0, core);
     return vec4(color, opacity);
 }

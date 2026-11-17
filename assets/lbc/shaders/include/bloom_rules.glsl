@@ -32,7 +32,8 @@ const LbcBloomRule LBC_BLOOM_RULES[] = LbcBloomRule[](
     LbcBloomRule(ivec3(122,42,232), ivec3(122,42,232), 1.0, LBC_CORE_KEEP),
     LbcBloomRule(ivec3(255,3,3), ivec3(255,3,3), 1.0, LBC_CORE_WHITE),
     LbcBloomRule(ivec3(255,0,64), ivec3(255,14,14), 1.5, LBC_CORE_WHITE),
-    LbcBloomRule(ivec3(29,28,32), ivec3(0,0,0), 2.0, LBC_CORE_WHITE)
+    LbcBloomRule(ivec3(29,28,32), ivec3(0,0,0), 2.0, LBC_CORE_WHITE),
+    LbcBloomRule(ivec3(64,143,255), ivec3(35,140,255), 1.4, LBC_CORE_WHITE)
 );
 // END ARTIST RULES
 
