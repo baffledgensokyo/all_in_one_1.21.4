@@ -106,6 +106,9 @@ void main() {
     bool isTmt = lbc_tmt_carrier(rawColor, tmtTintSeed.x);
     if (isTmt) rawColor = lbc_tmt_collage(Sampler0, meditationWarningQuadCoord, tmtTintSeed.y, tmtSourceCells);
     int alphaMarker = isTmt ? 255 : int(round(rawColor.a * 255.0));
+    // Opt in from an opaque model face so marked pixels survive the cutout pipeline.
+    bool bloomFace = tmtTintSeed.x == 252u && tmtTintSeed.y == ((253u << 8u) | 249u);
+    if (!isTmt && bloomFace && alphaMarker == 255 && lbc_bloom_rule(rawColor.rgb) >= 0) alphaMarker = 254;
     float meditationBase = isTmt ? -1.0 : lbc_meditation_warning_base_alpha(rawColor);
     bool isMeditationWarning = meditationBase >= 0.0;
     bool isZoneBorder = zoneMaterial != 0;
@@ -147,7 +150,7 @@ void main() {
         color = vec4(rawColor.rgb, 1.0);
     } else if (alphaMarker == 130) {
         color = vec4(rawColor.rgb, 0.5);
-    } else if (isTmt) {
+    } else if (isTmt || bloomFace) {
         color *= tmtVertexLight * ColorModulator;
     } else {
         color *= vertexColor * ColorModulator;
@@ -162,7 +165,7 @@ void main() {
     #else
     fragColor = calculateFinalColor(color, bypassLighting, bypassFog, alphaMarker == 254);
     #ifndef OIT
-    // Item cutout writes this explicit material tag; PNG alpha255 never opts in.
+    // The cutout pass can preserve the alpha byte without translucent blending.
     fragColor = lbc_bloom_unmarked(fragColor);
     if (alphaMarker == 254 && lbc_bloom_rule(rawColor.rgb) >= 0) fragColor.a = 254.0 / 255.0;
     #endif
