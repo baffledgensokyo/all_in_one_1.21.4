@@ -10,6 +10,7 @@
 #include <lbc:signed_glow_data.glsl>
 #include <lbc:weapon_spread_data.glsl>
 #include <lbc:smoke_data.glsl>
+#include <lbc:hakurei_sphere_data.glsl>
 
 layout(location = 0) in vec3 Position;
 layout(location = 1) in vec4 Color;
@@ -34,7 +35,14 @@ void main() {
     int signedGlowSlot=lbc_signed_glow_slot(Color.rgb);
     bool weaponSpread=lbc_weapon_spread_marker(Color.rgb);
     int smokeSlot=lbc_smoke_slot(Color.rgb);
-    if (smokeSlot >= 0 || weaponSpread || signedGlowSlot >= 0 || blackHoleSlot >= 0 || nuclearSlot >= 0 || all(equal(ivec3(round(Color.rgb * 255.0)), LBC_ZONE_GLOW))) {
+    ivec3 glow = ivec3(round(Color.rgb * 255.0));
+    int hakureiSlot = lbc_hakurei_slot(glow);
+    bool hakureiSphere = hakureiSlot >= 0 && lbc_hakurei_sprite(Sampler0, UV0);
+    if (hakureiSphere && !lbc_hakurei_rows_fit(ivec2(ScreenSize))) {
+        gl_Position = vec4(2.0, 2.0, 2.0, 1.0);
+        return;
+    }
+    if (hakureiSphere || smokeSlot >= 0 || weaponSpread || signedGlowSlot >= 0 || blackHoleSlot >= 0 || nuclearSlot >= 0 || all(equal(ivec3(round(Color.rgb * 255.0)), LBC_ZONE_GLOW))) {
         int tag = lbc_zone_tag(UV0, textureSize(Sampler0, 0));
         if (tag < LBC_ZONE_DATA_PIXELS) {
             zoneDataIndex = tag;
@@ -45,6 +53,7 @@ void main() {
             if(signedGlowSlot>=0) blackHoleKind=4;
             if(weaponSpread) blackHoleKind=5;
             if(smokeSlot>=0) blackHoleKind=6;
+            if (hakureiSphere) blackHoleKind = glow.g == 161 ? 7 : 8;
             int field = tag / 2;
             if (field < 12) {
                 // CPU-transformed reference points already include scale,
@@ -76,6 +85,7 @@ void main() {
             if(signedGlowSlot>=0) row=float(LBC_SIGNED_GLOW_FIRST_ROW+signedGlowSlot);
             if(weaponSpread) row=float(LBC_WEAPON_SPREAD_ROW);
             if(smokeSlot>=0) row=float(LBC_SMOKE_FIRST_ROW+smokeSlot);
+            if (hakureiSphere) row = float(LBC_HAKUREI_FIRST_ROW + hakureiSlot);
             vec2 pixel = vec2(float(tag), row) + edge;
             gl_Position = vec4(pixel / ScreenSize * 2.0 - 1.0, 0.0, 1.0);
         } else {

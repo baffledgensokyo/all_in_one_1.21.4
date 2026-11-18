@@ -119,11 +119,11 @@ void main() {
     #endif
     bool bypassLighting = isMeditationWarning || isZoneBorder || alphaMarker == 254 || alphaMarker == 130;
     bool bypassFog = bypassLighting;
-    // Only the requested 1x1, 10%-opaque red fallback is drawn here.
+    // Only the requested 1x1, 10%-opaque blue fallback is drawn here.
     // All energy detail belongs to the post effect.
     vec4 color = isMeditationWarning
         ? vec4(lbc_meditation_warning_color(rawColor, meditationWarningProgress), meditationBase * clamp(meditationWarningFade, 0.0, 1.0) * ColorModulator.a)
-        : (isZoneBorder ? vec4(1.0, 0.0, 0.0, 26.0 / 255.0) : rawColor);
+        : (isZoneBorder ? vec4(0.20, 0.52, 0.96, 26.0 / 255.0) : rawColor);
     if (!isTmt && lbc_meditation_warning_is_ring(rawColor)) {
         // Double-sided model: draw only the facing quad, also on no-cull layers.
         if (!gl_FrontFacing) discard;

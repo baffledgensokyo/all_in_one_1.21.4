@@ -76,7 +76,7 @@ LbcZoneField lbc_zone_field(vec3 relativePosition, float level) {
     return LbcZoneField(plasma, sin(phase), cos(phase) * phaseGradient / scale);
 }
 
-vec4 lbc_zone_color(vec3 relativePosition, vec3 pixelDX, vec3 pixelDY) {
+vec4 lbc_zone_color(vec3 relativePosition, vec3 pixelDX, vec3 pixelDY, int palette) {
     float footprint = max(length(pixelDX), length(pixelDY));
     float frequency = clamp(log2(max(footprint * 24.0, 0.00390625)), -8.0, 10.0);
     float centre = floor(frequency + 0.5);
@@ -110,14 +110,33 @@ vec4 lbc_zone_color(vec3 relativePosition, vec3 pixelDX, vec3 pixelDY) {
     // No dependence on the display's lower edge or vertical scale.
     float cloud = smoothstep(0.22, 0.82, plasma);
     float intensity = clamp(cloud * 0.85 + filament * 0.75, 0.0, 1.0);
-    vec3 color = mix(vec3(0.015, 0.09, 0.24), vec3(0.18, 0.55, 1.0), intensity);
-    color = mix(color, vec3(0.58, 0.88, 1.0), filament * 0.5);
+    vec3 base = vec3(0.015, 0.09, 0.24);
+    vec3 plasmaColor = vec3(0.18, 0.55, 1.0);
+    vec3 filamentColor = vec3(0.58, 0.88, 1.0);
+    vec3 coreColor = vec3(0.72, 0.92, 1.0);
+    if (palette == 1) {
+        base = vec3(0.23, 0.025, 0.055);
+        plasmaColor = vec3(1.0, 0.16, 0.24);
+        filamentColor = vec3(1.0, 0.58, 0.6);
+        coreColor = vec3(1.0, 0.84, 0.82);
+    } else if (palette == 2) {
+        base = vec3(0.25, 0.15, 0.013);
+        plasmaColor = vec3(1.0, 0.78, 0.10);
+        filamentColor = vec3(1.0, 0.95, 0.54);
+        coreColor = vec3(1.0, 0.98, 0.78);
+    }
+    vec3 color = mix(base, plasmaColor, intensity);
+    color = mix(color, filamentColor, filament * 0.5);
     float opacity = 0.14 + cloud * 0.48 + filament * 0.30;
     float core = smoothstep(0.94, 0.995, filament);
-    color = mix(color, vec3(0.72, 0.92, 1.0), core);
+    color = mix(color, coreColor, core);
     opacity = mix(opacity, 1.0, core);
     return vec4(color, opacity);
 }
 
+
+vec4 lbc_zone_color(vec3 relativePosition, vec3 pixelDX, vec3 pixelDY) {
+    return lbc_zone_color(relativePosition, pixelDX, pixelDY, 0);
+}
 
 #endif
