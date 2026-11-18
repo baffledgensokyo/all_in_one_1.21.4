@@ -9,6 +9,9 @@
 #include <minecraft:oit.glsl>
 #define LBC_ATLAS_GLITCH_FRAGMENT
 #include <lbc:atlas_glitch.glsl>
+#ifndef OIT
+#include <lbc:bloom_rules.glsl>
+#endif
 
 layout(location = 0) in vec4 v_Color; // The interpolated vertex color
 layout(location = 1) in vec2 v_TexCoord; // The interpolated block texture coordinates
@@ -119,5 +122,9 @@ void main() {
     executeAlphaOnlyPhase(gl_FragCoord.z, color.a);
     #else
     fragColor = calculateFinalColor(color);
+    #ifndef OIT
+    // Classic terrain must never write the item-material bloom marker.
+    fragColor = lbc_bloom_unmarked(fragColor);
+    #endif
     #endif
 }

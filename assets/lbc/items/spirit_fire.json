@@ -1,6 +1,12 @@
 {
-    "model": {
-        "type": "model",
-        "model": "lbc:item/spirit_fire"
-    }
+  "model": {
+    "type": "model",
+    "model": "lbc:item/spirit_fire",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 16580089
+      }
+    ]
+  }
 }

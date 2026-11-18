@@ -8,6 +8,7 @@
 #include <minecraft:sample_lightmap.glsl>
 #include <lbc:atlas_glitch.glsl>
 #include <lbc:zone_data.glsl>
+#include <lbc:hakurei_sphere_data.glsl>
 #include <lbc:zone_window.glsl>
 #include <lbc:black_hole_data.glsl>
 #include <lbc:nuclear_data.glsl>
@@ -107,6 +108,10 @@ void main() {
     zoneMaterial = all(equal(ivec3(round(Color.rgb * 255.0)), LBC_ZONE_TINT)) ? 1 : 0;
     zoneRelativePosition = Position;
     ivec3 itemTint = ivec3(round(Color.rgb * 255.0));
+    if (all(equal(itemTint, LBC_HAKUREI_TINT)) && lbc_hakurei_sprite(Sampler0, UV0)) {
+        // Sphere references travel only through the outline buffer, including during OIT.
+        gl_Position = vec4(2.0, 2.0, 2.0, 1.0);
+    }
     if (all(equal(itemTint, LBC_BH_SMALL_TINT)) || all(equal(itemTint, LBC_BH_DISK_TINT)) ||
         all(equal(itemTint, LBC_NUCLEAR_TINT))) {
         // Post effects have no rasterized surface: all geometry is an invisible

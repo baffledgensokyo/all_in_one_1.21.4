@@ -981,5 +981,13 @@
                 "stream": false
             }
         ]
+    },
+    "lbcsounds.music_staff": {
+        "sounds": [
+            {
+                "name": "minecraft:lbcsounds/music_staff",
+                "stream": true
+            }
+        ]
     }
 }

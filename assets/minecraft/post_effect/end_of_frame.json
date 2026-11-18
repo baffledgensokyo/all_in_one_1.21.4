@@ -31,46 +31,9 @@
       "height": 1,
       "persistent": true,
       "clear_color": 0
-    },
-    "reticle_scene": {}
+    }
   },
   "passes": [
-    {
-      "vertex_shader": "lbc:post/weapon_spread_resolve",
-      "fragment_shader": "lbc:post/weapon_spread_resolve",
-      "inputs": [
-        {
-          "sampler_name": "Scene",
-          "target": "minecraft:main"
-        }
-      ],
-      "output": "reticle_scene"
-    },
-    {
-      "vertex_shader": "minecraft:core/screenquad",
-      "fragment_shader": "minecraft:post/blit",
-      "inputs": [
-        {
-          "sampler_name": "In",
-          "target": "reticle_scene"
-        }
-      ],
-      "output": "minecraft:main",
-      "uniforms": {
-        "BlitConfig": [
-          {
-            "name": "ColorModulate",
-            "type": "vec4",
-            "value": [
-              1,
-              1,
-              1,
-              1
-            ]
-          }
-        ]
-      }
-    },
     {
       "vertex_shader": "minecraft:core/screenquad",
       "fragment_shader": "lbc:post/time_gate",

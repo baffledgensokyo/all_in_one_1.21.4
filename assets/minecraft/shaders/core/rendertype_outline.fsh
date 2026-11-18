@@ -9,6 +9,7 @@
 #include <lbc:signed_glow_data.glsl>
 #include <lbc:weapon_spread_data.glsl>
 #include <lbc:smoke_data.glsl>
+#include <lbc:hakurei_sphere_data.glsl>
 #include <lbc:exoperso_bloom.glsl>
 
 uniform sampler2D Sampler0;
@@ -28,6 +29,8 @@ void main() {
             if (blackHoleKind == 4) header = vec3(71,76,87);
             if (blackHoleKind == 5) header = vec3(83,80,82);
             if (blackHoleKind == 6) header = vec3(83,77,75);
+            if (blackHoleKind == 7) header = vec3(72, 83, 1);
+            if (blackHoleKind == 8) header = vec3(72, 83, 2);
             fragColor = vec4(header / 255.0, 0.0);
         } else {
             uint bits = floatBitsToUint(zoneDataValue);
@@ -40,7 +43,8 @@ void main() {
         return;
     }
     // Protect invisible data against other glowing entities in this tiny strip.
-    if (lbc_smoke_reserved_pixel(gl_FragCoord.xy,ScreenSize) ||
+    if (lbc_hakurei_reserved(gl_FragCoord.xy, ScreenSize) ||
+        lbc_smoke_reserved_pixel(gl_FragCoord.xy,ScreenSize) ||
         lbc_weapon_spread_reserved(gl_FragCoord.xy,ScreenSize) ||
         lbc_signed_glow_reserved(gl_FragCoord.xy,ScreenSize) ||
         lbc_bh_reserved_pixel(gl_FragCoord.xy, ScreenSize) ||

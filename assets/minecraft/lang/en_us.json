@@ -6648,5 +6648,7 @@
   "genie.unavailable": "The server has not configured the genie connection.",
   "genie.failed": "The genie lost his train of thought. Your lamp is safe, try again.",
   "genie.need_slot": "Free one slot to separate a lamp from its stack.",
-  "genie.invalid_wish": "Write a wish between 1 and 2000 characters."
+  "genie.invalid_wish": "Write a wish between 1 and 2000 characters.",
+  "lbc.hakurei.spellcard.activate": "%s activated the spell card Spirit Sign: Fantasy Seal",
+  "lbc.hakurei.bomb.activate": "%s activated the bomb Fantasy Seal"
 }

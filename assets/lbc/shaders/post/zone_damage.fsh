@@ -10,8 +10,7 @@
 uniform sampler2D SceneSampler;
 uniform sampler2D HoleDataSampler;
 layout(location = 0) in vec2 texCoord;
-layout(location = 9) flat in int zoneEnabled;
-layout(location = 10) flat in float zoneOutsideDistance;
+layout(location = 9) flat in vec4 zoneInfo;
 layout(location = 0) out vec4 fragColor;
 
 void main() {
@@ -25,7 +24,7 @@ void main() {
     ivec2 pixel = ivec2(texCoord * ScreenSize);
     if (all(lessThan(pixel, ivec2(4))) &&
         all(lessThanEqual(abs(ivec3(round(scene.rgb * 255.0)) - ivec3(72, 82, 25)), ivec3(1)))) return;
-    if (zoneEnabled != 0) {
-        fragColor.rgb = lbc_zone_damage(scene.rgb, texCoord, zoneOutsideDistance);
+    if (zoneInfo.x != 0.0) {
+        fragColor.rgb = lbc_zone_damage(scene.rgb, texCoord, zoneInfo.y);
     }
 }

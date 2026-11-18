@@ -105,7 +105,19 @@ void main() {
     // Dedicated sprite AND reserved component tint: no broad texture/color classifier.
     bool isTmt = lbc_tmt_carrier(rawColor, tmtTintSeed.x);
     if (isTmt) rawColor = lbc_tmt_collage(Sampler0, meditationWarningQuadCoord, tmtTintSeed.y, tmtSourceCells);
-    int alphaMarker = isTmt ? 255 : int(round(rawColor.a * 255.0));
+    // The native item material has to stay opaque/cutout. The reserved face tint
+    // permits an exact atlas texel lookup independently of color filtering and mipmaps.
+    bool bloomFace = !isTmt && tmtTintSeed.x == 252u && tmtTintSeed.y == ((253u << 8u) | 249u);
+    int alphaMarker = isTmt || bloomFace ? 255 : int(round(rawColor.a * 255.0));
+    if (bloomFace) {
+        ivec2 atlasSize = textureSize(Sampler0, 0);
+        ivec2 texel = clamp(ivec2(texCoord0 * vec2(atlasSize)), ivec2(0), atlasSize - 1);
+        vec4 material = texelFetch(Sampler0, texel, 0);
+        if (material.a == 1.0 && lbc_bloom_rule(material.rgb) >= 0) {
+            rawColor = material;
+            alphaMarker = 254;
+        }
+    }
     float meditationBase = isTmt ? -1.0 : lbc_meditation_warning_base_alpha(rawColor);
     bool isMeditationWarning = meditationBase >= 0.0;
     bool isZoneBorder = zoneMaterial != 0;
@@ -119,11 +131,11 @@ void main() {
     #endif
     bool bypassLighting = isMeditationWarning || isZoneBorder || alphaMarker == 254 || alphaMarker == 130;
     bool bypassFog = bypassLighting;
-    // Only the requested 1x1, 10%-opaque red fallback is drawn here.
+    // Only the requested 1x1, 10%-opaque blue fallback is drawn here.
     // All energy detail belongs to the post effect.
     vec4 color = isMeditationWarning
         ? vec4(lbc_meditation_warning_color(rawColor, meditationWarningProgress), meditationBase * clamp(meditationWarningFade, 0.0, 1.0) * ColorModulator.a)
-        : (isZoneBorder ? vec4(1.0, 0.0, 0.0, 26.0 / 255.0) : rawColor);
+        : (isZoneBorder ? vec4(0.20, 0.52, 0.96, 26.0 / 255.0) : rawColor);
     if (!isTmt && lbc_meditation_warning_is_ring(rawColor)) {
         // Double-sided model: draw only the facing quad, also on no-cull layers.
         if (!gl_FrontFacing) discard;
@@ -147,7 +159,7 @@ void main() {
         color = vec4(rawColor.rgb, 1.0);
     } else if (alphaMarker == 130) {
         color = vec4(rawColor.rgb, 0.5);
-    } else if (isTmt) {
+    } else if (isTmt || bloomFace) {
         color *= tmtVertexLight * ColorModulator;
     } else {
         color *= vertexColor * ColorModulator;
@@ -162,7 +174,7 @@ void main() {
     #else
     fragColor = calculateFinalColor(color, bypassLighting, bypassFog, alphaMarker == 254);
     #ifndef OIT
-    // Item cutout writes this explicit material tag; PNG alpha255 never opts in.
+    // The cutout pass can preserve the alpha byte without translucent blending.
     fragColor = lbc_bloom_unmarked(fragColor);
     if (alphaMarker == 254 && lbc_bloom_rule(rawColor.rgb) >= 0) fragColor.a = 254.0 / 255.0;
     #endif
