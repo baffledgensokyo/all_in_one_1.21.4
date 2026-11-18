@@ -34,6 +34,8 @@ void main() {
         // Keep explicitly white material cores white, including under a dark halo.
         // Scene alpha is unrelated camera/TimeStop data and must remain untouched.
         if (index < 0 || LBC_BLOOM_RULES[index].core != LBC_CORE_WHITE) combined *= 1.0 - halo.a;
+        // The white halo belongs to the surroundings, with a fully black lightning core.
+        if (index >= 0 && LBC_BLOOM_RULES[index].core == LBC_CORE_BLACK) combined = vec3(0.0);
         fragColor = vec4(combined, scene.a);
     }
 }

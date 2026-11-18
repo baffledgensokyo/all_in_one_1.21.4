@@ -1,6 +1,12 @@
 {
-    "model": {
-        "type": "model",
-        "model": "lbc:item/lightsaber_jedi"
-    }
+  "model": {
+    "type": "model",
+    "model": "lbc:item/lightsaber_jedi",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 16580089
+      }
+    ]
+  }
 }

@@ -1,6 +1,12 @@
 {
-    "model": {
-        "type": "model",
-        "model": "lbc:item/managram"
-    }
+  "model": {
+    "type": "model",
+    "model": "lbc:item/managram",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 16580089
+      }
+    ]
+  }
 }

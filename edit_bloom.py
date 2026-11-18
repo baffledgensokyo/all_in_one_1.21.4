@@ -14,7 +14,7 @@ CONFIG = ROOT / "bloom_rules.json"
 INCLUDE = ROOT / "assets/lbc/shaders/include/bloom_rules.glsl"
 BEGIN = "// BEGIN ARTIST RULES"
 END = "// END ARTIST RULES"
-MODES = {"keep": "LBC_CORE_KEEP", "white": "LBC_CORE_WHITE", "halo": "LBC_CORE_HALO"}
+MODES = {"keep": "LBC_CORE_KEEP", "white": "LBC_CORE_WHITE", "halo": "LBC_CORE_HALO", "black": "LBC_CORE_BLACK"}
 
 
 def validate(rules):
@@ -36,7 +36,7 @@ def validate(rules):
         if type(strength) not in (int, float) or not math.isfinite(strength) or not 0 <= strength <= 4:
             raise ValueError("Сила ореола должна быть от 0 до 4.")
         if not isinstance(rule["core"], str) or rule["core"] not in MODES:
-            raise ValueError("Сердцевина: keep, white или halo.")
+            raise ValueError("Сердцевина: keep, white, halo или black.")
     return rules
 
 
@@ -109,7 +109,7 @@ def gui(rules, smoke=False):
         table.heading(name, text=label)
         table.column(name, width=150)
     table.pack(fill="both", expand=True, padx=12, pady=12)
-    modes = {"keep": "Исходный цвет", "white": "Белая", "halo": "Цвет ореола"}
+    modes = {"keep": "Исходный цвет", "white": "Белая", "halo": "Цвет ореола", "black": "Чёрная"}
 
     def refresh(selected=None):
         table.delete(*table.get_children())

@@ -1,6 +1,12 @@
 {
-    "model": {
-        "type": "model",
-        "model": "lbc:item/laser_minigun/2"
-    }
+  "model": {
+    "type": "model",
+    "model": "lbc:item/laser_minigun/2",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 16580089
+      }
+    ]
+  }
 }

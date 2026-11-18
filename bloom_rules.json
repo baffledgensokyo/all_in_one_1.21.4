@@ -244,12 +244,12 @@
       32
     ],
     "halo": [
-      0,
-      0,
-      0
+      255,
+      255,
+      255
     ],
     "strength": 2.0,
-    "core": "white"
+    "core": "black"
   },
   {
     "source": [

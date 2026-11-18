@@ -1,6 +1,12 @@
 {
-    "model": {
-        "type": "model",
-        "model": "lbc:item/lightsaber_empty"
-    }
+  "model": {
+    "type": "model",
+    "model": "lbc:item/lightsaber_empty",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 16580089
+      }
+    ]
+  }
 }

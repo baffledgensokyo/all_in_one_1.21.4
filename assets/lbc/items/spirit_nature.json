@@ -1,6 +1,12 @@
 {
-    "model": {
-        "type": "model",
-        "model": "lbc:item/spirit_nature"
-    }
+  "model": {
+    "type": "model",
+    "model": "lbc:item/spirit_nature",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 16580089
+      }
+    ]
+  }
 }

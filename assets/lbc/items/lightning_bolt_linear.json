@@ -1,6 +1,12 @@
 {
-    "model": {
-        "type": "model",
-        "model": "lbc:item/lightning_bolt_linear"
-    }
+  "model": {
+    "type": "model",
+    "model": "lbc:item/lightning_bolt_linear",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 16580089
+      }
+    ]
+  }
 }

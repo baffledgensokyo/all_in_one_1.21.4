@@ -105,10 +105,19 @@ void main() {
     // Dedicated sprite AND reserved component tint: no broad texture/color classifier.
     bool isTmt = lbc_tmt_carrier(rawColor, tmtTintSeed.x);
     if (isTmt) rawColor = lbc_tmt_collage(Sampler0, meditationWarningQuadCoord, tmtTintSeed.y, tmtSourceCells);
-    int alphaMarker = isTmt ? 255 : int(round(rawColor.a * 255.0));
-    // Opt in from an opaque model face so marked pixels survive the cutout pipeline.
-    bool bloomFace = tmtTintSeed.x == 252u && tmtTintSeed.y == ((253u << 8u) | 249u);
-    if (!isTmt && bloomFace && alphaMarker == 255 && lbc_bloom_rule(rawColor.rgb) >= 0) alphaMarker = 254;
+    // The native item material has to stay opaque/cutout. The reserved face tint
+    // permits an exact atlas texel lookup independently of color filtering and mipmaps.
+    bool bloomFace = !isTmt && tmtTintSeed.x == 252u && tmtTintSeed.y == ((253u << 8u) | 249u);
+    int alphaMarker = isTmt || bloomFace ? 255 : int(round(rawColor.a * 255.0));
+    if (bloomFace) {
+        ivec2 atlasSize = textureSize(Sampler0, 0);
+        ivec2 texel = clamp(ivec2(texCoord0 * vec2(atlasSize)), ivec2(0), atlasSize - 1);
+        vec4 material = texelFetch(Sampler0, texel, 0);
+        if (material.a == 1.0 && lbc_bloom_rule(material.rgb) >= 0) {
+            rawColor = material;
+            alphaMarker = 254;
+        }
+    }
     float meditationBase = isTmt ? -1.0 : lbc_meditation_warning_base_alpha(rawColor);
     bool isMeditationWarning = meditationBase >= 0.0;
     bool isZoneBorder = zoneMaterial != 0;
