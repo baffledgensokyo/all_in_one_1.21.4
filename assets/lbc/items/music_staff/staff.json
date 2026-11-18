@@ -3,5 +3,6 @@
     "type": "minecraft:model",
     "model": "lbc:item/music_staff/staff"
   },
-  "hand_animation_on_swap": false
+  "hand_animation_on_swap": false,
+  "oversized_in_gui":true
 }
