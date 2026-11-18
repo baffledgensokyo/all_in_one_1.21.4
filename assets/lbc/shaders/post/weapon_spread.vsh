@@ -1,10 +1,10 @@
 #version 330
 #extension GL_ARB_separate_shader_objects : require
 #include <lbc:weapon_spread_data.glsl>
+#include <lbc:reticle_native.glsl>
 uniform sampler2D SpreadDataSampler;
-// Pixel extents from the screen center: left, right, bottom, top.
-layout(location=0) flat out vec4 spreadBounds;
-layout(location=1) flat out vec2 spreadStyle;
+layout(location = 0) flat out ivec3 reticleGrid;
+layout(location = 1) flat out ivec4 reticleReach;
 const float PI=3.141592653589793;
 bool header(int row) {
     return all(equal(ivec3(round(texelFetch(SpreadDataSampler,ivec2(56,row),0).rgb*255.0)),ivec3(83,80,82)));
@@ -43,7 +43,8 @@ void yawEnvelope(float q,float angle,vec3 h,vec3 side,vec3 forward,vec3 axis,ino
 void main() {
     vec2 uv=vec2((gl_VertexIndex<<1)&2,gl_VertexIndex&2);
     gl_Position=vec4(uv*2.0-1.0,0,1);
-    spreadBounds=vec4(0);spreadStyle=vec2(0);
+    reticleGrid = ivec3(0);
+    reticleReach = ivec4(0);
     ivec2 size=textureSize(SpreadDataSampler,0);
     if(size.x<57 || size.y<118)return;
     int row=LBC_WEAPON_SPREAD_ROW;
@@ -81,7 +82,10 @@ void main() {
     }
     vec2 halfFrame=vec2(size)*0.5;
     vec2 scale=projection*halfFrame;
-    spreadBounds=clamp(vec4(-x.x,x.y,-y.x,y.y)*scale.xxyy,vec4(0),vec4(halfFrame.x,halfFrame.x,halfFrame.y,halfFrame.y)+vec4(8));
-    float pixelScale=max(1.0,floor(min(float(size.x)/640.0,float(size.y)/360.0)));
-    spreadStyle=vec2(pixelScale,4.0*pixelScale);
+    vec4 extents = vec4(-x.x, x.y, -y.x, y.y) * scale.xxyy;
+    vec4 viewport = vec4(size.x, size.x, size.y, size.y);
+    vec4 bounds = clamp(extents, vec4(0), viewport);
+    int guiScale = lbc_reticle_gui_scale(size);
+    reticleGrid = ivec3(lbc_reticle_cell_origin(size, guiScale), guiScale);
+    reticleReach = ivec4(floor(bounds / float(guiScale) + 0.5));
 }

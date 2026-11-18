@@ -1,21 +1,39 @@
 #version 330
 #extension GL_ARB_separate_shader_objects : require
-#include <lbc:reticle_header.glsl>
+
 uniform sampler2D SceneSampler;
-layout(location=0) flat in vec4 spreadBounds;
-layout(location=1) flat in vec2 spreadStyle;
-layout(location=0) out vec4 fragColor;
+layout(location = 0) flat in ivec3 reticleGrid;
+layout(location = 1) flat in ivec4 reticleReach;
+layout(location = 0) out vec4 fragColor;
+
+bool arm(int pixel, int reach, int scale) {
+    // Four logical pixels, shortened as an arm approaches the center.
+    return pixel >= max(1, reach - 3) * scale && pixel < (reach + 1) * scale;
+}
+
 void main() {
-    ivec2 pixel=ivec2(gl_FragCoord.xy);
-    fragColor=texelFetch(SceneSampler,pixel,0);
-    int n=lbc_reticle_offset(pixel,textureSize(SceneSampler,0));
-    if(n<0)return;
-    int value;
-    if(n<4)value=LBC_RETICLE_MAGIC[n];
-    else {
-        int field=(n-4)/4;
-        float v=field<4 ? spreadBounds[field] : spreadStyle[field-4];
-        value=int((floatBitsToUint(v)>>uint(((n-4)%4)*8))&255u);
+    ivec2 pixel = ivec2(gl_FragCoord.xy);
+    fragColor = texelFetch(SceneSampler, pixel, 0);
+
+    int scale = reticleGrid.z;
+    if (scale <= 0) return;
+    ivec2 rel = pixel - reticleGrid.xy;
+    bvec2 axial = bvec2(rel.x >= 0 && rel.x < scale, rel.y >= 0 && rel.y < scale);
+    int centerWidth = max(2, scale);
+    bool desired = all(greaterThanEqual(rel, ivec2(0))) && all(lessThan(rel, ivec2(centerWidth)));
+    bool nativeStroke = false;
+    if (axial.y) {
+        nativeStroke = rel.x >= -4 * scale && rel.x < 5 * scale;
+        desired = desired || arm(scale - 1 - rel.x, reticleReach.x, scale)
+                          || arm(rel.x, reticleReach.y, scale);
     }
-    fragColor.a=float(value)/255.0;
+    if (axial.x) {
+        nativeStroke = nativeStroke || (rel.y >= -4 * scale && rel.y < 5 * scale);
+        desired = desired || arm(scale - 1 - rel.y, reticleReach.z, scale)
+                          || arm(rel.y, reticleReach.w, scale);
+    }
+
+    // Minecraft draws the native INVERT sprite after this pass.
+    // Invert the symmetric difference so the two masks compose exactly.
+    if (nativeStroke != desired) fragColor.rgb = vec3(1.0) - fragColor.rgb;
 }
