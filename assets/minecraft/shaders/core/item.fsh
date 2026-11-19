@@ -107,7 +107,8 @@ void main() {
     if (isTmt) rawColor = lbc_tmt_collage(Sampler0, meditationWarningQuadCoord, tmtTintSeed.y, tmtSourceCells);
     // The native item material has to stay opaque/cutout. The reserved face tint
     // permits an exact atlas texel lookup independently of color filtering and mipmaps.
-    bool bloomFace = !isTmt && tmtTintSeed.x == 252u && tmtTintSeed.y == ((253u << 8u) | 249u);
+    uvec3 faceTint = uvec3(tmtTintSeed.x, tmtTintSeed.y >> 8u, tmtTintSeed.y & 255u);
+    bool bloomFace = !isTmt && all(equal(faceTint, LBC_BLOOM_TINT));
     int alphaMarker = isTmt || bloomFace ? 255 : int(round(rawColor.a * 255.0));
     if (bloomFace) {
         ivec2 atlasSize = textureSize(Sampler0, 0);

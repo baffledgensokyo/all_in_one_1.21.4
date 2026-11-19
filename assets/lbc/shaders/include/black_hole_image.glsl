@@ -4,7 +4,6 @@
 
 #include <minecraft:globals.glsl>
 #include <lbc:black_hole_disk.glsl>
-#include <lbc:black_hole_transfer.glsl>
 
 // Lens the composited image. Original-pixel depth only clips foreground
 // occluders; it never selects colour layers or reconstructs block geometry.
@@ -161,7 +160,6 @@ void main() {
     ivec2 pixel = clamp(ivec2(gl_FragCoord.xy),ivec2(0),size-1);
     vec4 original = texelFetch(SceneSampler,pixel,0);
     fragColor = original;
-    if (lbc_bh_carrier_pixel(pixel,size)) fragColor.a = 1.0;
     if (holeMask == 0u) return;
     vec2 uv = gl_FragCoord.xy / vec2(size);
     vec3 direction = bhImageDirection(uv);

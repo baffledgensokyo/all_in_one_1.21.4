@@ -45,7 +45,7 @@ layout(location = 7) in vec2 texCoordGlint;
 layout(location = 0) out vec4 fragColor;
 #endif
 
-vec4 calculateFinalColor(vec4 color, bool bypassLighting, bool bypassFog) {
+vec4 calculateFinalColor(vec4 color, bool bypassLighting, bool bypassFog, bool preserveEmission) {
     if (!bypassLighting) {
     #ifndef NO_OVERLAY
         color.rgb = mix(overlayColor.rgb, color.rgb, overlayColor.a);
@@ -60,7 +60,7 @@ vec4 calculateFinalColor(vec4 color, bool bypassLighting, bool bypassFog) {
     #ifdef GLINT
     vec4 glintColor = GlintAlpha * texture(GlintSampler, texCoordGlint);
     // Matches BlendFuntion.GLINT
-    color.rgb += glintColor.rgb * glintColor.rgb;
+    if (!preserveEmission) color.rgb += glintColor.rgb * glintColor.rgb;
     #endif
 
     #ifdef OIT_ACCUMULATE
@@ -135,11 +135,12 @@ void main() {
     #ifdef OIT_ALPHA_ONLY
     executeAlphaOnlyPhase(gl_FragCoord.z, color.a);
     #else
-    fragColor = calculateFinalColor(color, bypassLighting, bypassFog);
+    bool emissiveMaterial = alphaMarker == 254 && lbc_bloom_rule(rawColor.rgb) >= 0;
+    fragColor = calculateFinalColor(color, bypassLighting, bypassFog, emissiveMaterial);
     #ifndef OIT
     // Fullbright textures explicitly opt in with alpha254; ordinary skins do not.
     fragColor = lbc_bloom_unmarked(fragColor);
-    if (alphaMarker == 254 && lbc_bloom_rule(rawColor.rgb) >= 0) fragColor.a = 254.0 / 255.0;
+    if (emissiveMaterial) fragColor.a = 254.0 / 255.0;
     #endif
     #endif
 }

@@ -6,7 +6,7 @@ vec3 lbc_bloom_to_white(vec3 color) {
     return mix(color, vec3(1.0), smoothstep(0.5, 1.0, brightness));
 }
 
-vec3 lbc_bloom_blur(sampler2D source, vec2 coord, vec2 dir) {
+vec4 lbc_bloom_blur(sampler2D source, vec2 coord, vec2 dir) {
     // The original radius-10 kernel, normalized by its total weight 2.470269.
     // Each linear sample combines two adjacent taps with the same weights.
     // Inputs MUST use bilinear filtering; scene/data samplers stay nearest.
@@ -17,14 +17,18 @@ vec3 lbc_bloom_blur(sampler2D source, vec2 coord, vec2 dir) {
         vec2(7.5,          0.0437636549),
         vec2(9.5,          0.0131289345)
     );
-    vec2 stepUV = dir / ScreenSize;
-    vec3 blurred = texture(source, coord).rgb * 0.0919037562;
+    vec2 stepUV = dir / vec2(textureSize(source, 0));
+    vec4 blurred = texture(source, coord) * 0.0919037562;
     for (int i = 0; i < 5; i++) {
         vec2 offset = stepUV * pairs[i].x;
-        blurred += (texture(source, coord - offset).rgb +
-                    texture(source, coord + offset).rgb) * pairs[i].y;
+        blurred += (texture(source, coord - offset) +
+                    texture(source, coord + offset)) * pairs[i].y;
     }
-    return lbc_bloom_to_white(blurred);
+    return blurred;
+}
+
+vec3 lbc_bloom_screen(vec3 scene, vec3 halo) {
+    return 1.0 - (1.0 - scene) * (1.0 - halo);
 }
 
 #endif

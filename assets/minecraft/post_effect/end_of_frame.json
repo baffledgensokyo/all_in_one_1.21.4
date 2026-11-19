@@ -123,33 +123,14 @@
           "target": "minecraft:main"
         }
       ],
-      "output": "bloomh",
-      "uniforms": {
-        "BlitConfig": [
-          {
-            "name": "ColorModulate",
-            "type": "vec4",
-            "value": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ]
-          }
-        ]
-      }
+      "output": "bloomh"
     },
     {
       "vertex_shader": "minecraft:core/screenquad",
-      "fragment_shader": "lbc:post/material_bloom",
+      "fragment_shader": "lbc:post/bloom_blur",
       "inputs": [
         {
           "sampler_name": "Diffuse",
-          "target": "bloomh",
-          "bilinear": true
-        },
-        {
-          "sampler_name": "Bloom",
           "target": "bloomh",
           "bilinear": true
         }
@@ -158,22 +139,17 @@
       "uniforms": {
         "BlitConfig": [
           {
-            "name": "ColorModulate",
-            "type": "vec4",
-            "value": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ]
-          },
-          {
             "name": "BlurDir",
             "type": "vec2",
             "value": [
               1.0,
               0.0
             ]
+          },
+          {
+            "name": "Whiten",
+            "type": "float",
+            "value": 0.0
           }
         ]
       }

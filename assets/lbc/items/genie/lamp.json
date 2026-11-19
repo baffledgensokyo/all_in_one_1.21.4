@@ -1,6 +1,12 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "lbc:item/genie/lamp"
+    "model": "lbc:item/genie/lamp",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 16580089
+      }
+    ]
   }
 }

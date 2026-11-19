@@ -8,6 +8,7 @@ const int LBC_CORE_KEEP = 0;
 const int LBC_CORE_WHITE = 1;
 const int LBC_CORE_HALO = 2;
 const int LBC_CORE_BLACK = 3;
+const uvec3 LBC_BLOOM_TINT = uvec3(252u, 253u, 249u);
 struct LbcBloomRule {
     ivec3 source;
     ivec3 halo;
@@ -35,19 +36,18 @@ const LbcBloomRule LBC_BLOOM_RULES[] = LbcBloomRule[](
     LbcBloomRule(ivec3(255,0,64), ivec3(255,14,14), 1.5, LBC_CORE_WHITE),
     LbcBloomRule(ivec3(29,28,32), ivec3(255,255,255), 2.0, LBC_CORE_BLACK),
     LbcBloomRule(ivec3(64,143,255), ivec3(35,140,255), 1.4, LBC_CORE_WHITE),
-    LbcBloomRule(ivec3(63,255,191), ivec3(63,255,191), 1.5, LBC_CORE_KEEP)
+    LbcBloomRule(ivec3(63,255,191), ivec3(63,255,191), 1.5, LBC_CORE_KEEP),
+    LbcBloomRule(ivec3(255,253,225), ivec3(255,212,112), 1.0, LBC_CORE_KEEP),
+    LbcBloomRule(ivec3(255,254,227), ivec3(255,212,112), 1.0, LBC_CORE_KEEP),
+    LbcBloomRule(ivec3(255,255,228), ivec3(255,212,112), 1.0, LBC_CORE_KEEP),
+    LbcBloomRule(ivec3(55,181,253), ivec3(55,181,253), 1.2, LBC_CORE_KEEP)
 );
 // END ARTIST RULES
 
-// Reserved scene-alpha tag. Raw PNG alpha254 is the explicit opt-in.
-// Core shaders remove this tag from ordinary terrain, skins and particles.
+// Reserved scene-alpha tag. Item faces use LBC_BLOOM_TINT with an opaque sprite.
+// Legacy material renderers can also pass an explicit alpha tag.
 bool lbc_bloom_marked(vec4 value) {
     return int(round(value.a * 255.0)) == 254;
-}
-bool lbc_bloom_transport(ivec2 pixel, ivec2 size) {
-    // Existing camera / black-hole / nuclear bytes also use scene alpha.
-    // Those two171x50 strips are data, never emissive material coverage.
-    return pixel.x < 171 && min(pixel.y, size.y - 1 - pixel.y) < 50;
 }
 int lbc_bloom_rule(vec3 rgb) {
     ivec3 source = ivec3(round(clamp(rgb, 0.0, 1.0) * 255.0));

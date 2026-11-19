@@ -5,9 +5,8 @@ const int LBC_NUCLEAR_COUNT = 16;
 // Rows 0..17 belong to the zone and the sixteen black holes.
 const int LBC_NUCLEAR_FIRST_ROW = 18;
 // Fade carriers have independent input rows, then resolve to the same slots.
-// History stays 171x68; the outline/alpha transport needs 100 rows.
+// Both fade and live carriers have their own rows in the entity outline input.
 const int LBC_NUCLEAR_FADE_FIRST_ROW = LBC_NUCLEAR_FIRST_ROW + LBC_NUCLEAR_COUNT;
-const int LBC_NUCLEAR_DATA_ROWS = 2 * (LBC_NUCLEAR_FADE_FIRST_ROW + LBC_NUCLEAR_COUNT);
 const int LBC_EFFECT_ROWS = 2 * (LBC_NUCLEAR_FIRST_ROW + LBC_NUCLEAR_COUNT);
 const ivec3 LBC_NUCLEAR_TINT = ivec3(251, 254, 255);
 // First clear the stem; reserve most of the exit for the suspended cap.

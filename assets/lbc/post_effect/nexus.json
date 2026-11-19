@@ -1,7 +1,6 @@
 {
   "targets": {
     "scene": {},
-    "glow": {},
     "outline": {},
     "nexus": {}
   },
@@ -16,26 +15,6 @@
         }
       ],
       "output": "scene",
-      "uniforms": {
-        "BlitConfig": [
-          {
-            "name": "ColorModulate",
-            "type": "vec4",
-            "value": [1.0, 1.0, 1.0, 1.0]
-          }
-        ]
-      }
-    },
-    {
-      "vertex_shader": "minecraft:core/screenquad",
-      "fragment_shader": "minecraft:post/bloom_sample",
-      "inputs": [
-        {
-          "sampler_name": "Diffuse",
-          "target": "scene"
-        }
-      ],
-      "output": "glow",
       "uniforms": {
         "BlitConfig": [
           {
@@ -89,10 +68,6 @@
         {
           "sampler_name": "Nexus",
           "target": "nexus"
-        },
-        {
-          "sampler_name": "Bloom",
-          "target": "glow"
         }
       ],
       "output": "minecraft:main"

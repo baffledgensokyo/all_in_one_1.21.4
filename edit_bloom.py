@@ -1,7 +1,7 @@
-"""Small standalone artist editor: Python standard library; Pillow only for PNG tagging.
+"""Edit the material palette. Pillow is optional for picking a color from a PNG.
 
-Keep beside bloom_rules.json and the assets/ folder. Saves only beside itself,
-except the PNG the artist explicitly selects and confirms. Never scans textures.
+Keep beside bloom_rules.json and the assets/ folder. The editor saves the JSON
+palette and regenerates the matching GLSL include.
 """
 import argparse
 import json
@@ -64,37 +64,6 @@ def save(rules):
         temporary.replace(path)
 
 
-def mark_png(path, rgb):
-    from PIL import Image
-    path = Path(path)
-    rgb = tuple(rgb)
-    validate([{"source": list(rgb), "halo": list(rgb), "strength": 1, "core": "keep"}])
-    with Image.open(path) as image:
-        if getattr(image, "n_frames", 1) != 1:
-            raise ValueError("Анимированный PNG не поддерживается этой кнопкой.")
-        if image.width * image.height > 4096 * 4096:
-            raise ValueError("Текстура слишком велика для кнопки разметки: предел 4096×4096.")
-        rgba = image.convert("RGBA")
-    # PixelAccess keeps memory bounded by the image, not millions of Python tuples.
-    pixels = rgba.load()
-    count = 0
-    for y in range(rgba.height):
-        for x in range(rgba.width):
-            pixel = pixels[x, y]
-            if pixel[:3] == rgb and pixel[3] in (254, 255):
-                pixels[x, y] = (*rgb, 254)
-                count += 1
-    if count == 0:
-        raise ValueError("Нет непрозрачных пикселей с точным RGB выбранного правила.")
-    backup = path.with_suffix(".png.bak")
-    if not backup.exists():
-        backup.write_bytes(path.read_bytes())
-    temporary = path.with_suffix(".png.tmp")
-    rgba.save(temporary, format="PNG")
-    temporary.replace(path)
-    return count
-
-
 def gui(rules, smoke=False):
     import tkinter as tk
     from tkinter import colorchooser, filedialog, messagebox, ttk
@@ -128,19 +97,74 @@ def gui(rules, smoke=False):
         dialog.grab_set()
         color_buttons = {}
 
+        def set_color(key, rgb):
+            current[key] = [round(x) for x in rgb]
+            luminance = sum(x * weight for x, weight in zip(current[key], (0.2126, 0.7152, 0.0722)))
+            swatch = "#" + "".join(f"{x:02x}" for x in current[key])
+            color_buttons[key].configure(text=str(current[key]), bg=swatch, fg="white" if luminance < 128 else "black")
+
         def choose(key):
             initial = "#" + "".join(f"{x:02x}" for x in current[key])
             rgb, _ = colorchooser.askcolor(initial, parent=dialog)
             if rgb is not None:
-                current[key] = [round(x) for x in rgb]
-                luminance = sum(x * weight for x, weight in zip(current[key], (0.2126, 0.7152, 0.0722)))
-                color_buttons[key].configure(text=str(current[key]), bg="#" + "".join(f"{x:02x}" for x in current[key]), fg="white" if luminance < 128 else "black")
+                set_color(key, rgb)
+
+        def sample_png():
+            try:
+                from PIL import Image, ImageTk
+            except ImportError:
+                messagebox.showerror("Для PNG нужен Pillow", "Установи Pillow командой py -m pip install Pillow.", parent=dialog)
+                return
+            path = filedialog.askopenfilename(title="Выбери PNG текстуры", filetypes=[("PNG", "*.png")], parent=dialog)
+            if not path:
+                return
+            try:
+                with Image.open(path) as image:
+                    rgba = image.convert("RGBA")
+            except (OSError, Image.DecompressionBombError) as error:
+                messagebox.showerror("Не удалось открыть PNG", str(error), parent=dialog)
+                return
+            scale = max(1.0, min(480 / rgba.width, 480 / rgba.height))
+            size = round(rgba.width * scale), round(rgba.height * scale)
+            scaled = rgba if size == rgba.size else rgba.resize(size, Image.Resampling.NEAREST)
+            sheet = tk.Toplevel(dialog)
+            sheet.title("Выбери непрозрачный пиксель")
+            sheet.transient(dialog)
+            preview = ImageTk.PhotoImage(scaled, master=sheet)
+            view = tk.Canvas(sheet, width=min(size[0], 480), height=min(size[1], 480),
+                             scrollregion=(0, 0, *size), highlightthickness=0)
+            view.create_image(0, 0, image=preview, anchor="nw")
+            view.grid(row=0, column=0)
+            if size[0] > 480:
+                horizontal = ttk.Scrollbar(sheet, orient="horizontal", command=view.xview)
+                horizontal.grid(row=1, column=0, sticky="ew")
+                view.configure(xscrollcommand=horizontal.set)
+            if size[1] > 480:
+                vertical = ttk.Scrollbar(sheet, orient="vertical", command=view.yview)
+                vertical.grid(row=0, column=1, sticky="ns")
+                view.configure(yscrollcommand=vertical.set)
+
+            def pick(event):
+                x, y = int(view.canvasx(event.x)), int(view.canvasy(event.y))
+                if not (0 <= x < size[0] and 0 <= y < size[1]):
+                    return
+                *rgb, alpha = scaled.getpixel((x, y))
+                if alpha == 255:
+                    set_color("source", rgb)
+                    sheet.destroy()
+
+            view.bind("<Button-1>", pick)
+            sheet.grab_set()
+            dialog.wait_window(sheet)
+            if dialog.winfo_exists():
+                dialog.grab_set()
 
         for row, (key, label) in enumerate((("source", "Цвет пикселя в PNG"), ("halo", "Цвет ореола"))):
             ttk.Label(dialog, text=label).grid(row=row, column=0, padx=10, pady=8)
             button = tk.Button(dialog, text=str(current[key]), command=lambda k=key: choose(k))
             button.grid(row=row, column=1, padx=10)
             color_buttons[key] = button
+        ttk.Button(dialog, text="Цвет из PNG…", command=sample_png).grid(row=0, column=2, padx=10)
         ttk.Label(dialog, text="Сила: 0 — нет, 1 — обычная, 4 — максимум").grid(row=2, column=0, padx=10)
         strength = tk.StringVar(value=str(current["strength"]))
         ttk.Spinbox(dialog, from_=0, to=4, increment=0.25, textvariable=strength, width=12).grid(row=2, column=1, padx=10, pady=8)
@@ -175,29 +199,11 @@ def gui(rules, smoke=False):
             messagebox.showinfo("Готово", "Правила сохранены рядом с редактором.\nСкопируй папку assets в ресурс-пак и нажми F3+T.")
         except (OSError, ValueError, KeyError) as error: messagebox.showerror("Не удалось сохранить", str(error))
 
-    def tag_png():
-        selected = table.selection()
-        if not selected: return
-        try:
-            from PIL import Image
-        except ImportError:
-            messagebox.showerror("Для PNG нужен Pillow", "Правила можно редактировать без него.\nДля разметки PNG: py -m pip install Pillow")
-            return
-        name = filedialog.askopenfilename(title="Выбери PNG текстуры предмета", filetypes=[("PNG", "*.png")])
-        if not name: return
-        path = Path(name)
-        if not messagebox.askyesno("Разметить текстуру?", f"Пометить RGB {rules[int(selected[0])]['source']} альфой 254?\n{path}\n\nПрозрачные и полупрозрачные пиксели сохранятся. Будет создана резервная копия .png.bak."): return
-        try:
-            rgb = tuple(rules[int(selected[0])]["source"])
-            count = mark_png(path, rgb)
-            messagebox.showinfo("PNG размечен", f"Помечено пикселей: {count}.\nОбычные области текстуры не изменены.")
-        except (OSError, ValueError) as error: messagebox.showerror("Не удалось разметить PNG", str(error))
-
     buttons = ttk.Frame(window)
     buttons.pack(fill="x", padx=12)
-    for label, action in (("Добавить", lambda: edit(True)), ("Изменить", edit), ("Удалить", remove), ("Разметить PNG…", tag_png), ("Сохранить", write)):
+    for label, action in (("Добавить", lambda: edit(True)), ("Изменить", edit), ("Удалить", remove), ("Сохранить", write)):
         ttk.Button(buttons, text=label, command=action).pack(side="left", padx=3)
-    ttk.Label(window, text="Свечение: RGB из списка + альфа 254 в PNG. Альфа 255 — обычный материал.\nРедактор меняет только выбранный PNG и файлы рядом с собой. Подробности — README_RU.txt.").pack(padx=12, pady=12)
+    ttk.Label(window, text="Для свечения предметов нужны tint #FCFDF9 на грани и точный RGB из списка.\nОставляй эти пиксели непрозрачными (альфа 255).").pack(padx=12, pady=12)
     table.bind("<Double-1>", lambda event: edit())
     refresh()
     if smoke:

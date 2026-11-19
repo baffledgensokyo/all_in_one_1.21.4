@@ -1,7 +1,7 @@
 #version 330
 #extension GL_ARB_separate_shader_objects : require
 #include <minecraft:globals.glsl>
-#include <lbc:nuclear_data.glsl>
+#include <lbc:effect_packet.glsl>
 
 uniform sampler2D CurrentSampler;
 uniform sampler2D HistorySampler;
@@ -14,57 +14,54 @@ const float NUCLEAR_FADE_OUT=12.0;
 const float BH_SPAWN_BACK=1.70158; // About 10% overshoot, then settle.
 const ivec2 EFFECT_SIZE=ivec2(171,LBC_EFFECT_ROWS);
 
-vec4 packBits(uint bits) {
-    return vec4(float(bits&255u),float((bits>>8u)&255u),
-                float((bits>>16u)&255u),float(bits>>24u))/255.0;
-}
 uint readBits(ivec2 pixel) {
-    uvec4 b=uvec4(round(texelFetch(HistorySampler,pixel,0)*255.0));
-    return b.x|(b.y<<8u)|(b.z<<16u)|(b.w<<24u);
+    return lbc_packet_unpack(texelFetch(HistorySampler,pixel,0));
 }
 float oldFloat(ivec2 pixel) { return uintBitsToFloat(readBits(pixel)); }
+int nuclearView() {
+    return lbc_packet_record(CurrentSampler, LBC_PACKET_NUCLEAR_VIEW, LBC_PACKET_MATRIX, LBC_PACKET_NUCLEAR, LBC_PACKET_FADE);
+}
+int cameraRow() {
+    int hole = lbc_packet_record(CurrentSampler, LBC_PACKET_HOLE_VIEW, LBC_PACKET_MATRIX, LBC_PACKET_HOLE, LBC_PACKET_DISK);
+    if (hole >= 0) return hole;
+    int nuclear = nuclearView();
+    if (nuclear >= 0) return nuclear;
+    return lbc_packet_record(CurrentSampler, LBC_PACKET_HOLE_VIEW, LBC_PACKET_MATRIX, LBC_PACKET_ZONE, LBC_PACKET_ZONE);
+}
 ivec3 rawBytes(int x,int row) {
-    return ivec3(round(vec3(texelFetch(CurrentSampler,ivec2(x*3,row),0).a,
-                           texelFetch(CurrentSampler,ivec2(x*3+1,row),0).a,
-                           texelFetch(CurrentSampler,ivec2(x*3+2,row),0).a)*255.0));
+    int kind = lbc_packet_kind(CurrentSampler, row);
+    if (x == 56) return lbc_packet_header_rgb(kind);
+    int field = x / 2;
+    if (field >= LBC_PACKET_POINTS) {
+        if (row % LBC_PACKET_SIZE < LBC_PACKET_HOLE_VIEW) {
+            row = kind == LBC_PACKET_NUCLEAR || kind == LBC_PACKET_FADE ? nuclearView() : -1;
+            if (row < 0) row = cameraRow();
+        }
+        field -= LBC_PACKET_POINTS;
+    }
+    uint word = row >= 0 ? lbc_packet_read(CurrentSampler, row + 1 + field) : 0u;
+    uint shift = x % 2 == 0 ? 0u : 16u;
+    return ivec3(int((word >> shift) & 255u), int((word >> (shift + 8u)) & 255u), 201 + x % 2);
 }
 bool header(ivec3 b,int row) {
     return row<LBC_NUCLEAR_FIRST_ROW ? b.r==66&&b.g==72&&(b.b==100||b.b==101) :
         lbc_nuclear_header(b,row>=LBC_NUCLEAR_FADE_FIRST_ROW);
 }
 int currentRow(int row) {
-    ivec2 size=textureSize(CurrentSampler,0);
-    if(size.x<171||size.y<2*(row+1))return -1;
-    for(int copy=0;copy<2;copy++) {
-        int y=copy==0?row:size.y-1-row;
-        if(!header(rawBytes(56,y),row))continue;
-        bool valid=true;
-        for(int field=0;field<28;field++)
-            valid=valid&&rawBytes(field*2,y).b==201&&rawBytes(field*2+1,y).b==202;
-        if(valid)return y;
+    if (row < LBC_NUCLEAR_FIRST_ROW) {
+        int offset = (row - LBC_BH_FIRST_ROW) * LBC_PACKET_OBJECT;
+        return lbc_packet_record(CurrentSampler, offset, LBC_PACKET_POINTS, LBC_PACKET_HOLE, LBC_PACKET_DISK);
     }
-    return -1;
-}
-int cameraRow() {
-    for(int row=2;row<LBC_NUCLEAR_FADE_FIRST_ROW+LBC_NUCLEAR_COUNT;row++) {
-        int y=currentRow(row);
-        if(y>=0)return y;
-    }
-    ivec2 size=textureSize(CurrentSampler,0);
-    if(size.x>=171&&size.y>=LBC_EFFECT_ROWS)for(int copy=0;copy<2;copy++) {
-        int row=copy==0?1:size.y-2;
-        if(all(equal(rawBytes(56,row),ivec3(67,65,77)))) {
-            bool valid=true;
-            for(int field=12;field<28;field++)
-                valid=valid&&rawBytes(field*2,row).b==201&&rawBytes(field*2+1,row).b==202;
-            if(valid)return row;
-        }
-    }
-    return -1;
+    bool fading = row >= LBC_NUCLEAR_FADE_FIRST_ROW;
+    int slot = row - (fading ? LBC_NUCLEAR_FADE_FIRST_ROW : LBC_NUCLEAR_FIRST_ROW);
+    int offset = (LBC_BH_COUNT + slot) * LBC_PACKET_OBJECT;
+    int kind = fading ? LBC_PACKET_FADE : LBC_PACKET_NUCLEAR;
+    return lbc_packet_record(CurrentSampler, offset, LBC_PACKET_POINTS, kind, kind);
 }
 float pointField(int field,int row,bool current) {
-    ivec3 a=current?rawBytes(field*2,row):ivec3(round(texelFetch(HistorySampler,ivec2(field*2,row),0).rgb*255.0));
-    ivec3 b=current?rawBytes(field*2+1,row):ivec3(round(texelFetch(HistorySampler,ivec2(field*2+1,row),0).rgb*255.0));
+    if (current) return uintBitsToFloat(lbc_packet_read(CurrentSampler, row + 1 + field));
+    ivec3 a=ivec3(round(texelFetch(HistorySampler,ivec2(field*2,row),0).rgb*255.0));
+    ivec3 b=ivec3(round(texelFetch(HistorySampler,ivec2(field*2+1,row),0).rgb*255.0));
     return uintBitsToFloat(uint(a.r)|(uint(a.g)<<8u)|(uint(b.r)<<16u)|(uint(b.g)<<24u));
 }
 vec3 point(int index,int row,bool current) {
@@ -100,9 +97,9 @@ void main() {
     if(!history)dt=0.0;
 
     if(row==1) {
-        if(x<3)fragColor=packBits(uint(CameraBlockPos[x]));
-        else if(x<6)fragColor=packBits(floatBitsToUint(CameraOffset[x-3]));
-        else if(x==6)fragColor=packBits(floatBitsToUint(now));
+        if(x<3)fragColor=lbc_packet_pack(uint(CameraBlockPos[x]));
+        else if(x<6)fragColor=lbc_packet_pack(floatBitsToUint(CameraOffset[x-3]));
+        else if(x==6)fragColor=lbc_packet_pack(floatBitsToUint(now));
         else if(x==7)fragColor=vec4(76,73,70,69)/255.0;
         return;
     }
@@ -161,8 +158,8 @@ void main() {
     float dissolve=fading?1.0-progress:0.0;
     // Keep the cap fully opaque while the clearing front climbs the stem.
     float opacityProgress=fading?min(progress/(1.0-LBC_NUCLEAR_DISSOLVE_SPLIT),1.0):progress;
-    if(x==57) {fragColor=packBits(floatBitsToUint(progress));return;}
-    if(x==59) {fragColor=packBits(floatBitsToUint(live>=0?(fading?2.0:1.0):0.0));return;}
+    if(x==57) {fragColor=lbc_packet_pack(floatBitsToUint(progress));return;}
+    if(x==59) {fragColor=lbc_packet_pack(floatBitsToUint(live>=0?(fading?2.0:1.0):0.0));return;}
     if(nuclear&&x>=60&&x<=76&&live>=0) {
         // Prepare exact float object data once per frame for the 5..16 path.
         // The fragment stage fetches only its current object; no huge arrays
@@ -184,7 +181,7 @@ void main() {
             value=nuclearOpacity(opacityProgress,nuclearVisibility);
         } else if(x==75)value=float(row-LBC_NUCLEAR_FIRST_ROW)*13.71;
         else value=dissolve;
-        fragColor=packBits(floatBitsToUint(value));return;
+        fragColor=lbc_packet_pack(floatBitsToUint(value));return;
     }
     if(x>58||(live<0&&(!wasAlive||progress<=0.0)))return;
     if(x==56||x==58) {
@@ -201,7 +198,7 @@ void main() {
             // If removed during the bounce, contract from the actual last size.
             float size=live>=0?holeArrival(progress)*visibility:
                 oldFloat(ivec2(58,row))*fade/max(smoothstep(0.0,1.0,previousProgress),1e-6);
-            fragColor=packBits(floatBitsToUint(nuclear?nuclearOpacity(opacityProgress,visibility):max(size,0.0)));
+            fragColor=lbc_packet_pack(floatBitsToUint(nuclear?nuclearOpacity(opacityProgress,visibility):max(size,0.0)));
         } else {
             // Normalize both nuclear inputs to the existing NUK output ABI.
             // The volume, resolve and heat shaders keep exactly their design.
