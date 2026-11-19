@@ -1,0 +1,43 @@
+name: Publish Minecraft resource pack
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the pack
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Build and publish the ZIP
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          archive="$RUNNER_TEMP/luckywars-resourcepack.zip"
+          tag="resourcepack-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          sha1="$(python3 .github/package_resourcepack.py "$archive")"
+          url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/releases/download/$tag/luckywars-resourcepack.zip"
+
+          {
+            printf 'Скопируйте обе строки в `server.properties`.\n\n'
+            printf '%s\n' '```properties'
+            printf 'resource-pack=%s\nresource-pack-sha1=%s\n' "$url" "$sha1"
+            printf '%s\n' '```'
+          } > "$RUNNER_TEMP/release-notes.md"
+
+          gh release create "$tag" "$archive" \
+            --target "$GITHUB_SHA" \
+            --title "Minecraft resource pack $GITHUB_RUN_NUMBER" \
+            --notes-file "$RUNNER_TEMP/release-notes.md" \
+            --latest=false
+
+          {
+            printf '## [Скачать ZIP](%s)\n\n' "$url"
+            cat "$RUNNER_TEMP/release-notes.md"
+          } >> "$GITHUB_STEP_SUMMARY"
