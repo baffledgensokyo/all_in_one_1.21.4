@@ -5,8 +5,8 @@
     64
   ],
   "textures": {
-    "1": "minecraft:item/mammamiapepperoni",
-    "particle": "minecraft:item/mammamiapepperoni"
+    "1": "lbc:item/nexus_item_cage_white",
+    "particle": "lbc:item/nexus_item_cage_white"
   },
   "elements": [
     {
