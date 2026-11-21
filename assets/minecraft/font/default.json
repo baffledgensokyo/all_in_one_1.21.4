@@ -729,7 +729,7 @@
         {
             "type": "bitmap",
             "file": "minecraft:font/icons/suffix_symbols.png",
-            "ascent": 12,
+            "ascent": 11,
             "height": 16,
             "chars": [
                 "\uE186",
