@@ -1693,7 +1693,7 @@
   "flying_boots.lore.2": "You can make a set with Traveler and Jet armor!",
   "reactive_boots.lore.5": "Can be combined with Hermes Boots",
   "hermes_boots.lore": "Can be combined with Jet Boots",
-  "effect_can_stack": "Effect can stack if there are multiple items in 1 slot!",
+  "effect_can_stack": "Effect can stack based on item amount!",
   "lbc.adv.legends.kill_technoshish": "Cybercrime",
   "lbc.adv.legends.kill_technoshish.lore": "Defeat the Next-Generation AI Exoskeleton",
   "lbc.adv.sword.cyberkatanamk2": "Megapulse! Phase Strike!",
