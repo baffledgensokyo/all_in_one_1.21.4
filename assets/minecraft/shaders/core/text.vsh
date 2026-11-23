@@ -39,6 +39,12 @@ bool isIconShadowColor(ivec3 color) {
 }
 
 void main() {
+    // Private shader-off warning: clip only the reserved marker.
+    if (all(equal(ivec4(round(Color * 255.0)), ivec4(254, 1, 251, 181)))) {
+        gl_Position = vec4(2.0, 2.0, 2.0, 1.0);
+        return;
+    }
+
     gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
 
 #if !defined(IS_GUI) && !defined(IS_SEE_THROUGH)

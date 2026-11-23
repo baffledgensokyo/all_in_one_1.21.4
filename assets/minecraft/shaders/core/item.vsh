@@ -53,6 +53,12 @@ layout(location = 8) flat out float atlasGlitchCode;
 
 #include <lbc:phone_hd_pixels.glsl>
 void main() {
+    // Private shader-off warning: clip only the reserved marker.
+    if (all(equal(ivec3(round(Color.rgb * 255.0)), ivec3(254, 1, 251))) && all(equal(ivec4(round(textureLod(Sampler0, UV0, 0.0) * 255.0)), ivec4(0, 0, 1, 255)))) {
+        gl_Position = vec4(2.0, 2.0, 2.0, 1.0);
+        return;
+    }
+
     gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
 
     #ifndef OIT_ALPHA_ONLY

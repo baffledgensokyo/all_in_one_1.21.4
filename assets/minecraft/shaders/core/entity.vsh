@@ -55,6 +55,12 @@ layout(location = 9) flat out uvec4 tmtSourceCells;
 layout(location = 10) flat out uvec4 tiktokPixels;
 layout(location = 11) out float tiktokU;
 void main() {
+    // Private shader-off warning: clip only the reserved marker.
+    if (all(equal(ivec3(round(Color.rgb * 255.0)), ivec3(254, 1, 251))) && all(equal(ivec4(round(textureLod(Sampler0, UV0, 0.0) * 255.0)), ivec4(0, 0, 1, 255)))) {
+        gl_Position = vec4(2.0, 2.0, 2.0, 1.0);
+        return;
+    }
+
     uvec3 phoneTint = uvec3(round(Color.rgb * 255.0));
     vec2 phoneUV;
     bool phoneCarrier = all(lessThanEqual(phoneTint, uvec3(247u))) && lbc_tiktok_tile(Sampler0, UV0, phoneUV);
