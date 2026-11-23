@@ -6651,7 +6651,7 @@
   "genie.invalid_wish": "Хо-хо, у тебя есть право на одно желание, путник. Что же за предмет ты желаешь получить?",
   "lbc.hakurei.spellcard.activate": "%s активировал спеллкарту «Знак духа: Печать фантазии»",
   "lbc.hakurei.bomb.activate": "%s активировал бомбу «Печать фантазии»",
-  "shader.required.line1": "??? ???? ??????????",
-  "shader.required.line2": "???????? ???????",
+  "shader.required.line1": "Для игры необходимо",
+  "shader.required.line2": "ВКЛЮЧИТЬ ШЕЙДЕРЫ",
   "tiktok.direct_status": " · ссылки для клиентского мода: %s/20"
 }
