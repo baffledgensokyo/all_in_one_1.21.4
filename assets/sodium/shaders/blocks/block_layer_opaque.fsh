@@ -13,10 +13,18 @@
 #include <lbc:bloom_rules.glsl>
 #endif
 
+// Sodium 0.9.2 defines USE_VERTEX_COMPRESSION for both shader stages.
+// Sodium 0.9.3 removed it and renamed the native fade varying.
+#ifdef USE_VERTEX_COMPRESSION
+#define LBC_FADE_FACTOR fadeFactor
+#else
+#define LBC_FADE_FACTOR v_fadeFactor
+#endif
+
 layout(location = 0) in vec4 v_Color; // The interpolated vertex color
 layout(location = 1) in vec2 v_TexCoord; // The interpolated block texture coordinates
 layout(location = 2) in vec2 v_FragDistance; // The fragment's distance from the camera (cylindrical and spherical)
-layout(location = 3) in float fadeFactor;
+layout(location = 3) in float LBC_FADE_FACTOR;
 // Keep the location in sync with the vertex shader and clear of Sodium Extra.
 layout(location = 10) flat in float atlasGlitchCode;
 
@@ -37,7 +45,7 @@ vec4 calculateFinalColor(vec4 color) {
     #ifdef OIT_ALPHA_ONLY
     float factor = 1.0;
     #else
-    float factor = fadeFactor;
+    float factor = LBC_FADE_FACTOR;
     #endif
 
     return _linearFog(color, v_FragDistance, fogColor, u_EnvironmentFog, u_RenderFog, factor);
@@ -67,7 +75,6 @@ vec4 sampleNearest(sampler2D source, vec2 uv, vec2 pixelSize) {
 vec4 sampleRGSS(sampler2D source, vec2 uv, vec2 pixelSize) {
     vec2 du = dFdx(uv);
     vec2 dv = dFdy(uv);
-
     vec2 texelScreenSize = sqrt(du * du + dv * dv);
     float maxTexelSize = max(texelScreenSize.x, texelScreenSize.y);
 

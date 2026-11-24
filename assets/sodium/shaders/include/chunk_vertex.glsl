@@ -22,7 +22,7 @@ uint _draw_id;
 // The material bits for the primitive
 uint _material_params;
 
-#ifdef USE_VERTEX_COMPRESSION
+// Sodium 0.9.3 removed USE_VERTEX_COMPRESSION; both versions use the same format.
 const uint POSITION_BITS        = 20u;
 const uint POSITION_MAX_COORD   = 1u << POSITION_BITS;
 const uint POSITION_MAX_VALUE   = POSITION_MAX_COORD - 1u;
@@ -66,9 +66,6 @@ void _vert_init() {
     _draw_id = a_LightAndData[3];
 }
 
-#else
-#error "Vertex compression must be enabled"
-#endif
 #include <lbc:atlas_glitch.glsl>
 
 // Sodium Extra uses locations 4 and 5 for fog.
