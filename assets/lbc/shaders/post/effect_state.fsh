@@ -10,6 +10,8 @@ layout(location = 0) out vec4 fragColor;
 // Tiny persistent object records, never previous world RGB. Durations are
 // seconds and are independent of FPS, particle age and display scale.
 const float BH_FADE_SECONDS=0.20;
+// A lost outline packet must not close a still-live hole.
+const float BH_MISSING_GRACE_SECONDS=0.10;
 const float NUCLEAR_FADE_OUT=12.0;
 const float BH_SPAWN_BACK=1.70158; // About 10% overshoot, then settle.
 const ivec2 EFFECT_SIZE=ivec2(171,LBC_EFFECT_ROWS);
@@ -89,11 +91,16 @@ void main() {
     fragColor=vec4(0.0);
     bool history=all(equal(ivec4(round(texelFetch(HistorySampler,ivec2(7,1),0)*255.0)),ivec4(76,73,70,69)));
     float now=GameTime*1200.0;
-    float dt=history?mod(now-oldFloat(ivec2(6,1))+1200.0,1200.0):0.0;
+    // ClientLevel game time advances locally but the server may correct it
+    // backwards under low TPS. A correction is not elapsed time and must not
+    // invalidate live effect history. Preserve the ordinary 1200s wrap.
+    float elapsed=history?now-oldFloat(ivec2(6,1)):0.0;
+    if(elapsed < -600.0)elapsed+=1200.0;
+    float dt=elapsed>=0.0&&elapsed<=2.0?elapsed:0.0;
     ivec3 oldBlock=ivec3(int(readBits(ivec2(0,1))),int(readBits(ivec2(1,1))),int(readBits(ivec2(2,1))));
     vec3 offset=vec3(oldFloat(ivec2(3,1)),oldFloat(ivec2(4,1)),oldFloat(ivec2(5,1)));
     vec3 delta=vec3(oldBlock-CameraBlockPos)+offset-CameraOffset;
-    history=history&&dt<=2.0&&length(delta)<256.0;
+    history=history&&length(delta)<256.0;
     if(!history)dt=0.0;
 
     if(row==1) {
@@ -118,21 +125,31 @@ void main() {
         live=currentRow(row+LBC_NUCLEAR_COUNT);
         fading=live>=0;
     }
-    float nuclearVisibility=1.0,nuclearDuration=NUCLEAR_FADE_OUT;
+    float nuclearVisibility=1.0,nuclearDuration=NUCLEAR_FADE_OUT,nuclearTotal=0.0,serverAge=0.0;
+    bool timedMain=false;
     if(nuclear&&live>=0) {
         vec3 origin=point(0,live,true);
         float ratio=length(point(3,live,true)-origin)/max(length(point(1,live,true)-origin),0.0001);
         // Fade-only duration channel: Z/R = 2 + seconds. Legacy Z/R=1..2
         // still controls visibility; changing duration never stretches smoke.
         bool customDuration=fading&&ratio>=2.5;
-        nuclearVisibility=customDuration?1.0:clamp(2.0-ratio,0.0,1.0);
+        timedMain=!fading&&ratio>=2.5;
+        nuclearVisibility=(customDuration||timedMain)?1.0:clamp(2.0-ratio,0.0,1.0);
         if(customDuration)nuclearDuration=clamp(ratio-2.0,0.5,120.0);
+        if(timedMain)nuclearTotal=clamp(ratio-2.0,0.5,120.0);
+        serverAge=clamp(length(point(2,live,true)-origin)-1.0,0.0,120.0);
     }
     bool wasAlive=history&&header(ivec3(round(texelFetch(HistorySampler,ivec2(56,row),0).rgb*255.0)),row);
     float progress=wasAlive?oldFloat(ivec2(57,row)):0.0;
     if(isnan(progress)||isinf(progress))progress=0.0;
     progress=clamp(progress,0.0,1.0);
     float previousProgress=progress;
+    float missing=0.0;
+    if(!nuclear && live<0 && wasAlive) {
+        float previousMissing=oldFloat(ivec2(60,row));
+        if(isnan(previousMissing)||isinf(previousMissing)||previousMissing<0.0)previousMissing=0.0;
+        missing=min(previousMissing+dt,BH_MISSING_GRACE_SECONDS+BH_FADE_SECONDS);
+    }
     if(live>=0&&wasAlive) {
         vec3 oldCenter=point(0,row,false)+delta;
         float radius=length(point(1,live,true)-point(0,live,true));
@@ -140,10 +157,26 @@ void main() {
                       distance(oldCenter,point(0,live,true))>max(radius*4.0,8.0);
         if(replaced){progress=0.0;wasAlive=false;}
     }
+    float wallAge=serverAge;
+    if(nuclear && live>=0) {
+        float priorTotal=wasAlive?oldFloat(ivec2(78,row)):0.0;
+        float priorAge=wasAlive?oldFloat(ivec2(77,row)):0.0;
+        if(isnan(priorTotal)||isinf(priorTotal)||priorTotal<0.0||priorTotal>120.0)priorTotal=0.0;
+        if(isnan(priorAge)||isinf(priorAge)||priorAge<0.0||priorAge>120.0)priorAge=0.0;
+        if(fading&&priorTotal>0.0)nuclearTotal=priorTotal;
+        if(nuclearTotal>0.0) {
+            wallAge=wasAlive&&priorTotal>0.0?max(priorAge+dt,serverAge):serverAge;
+            nuclearDuration=fading?nuclearDuration:(nuclearTotal<=10.5?4.0:12.0);
+            if(fading&&wasAlive&&oldFloat(ivec2(59,row))<1.5)
+                wallAge=max(wallAge,nuclearTotal-nuclearDuration);
+            wallAge=min(wallAge,120.0);
+        }
+    }
     if(nuclear) {
         // A real, stationary fade display supplies ALL points and inverse VP
         // every frame. Never render a nuclear tail from a dead carrier's VP.
         if(live<0)progress=0.0;
+        else if(nuclearTotal>0.0)progress=clamp((nuclearTotal-wallAge)/nuclearDuration,0.0,1.0);
         else if(!fading)progress=1.0;
         else if(!wasAlive||oldFloat(ivec2(59,row))<1.5)progress=1.0;
         else progress=max(progress-dt/nuclearDuration,0.0);
@@ -153,11 +186,16 @@ void main() {
         // A removal during arrival still gets its complete exit duration,
         // beginning at the actual displayed radius (including overshoot).
         if(wasAlive&&oldFloat(ivec2(59,row))>0.5){progress=1.0;previousProgress=1.0;}
-        progress=max(progress-dt/BH_FADE_SECONDS,0.0);
+        float fadeDt=max(missing-BH_MISSING_GRACE_SECONDS,0.0)-max(missing-dt-BH_MISSING_GRACE_SECONDS,0.0);
+        progress=max(progress-fadeDt/BH_FADE_SECONDS,0.0);
     }
-    float dissolve=fading?1.0-progress:0.0;
+    bool nuclearDissolving=fading||(nuclear&&nuclearTotal>0.0&&wallAge>nuclearTotal-nuclearDuration);
+    float dissolve=nuclearDissolving?1.0-progress:0.0;
     // Keep the cap fully opaque while the clearing front climbs the stem.
-    float opacityProgress=fading?min(progress/(1.0-LBC_NUCLEAR_DISSOLVE_SPLIT),1.0):progress;
+    float opacityProgress=nuclearDissolving?min(progress/(1.0-LBC_NUCLEAR_DISSOLVE_SPLIT),1.0):progress;
+    if(nuclear&&x==77){fragColor=lbc_packet_pack(floatBitsToUint(wallAge));return;}
+    if(nuclear&&x==78){fragColor=lbc_packet_pack(floatBitsToUint(nuclearTotal));return;}
+    if(!nuclear && x==60) {fragColor=lbc_packet_pack(floatBitsToUint(missing));return;}
     if(x==57) {fragColor=lbc_packet_pack(floatBitsToUint(progress));return;}
     if(x==59) {fragColor=lbc_packet_pack(floatBitsToUint(live>=0?(fading?2.0:1.0):0.0));return;}
     if(nuclear&&x>=60&&x<=76&&live>=0) {
@@ -176,7 +214,7 @@ void main() {
         else if(x<73) {
             mat3 rotation=transpose(mat3(normalize(axisX),normalize(axisY),normalize(axisZ)));
             value=rotation[(x-64)/3][(x-64)%3];
-        } else if(x==73)value=clamp(length(axisY)-1.0,0.0,120.0);
+        } else if(x==73)value=nuclearTotal>0.0?wallAge:clamp(length(axisY)-1.0,0.0,120.0);
         else if(x==74) {
             value=nuclearOpacity(opacityProgress,nuclearVisibility);
         } else if(x==75)value=float(row-LBC_NUCLEAR_FIRST_ROW)*13.71;
@@ -206,6 +244,11 @@ void main() {
                 (live>=0?vec3(rawBytes(x,live))/255.0:texelFetch(HistorySampler,ivec2(x,row),0).rgb);
             fragColor=vec4(bytes,nuclear?nuclearOpacity(opacityProgress,visibility):fade*visibility);
         }
+    } else if(live>=0&&nuclear&&nuclearTotal>0.0&&x>=12&&x<18) {
+        vec3 center=point(0,live,true);
+        vec3 axis=point(2,live,true)-center;
+        vec3 p=center+normalize(axis)*(wallAge+1.0);
+        fragColor=encodedField(p[(x/2)%3],x);
     } else if(live>=0)fragColor=vec4(vec3(rawBytes(x,live))/255.0,1.0);
     else if(x<24) {
         int index=x/6,axis=(x/2)%3;

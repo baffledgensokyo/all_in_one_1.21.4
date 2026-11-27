@@ -39,9 +39,9 @@ vec4 nuclearTrace(vec3 origin, vec3 direction, float sceneDistance, vec2 pixel) 
         if(end<=start)continue;
         vec3 beforeRadiance=radiance;
         float beforeTransmittance=transmittance;
-        float stepSize=max((end-start)/72.0,0.003);
+        float stepSize=max((end-start)/48.0,0.003);
         float t=start+stepSize*nuclearHash(vec3(floor(pixel),0.0));
-        for(int step=0;step<72;step++) {
+        for(int step=0;step<48;step++) {
             if(t>end||transmittance<0.002)break;
             vec3 p=ro+rd*t;
             vec4 medium=nuclearMedium(p,age,time,object.seed);
